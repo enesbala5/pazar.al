@@ -1,52 +1,44 @@
-<script>
+<script lang="ts">
+	// Imports:
+	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
+	import Heart from './components/logos/user/Heart.svelte';
+	import Save from './components/logos/user/Save.svelte';
 
 	// Initializations:
-	const links = [
-		{ route: '/', name: 'Home' },
-		{ route: '/about', name: 'About' }
-	];
+	const links = [{ route: '/', name: 'Home' }];
 
+	export let onIndex: boolean;
 </script>
 
-<!-- #################################################################################################### -->
+<nav class="flex items-center justify-between p-4">
+	<a href="/" class="h-8 w-8">
+		<Logo classNames="fill-neutral-50" />
+	</a>
 
-<nav>
+	<div class="flex items-center ">
+		<!-- Liked  & Saved -->
+		<div
+			class="mr-4 flex items-center space-x-4 border-r-2 {onIndex
+				? ' border-neutral-700'
+				: ' border-neutral-800'} px-4 pr-4 "
+		>
+			<div class=" flex h-5 w-5   items-center justify-center opacity-70">
+				<Heart classNames="fill-white" />
+			</div>
+			<div class=" flex h-5 w-3.5  items-center justify-center opacity-70">
+				<Save classNames="fill-white" />
+			</div>
+		</div>
+		<!-- Break Line -->
+		<!-- <div class=" bg-neutral-50 px-2" /> -->
 
-	<!-- Navigation Links -->
-	<ul class="links">
-		{#each links as link}
-			<li><a href="{link.route}">{link.name}</a></li>
-		{/each}
-	</ul>
-
+		<!-- Profile Item -->
+		<div
+			class="flex h-10 w-10 items-center justify-center rounded-full {onIndex
+				? ' bg-neutral-900'
+				: ' bg-neutral-800'}"
+		>
+			<p class="mb-0.5 text-xl text-neutral-50">E</p>
+		</div>
+	</div>
 </nav>
-
-<!-- #################################################################################################### -->
-
-<style>
-
-	nav {
-		display: flex;
-		align-items: center;
-		height: 53px;
-		width: 100%;
-		padding: 0 32px;
-		background: #263238;
-		border-bottom: 2px solid rgba(34,40,49,0.3);
-	}
-
-	.links {
-		display: flex;
-	}
-	
-	.links li {
-		margin: 0 2em 0 0;
-		list-style: none;
-	}
-
-	.links a {
-		color: inherit;
-		text-decoration: none;
-	}
-	
-</style>
