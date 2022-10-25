@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { Post } from '@prisma/client';
 	import Euro from '../logos/user/currencies/Euro.svelte';
 	import Lek from '../logos/user/currencies/Lek.svelte';
@@ -20,7 +21,13 @@
 			class="absolute bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent "
 		/>
 
-		<div class=" absolute bottom-8 z-30 px-4">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
+			class=" absolute bottom-8 z-30 px-4"
+			on:click={() => {
+				goto(`/postim/${product.pid}`);
+			}}
+		>
 			<h3 class="text-xl ">{product.title}</h3>
 			<p class="opacity-70">{product.description}</p>
 		</div>

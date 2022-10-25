@@ -20,6 +20,24 @@
 	};
 
 	$: updateOnIndex($page.url.pathname);
+
+	let urlBuffer = $page.url.pathname;
+
+	let returnButton: boolean = false;
+	let returnUrl: string | undefined = undefined;
+
+	afterNavigate(() => {
+		if ($page.url.pathname.startsWith('/postim')) {
+			if (urlBuffer.startsWith('/kerkim')) {
+				returnUrl = urlBuffer;
+			} else {
+				returnUrl = undefined;
+			}
+		} else {
+			returnUrl = undefined;
+		}
+		urlBuffer = $page.url.pathname;
+	});
 </script>
 
 <div
@@ -32,11 +50,10 @@
 			class="absolute top-0 -z-10 h-[40vh] w-full bg-gradient-to-b from-neutral-800 to-neutral-900"
 		/>
 		<div class="absolute -z-20 min-h-screen w-full bg-neutral-900 " />
-	
 	{/if}
 
 	<!-- Navbar -->
-	<Nav {onIndex} />
+	<Nav {onIndex} {returnUrl} />
 
 	<!-- App Content -->
 	<main><slot /></main>
