@@ -1,0 +1,59 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// TODO:
+// -> Add image support
+
+/// Post Model - Contains all information on a post made on the page
+model Post {
+  pid        String   @id @default(cuid()) /// Post ID
+  created_at DateTime @default(now()) /// Created At
+  archived   Boolean  @default(false) /// If post is archived
+  post_views Int      @default(0) /// How many times has the post been viewed
+  post_likes Int      @default(0) /// How many times the post has been liked
+  // ? per kte sjam i sigurt ||| (per Datatype-in e kam fjalen)
+
+  title       String
+  description String
+  price       Float
+  eur         Boolean
+  old_price   Float
+  // to calculate changes on price ||| 
+  // -> mund te jete null 
+  // -> mund te vendoset njejte me cmimin
+  // -> te funksionoje si buffer && te mos ndryshohet kur ndryshon cmimi
+
+  city    String
+  country String
+  // foreign key restraints -> Nqs dua te pranoje vetem X vlera
+
+  category String
+  tags     Json?
+
+  // TODO: Not working -> Fix and learn how to create the relational model needed for this to work
+  // liked_by     User?   @relation(fields: [liked_by_uid], references: [uid])
+  // liked_by_uid String?
+}
+
+model User {
+  uid        String   @id @default(cuid())
+  created_at DateTime @default(now())
+  // role       Role     @default(USER)
+
+  email String @unique
+  name  String
+
+  // liked_posts Post[]
+}
+
+// enum Role {
+//   USER
+//   ADMIN
+// }
