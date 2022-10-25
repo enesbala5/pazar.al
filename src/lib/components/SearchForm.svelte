@@ -15,6 +15,7 @@
 	import List from '$lib/components/logos/user/filters/List.svelte';
 	import Settings from '$lib/components/logos/user/filters/Settings.svelte';
 	import Dollar from '$lib/components/logos/user/filters/sort/Dollar.svelte';
+	import { card } from '$lib/userPreferences/preferences';
 </script>
 
 <form on:submit|preventDefault={searchProduct} class="">
@@ -41,22 +42,36 @@
 			<div
 				class="flex w-full overflow-hidden rounded-md bg-indigo-400 bg-opacity-20"
 			>
-				<div
-					class="flex h-full w-1/2 grow items-center justify-center bg-neutral-50 p-1.5"
+				<button
+					on:click={() => {
+						card.set(true);
+					}}
+					class="
+					{$card ? 'bg-neutral-50' : 'bg-transparent'}
+					flex h-full w-1/2 grow items-center justify-center  bg-neutral-50 p-1.5"
 				>
 					<div class="mx-2">
 						<Grid
-							classNames="fill-transparent stroke-indigo-700 w-4 h-4 bg-transparent"
+							classNames="
+							{$card ? 'stroke-indigo-700' : 'stroke-white'}
+							fill-transparent w-4 h-4 bg-transparent"
 						/>
 					</div>
-				</div>
-				<div
-					class="flex h-full w-1/2 grow items-center justify-center bg-transparent p-1.5"
+				</button>
+				<button
+					on:click={() => {
+						card.set(false);
+					}}
+					class="
+					{!$card ? 'bg-neutral-50' : 'bg-transparent'}
+					flex h-full w-1/2 grow items-center justify-center  p-1.5"
 				>
 					<div class="mx-2">
-						<List classNames="fill-white w-4 h-4" />
+						<List
+							classNames="{!$card ? 'fill-indigo-700' : 'fill-white'} w-4 h-4"
+						/>
 					</div>
-				</div>
+				</button>
 			</div>
 
 			<div
