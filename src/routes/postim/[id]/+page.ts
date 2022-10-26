@@ -1,4 +1,4 @@
-/** @type {import('./$types').PageLoad} */
+import type { PageLoad } from './$types';
 
 import type { Post } from '@prisma/client';
 
@@ -32,6 +32,6 @@ export const loadFromApi = async (
 		});
 };
 
-export async function load({ params, fetch }) {
+export const load: any = async ({ params, fetch }) => {
 	return await loadFromApi(fetch, params.id);
-}
+};

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { inject } from '@vercel/analytics';
-
+	// import { inject } from '@vercel/analytics';
 
 	// Imports:
 	import Nav from '$lib/Nav.svelte';
@@ -11,7 +10,7 @@
 	import '../app.css';
 
 	let onIndex: boolean = false;
-	inject();
+	// inject();
 
 	const updateOnIndex = (url: string) => {
 		if (url === '/') {

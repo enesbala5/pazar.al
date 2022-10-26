@@ -64,11 +64,11 @@ const loadFromApi = async (
 		});
 };
 
-export async function load({ params, fetch }) {
+export const load: any = async ({ params, fetch }) => {
 	return {
 		kerkim: params.id ?? '',
 		pageNumber: Number(params.faqja),
 		count: await loadCount(fetch, params.id),
 		data: await loadFromApi(fetch, params),
 	};
-}
+};

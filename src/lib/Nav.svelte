@@ -11,7 +11,7 @@
 
 	export let onIndex: boolean;
 
-	export let returnUrl: string;
+	export let returnUrl: string | undefined;
 </script>
 
 <nav class="flex items-center justify-between p-4">
