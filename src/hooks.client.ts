@@ -1,1 +1,0 @@
-import '$lib/logic/supabaseClient'

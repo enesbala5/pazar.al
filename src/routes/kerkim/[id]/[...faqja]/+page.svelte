@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Pagination from '$lib/components/Pagination.svelte';
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import SearchForm from '$lib/components/SearchForm.svelte';
 	import { card } from '$lib/userPreferences/preferences';
@@ -11,6 +12,8 @@
 	const createItem = async () => {
 		fetch('/api/createPost');
 	};
+
+	let pageNumber = 1;
 </script>
 
 <div class="relative">
@@ -22,9 +25,18 @@
 
 	<div class="absolute top-0 w-full">
 		<div class="p-4">
-			<SearchForm onIndex={false} {productSearchInput} />
+			<SearchForm onIndex={false} {productSearchInput} {pageNumber} />
+			<Pagination
+				{pageNumber}
+				itemsAmount={data.count}
+				itemsPerPage={1}
+				on:updatePageNumber={(e) => {
+					pageNumber = e.detail.pageNumber;
+				}}
+			/>
 		</div>
 
+		<p class="mx-4 my-6 text-xl font-medium">{pageNumber} Page</p>
 		{#each data.data as product}
 			<ProductItem card={$card} {product} />
 		{:else}

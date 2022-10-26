@@ -1,14 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Search from './logos/user/Search.svelte';
-
-	const searchProduct = () => {
-		if (productSearchInput !== undefined && productSearchInput !== '')
-			goto(`/kerkim/${productSearchInput}`);
-	};
-
-	export let productSearchInput: string = '';
-
 	export let onIndex: boolean = true;
 	import Arrow from '$lib/components/logos/user/Arrow.svelte';
 	import Grid from '$lib/components/logos/user/filters/Grid.svelte';
@@ -16,6 +8,50 @@
 	import Settings from '$lib/components/logos/user/filters/Settings.svelte';
 	import Dollar from '$lib/components/logos/user/filters/sort/Dollar.svelte';
 	import { card } from '$lib/userPreferences/preferences';
+
+	export let pageNumber: number = 1;
+
+	interface searchQuery {
+		faqja?: string;
+	}
+
+	let queryParams: searchQuery = {
+		faqja: String(pageNumber),
+	};
+
+	const searchProduct = () => {
+		queryParams = {};
+		let queryString: string | undefined = undefined;
+
+		if (pageNumber !== 1) {
+			queryParams.faqja = String(pageNumber);
+			queryString = new URLSearchParams(queryParams).toString();
+		}
+
+		if (productSearchInput !== undefined && productSearchInput !== '') {
+			goto(`/kerkim/${encodeURI(productSearchInput)}`);
+
+			if (Object.keys(queryParams).length > 0) {
+				goto(`/kerkim/${encodeURI(productSearchInput)}?${queryString}`);
+			}
+		}
+	};
+
+	let pageNumberBuffer: number | undefined = undefined;
+
+	// TODO: Check if it updates when loading page
+	$: pageNumber, paginate();
+
+	const paginate = () => {
+		if (pageNumberBuffer !== undefined && pageNumber === 1) {
+			searchProduct();
+		} else if (pageNumber !== 1) {
+			searchProduct();
+		}
+		pageNumberBuffer = pageNumber;
+	};
+
+	export let productSearchInput: string = '';
 </script>
 
 <form on:submit|preventDefault={searchProduct} class="">
@@ -96,78 +132,6 @@
 				<div class="flex items-center">
 					<Settings classNames="w-3.5 h-3.5 fill-white min-w-[0.875rem]" />
 					<p class="ml-2  text-sm font-medium uppercase">Opsione</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- Pagination -->
-		<section class="mt-6 ">
-			<div
-				class="flex w-full items-center justify-between rounded-md bg-indigo-400 bg-opacity-20"
-			>
-				<div class="flex w-full items-center justify-around px-2">
-					<!-- First Page -->
-					<button class="">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="h-5 w-5"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-							/>
-						</svg>
-					</button>
-					<!-- Previous Page -->
-					<button class="">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="h-5 w-5"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15.75 19.5L8.25 12l7.5-7.5"
-							/>
-						</svg>
-					</button>
-					<div class="flex items-center">
-						<p class="text-xs uppercase opacity-70">Faqja</p>
-						<p class="mx-2 font-medium">1</p>
-					</div>
-					<!-- Next Page -->
-					<button class="">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="h-5 w-5"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M8.25 4.5l7.5 7.5-7.5 7.5"
-							/>
-						</svg>
-					</button>
-				</div>
-
-				<!-- Save search content -->
-				<div class="border-l border-white border-opacity-20 py-3 px-3">
-					<p class="whitespace-nowrap text-xs font-medium uppercase">
-						Ruani Kerkimin
-					</p>
 				</div>
 			</div>
 		</section>

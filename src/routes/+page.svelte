@@ -1,15 +1,5 @@
 <script lang="ts">
 	import SearchForm from '$lib/components/SearchForm.svelte';
-
-	// Imports:
-	import { onMount } from 'svelte';
-
-	// Initializations & Exports:
-	// :3
-
-	onMount(() => {
-		// :3
-	});
 </script>
 
 <!-- #################################################################################################### -->

@@ -37,7 +37,7 @@
 			on:click={gotoPost}
 			on:keydown={gotoPost}
 		>
-			<h3 class="text-xl ">{product.title}</h3>
+			<h3 class="text-xl">{product.title}</h3>
 			<p class="opacity-70">{product.description}</p>
 		</div>
 

@@ -9,17 +9,13 @@ const prisma = new PrismaClient();
 export async function POST({ request }) {
 	const query = await request.json();
 
-	console.log(query);
-
-	let data = await prisma.post.findMany({
-		take: 1,
+	let count = await prisma.post.count({
 		where: {
 			title: {
 				contains: query,
 			},
 		},
 	});
-	console.log('-------------------------------');
 
-	return new Response(JSON.stringify(data));
+	return new Response(JSON.stringify(count));
 }
