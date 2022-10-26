@@ -10,7 +10,6 @@
 	import '../app.css';
 
 	let onIndex: boolean = false;
-	// inject();
 
 	const updateOnIndex = (url: string) => {
 		if (url === '/') {
