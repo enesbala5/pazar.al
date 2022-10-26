@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { inject } from '@vercel/analytics';
+
 
 	// Imports:
 	import Nav from '$lib/Nav.svelte';
@@ -9,6 +11,7 @@
 	import '../app.css';
 
 	let onIndex: boolean = false;
+	inject();
 
 	const updateOnIndex = (url: string) => {
 		if (url === '/') {
@@ -41,9 +44,7 @@
 </script>
 
 <div
-	class="min-h-screen {onIndex
-		? 'bg-transparent'
-		: 'bg-neutral-900'} font-aeonik text-neutral-50"
+	class="min-h-screen {onIndex ? 'bg-transparent' : 'bg-neutral-900'} font-aeonik text-neutral-50"
 >
 	{#if onIndex}
 		<div

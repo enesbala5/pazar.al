@@ -11,7 +11,7 @@
 	import type { searchQuery } from '$lib/types/query';
 	import Clear from './logos/user/Clear.svelte';
 	import { page } from '$app/stores';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	export let pageNumber: number = 1;
 	let pageNumberBuffer: number | undefined = undefined;
