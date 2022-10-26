@@ -8,76 +8,109 @@
 	import Settings from '$lib/components/logos/user/filters/Settings.svelte';
 	import Dollar from '$lib/components/logos/user/filters/sort/Dollar.svelte';
 	import { card } from '$lib/userPreferences/preferences';
+	import type { searchQuery } from '$lib/types/query';
+	import Clear from './logos/user/Clear.svelte';
+	import { page } from '$app/stores';
+	import { browser } from '$app/env';
 
 	export let pageNumber: number = 1;
-
-	interface searchQuery {
-		faqja?: string;
-	}
+	let pageNumberBuffer: number | undefined = undefined;
 
 	let queryParams: searchQuery = {
 		faqja: String(pageNumber),
 	};
 
-	const searchProduct = () => {
-		queryParams = {};
-		let queryString: string | undefined = undefined;
-
+	const updateQueryParams = () => {
 		if (pageNumber !== 1) {
 			queryParams.faqja = String(pageNumber);
-			queryString = new URLSearchParams(queryParams).toString();
+		}
+	};
+	let queryString: string = '';
+
+	const searchProduct = () => {
+		queryParams = {};
+		queryString = '';
+
+		updateQueryParams();
+
+		if (Object.keys(queryParams).length > 0) {
+			Object.values(queryParams).forEach((param) => {
+				queryString = `${queryString}/${encodeURIComponent(param)}`;
+			});
+			console.log(queryString);
 		}
 
 		if (productSearchInput !== undefined && productSearchInput !== '') {
-			goto(`/kerkim/${encodeURI(productSearchInput)}`);
+			goto(`/kerkim/${encodeURIComponent(productSearchInput)}`);
 
-			if (Object.keys(queryParams).length > 0) {
-				goto(`/kerkim/${encodeURI(productSearchInput)}?${queryString}`);
+			if (queryString !== '') {
+				goto(`/kerkim/${encodeURIComponent(productSearchInput)}${queryString}`);
 			}
 		}
 	};
-
-	let pageNumberBuffer: number | undefined = undefined;
 
 	// TODO: Check if it updates when loading page
 	$: pageNumber, paginate();
 
 	const paginate = () => {
-		if (pageNumberBuffer !== undefined && pageNumber === 1) {
-			searchProduct();
-		} else if (pageNumber !== 1) {
+		if (pageNumberBuffer !== undefined) {
 			searchProduct();
 		}
 		pageNumberBuffer = pageNumber;
 	};
 
 	export let productSearchInput: string = '';
+
+	let searchBar: HTMLInputElement;
+
+	let searchBarFocused: boolean = false;
+
+	$: searchBarFocused, console.log(searchBarFocused);
 </script>
 
 <form on:submit|preventDefault={searchProduct} class="">
 	<section class="relative">
 		<input
+			bind:this={searchBar}
 			type="text"
+			on:focus={() => (searchBarFocused = true)}
+			on:blur={() => (searchBarFocused = false)}
 			bind:value={productSearchInput}
 			class="
 			{onIndex ? 'bg-neutral-800' : 'bg-indigo-600'}
 			w-full rounded-md border-0 px-5 py-3.5  outline-none focus:ring-0"
 		/>
-		<button
-			class="
+		<!-- $page.url.pathname != '/' -->
+		{#if productSearchInput !== '' && !searchBarFocused}
+			<button
+				on:click={() => {
+					productSearchInput = '';
+					searchBar.focus();
+				}}
+				class="
+			{onIndex ? 'bg-indigo-700' : ''}
+			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
+			>
+				<Clear classNames="fill-white w-5/6 h-5/6" />
+			</button>
+		{:else}
+			<button
+				on:click={() => {
+					searchProduct();
+					searchBar.blur();
+				}}
+				class="
 			{onIndex ? 'bg-indigo-700' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9  -translate-y-1/2 items-center justify-center rounded-md p-1"
-		>
-			<Search classNames="fill-white w-2/3 h-2/3" />
-		</button>
+			>
+				<Search classNames="fill-white w-2/3 h-2/3" />
+			</button>{/if}
 	</section>
 
 	{#if !onIndex}
 		<!-- Filters -->
 		<section class="mt-3 flex space-x-3">
-			<div
-				class="flex w-full overflow-hidden rounded-md bg-indigo-400 bg-opacity-20"
-			>
+			<div class="flex w-full overflow-hidden rounded-md bg-indigo-400 bg-opacity-20">
 				<button
 					on:click={() => {
 						card.set(true);
@@ -103,9 +136,7 @@
 					flex h-full w-1/2 grow items-center justify-center  p-1.5"
 				>
 					<div class="mx-2">
-						<List
-							classNames="{!$card ? 'fill-indigo-700' : 'fill-white'} w-4 h-4"
-						/>
+						<List classNames="{!$card ? 'fill-indigo-700' : 'fill-white'} w-4 h-4" />
 					</div>
 				</button>
 			</div>

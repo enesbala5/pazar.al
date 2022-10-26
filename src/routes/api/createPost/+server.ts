@@ -22,7 +22,5 @@ const createPost = async () => {
 export async function GET({ url }) {
 	// let data = await prisma.post.findMany();
 	createPost();
-	console.log('done');
-
 	return new Response(String(true));
 }

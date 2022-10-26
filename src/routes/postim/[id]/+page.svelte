@@ -20,29 +20,25 @@
 		<section class="mt-2 flex items-center justify-between">
 			<div class="w-fit rounded-md bg-indigo-700 py-0.5 px-2 text-sm">
 				<p>
-					{`${data.data?.city}, ${data.data?.country}`}
+					{`${data?.city}, ${data?.country}`}
 				</p>
 			</div>
 
 			<div class="flex items-center space-x-2">
-				<div
-					class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2"
-				>
+				<div class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2">
 					<Heart classNames="w-full h-full fill-white " />
 				</div>
-				<div
-					class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2"
-				>
+				<div class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2">
 					<Save classNames="w-full h-full fill-white " />
 				</div>
 			</div>
 		</section>
 		<section class="mt-4">
-			<h1 class="text-2xl font-medium">{data.data?.title}</h1>
+			<h1 class="text-2xl font-medium">{data?.title}</h1>
 
 			<div class="mt-8">
 				<h2 class="text-lg font-medium">Description</h2>
-				<p class="mt-2">{data.data?.description}</p>
+				<p class="mt-2">{data?.description}</p>
 			</div>
 		</section>
 	</section>

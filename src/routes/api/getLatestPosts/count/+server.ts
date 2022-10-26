@@ -11,9 +11,18 @@ export async function POST({ request }) {
 
 	let count = await prisma.post.count({
 		where: {
-			title: {
-				contains: query,
-			},
+			AND: [
+				{
+					title: {
+						contains: query,
+					},
+				},
+				{
+					archived: {
+						equals: false,
+					},
+				},
+			],
 		},
 	});
 

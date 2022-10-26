@@ -1,15 +1,11 @@
 /** @type {import('./$types').PageLoad} */
 
+import type { Post } from '@prisma/client';
+
 export const loadFromApi = async (
 	fetch: {
-		(
-			input: RequestInfo | URL,
-			init?: RequestInit | undefined
-		): Promise<Response>;
-		(
-			input: RequestInfo | URL,
-			init?: RequestInit | undefined
-		): Promise<Response>;
+		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
+		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
 		(
 			arg0: string,
 			arg1: {
@@ -31,13 +27,11 @@ export const loadFromApi = async (
 		body: JSON.stringify(query),
 	})
 		.then((response: any) => response.json())
-		.then((data: any) => {
+		.then((data: Post) => {
 			return data;
 		});
 };
 
 export async function load({ params, fetch }) {
-	return {
-		data: await loadFromApi(fetch, params.id),
-	};
+	return await loadFromApi(fetch, params.id);
 }

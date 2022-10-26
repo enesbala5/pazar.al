@@ -35,9 +35,7 @@
 {#if itemsAmount > 0}
 	<!-- Pagination -->
 	<section class="mt-6 ">
-		<div
-			class="flex w-full items-center justify-between rounded-md bg-indigo-400 bg-opacity-20"
-		>
+		<div class="flex w-full items-center justify-between rounded-md bg-indigo-400 bg-opacity-20">
 			<div class="flex w-full items-center justify-around px-2">
 				<!-- First Page -->
 				<button class="" on:click={firstPage}>
@@ -66,11 +64,7 @@
 						stroke="currentColor"
 						class="h-5 w-5"
 					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M15.75 19.5L8.25 12l7.5-7.5"
-						/>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 					</svg>
 				</button>
 				<div class="flex items-center">
@@ -87,21 +81,22 @@
 						stroke="currentColor"
 						class="h-5 w-5"
 					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M8.25 4.5l7.5 7.5-7.5 7.5"
-						/>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
 					</svg>
 				</button>
 			</div>
 
 			<!-- Save search content -->
 			<div class="border-l border-white border-opacity-20 py-3 px-3">
-				<p class="whitespace-nowrap text-xs font-medium uppercase">
-					Ruani Kerkimin
-				</p>
+				<p class="whitespace-nowrap text-xs font-medium uppercase">Ruani Kerkimin</p>
 			</div>
 		</div>
+	</section>
+	<section class="mt-4 text-xs uppercase">
+		<p class="text-sm ">
+			Showing {`${pageNumber * itemsPerPage - itemsPerPage + 1} - ${
+				pageNumber * itemsPerPage < itemsAmount ? pageNumber * itemsPerPage : itemsAmount
+			}`} of {itemsAmount}
+		</p>
 	</section>
 {/if}
