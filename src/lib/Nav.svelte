@@ -16,8 +16,8 @@
 
 <nav class="flex items-center justify-between p-4">
 	<section class="flex items-center">
-		<a href="/" class="h-8 w-8">
-			<Logo classNames="fill-neutral-50" />
+		<a href="/" class="h-8 w-8 ">
+			<Logo classNames="fill-neutral-50 w-full h-full " />
 		</a>
 		{#if returnUrl !== undefined}
 			<button

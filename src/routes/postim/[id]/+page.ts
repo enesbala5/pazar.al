@@ -37,7 +37,6 @@ export const loadFromApi = async (
 };
 
 export async function load({ params, fetch }) {
-
 	return {
 		data: await loadFromApi(fetch, params.id),
 	};

@@ -8,25 +8,34 @@
 	export let card: boolean;
 
 	export let product: Post;
+
+	const gotoPost = () => {
+		goto(`/postim/${product.pid}`);
+	};
 </script>
 
 {#if card}
-	<section class="relative mx-2 my-4 mb-12 min-h-[30vh] rounded-md">
-		<img
-			src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
-			alt={product.title}
-			class="absolute top-0 left-0 z-10 h-full w-full rounded-md object-cover"
-		/>
+	<section class="group relative mx-2 my-4 mb-12 min-h-[30vh] rounded-md">
 		<div
-			class="absolute bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent "
-		/>
+			class="absolute top-0 left-0 z-10 h-full w-full overflow-hidden rounded-md"
+			on:click={gotoPost}
+			on:keydown={gotoPost}
+		>
+			<img
+				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
+				alt={product.title}
+				class=" transition-scale h-full w-full object-cover group-active:scale-110 lg:group-hover:scale-110 lg:group-active:scale-100"
+			/>
+			<div
+				class="absolute bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent "
+			/>
+		</div>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			class=" absolute bottom-8 z-30 px-4"
-			on:click={() => {
-				goto(`/postim/${product.pid}`);
-			}}
+			on:click={gotoPost}
+			on:keydown={gotoPost}
 		>
 			<h3 class="text-xl ">{product.title}</h3>
 			<p class="opacity-70">{product.description}</p>
@@ -86,3 +95,10 @@
 		</div>
 	</section>
 {/if}
+
+<style>
+	.transition-scale {
+		transition: all 2s;
+		transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+	}
+</style>

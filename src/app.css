@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-}
-
 @font-face {
 	font-family: 'Aeonik';
 	src: url('/fonts/Aeonik-Regular.woff2') format('woff2'),
