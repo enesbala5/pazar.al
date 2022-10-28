@@ -1,5 +1,5 @@
-/** @type {import('./$types').PageLoad} */
 import type { searchQuery } from '$lib/types/query';
+import type { PageLoad } from './$types';
 
 const loadCount = async (
 	fetch: {
@@ -64,10 +64,18 @@ const loadFromApi = async (
 		});
 };
 
-export const load: any = async ({ params, fetch }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
+	console.log('params kerkim/id/faqja', params);
+
+	let pageNumberParam = 1;
+
+	if (params.faqja !== '') {
+		pageNumberParam = Number(params.faqja);
+	}
+
 	return {
 		kerkim: params.id ?? '',
-		pageNumber: Number(params.faqja),
+		pageNumber: pageNumberParam,
 		count: await loadCount(fetch, params.id),
 		data: await loadFromApi(fetch, params),
 	};

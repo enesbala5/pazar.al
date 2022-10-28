@@ -11,7 +11,6 @@
 	import type { searchQuery } from '$lib/types/query';
 	import Clear from './logos/user/Clear.svelte';
 	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
 
 	export let pageNumber: number = 1;
 	let pageNumberBuffer: number | undefined = undefined;
@@ -37,7 +36,7 @@
 			Object.values(queryParams).forEach((param) => {
 				queryString = `${queryString}/${encodeURIComponent(param)}`;
 			});
-			console.log(queryString);
+			console.log('queryString', queryString);
 		}
 
 		if (productSearchInput !== undefined && productSearchInput !== '') {
@@ -64,8 +63,6 @@
 	let searchBar: HTMLInputElement;
 
 	let searchBarFocused: boolean = false;
-
-	$: searchBarFocused, console.log(searchBarFocused);
 </script>
 
 <form on:submit|preventDefault={searchProduct} class="">
@@ -80,8 +77,8 @@
 			{onIndex ? 'bg-neutral-800' : 'bg-indigo-600'}
 			w-full rounded-md border-0 px-5 py-3.5  outline-none focus:ring-0"
 		/>
-		<!-- $page.url.pathname != '/' -->
-		{#if productSearchInput !== '' && !searchBarFocused}
+		<!-- -->
+		{#if productSearchInput !== '' && !searchBarFocused && $page.url.pathname != '/'}
 			<button
 				on:click={() => {
 					productSearchInput = '';

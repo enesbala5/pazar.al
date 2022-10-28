@@ -15,6 +15,8 @@ const getKeywords = (searchQuery: string | undefined) => {
 export const POST: RequestHandler = async ({ request }) => {
 	const query: searchQuery = await request.json();
 
+	// console.log('query faqja: ', query);
+
 	let pageNumber = 1;
 	const itemsPerPage: number = 3;
 
@@ -25,6 +27,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	let itemsToSkip = pageNumber * itemsPerPage - itemsPerPage;
+	console.log('itemsToSkip', itemsToSkip);
 
 	let keywords: string[] = getKeywords(query.id);
 
