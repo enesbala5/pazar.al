@@ -29,12 +29,12 @@ const loadFromApi = async (
 		body: JSON.stringify(completeQuery),
 	});
 
-	// if (!response.ok) {
-	// 	return {};
-	// }
+	if (!response.ok) {
+		return {};
+	}
 
 	const data = await response.json();
-	return data;
+	return await data;
 };
 
 const loadCount = async (
@@ -65,12 +65,12 @@ const loadCount = async (
 		body: JSON.stringify(query),
 	});
 
-	// if (!response.ok) {
-	// 	return {};
-	// }
+	if (!response.ok) {
+		return {};
+	}
 
 	const data = await response.json();
-	return data;
+	return await data;
 };
 
 export const load: PageLoad = async ({ params, fetch }) => {
