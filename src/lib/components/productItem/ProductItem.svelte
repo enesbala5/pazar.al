@@ -32,11 +32,7 @@
 		</div>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			class=" absolute bottom-8 z-30 px-4"
-			on:click={gotoPost}
-			on:keydown={gotoPost}
-		>
+		<div class=" absolute bottom-8 z-30 px-4" on:click={gotoPost} on:keydown={gotoPost}>
 			<h3 class="text-xl">{product.title}</h3>
 			<p class="opacity-70">{product.description}</p>
 		</div>
@@ -57,9 +53,7 @@
 		</div>
 
 		<!-- Like Button -->
-		<div
-			class="absolute bottom-0 z-30 flex w-full items-center  justify-end p-4"
-		>
+		<div class="absolute bottom-0 z-30 flex w-full items-center  justify-end p-4">
 			<Heart classNames="h-5 fill-white w-5 opacity-80 " />
 		</div>
 	</section>
