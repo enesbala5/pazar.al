@@ -6,9 +6,11 @@ export const getLatestPosts = async (params: searchQuery) => {
 	let url = nav.api.getLatestPosts;
 	const response = await fetch(url, {
 		method: 'POST',
-		headers: {
+		headers: new Headers({
+			Accept: 'application/json',
 			'Content-Type': 'application/json',
-		},
+			Authorization: 'Basic ' + Credential,
+		}),
 		cache: 'no-cache',
 		body: JSON.stringify(params),
 	});
