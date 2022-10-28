@@ -29,9 +29,9 @@ const loadFromApi = async (
 		body: JSON.stringify(completeQuery),
 	});
 
-	if (!response.ok) {
-		return {};
-	}
+	// if (!response.ok) {
+	// 	return {};
+	// }
 
 	const data = await response.json();
 	return data;
@@ -65,9 +65,9 @@ const loadCount = async (
 		body: JSON.stringify(query),
 	});
 
-	if (!response.ok) {
-		return {};
-	}
+	// if (!response.ok) {
+	// 	return {};
+	// }
 
 	const data = await response.json();
 	return data;
