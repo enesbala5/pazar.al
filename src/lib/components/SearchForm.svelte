@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Search from './logos/user/Search.svelte';
-	export let onIndex: boolean = true;
 	import Arrow from '$lib/components/logos/user/Arrow.svelte';
 	import Grid from '$lib/components/logos/user/filters/Grid.svelte';
 	import List from '$lib/components/logos/user/filters/List.svelte';
@@ -11,81 +9,59 @@
 	import type { searchQuery } from '$lib/types/query';
 	import Clear from './logos/user/Clear.svelte';
 	import { page } from '$app/stores';
+	import { insertParams } from '$lib/functions/paramHandling';
 
-	export let pageNumber: number = 1;
-	let pageNumberBuffer: number | undefined = undefined;
+	export let onIndex: boolean = true;
+	export let params: searchQuery = {};
+	export let searchInput: string = ''; // Search value
 
-	let queryParams: searchQuery = {
-		faqja: String(pageNumber),
+	const updateParamsField = (updatePage: boolean = true) => {
+		if (searchInput !== '') {
+			params.id = searchInput;
+		}
+		if (updatePage) {
+			params.faqja = 1;
+		}
+		console.log('updating params field', params);
 	};
 
-	const updateQueryParams = () => {
-		if (pageNumber !== 1) {
-			queryParams.faqja = String(pageNumber);
-		}
-	};
-	let queryString: string = '';
+	const searchProduct = (updatePage: boolean = true) => {
+		console.log('updating params');
 
-	const searchProduct = () => {
-		queryParams = {};
-		queryString = '';
-
-		updateQueryParams();
-		console.log('-----------------------------');
-		console.log('searchForm', queryParams);
-
-		if (Object.keys(queryParams).length > 0) {
-			Object.values(queryParams).forEach((param) => {
-				queryString = `${queryString}/${encodeURIComponent(param)}`;
-			});
-			console.log('queryString', queryString);
-		}
-
-		if (productSearchInput !== undefined && productSearchInput !== '') {
-			goto(`/kerkim/${encodeURIComponent(productSearchInput)}`);
-
-			if (queryString !== '') {
-				goto(`/kerkim/${encodeURIComponent(productSearchInput)}${queryString}`);
-			}
-		}
+		// update params object with local values
+		updateParamsField(updatePage);
+		insertParams($page, params);
 	};
 
-	// TODO: Check if it updates when loading page
-	$: pageNumber, paginate();
-
-	const paginate = () => {
-		if (pageNumberBuffer !== undefined) {
-			searchProduct();
-		}
-		pageNumberBuffer = pageNumber;
+	export const paginate = () => {
+		searchProduct(false);
 	};
 
-	export let productSearchInput: string = '';
+	const clearInput = () => {
+		searchInput = '';
+		searchBar.focus();
+	};
 
 	let searchBar: HTMLInputElement;
-
 	let searchBarFocused: boolean = false;
 </script>
 
-<form on:submit|preventDefault={searchProduct} class="">
+<form on:submit|preventDefault={() => searchProduct()} class="">
 	<section class="relative">
 		<input
 			bind:this={searchBar}
 			type="text"
 			on:focus={() => (searchBarFocused = true)}
 			on:blur={() => (searchBarFocused = false)}
-			bind:value={productSearchInput}
+			bind:value={searchInput}
 			class="
 			{onIndex ? 'bg-neutral-800' : 'bg-indigo-600'}
 			w-full rounded-md border-0 px-5 py-3.5  outline-none focus:ring-0"
 		/>
 		<!-- -->
-		{#if productSearchInput !== '' && !searchBarFocused && $page.url.pathname != '/'}
+		{#if searchInput !== '' && !searchBarFocused && $page.url.pathname != '/'}
 			<button
-				on:click={() => {
-					productSearchInput = '';
-					searchBar.focus();
-				}}
+				on:click={clearInput}
 				class="
 			{onIndex ? 'bg-indigo-700' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
@@ -94,13 +70,11 @@
 			</button>
 		{:else}
 			<button
-				on:click={() => {
-					searchProduct();
-					searchBar.blur();
-				}}
+				on:click={() => searchProduct()}
+				on:mousedown={() => searchProduct()}
 				class="
 			{onIndex ? 'bg-indigo-700' : ''}
-			absolute right-2 top-1/2 flex aspect-square h-9  -translate-y-1/2 items-center justify-center rounded-md p-1"
+			absolute right-2 top-1/2 z-50 flex aspect-square h-9  -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
 				<Search classNames="fill-white w-2/3 h-2/3" />
 			</button>{/if}

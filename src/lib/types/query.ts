@@ -1,4 +1,4 @@
 export interface searchQuery {
 	id?: string;
-	faqja?: string;
+	faqja?: number;
 }
