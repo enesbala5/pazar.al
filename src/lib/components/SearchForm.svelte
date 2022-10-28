@@ -31,6 +31,8 @@
 		queryString = '';
 
 		updateQueryParams();
+		console.log('-----------------------------');
+		console.log('searchForm', queryParams);
 
 		if (Object.keys(queryParams).length > 0) {
 			Object.values(queryParams).forEach((param) => {

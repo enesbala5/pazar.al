@@ -53,7 +53,7 @@ const loadCount = async (
 	query: {}
 ) => {
 	let url = `/api/getLatestPosts/count`;
-	console.log('query page', query);
+	console.log('+page.ts query (kerkim): ', query);
 
 	const response = await fetch(url, {
 		method: 'POST',
