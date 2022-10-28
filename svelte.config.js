@@ -1,4 +1,4 @@
-import vercel from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-netlify';
 
 import preprocess from 'svelte-preprocess';
 
@@ -6,7 +6,7 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	preprocess: preprocess(),
 	kit: {
-		adapter: vercel()
+		adapter: adapter()
 	}
 };
 

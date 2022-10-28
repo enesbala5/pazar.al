@@ -4,6 +4,8 @@ import { error } from '@sveltejs/kit';
 
 export const getLatestPosts = async (params: searchQuery) => {
 	let url = nav.api.getLatestPosts;
+	console.log(JSON.stringify(params));
+
 	const response = await fetch(url, {
 		method: 'POST',
 		headers: new Headers({
@@ -17,7 +19,6 @@ export const getLatestPosts = async (params: searchQuery) => {
 
 	if (!response.ok) {
 		throw error(404, 'Posts not found');
-		return;
 	}
 
 	const data = await response.json();
