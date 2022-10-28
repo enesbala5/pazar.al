@@ -5,11 +5,10 @@
 	import Pagination from '$lib/components/Pagination.svelte';
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import SearchForm from '$lib/components/SearchForm.svelte';
-	import { faqjaParamParse } from '$lib/functions/conversions';
-	import { getParams, insertParams } from '$lib/functions/paramHandling';
+	import { getLatestPosts } from '$lib/fetching/main';
+	import { getParams } from '$lib/functions/paramHandling';
 	import type { searchQuery } from '$lib/types/query';
 	import { card } from '$lib/userPreferences/preferences';
-	import { onMount } from 'svelte';
 
 	let params: searchQuery = {};
 
@@ -19,11 +18,14 @@
 
 	let searchInput = params.id;
 
-	afterNavigate(() => {
+	afterNavigate(async () => {
 		params = getParams($page);
 		console.log('params received', params);
 
 		console.log('should start new fetch request etc');
+		// const data = await getLatestPosts(params);
+		// console.log(data);
+		console.log('should be finished?');
 	});
 
 	const createItem = async () => {
@@ -75,6 +77,19 @@
 				>Create item in DB</button
 			>
 		</div> -->
+
+		{#await getLatestPosts(params)}
+			<div>Loading</div>
+			<!-- TODO: Add ProductItem Skeleton Model x (Items per Page) -->
+		{:then data}
+			{#each data as postim}
+				<ProductItem card={$card} product={postim} />
+			{:else}
+				<p>Failed</p>
+			{/each}
+		{:catch error}
+			<p>Failed {error.status}</p>
+		{/await}
 		<p>{params}</p>
 	</div>
 </div>
