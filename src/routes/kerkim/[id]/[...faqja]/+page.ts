@@ -19,7 +19,21 @@ const loadFromApi = async (
 ) => {
 	let url = `/api/getLatestPosts`;
 
-	const response = await fetch(url, {
+	// const response = await fetch(url, {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 		// 'Content-Type': 'application/x-www-form-urlencoded',
+	// 	},
+	// 	cache: 'no-cache',
+	// 	body: JSON.stringify(completeQuery),
+	// });
+
+	// if (!response.ok) {
+	// 	return {};
+	// }
+
+	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -27,14 +41,17 @@ const loadFromApi = async (
 		},
 		cache: 'no-cache',
 		body: JSON.stringify(completeQuery),
-	});
+	})
+		.then((response: any) => response.json())
+		.then((data: any) => {
+			return data;
+		})
+		.catch((error) => {
+			console.error('Load Posts failed:', error);
+		});
 
-	if (!response.ok) {
-		return {};
-	}
-
-	const data = await response.json();
-	return await data;
+	// const data = await response.json();
+	// return await data;
 };
 
 const loadCount = async (
@@ -55,7 +72,21 @@ const loadCount = async (
 	let url = `/api/getLatestPosts/count`;
 	console.log('+page.ts query (kerkim): ', query);
 
-	const response = await fetch(url, {
+	// const response = await fetch(url, {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 		// 'Content-Type': 'application/x-www-form-urlencoded',
+	// 	},
+	// 	cache: 'default',
+	// 	body: JSON.stringify(query),
+	// });
+
+	// if (!response.ok) {
+	// 	return {};
+	// }
+
+	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -63,14 +94,17 @@ const loadCount = async (
 		},
 		cache: 'default',
 		body: JSON.stringify(query),
-	});
+	})
+		.then((response: any) => response.json())
+		.then((data: any) => {
+			return data;
+		})
+		.catch((error) => {
+			console.error('Load Count failed:', error);
+		});
 
-	if (!response.ok) {
-		return {};
-	}
-
-	const data = await response.json();
-	return await data;
+	// const data = await response.json();
+	// return await data;
 };
 
 export const load: PageLoad = async ({ params, fetch }) => {
