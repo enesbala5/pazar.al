@@ -30,7 +30,7 @@ const loadFromApi = async (
 	});
 
 	if (!response.ok) {
-		return null;
+		return {};
 	}
 
 	const data = await response.json();
