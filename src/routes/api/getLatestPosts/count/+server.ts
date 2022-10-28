@@ -33,7 +33,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(JSON.stringify(count));
 	}
 
-	throw error(404, 'Post Not Found');
-
-	return new Response(JSON.stringify(count));
+	return new Response(JSON.stringify({}));
 };
