@@ -84,6 +84,7 @@
 		{:then data}
 			{#each data as postim}
 				<ProductItem card={$card} product={postim} />
+				<button on:click={() => console.log(postim)}>log</button>
 			{:else}
 				<p>Failed</p>
 			{/each}
