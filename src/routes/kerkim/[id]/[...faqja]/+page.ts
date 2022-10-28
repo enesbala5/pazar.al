@@ -2,40 +2,6 @@ import type { searchQuery } from '$lib/types/query';
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
-const loadCount = async (
-	fetch: {
-		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
-		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
-		(
-			arg0: string,
-			arg1: {
-				method: string;
-				headers: { 'Content-Type': string };
-				body: string;
-			}
-		): Promise<any>;
-	},
-	query: {}
-) => {
-	let url = `/api/getLatestPosts/count`;
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-		},
-		cache: 'force-cache',
-		body: JSON.stringify(query),
-	});
-
-	if (!response.ok) {
-		throw error(404, 'Kerkimi nuk ka rezultat');
-	}
-
-	const data = await response.json();
-	return data;
-};
-
 const loadFromApi = async (
 	fetch: {
 		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
@@ -64,7 +30,43 @@ const loadFromApi = async (
 	});
 
 	if (!response.ok) {
-		throw error(404, 'Kerkimi nuk ka rezultat');
+		return null;
+	}
+
+	const data = await response.json();
+	return data;
+};
+
+const loadCount = async (
+	fetch: {
+		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
+		(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
+		(
+			arg0: string,
+			arg1: {
+				method: string;
+				headers: { 'Content-Type': string };
+				body: string;
+			}
+		): Promise<any>;
+	},
+	query: {}
+) => {
+	let url = `/api/getLatestPosts/count`;
+	console.log('query page', query);
+
+	const response = await fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		cache: 'default',
+		body: JSON.stringify(query),
+	});
+
+	if (!response.ok) {
+		return null;
 	}
 
 	const data = await response.json();
@@ -83,7 +85,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	return {
 		kerkim: params.id ?? '',
 		pageNumber: pageNumberParam,
-		count: await loadCount(fetch, params.id),
 		data: await loadFromApi(fetch, params),
+		count: await loadCount(fetch, params.id),
 	};
 };
