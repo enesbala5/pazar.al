@@ -1,4 +1,5 @@
 import type { PageLoad } from './$types';
+import { error } from '@sveltejs/kit';
 
 import type { Post } from '@prisma/client';
 
@@ -18,20 +19,29 @@ export const loadFromApi = async (
 	query: string
 ) => {
 	let url = '/api/getPost';
-	return fetch(url, {
+	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify(query),
-	})
-		.then((response: any) => response.json())
-		.then((data: Post) => {
-			return data;
-		});
+	});
+
+	if (!response.ok) {
+		throw error(404, 'Postimi nuk u gjet');
+	}
+
+	const data = await response.json();
+	return data;
+
+	// .then((response: any) => response.json())
+	// 	.then((data: Post) => {
+	// 		return data;
+	// 	});
 };
 
-export const load: any = async ({ params, fetch }) => {
-	return await loadFromApi(fetch, params.id);
+export const load: PageLoad = async ({ params, fetch }) => {
+	const data = await loadFromApi(fetch, params.id);
+	return data;
 };

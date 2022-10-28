@@ -1,4 +1,6 @@
 import type { searchQuery } from '$lib/types/query';
+import { error } from '@sveltejs/kit';
+
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import type { RequestHandler } from './$types';
@@ -55,5 +57,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		},
 	});
 
-	return new Response(JSON.stringify(data));
+	if (data) {
+		return new Response(JSON.stringify(data));
+	}
+
+	throw error(404, 'Post Not Found');
 };

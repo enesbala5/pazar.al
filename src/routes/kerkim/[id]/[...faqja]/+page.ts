@@ -1,5 +1,6 @@
 import type { searchQuery } from '$lib/types/query';
 import type { PageLoad } from './$types';
+import { error } from '@sveltejs/kit';
 
 const loadCount = async (
 	fetch: {
@@ -17,7 +18,7 @@ const loadCount = async (
 	query: {}
 ) => {
 	let url = `/api/getLatestPosts/count`;
-	return fetch(url, {
+	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -25,11 +26,14 @@ const loadCount = async (
 		},
 		cache: 'force-cache',
 		body: JSON.stringify(query),
-	})
-		.then((response: any) => response.json())
-		.then((data: any) => {
-			return data;
-		});
+	});
+
+	if (!response.ok) {
+		throw error(404, 'Kerkimi nuk ka rezultat');
+	}
+
+	const data = await response.json();
+	return data;
 };
 
 const loadFromApi = async (
@@ -49,7 +53,7 @@ const loadFromApi = async (
 ) => {
 	let url = `/api/getLatestPosts`;
 
-	return fetch(url, {
+	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -57,11 +61,14 @@ const loadFromApi = async (
 		},
 		cache: 'no-cache',
 		body: JSON.stringify(completeQuery),
-	})
-		.then((response: any) => response.json())
-		.then((data: any) => {
-			return data;
-		});
+	});
+
+	if (!response.ok) {
+		throw error(404, 'Kerkimi nuk ka rezultat');
+	}
+
+	const data = await response.json();
+	return data;
 };
 
 export const load: PageLoad = async ({ params, fetch }) => {
