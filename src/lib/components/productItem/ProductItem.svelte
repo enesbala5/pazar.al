@@ -8,6 +8,7 @@
 	export let card: boolean;
 
 	export let product: Post;
+	export let skeleton: boolean = false;
 
 	const gotoPost = () => {
 		goto(`/postim/${product.pid}`);

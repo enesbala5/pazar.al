@@ -4,28 +4,25 @@
 	import { page } from '$app/stores';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
+	import ProductItemSkeleton from '$lib/components/productItem/ProductItemSkeleton.svelte';
 	import SearchForm from '$lib/components/SearchForm.svelte';
-	import { getLatestPosts } from '$lib/fetching/main';
+	import { getCount, getLatestPosts } from '$lib/fetching/main';
+	import { faqjaParamParse } from '$lib/functions/conversions';
 	import { getParams } from '$lib/functions/paramHandling';
 	import type { searchQuery } from '$lib/types/query';
 	import { card } from '$lib/userPreferences/preferences';
 
 	let params: searchQuery = {};
 
+	let itemsAmount: number = 0;
+
 	// let paramsCache: searchQuery = {};
-
-	$: $page.params, console.log('search...');
-
-	let searchInput = params.id;
 
 	afterNavigate(async () => {
 		params = getParams($page);
 		console.log('params received', params);
 
-		console.log('should start new fetch request etc');
-		// const data = await getLatestPosts(params);
-		// console.log(data);
-		console.log('should be finished?');
+		itemsAmount = await getCount(params);
 	});
 
 	const createItem = async () => {
@@ -54,16 +51,17 @@
 				{params}
 				bind:paginate
 			/>
-
-			<Pagination
-				pageNumber={params.faqja !== undefined ? params.faqja : 1}
-				itemsAmount={7}
-				itemsPerPage={3}
-				on:updatePageNumber={(e) => {
-					params.faqja = e.detail.pageNumber;
-					paginateFN();
-				}}
-			/>
+			{#key itemsAmount}
+				<Pagination
+					pageNumber={params.faqja !== undefined ? params.faqja : 1}
+					{itemsAmount}
+					itemsPerPage={3}
+					on:updatePageNumber={(e) => {
+						params.faqja = e.detail.pageNumber;
+						paginateFN();
+					}}
+				/>
+			{/key}
 		</div>
 		<!-- itemsAmount={data.count} -->
 
@@ -73,23 +71,26 @@
 			<p>Sorry there are no posts that match that description</p>
 		{/each}
 		<div class="rounded-md bg-neutral-700 py-4 text-center">
-			<button class="my-2 rounded-md bg-indigo-700 py-2 px-4" on:click={createItem}
-				>Create item in DB</button
-			>
+		
 		</div> -->
 
+		<!-- TODO: Add ProductItem Skeleton Model x (Items per Page) -->
 		{#await getLatestPosts(params)}
-			<div>Loading</div>
-			<!-- TODO: Add ProductItem Skeleton Model x (Items per Page) -->
+			{#each Array(3) as _, i}
+				<ProductItemSkeleton index={i} card={$card} />
+			{/each}
 		{:then data}
-			{#each data as postim}
+			{#each data as postim, i}
 				<ProductItem card={$card} product={postim} />
 			{:else}
-				<p>Failed</p>
+				{#each Array(3) as _, i}
+					<ProductItemSkeleton index={i} card={$card} />
+				{/each}
 			{/each}
 		{:catch error}
-			<p>Failed {error.status}</p>
+			{#each Array(3) as _, i}
+				<ProductItemSkeleton index={i} card={$card} />
+			{/each}
 		{/await}
-		<p>{params}</p>
 	</div>
 </div>

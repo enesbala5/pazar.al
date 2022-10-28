@@ -33,5 +33,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(JSON.stringify(count));
 	}
 
-	return new Response(JSON.stringify({}));
+	throw error(404, 'No posts match');
 };
