@@ -40,8 +40,8 @@
 		</div>
 	</section>
 {:else}
-	<section class="relative my-4 mb-6 flex h-[12vh] items-center px-4 animate-pulse">
-		<div class=" h-full w-1/3 bg-neutral-700 rounded-md" />
+	<section class="relative my-4 mb-6 flex h-[12vh] animate-pulse items-center px-4">
+		<div class=" h-full w-1/3 rounded-md bg-neutral-700" />
 		<div class="w-2/3 pl-4">
 			<div
 				class="mb-2 h-5
@@ -58,8 +58,7 @@
 				aria-label="Pricing and User Actions"
 				class="mt-3 flex  w-full items-center justify-between"
 			>
-				<section class="flex items-center rounded-md bg-indigo-600 py-0.5 px-2 w-16 h-5 ">
-				</section>
+				<section class="flex h-5 w-16 items-center rounded-md bg-indigo-600 py-0.5 px-2 " />
 				<Heart classNames="h-5 fill-neutral-700 w-5" />
 			</section>
 		</div>

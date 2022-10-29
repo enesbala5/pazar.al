@@ -8,4 +8,5 @@ export const nav = {
 		getPost: '/api/getPost',
 		createPost: '/api/cretePost',
 	},
+	suport: '/suport',
 };

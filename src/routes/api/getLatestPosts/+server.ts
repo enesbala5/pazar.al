@@ -20,7 +20,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	console.log('query faqja: ', query);
 
 	let pageNumber = 1;
-	const itemsPerPage: number = 3;
+	const itemsPerPage: number = 15;
 
 	if (query.faqja !== undefined) {
 		pageNumber = Number(query.faqja);

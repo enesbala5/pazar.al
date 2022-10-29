@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import KerkimError from '$lib/components/error/KerkimError.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import ProductItemSkeleton from '$lib/components/productItem/ProductItemSkeleton.svelte';
@@ -20,14 +21,12 @@
 
 	afterNavigate(async () => {
 		params = getParams($page);
-		console.log('params received', params);
-
 		itemsAmount = await getCount(params);
 	});
 
-	const createItem = async () => {
-		fetch('/api/createPost');
-	};
+	// const createItem = async () => {
+	// fetch('/api/createPost');
+	// };
 
 	const paginateFN = () => {
 		paginate();
@@ -55,7 +54,7 @@
 				<Pagination
 					pageNumber={params.faqja !== undefined ? params.faqja : 1}
 					{itemsAmount}
-					itemsPerPage={3}
+					itemsPerPage={15}
 					on:updatePageNumber={(e) => {
 						params.faqja = e.detail.pageNumber;
 						paginateFN();
@@ -63,34 +62,19 @@
 				/>
 			{/key}
 		</div>
-		<!-- itemsAmount={data.count} -->
-
-		<!-- {#each data.data as product}
-			<ProductItem card={$card} {product} />
-		{:else}
-			<p>Sorry there are no posts that match that description</p>
-		{/each}
-		<div class="rounded-md bg-neutral-700 py-4 text-center">
-		
-		</div> -->
-
 		<!-- TODO: Add ProductItem Skeleton Model x (Items per Page) -->
 		{#await getLatestPosts(params)}
-			{#each Array(3) as _, i}
+			{#each Array(5) as _, i}
 				<ProductItemSkeleton index={i} card={$card} />
 			{/each}
 		{:then data}
 			{#each data as postim, i}
 				<ProductItem card={$card} product={postim} />
 			{:else}
-				{#each Array(3) as _, i}
-					<ProductItemSkeleton index={i} card={$card} />
-				{/each}
+				<KerkimError id={params.id} />
 			{/each}
-		{:catch error}
-			{#each Array(3) as _, i}
-				<ProductItemSkeleton index={i} card={$card} />
-			{/each}
+		{:catch}
+			<KerkimError id={params.id} />
 		{/await}
 	</div>
 </div>
