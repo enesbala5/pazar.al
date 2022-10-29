@@ -24,11 +24,14 @@ model Post {
   description String
   price       Float
   eur         Boolean
-  old_price   Float
-  // to calculate changes on price ||| 
-  // -> mund te jete null 
-  // -> mund te vendoset njejte me cmimin
-  // -> te funksionoje si buffer && te mos ndryshohet kur ndryshon cmimi
+  old_price   Float   @default(0)
+
+  // * MUND TE FUNKSIONOJ KESHTU:
+  // -> old_price = @default(0)
+  // Kur ndryshon cmimi -> make old_price = price
+  // Pastaj ndrysho price;
+
+  // Mbase mund te behet array (per Price History (Mbase per Dashboard Internal))
 
   city    String
   country String

@@ -2,6 +2,7 @@ import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
 import type { Post } from '@prisma/client';
+import type { searchQuery } from '$lib/types/query';
 
 export const loadFromApi = async (
 	fetch: {
@@ -16,7 +17,7 @@ export const loadFromApi = async (
 			}
 		): Promise<any>;
 	},
-	query: string
+	query: searchQuery
 ) => {
 	let url = '/api/getPost';
 	const response = await fetch(url, {
@@ -25,7 +26,7 @@ export const loadFromApi = async (
 			'Content-Type': 'application/json',
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
-		body: JSON.stringify(query),
+		body: JSON.stringify(query.id),
 	});
 
 	if (!response.ok) {
@@ -34,14 +35,9 @@ export const loadFromApi = async (
 
 	const data = await response.json();
 	return data;
-
-	// .then((response: any) => response.json())
-	// 	.then((data: Post) => {
-	// 		return data;
-	// 	});
 };
 
 export const load: PageLoad = async ({ params, fetch }) => {
-	const data = await loadFromApi(fetch, params.id);
+	const data = await loadFromApi(fetch, params);
 	return data;
 };

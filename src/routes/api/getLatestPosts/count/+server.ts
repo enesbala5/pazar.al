@@ -4,8 +4,6 @@ const prisma = new PrismaClient();
 
 import type { RequestHandler } from './$types';
 
-// TODO:
-// -> Add other search options to query
 export const POST: RequestHandler = async ({ request }) => {
 	const query = await request.json();
 	console.log('query count', query);
@@ -27,11 +25,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		},
 	});
 
-	console.log('count', count);
-
 	if (count) {
 		return new Response(JSON.stringify(count));
 	}
 
-	throw error(404, 'No posts match');
+	throw error(404, 'Nuk ka postime qe pershtaten');
 };

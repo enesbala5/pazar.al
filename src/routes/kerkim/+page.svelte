@@ -62,7 +62,6 @@
 				/>
 			{/key}
 		</div>
-		<!-- TODO: Add ProductItem Skeleton Model x (Items per Page) -->
 		{#await getLatestPosts(params)}
 			{#each Array(5) as _, i}
 				<ProductItemSkeleton index={i} card={$card} />
@@ -72,9 +71,11 @@
 				<ProductItem card={$card} product={postim} />
 			{:else}
 				<KerkimError id={params.id} />
+				<!-- TODO: Add Recently Viewed Items -->
 			{/each}
 		{:catch}
 			<KerkimError id={params.id} />
+			<!-- TODO: Add Recently Viewed Items -->
 		{/await}
 	</div>
 </div>

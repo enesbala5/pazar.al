@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // TODO:
-// -> Add other search options to query
+// -> Maybe add referral query options
 export const POST: RequestHandler = async ({ request }) => {
 	const query = await request.json();
 

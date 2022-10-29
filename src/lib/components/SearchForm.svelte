@@ -15,22 +15,23 @@
 	export let params: searchQuery = {};
 	export let searchInput: string = ''; // Search value
 
-	const updateParamsField = (updatePage: boolean = true) => {
+	const updateParamsField = (resetPage: boolean = true) => {
 		if (searchInput !== '') {
 			params.id = searchInput;
 		}
-		if (updatePage) {
+		if (resetPage) {
 			params.faqja = 1;
 		}
 		console.log('updating params field', params);
 	};
 
-	const searchProduct = (updatePage: boolean = true) => {
-		console.log('updating params');
-
-		// update params object with local values
-		updateParamsField(updatePage);
-		insertParams($page, params);
+	const searchProduct = (resetPage: boolean = true) => {
+		if (searchInput !== params.id) {
+			console.log('updating params sForm', searchProduct);
+			// update params object with local values
+			updateParamsField(resetPage);
+			insertParams($page, params);
+		}
 	};
 
 	export const paginate = () => {

@@ -94,9 +94,11 @@
 	</section>
 	<section class="mt-4 text-xs uppercase">
 		<p class="text-sm ">
-			Showing {`${pageNumber * itemsPerPage - itemsPerPage + 1} - ${
+			<span class="text-xs opacity-80">Showing</span>
+			{`${pageNumber * itemsPerPage - itemsPerPage + 1} - ${
 				pageNumber * itemsPerPage < itemsAmount ? pageNumber * itemsPerPage : itemsAmount
-			}`} of {itemsAmount}
+			}`} <span class="text-xs opacity-80">of</span>
+			{itemsAmount}
 		</p>
 	</section>
 {/if}
