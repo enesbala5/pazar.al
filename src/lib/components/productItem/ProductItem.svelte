@@ -63,15 +63,24 @@
 		</div>
 	</section>
 {:else}
-	<section class="relative my-4 mb-6 flex h-[12vh] items-center px-4">
-		<div class=" h-full w-1/3 cursor-pointer" on:click={gotoPost} on:keydown={gotoPost}>
+	<section class="relative my-4 mx-4 mb-6 flex h-auto items-center ">
+		<div
+			class="absolute left-0 h-full w-1/3 cursor-pointer "
+			on:click={gotoPost}
+			on:keydown={gotoPost}
+		>
 			<img
 				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
 				alt={product.title}
 				class=" h-full w-full rounded-md object-cover"
 			/>
 		</div>
-		<div class="w-2/3 cursor-pointer pl-4" on:click={gotoPost} on:keydown={gotoPost}>
+		<div class="invisible w-1/3" />
+		<div
+			class="w-2/3 cursor-pointer  py-4 pl-4"
+			on:click={gotoPost}
+			on:keydown={gotoPost}
+		>
 			<h3 class=" ">{product.title}</h3>
 			<p class="text-sm opacity-70">{product.description}</p>
 
