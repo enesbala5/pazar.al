@@ -9,4 +9,7 @@ export const nav = {
 		createPost: '/api/cretePost',
 	},
 	suport: '/suport',
+
+	register: '/register',
+	login: '/login',
 };

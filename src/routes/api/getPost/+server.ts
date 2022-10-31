@@ -1,15 +1,13 @@
 import type { RequestHandler } from './$types';
 import { error } from '@sveltejs/kit';
-
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { db } from '$lib/fetching/db';
 
 // TODO:
 // -> Maybe add referral query options
 export const POST: RequestHandler = async ({ request }) => {
 	const query = await request.json();
 
-	let data = await prisma.post.findFirst({
+	let data = await db.post.findFirst({
 		where: {
 			AND: [
 				{

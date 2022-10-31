@@ -1,5 +1,7 @@
 /// <reference types="@sveltejs/kit" />
 
+import type { Prisma } from '@prisma/client';
+
 // src/app.d.ts
 
 /// <reference types="@sveltejs/kit" />
@@ -13,10 +15,14 @@ declare namespace App {
 		SchemaName: 'public';
 	}
 
-	// interface Locals {}
-	interface PageData {
-		session: import('@supabase/supabase-js').Session | null;
+	type role = 'USER' | 'ADMIN';
+	interface Locals {
+		user: {
+			name: string;
+			role: role;
+		};
 	}
+	// interface PageData {}
 	// interface Error {}
 	// interface Platform {}
 }

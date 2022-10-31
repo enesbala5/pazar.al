@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
-	// import { inject } from '@vercel/analytics';
 
-	// Imports:
 	import Nav from '$lib/Nav.svelte';
-	import { onMount } from 'svelte';
-	import { fly } from 'svelte/transition';
 	import '../app.css';
 
 	let onIndex: boolean = false;
@@ -24,7 +20,6 @@
 
 	let urlBuffer = $page.url.pathname;
 
-	let returnButton: boolean = false;
 	let returnUrl: string | undefined = undefined;
 
 	afterNavigate(() => {

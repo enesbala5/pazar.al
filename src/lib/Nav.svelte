@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-
+	import { page } from '$app/stores';
+	import { applyAction, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	// Imports:
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 	import Heart from './components/logos/user/Heart.svelte';
-	import Save from './components/logos/user/Save.svelte';
-
-	// Initializations:
-	const links = [{ route: '/', name: 'Home' }];
+	import { nav } from './userPreferences/nav';
 
 	export let onIndex: boolean;
 
 	export let returnUrl: string | undefined;
+
+	console.log($page);
 </script>
 
 <nav class="flex items-center justify-between p-4">
@@ -54,20 +54,33 @@
 			<div class=" flex h-5 w-5   items-center justify-center opacity-70">
 				<Heart classNames="fill-white" />
 			</div>
-			<div class=" flex h-5 w-3.5  items-center justify-center opacity-70">
-				<Save classNames="fill-white" />
-			</div>
 		</div>
 		<!-- Break Line -->
 		<!-- <div class=" bg-neutral-50 px-2" /> -->
 
 		<!-- Profile Item -->
-		<div
-			class="flex h-10 w-10 items-center justify-center rounded-full {onIndex
-				? ' bg-neutral-900'
-				: ' bg-neutral-800'}"
-		>
-			<p class="mb-0.5 text-xl text-neutral-50">E</p>
-		</div>
+		{#if $page.data.user}
+			<div
+				class="flex h-10 w-10 items-center justify-center rounded-full {onIndex
+					? ' bg-neutral-900'
+					: ' bg-neutral-800'}"
+			>
+				<p class="mb-0.5 text-xl text-neutral-50">E</p>
+			</div>
+			<form
+				action="/logout"
+				method="post"
+				use:enhance={() => {
+					return async ({ result }) => {
+						invalidateAll();
+						await applyAction(result);
+					};
+				}}
+			>
+				<button type="submit">Logout</button>
+			</form>
+		{:else}
+			<a href={nav.login}>Login</a>
+		{/if}
 	</div>
 </nav>

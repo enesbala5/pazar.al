@@ -1,8 +1,7 @@
 import type { searchQuery } from '$lib/types/query';
 import { error } from '@sveltejs/kit';
 
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { db } from '$lib/fetching/db';
 import type { RequestHandler } from './$types';
 
 const getKeywords = (searchQuery: string | undefined) => {
@@ -17,8 +16,6 @@ const getKeywords = (searchQuery: string | undefined) => {
 export const POST: RequestHandler = async ({ request }) => {
 	const query: searchQuery = await request.json();
 
-	console.log('query faqja: ', query);
-
 	let pageNumber = 1;
 	const itemsPerPage: number = 15;
 
@@ -29,11 +26,9 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	let itemsToSkip = pageNumber * itemsPerPage - itemsPerPage;
-	console.log('itemsToSkip', itemsToSkip);
-
 	let keywords: string[] = getKeywords(query.id);
 
-	let data = await prisma.post.findMany({
+	let data = await db.post.findMany({
 		take: itemsPerPage,
 		skip: itemsToSkip,
 		where: {

@@ -1,0 +1,42 @@
+<script lang="ts">
+	import type { ActionData } from './$types';
+	import { applyAction, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
+
+	export let form: ActionData;
+</script>
+
+<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Login</h1>
+
+<form
+	action="?/login"
+	method="POST"
+	class="px-4"
+	use:enhance={() => {
+		return async ({ result }) => {
+			invalidateAll();
+			await applyAction(result);
+		};
+	}}
+>
+	<div>
+		<label for="username">Username</label>
+		<input class="inputPrimary mt-2" type="text" id="username" name="username" required />
+	</div>
+	<div class="mt-4">
+		<label for="password">Password</label>
+		<input class="inputPrimary mt-2" type="password" id="password" name="password" required />
+	</div>
+
+	{#if form?.invalid}
+		<p class=" mt-2 text-red-500">Username and password is required.</p>
+	{/if}
+
+	{#if form?.credentials}
+		<p class=" mt-2 text-red-500">You have entered the wrong credentials.</p>
+	{/if}
+
+	<div class="mt-4">
+		<button type="submit" class="buttonPrimary">Submit</button>
+	</div>
+</form>

@@ -31,8 +31,8 @@
 		<p>Provoni te kerkoni me terma me te pergjithshem.</p>
 	</div>
 	<div class="mt-8 space-x-2 text-sm">
-		<button class="rounded-md bg-indigo-700 py-2 px-4" on:click={returnHome}>Return Home</button>
-		<button class="rounded-md bg-neutral-700 py-2 px-4" on:click={contactSupport}
+		<button class="buttonPrimary" on:click={returnHome}>Return Home</button>
+		<button class="buttonSecondary" on:click={contactSupport}
 			>Kontaktoni Suportin</button
 		>
 	</div>

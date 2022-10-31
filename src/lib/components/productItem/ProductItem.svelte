@@ -76,11 +76,7 @@
 			/>
 		</div>
 		<div class="invisible w-1/3" />
-		<div
-			class="w-2/3 cursor-pointer  py-4 pl-4"
-			on:click={gotoPost}
-			on:keydown={gotoPost}
-		>
+		<div class="w-2/3 cursor-pointer  py-4 pl-4" on:click={gotoPost} on:keydown={gotoPost}>
 			<h3 class=" ">{product.title}</h3>
 			<p class="text-sm opacity-70">{product.description}</p>
 

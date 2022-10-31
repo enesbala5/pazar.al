@@ -13,7 +13,7 @@ datasource db {
 
 /// Post Model - Contains all information on a post made on the page
 model Post {
-  pid        String   @id @default(cuid()) /// Post ID
+  pid        String   @id @default(uuid()) /// Post ID
   created_at DateTime @default(now()) /// Created At
   archived   Boolean  @default(false) /// If post is archived
   post_views Int      @default(0) /// How many times has the post been viewed
@@ -46,17 +46,18 @@ model Post {
 }
 
 model User {
-  uid        String   @id @default(cuid())
+  uid           String @id @default(uuid())
+  username      String @unique
+  passwordHash  String
+  userAuthToken String @unique
+
   created_at DateTime @default(now())
-  // role       Role     @default(USER)
-
-  email String @unique
-  name  String
-
+  updated_at DateTime @updatedAt
   // liked_posts Post[]
+  role       Role     @default(USER)
 }
 
-// enum Role {
-//   USER
-//   ADMIN
-// }
+enum Role {
+  USER
+  ADMIN
+}

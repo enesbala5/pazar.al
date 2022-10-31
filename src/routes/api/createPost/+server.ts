@@ -1,11 +1,10 @@
 import { error } from '@sveltejs/kit';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { db } from '$lib/fetching/db';
 
 /** @type {import('./$types').RequestHandler} */
 
 const createPost = async () => {
-	const newPost = await prisma.post.create({
+	const newPost = await db.post.create({
 		data: {
 			title: 'Range Rover 2022',
 			description: 'Super mjet 2',
@@ -20,7 +19,7 @@ const createPost = async () => {
 };
 
 export async function GET({ url }) {
-	// let data = await prisma.post.findMany();
+	// let data = await db.post.findMany();
 	createPost();
 	return new Response(String(true));
 }
