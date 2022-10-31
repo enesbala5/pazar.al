@@ -1,4 +1,9 @@
 {
   "editor.tabSize": 2,
-  "editor.formatOnSave": false
+	"editor.formatOnSave": false,
+	"i18n-ally.localesPaths": [
+		"src/lib/i18n",
+		"I:/dev/MerrJep Clone/new/base/src/lib/i18n",
+		"I:/dev/MerrJep Clone/new/base/src/lib/lang"
+	]
 }

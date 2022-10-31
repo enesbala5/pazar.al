@@ -1,5 +1,6 @@
 import { c as create_ssr_component, b as add_attribute, v as validate_component, e as escape, f as createEventDispatcher, d as subscribe, i as is_promise, n as noop, h as each } from "../../../chunks/index.js";
 import { p as page } from "../../../chunks/stores.js";
+import { n as nav } from "../../../chunks/nav.js";
 import { H as Heart } from "../../../chunks/Heart.js";
 import { c as card, S as SearchForm } from "../../../chunks/SearchForm.js";
 import { e as error } from "../../../chunks/index2.js";
@@ -9,18 +10,6 @@ function guard(name) {
   };
 }
 const goto = guard("goto");
-const nav = {
-  index: "/",
-  kerkim: "/kerkim",
-  postim: "/postim",
-  api: {
-    getLatestPosts: "/api/getLatestPosts",
-    count: "/api/getLatestPosts/count",
-    getPost: "/api/getPost",
-    createPost: "/api/cretePost"
-  },
-  suport: "/suport"
-};
 const NoResults = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { classNames } = $$props;
   if ($$props.classNames === void 0 && $$bindings.classNames && classNames !== void 0)
@@ -43,13 +32,12 @@ const KerkimError = create_ssr_component(($$result, $$props, $$bindings, slots) 
   if ($$props.contactSupport === void 0 && $$bindings.contactSupport && contactSupport !== void 0)
     $$bindings.contactSupport(contactSupport);
   return `<section class="${"mx-2 my-4 rounded-md bg-gradient-to-t from-neutral-800 to-transparent p-4 text-left"}">${validate_component(NoResults, "NoResults").$$render($$result, { classNames: "w-24 h-24 fill-white" }, {}, {})}
-	<p class="${"mt-4 w-5/6 text-xl"}">https://vscode.dev/github/enesbala5/pazar/blob/068b41b2f145373da7bd5519ff2b0b2487d50b7d/src/lib/components/productItem/ProductItem.svelte#L19
-		Nuk u gjeten rezultate per
+	<p class="${"mt-4 w-5/6 text-xl"}">Nuk u gjeten rezultate per
 		${id === void 0 ? `kerkimin tuaj.` : `kerkimin
 			<span class="${"font-medium underline underline-offset-1 "}">&quot;${escape(id)}&quot;.</span>`}</p>
 	<div class="${"mt-4 text-sm opacity-80"}"><p>Provoni te kerkoni me terma me te pergjithshem.</p></div>
-	<div class="${"mt-8 space-x-2 text-sm"}"><button class="${"rounded-md bg-indigo-700 py-2 px-4"}">Return Home</button>
-		<button class="${"rounded-md bg-neutral-700 py-2 px-4"}">Kontaktoni Suportin</button></div></section>`;
+	<div class="${"mt-8 space-x-2 text-sm"}"><button class="${"buttonPrimary"}">Return Home</button>
+		<button class="${"buttonSecondary"}">Kontaktoni Suportin</button></div></section>`;
 });
 const Pagination = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { pageNumber, itemsAmount, itemsPerPage } = $$props;
@@ -128,8 +116,9 @@ const ProductItem = create_ssr_component(($$result, $$props, $$bindings, slots) 
     },
     {},
     {}
-  )}</div></section>` : `<section class="${"relative my-4 mb-6 flex h-[12vh] items-center px-4"}"><div class="${"h-full w-1/3 cursor-pointer"}"><img src="${"https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"}"${add_attribute("alt", product.title, 0)} class="${"h-full w-full rounded-md object-cover"}"></div>
-		<div class="${"w-2/3 cursor-pointer pl-4"}"><h3 class="${""}">${escape(product.title)}</h3>
+  )}</div></section>` : `<section class="${"relative my-4 mx-4 mb-6 flex h-auto items-center "}"><div class="${"absolute left-0 h-full w-1/3 cursor-pointer "}"><img src="${"https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"}"${add_attribute("alt", product.title, 0)} class="${"h-full w-full rounded-md object-cover"}"></div>
+		<div class="${"invisible w-1/3"}"></div>
+		<div class="${"w-2/3 cursor-pointer py-4 pl-4"}"><h3 class="${""}">${escape(product.title)}</h3>
 			<p class="${"text-sm opacity-70"}">${escape(product.description)}</p>
 
 			<section aria-label="${"Pricing and User Actions"}" class="${"mt-3 flex w-full items-center justify-between"}"><section class="${"flex items-center rounded-sm bg-indigo-600 py-0.5 px-2"}"><div aria-label="${"Currency Used"}" class="${"mr-2 opacity-80"}">${product.eur ? `${validate_component(Euro, "Euro").$$render($$result, { classNames: "fill-white h-2.5" }, {}, {})}` : `${validate_component(Lek, "Lek").$$render($$result, { classNames: "fill-white h-2.5" }, {}, {})}`}</div>
@@ -251,7 +240,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         return `
 			${data.length ? each(data, (postim, i) => {
           return `${validate_component(ProductItem, "ProductItem").$$render($$result, { card: $card, product: postim }, {}, {})}`;
-        }) : `${validate_component(KerkimError, "KerkimError").$$render($$result, { id: params.id }, {}, {})}`}
+        }) : `${validate_component(KerkimError, "KerkimError").$$render($$result, { id: params.id }, {}, {})}
+				`}
 		`;
       }(__value);
     }(getLatestPosts(params))}</div></div>`;

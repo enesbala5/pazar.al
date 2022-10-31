@@ -14,13 +14,12 @@ declare namespace App {
 		Database: import('./DatabaseDefinitions').Database;
 		SchemaName: 'public';
 	}
-
-	type role = 'USER' | 'ADMIN';
 	interface Locals {
 		user: {
 			name: string;
-			role: role;
+			role: string;
 		};
+		language: string;
 	}
 	// interface PageData {}
 	// interface Error {}

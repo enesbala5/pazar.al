@@ -47,6 +47,7 @@ model Post {
 
 model User {
   uid           String @id @default(uuid())
+  email         String @unique
   username      String @unique
   passwordHash  String
   userAuthToken String @unique

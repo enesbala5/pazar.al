@@ -14,6 +14,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 const register: Action = async ({ request }) => {
 	const data = await request.formData();
 	const username = data.get('username');
+	const email = data.get('email');
 	const password = data.get('password');
 
 	console.log({ username, password });

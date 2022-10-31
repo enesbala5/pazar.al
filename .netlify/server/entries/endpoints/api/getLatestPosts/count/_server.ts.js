@@ -1,10 +1,9 @@
 import { e as error } from "../../../../../chunks/index2.js";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { d as db } from "../../../../../chunks/db.js";
 const POST = async ({ request }) => {
   const query = await request.json();
   console.log("query count", query);
-  let count = await prisma.post.count({
+  let count = await db.post.count({
     where: {
       AND: [
         {

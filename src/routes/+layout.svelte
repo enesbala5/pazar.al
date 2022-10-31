@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
-
 	import Nav from '$lib/Nav.svelte';
+	import { page } from '$app/stores';
+	import { t } from '$lib/lang';
+
 	import '../app.css';
 
 	let onIndex: boolean = false;

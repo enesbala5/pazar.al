@@ -3,12 +3,20 @@
 	import { enhance } from '$app/forms';
 
 	export let form: ActionData;
+
+	import { t } from '$lib/lang';
 </script>
 
+<p>{$t('home.')}</p>
 <h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Register</h1>
 
 <form action="?/register" method="POST" class="px-4" use:enhance>
 	<div>
+		<label for="email">Email Address</label>
+		<input class="inputPrimary mt-2" type="text" id="email" name="email" required />
+	</div>
+
+	<div class="mt-4">
 		<label for="username">Username</label>
 		<input class="inputPrimary mt-2" type="text" id="username" name="username" required />
 	</div>

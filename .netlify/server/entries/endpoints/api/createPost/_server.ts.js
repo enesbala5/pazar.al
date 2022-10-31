@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { d as db } from "../../../../chunks/db.js";
 const createPost = async () => {
-  await prisma.post.create({
+  await db.post.create({
     data: {
       title: "Range Rover 2022",
       description: "Super mjet 2",

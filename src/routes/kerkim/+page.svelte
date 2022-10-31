@@ -35,6 +35,8 @@
 	let paginate: any;
 </script>
 
+<title>Pazar{params.id ? ' - ' + params.id : ''}</title>
+
 <div class="relative">
 	<div class="fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-900" />
 

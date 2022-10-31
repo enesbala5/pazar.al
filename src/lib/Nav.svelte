@@ -6,15 +6,21 @@
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 	import Heart from './components/logos/user/Heart.svelte';
 	import { nav } from './userPreferences/nav';
+	import Popover from './components/UI/Popover.svelte';
+	import Language from './components/Language.svelte';
 
 	export let onIndex: boolean;
 
 	export let returnUrl: string | undefined;
 
 	console.log($page);
+
+	let element: HTMLElement;
+
+	let userPanelVisible: boolean = false;
 </script>
 
-<nav class="flex items-center justify-between p-4">
+<nav class="relative flex items-center justify-between p-4">
 	<section class="flex items-center">
 		<a href="/" class="h-8 w-8 ">
 			<Logo classNames="fill-neutral-50 w-full h-full " />
@@ -61,26 +67,25 @@
 		<!-- Profile Item -->
 		{#if $page.data.user}
 			<div
+				bind:this={element}
+				on:click={() => {
+					userPanelVisible = !userPanelVisible;
+				}}
+				on:keydown={() => {
+					userPanelVisible = !userPanelVisible;
+				}}
 				class="flex h-10 w-10 items-center justify-center rounded-full {onIndex
 					? ' bg-neutral-900'
 					: ' bg-neutral-800'}"
 			>
 				<p class="mb-0.5 text-xl text-neutral-50">E</p>
 			</div>
-			<form
-				action="/logout"
-				method="post"
-				use:enhance={() => {
-					return async ({ result }) => {
-						invalidateAll();
-						await applyAction(result);
-					};
-				}}
-			>
-				<button type="submit">Logout</button>
-			</form>
+			{#if userPanelVisible}
+				<Popover position={'bottom'} direction="rtl" {element} />
+			{/if}
 		{:else}
 			<a href={nav.login}>Login</a>
 		{/if}
+		<Language />
 	</div>
 </nav>

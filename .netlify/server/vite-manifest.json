@@ -9,7 +9,7 @@
       "_index3.js"
     ],
     "dynamicImports": [
-      ".svelte-kit/build/hooks.js"
+      "src/hooks.server.ts"
     ]
   },
   "src/routes/api/+server.ts": {
@@ -20,19 +20,26 @@
   "src/routes/api/createPost/+server.ts": {
     "file": "entries/endpoints/api/createPost/_server.ts.js",
     "src": "src/routes/api/createPost/+server.ts",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_db.js"
+    ]
   },
   "src/routes/api/getLatestPosts/+server.ts": {
     "file": "entries/endpoints/api/getLatestPosts/_server.ts.js",
     "src": "src/routes/api/getLatestPosts/+server.ts",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_db.js"
+    ]
   },
   "src/routes/api/getLatestPosts/count/+server.ts": {
     "file": "entries/endpoints/api/getLatestPosts/count/_server.ts.js",
     "src": "src/routes/api/getLatestPosts/count/+server.ts",
     "isEntry": true,
     "imports": [
-      "_index2.js"
+      "_index2.js",
+      "_db.js"
     ]
   },
   "src/routes/api/getPost/+server.ts": {
@@ -40,7 +47,8 @@
     "src": "src/routes/api/getPost/+server.ts",
     "isEntry": true,
     "imports": [
-      "_index2.js"
+      "_index2.js",
+      "_db.js"
     ]
   },
   "src/routes/+layout.svelte": {
@@ -51,11 +59,16 @@
       "_index.js",
       "_stores.js",
       "_Heart.js",
-      "_Save.js"
+      "_nav.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout-20c5ba97.css"
+      "_app/immutable/assets/_layout-99fd0378.css"
     ]
+  },
+  "src/routes/+layout.server.ts": {
+    "file": "entries/pages/_layout.server.ts.js",
+    "src": "src/routes/+layout.server.ts",
+    "isEntry": true
   },
   "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
     "file": "entries/fallbacks/error.svelte.js",
@@ -92,6 +105,69 @@
       "_SearchForm.js"
     ]
   },
+  "src/routes/(auth)/login/+page.svelte": {
+    "file": "entries/pages/(auth)/login/_page.svelte.js",
+    "src": "src/routes/(auth)/login/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/(auth)/login/+page.server.ts": {
+    "file": "entries/pages/(auth)/login/_page.server.ts.js",
+    "src": "src/routes/(auth)/login/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_index2.js",
+      "_db.js",
+      "_nav.js"
+    ]
+  },
+  "src/routes/(auth)/logout/+page.server.ts": {
+    "file": "entries/pages/(auth)/logout/_page.server.ts.js",
+    "src": "src/routes/(auth)/logout/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_nav.js",
+      "_index2.js"
+    ]
+  },
+  "src/routes/(auth)/register/+page.svelte": {
+    "file": "entries/pages/(auth)/register/_page.svelte.js",
+    "src": "src/routes/(auth)/register/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/(auth)/register/+page.server.ts": {
+    "file": "entries/pages/(auth)/register/_page.server.ts.js",
+    "src": "src/routes/(auth)/register/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_db.js",
+      "_nav.js",
+      "_index2.js"
+    ]
+  },
+  "src/routes/(protected)/admin/+page.svelte": {
+    "file": "entries/pages/(protected)/admin/_page.svelte.js",
+    "src": "src/routes/(protected)/admin/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_stores.js"
+    ]
+  },
+  "src/routes/(protected)/admin/+page.server.ts": {
+    "file": "entries/pages/(protected)/admin/_page.server.ts.js",
+    "src": "src/routes/(protected)/admin/+page.server.ts",
+    "isEntry": true,
+    "imports": [
+      "_nav.js",
+      "_index2.js"
+    ]
+  },
   "src/routes/kerkim/+page.svelte": {
     "file": "entries/pages/kerkim/_page.svelte.js",
     "src": "src/routes/kerkim/+page.svelte",
@@ -99,6 +175,7 @@
     "imports": [
       "_index.js",
       "_stores.js",
+      "_nav.js",
       "_Heart.js",
       "_SearchForm.js",
       "_index2.js"
@@ -126,8 +203,7 @@
     "isEntry": true,
     "imports": [
       "_index.js",
-      "_Heart.js",
-      "_Save.js"
+      "_Heart.js"
     ]
   },
   "src/routes/postim/[id]/+page.ts": {
@@ -150,6 +226,9 @@
       "_index.js"
     ]
   },
+  "_db.js": {
+    "file": "chunks/db.js"
+  },
   "_stores.js": {
     "file": "chunks/stores.js",
     "imports": [
@@ -162,11 +241,8 @@
       "_index.js"
     ]
   },
-  "_Save.js": {
-    "file": "chunks/Save.js",
-    "imports": [
-      "_index.js"
-    ]
+  "_nav.js": {
+    "file": "chunks/nav.js"
   },
   "_SearchForm.js": {
     "file": "chunks/SearchForm.js",
@@ -176,9 +252,12 @@
       "_stores.js"
     ]
   },
-  ".svelte-kit/build/hooks.js": {
-    "file": "chunks/hooks.js",
-    "src": ".svelte-kit/build/hooks.js",
-    "isDynamicEntry": true
+  "src/hooks.server.ts": {
+    "file": "chunks/hooks.server.js",
+    "src": "src/hooks.server.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_db.js"
+    ]
   }
 }
