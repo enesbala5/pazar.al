@@ -4,7 +4,7 @@
 
 	const languages = [
 		{ code: 'en', name: 'English' },
-		{ code: 'ms', name: 'Bahasa Malaysia' },
+		{ code: 'sq', name: 'Shqip' },
 	];
 
 	$: selected = locale.get();
@@ -19,6 +19,11 @@
 
 <select bind:value={selected} on:change={handleOnChange}>
 	{#each languages as l (l.code)}
-		<option value={l.code}>{l.name}</option>
+		{#if l.code === 'en'}
+			<option value={l.code} class="flex items-center justify-center">{l.name}</option>
+		{/if}
+		{#if l.code === 'sq'}
+			<option value={l.code} class="flex items-center justify-center">{l.name}</option>
+		{/if}
 	{/each}
 </select>

@@ -20,6 +20,18 @@ export const config: Config = {
 			routes: ['/register'],
 			loader: async () => (await import('./sq/register.json')).default,
 		},
+		{
+			locale: 'en',
+			key: 'generic',
+			routes: ['/register', '/login'],
+			loader: async () => (await import('./en/generic.json')).default,
+		},
+		{
+			locale: 'sq',
+			key: 'generic',
+			routes: ['/register', '/login'],
+			loader: async () => (await import('./sq/generic.json')).default,
+		},
 	],
 };
 

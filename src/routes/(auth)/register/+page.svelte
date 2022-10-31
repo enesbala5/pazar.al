@@ -5,25 +5,16 @@
 	export let form: ActionData;
 
 	import { t } from '$lib/lang';
+	import InputField from '$lib/components/UI/Input/InputField.svelte';
 </script>
 
-<p>{$t('home.')}</p>
-<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Register</h1>
+<p />
+<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">{$t('register.register')}</h1>
 
 <form action="?/register" method="POST" class="px-4" use:enhance>
-	<div>
-		<label for="email">Email Address</label>
-		<input class="inputPrimary mt-2" type="text" id="email" name="email" required />
-	</div>
-
-	<div class="mt-4">
-		<label for="username">Username</label>
-		<input class="inputPrimary mt-2" type="text" id="username" name="username" required />
-	</div>
-	<div class="mt-4">
-		<label for="password">Password</label>
-		<input class="inputPrimary mt-2" type="password" id="password" name="password" required />
-	</div>
+	<InputField name="email" title={$t('generic.email')} />
+	<InputField name="username" title={$t('generic.username')} classNames="mt-4" />
+	<InputField name="password" title={$t('generic.password')} classNames="mt-4" />
 
 	{#if form?.user}
 		<p class=" mt-2 text-red-500">Username is taken.</p>

@@ -38,7 +38,9 @@
 </script>
 
 <div
-	class="min-h-screen {onIndex ? 'bg-transparent' : 'bg-neutral-900'} font-aeonik text-neutral-50"
+	class="dark min-h-screen {onIndex
+		? 'bg-transparent'
+		: 'bg-neutral-900'} font-aeonik text-neutral-50"
 >
 	{#if onIndex}
 		<div
