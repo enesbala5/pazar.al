@@ -5,8 +5,6 @@ import { error } from '@sveltejs/kit';
 export const getLatestPosts = async (params: searchQuery) => {
 	let url = nav.api.getLatestPosts;
 
-	console.log('params getLatest', JSON.stringify(params));
-
 	const response = await fetch(url, {
 		method: 'POST',
 		headers: new Headers({

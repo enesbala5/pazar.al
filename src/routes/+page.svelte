@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SearchForm from '$lib/components/SearchForm.svelte';
+	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 </script>
 
 <!-- #################################################################################################### -->

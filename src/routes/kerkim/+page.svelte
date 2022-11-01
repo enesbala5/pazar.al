@@ -3,15 +3,17 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import KerkimError from '$lib/components/error/KerkimError.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
+	import Pagination from '$lib/components/UI/Pagination.svelte';
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import ProductItemSkeleton from '$lib/components/productItem/ProductItemSkeleton.svelte';
-	import SearchForm from '$lib/components/SearchForm.svelte';
+	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 	import { getCount, getLatestPosts } from '$lib/fetching/main';
 	import { faqjaParamParse } from '$lib/functions/conversions';
 	import { getParams } from '$lib/functions/paramHandling';
 	import type { searchQuery } from '$lib/types/query';
 	import { card } from '$lib/userPreferences/preferences';
+
+	$: $page, console.log('kerkim', $page.data.user);
 
 	let params: searchQuery = {};
 

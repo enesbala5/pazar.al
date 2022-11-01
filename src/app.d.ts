@@ -1,6 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 
-import type { Prisma } from '@prisma/client';
+import type { Prisma, Role } from '@prisma/client';
 
 // src/app.d.ts
 
@@ -17,7 +17,9 @@ declare namespace App {
 	interface Locals {
 		user: {
 			name: string;
-			role: string;
+			surname: string;
+			email: string;
+			role: Role;
 		};
 		language: string;
 	}

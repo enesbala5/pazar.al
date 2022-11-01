@@ -2,6 +2,7 @@
 	import type { ActionData } from './$types';
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
+	import { nav } from '$lib/userPreferences/nav';
 
 	export let form: ActionData;
 </script>
@@ -20,8 +21,8 @@
 	}}
 >
 	<div>
-		<label for="username">Username</label>
-		<input class="inputPrimary mt-2" type="text" id="username" name="username" required />
+		<label for="email">Email</label>
+		<input class="inputPrimary mt-2" type="text" id="email" name="email" required />
 	</div>
 	<div class="mt-4">
 		<label for="password">Password</label>
@@ -29,7 +30,7 @@
 	</div>
 
 	{#if form?.invalid}
-		<p class=" mt-2 text-red-500">Username and password is required.</p>
+		<p class=" mt-2 text-red-500">Email and password is required.</p>
 	{/if}
 
 	{#if form?.credentials}
@@ -40,3 +41,4 @@
 		<button type="submit" class="buttonPrimary">Submit</button>
 	</div>
 </form>
+<a href={nav.register}>Register</a>

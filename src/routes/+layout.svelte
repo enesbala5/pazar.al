@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-	import Nav from '$lib/Nav.svelte';
+	import Nav from '$lib/components/UI/Nav.svelte';
 	import { page } from '$app/stores';
-	import { t } from '$lib/lang';
+	import { loadTranslations, locale } from '$lib/lang';
 
 	import '../app.css';
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+	import { nav } from '$lib/userPreferences/nav';
 
 	let onIndex: boolean = false;
 
@@ -35,6 +38,16 @@
 		}
 		urlBuffer = $page.url.pathname;
 	});
+
+	let currentLocale = $page.data.language ?? 'sq';
+	let translationsLoaded = false;
+
+	afterNavigate(async () => {
+		if (translationsLoaded) translationsLoaded = false;
+		await loadTranslations(currentLocale, $page.url.pathname)?.then(
+			(e) => (translationsLoaded = true)
+		);
+	});
 </script>
 
 <div
@@ -49,9 +62,14 @@
 		<div class="absolute -z-20 min-h-screen w-full bg-neutral-900 " />
 	{/if}
 
-	<!-- Navbar -->
+	<!-- {#if $page.url.pathname !== nav.register && $page.url.pathname !== nav.login} -->
 	<Nav {onIndex} {returnUrl} />
+	<!-- {/if} -->
 
 	<!-- App Content -->
-	<main><slot /></main>
+	<main>
+		<!-- {#if translationsLoaded} -->
+			<slot />
+		<!-- {/if} -->
+	</main>
 </div>

@@ -13,16 +13,16 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 const login: Action = async ({ cookies, request }) => {
 	const data = await request.formData();
-	const username = data.get('username');
+	const email = data.get('email');
 	const password = data.get('password');
 
-	if (typeof username !== 'string' || typeof password !== 'string' || !username || !password) {
+	if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
 		return invalid(400, { invalid: true });
 	}
 
 	const user = await db.user.findUnique({
 		where: {
-			username,
+			email,
 		},
 	});
 
@@ -37,7 +37,7 @@ const login: Action = async ({ cookies, request }) => {
 	}
 
 	const authenticatedUser = await db.user.update({
-		where: { username: user.username },
+		where: { email: user.email },
 		data: {
 			userAuthToken: crypto.randomUUID(),
 		},

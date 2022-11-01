@@ -13,18 +13,26 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 const register: Action = async ({ request }) => {
 	const data = await request.formData();
-	const username = data.get('username');
+	const name = data.get('name');
+	const surname = data.get('surname');
 	const email = data.get('email');
 	const password = data.get('password');
 
-	console.log({ username, password });
-
-	if (typeof username !== 'string' || typeof password !== 'string' || !username || !password) {
+	if (
+		typeof email !== 'string' ||
+		typeof password !== 'string' ||
+		typeof name !== 'string' ||
+		typeof surname !== 'string' ||
+		!email ||
+		!password ||
+		!name ||
+		!surname
+	) {
 		return invalid(400, { invalid: true });
 	}
 
 	const user = await db.user.findUnique({
-		where: { username },
+		where: { email },
 	});
 
 	if (user) {
@@ -33,7 +41,9 @@ const register: Action = async ({ request }) => {
 
 	await db.user.create({
 		data: {
-			username,
+			name,
+			surname,
+			email,
 			passwordHash: await bcrypt.hash(password, 10),
 			userAuthToken: crypto.randomUUID(),
 			role: 'USER',

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Search from './logos/user/Search.svelte';
+	import Search from '$lib/components/logos/user/Search.svelte';
 	import Arrow from '$lib/components/logos/user/Arrow.svelte';
 	import Grid from '$lib/components/logos/user/filters/Grid.svelte';
 	import List from '$lib/components/logos/user/filters/List.svelte';
@@ -7,7 +7,7 @@
 	import Dollar from '$lib/components/logos/user/filters/sort/Dollar.svelte';
 	import { card } from '$lib/userPreferences/preferences';
 	import type { searchQuery } from '$lib/types/query';
-	import Clear from './logos/user/Clear.svelte';
+	import Clear from '$lib/components/logos/user/Clear.svelte';
 	import { page } from '$app/stores';
 	import { insertParams } from '$lib/functions/paramHandling';
 
@@ -22,12 +22,10 @@
 		if (resetPage) {
 			params.faqja = 1;
 		}
-		console.log('updating params field', params);
 	};
 
 	const searchProduct = (resetPage: boolean = true) => {
 		if (searchInput !== params.id) {
-			console.log('updating params sForm', searchProduct);
 			// update params object with local values
 			updateParamsField(resetPage);
 			insertParams($page, params);
@@ -57,7 +55,7 @@
 			bind:value={searchInput}
 			class="
 			{onIndex ? 'bg-neutral-800' : 'bg-indigo-600'}
-			w-full rounded-md border-0 px-5 py-3.5  outline-none focus:ring-0"
+			w-full rounded-md border-0 px-5 py-3.5 outline-none focus:ring-0"
 		/>
 		<!-- -->
 		{#if searchInput !== '' && !searchBarFocused && $page.url.pathname != '/'}
@@ -91,7 +89,7 @@
 					}}
 					class="
 					{$card ? 'bg-neutral-50' : 'bg-transparent'}
-					flex h-full w-1/2 grow items-center justify-center  bg-neutral-50 p-1.5"
+					flex h-full w-1/2 grow items-center justify-center p-1.5"
 				>
 					<div class="mx-2">
 						<Grid

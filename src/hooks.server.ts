@@ -7,6 +7,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session');
 	const language = event.cookies.get('language');
 
+	console.log('cookies', session, language);
+
 	if (language) {
 		locale.set(language);
 
@@ -15,23 +17,30 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (!session) {
+		console.log('no session??');
 		return await resolve(event);
 	}
 
 	const user = await db.user.findUnique({
 		where: { userAuthToken: session },
 		select: {
-			username: true,
+			name: true,
+			surname: true,
+			email: true,
 			role: true,
 		},
 	});
 
 	if (user) {
 		event.locals.user = {
-			name: user.username,
+			name: user.name,
+			surname: user.surname,
+			email: user.email,
 			role: user.role,
 		};
 	}
+
+	console.log(event.locals);
 
 	return await resolve(event);
 };

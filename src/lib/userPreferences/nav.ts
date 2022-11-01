@@ -12,4 +12,6 @@ export const nav = {
 
 	register: '/register',
 	login: '/login',
+	admin: '/admin',
+	profile: '/profile',
 };

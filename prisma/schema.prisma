@@ -47,18 +47,25 @@ model Post {
 
 model User {
   uid           String @id @default(uuid())
+  name          String
+  surname       String
   email         String @unique
-  username      String @unique
   passwordHash  String
   userAuthToken String @unique
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
   // liked_posts Post[]
-  role       Role     @default(USER)
+  role         Role        @default(USER)
+  account_type AccountType @default(Individ)
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum AccountType {
+  Individ
+  Biznes
 }

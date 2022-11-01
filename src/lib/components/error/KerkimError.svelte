@@ -4,7 +4,6 @@
 	import NoResults from '../logos/user/NoResults.svelte';
 
 	export let id: string | undefined;
-	console.log(id);
 
 	export const returnHome = () => {
 		goto(nav.index);
@@ -32,8 +31,6 @@
 	</div>
 	<div class="mt-8 space-x-2 text-sm">
 		<button class="buttonPrimary" on:click={returnHome}>Return Home</button>
-		<button class="buttonSecondary" on:click={contactSupport}
-			>Kontaktoni Suportin</button
-		>
+		<button class="buttonSecondary" on:click={contactSupport}>Kontaktoni Suportin</button>
 	</div>
 </section>

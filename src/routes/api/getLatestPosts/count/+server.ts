@@ -4,8 +4,6 @@ import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const query = await request.json();
-	console.log('query count', query);
-
 	let count = await db.post.count({
 		where: {
 			AND: [
