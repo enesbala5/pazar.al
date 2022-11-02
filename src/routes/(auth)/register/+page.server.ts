@@ -1,7 +1,7 @@
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userPreferences/nav';
 import { invalid, redirect } from '@sveltejs/kit';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 import type { Action, Actions, PageServerLoad } from './$types';
 
