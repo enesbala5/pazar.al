@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://c1fwy0s3gpx3kym793va:pscale_pw_ixlWEzPlUbbgR7De7oAYTQkMuT02qxhf8p3k6qHALEg@eu-central.connect.psdb.cloud/mj?sslaccept=strict&ssclcert=/etc/pki/tls/certs/ca-bundle.crt"
+  url      = env("DATABASE_URL")
 }
 
 // TODO:
