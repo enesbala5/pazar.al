@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set(["favicon.png","fonts/Aeonik-Light.woff","fonts/Aeonik-Light.woff2","fonts/Aeonik-Medium.woff","fonts/Aeonik-Medium.woff2","fonts/Aeonik-Regular.woff","fonts/Aeonik-Regular.woff2","icon.png","images/auth/main.jpg","images/heart.png","manifest.json","maskable_icon.png","sitemap.xml","service-worker.js"]),
 	mimeTypes: {".png":"image/png",".woff":"font/woff",".woff2":"font/woff2",".jpg":"image/jpeg",".json":"application/json",".xml":"application/xml"},
 	_: {
-		entry: {"file":"_app/immutable/start-5946f47b.js","imports":["_app/immutable/start-5946f47b.js","_app/immutable/chunks/index-304ec1ce.js","_app/immutable/chunks/singletons-5542a24d.js","_app/immutable/chunks/preload-helper-b21cceae.js","_app/immutable/chunks/control-03134885.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-b02b0afd.js","imports":["_app/immutable/start-b02b0afd.js","_app/immutable/chunks/index-304ec1ce.js","_app/immutable/chunks/singletons-ae48b70d.js","_app/immutable/chunks/preload-helper-b21cceae.js","_app/immutable/chunks/control-03134885.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),

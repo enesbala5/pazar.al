@@ -2,7 +2,8 @@ import { c as create_ssr_component, b as add_attribute, e as escape, v as valida
 import { p as page } from "../../chunks/stores.js";
 import { H as Heart } from "../../chunks/Heart.js";
 import { n as nav } from "../../chunks/nav.js";
-import { l as locale } from "../../chunks/index4.js";
+import g from "@sveltekit-i18n/base";
+import C from "@sveltekit-i18n/parser-default";
 const Logo = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { classNames } = $$props;
   if ($$props.classNames === void 0 && $$bindings.classNames && classNames !== void 0)
@@ -61,6 +62,89 @@ ${visible ? `<section role="${"dialog"}" aria-labelledby="${"Title"}" aria-descr
   ) + " wrapper z-50 rounded-md " + escape(bgColor, true) + " p-4 svelte-3lxhqn"}" style="${"--popover-top: " + escape(`${bottom}px`, true) + "; --popover-left: " + escape(`${anchor === "right" ? right - popoverSize : left}px`, true)}"><div class="${"" + escape(direction === "rtl" ? "items-end" : "items-start", true) + " flex flex-col space-y-2"}">${slots.default ? slots.default({}) : ``}</div></section>
 	<div class="${"fixed top-0 left-0 z-40 h-screen w-screen bg-black opacity-0"}"></div>` : ``}`;
 });
+var n = Object.defineProperty, M = Object.defineProperties;
+var u = Object.getOwnPropertyDescriptors;
+var s = Object.getOwnPropertySymbols;
+var f = Object.prototype.hasOwnProperty, P = Object.prototype.propertyIsEnumerable;
+var i = (r, o, e) => o in r ? n(r, o, { enumerable: true, configurable: true, writable: true, value: e }) : r[o] = e, p = (r, o) => {
+  for (var e in o || (o = {}))
+    f.call(o, e) && i(r, e, o[e]);
+  if (s)
+    for (var e of s(o))
+      P.call(o, e) && i(r, e, o[e]);
+  return r;
+}, d = (r, o) => M(r, u(o));
+var l = (r, o) => {
+  var e = {};
+  for (var a in r)
+    f.call(r, a) && o.indexOf(a) < 0 && (e[a] = r[a]);
+  if (r != null && s)
+    for (var a of s(r))
+      o.indexOf(a) < 0 && P.call(r, a) && (e[a] = r[a]);
+  return e;
+};
+var m = (e) => {
+  var a = e, { parserOptions: r = {} } = a, o = l(a, ["parserOptions"]);
+  return d(p({}, o), { parser: C(r) });
+}, t$1 = class extends g {
+  constructor(e) {
+    super(e && m(e));
+    this.loadConfig = (e2) => super.configLoader(m(e2));
+  }
+}, v = t$1;
+const en = "English";
+const sq = "Albanian";
+const lang = {
+  en,
+  sq
+};
+const config = {
+  fallbackLocale: "sq",
+  translations: {
+    en: { lang },
+    sq: { lang }
+  },
+  loaders: [
+    {
+      locale: "en",
+      key: "register",
+      routes: [nav.register],
+      loader: async () => (await import("../../chunks/register.js")).default
+    },
+    {
+      locale: "sq",
+      key: "register",
+      routes: [nav.register],
+      loader: async () => (await import("../../chunks/register2.js")).default
+    },
+    {
+      locale: "en",
+      key: "login",
+      routes: [nav.login],
+      loader: async () => (await import("../../chunks/login.js")).default
+    },
+    {
+      locale: "sq",
+      key: "login",
+      routes: [nav.login],
+      loader: async () => (await import("../../chunks/login2.js")).default
+    },
+    {
+      locale: "en",
+      key: "generic",
+      routes: [nav.register, nav.login],
+      loader: async () => (await import("../../chunks/generic.js")).default
+    },
+    {
+      locale: "sq",
+      key: "generic",
+      routes: [nav.register, nav.login],
+      loader: async () => (await import("../../chunks/generic2.js")).default
+    }
+  ]
+};
+const { t, loading, locales, locale, loadTranslations, setLocale } = new v(config);
+loading.subscribe(($loading) => $loading && console.log("Loading translations..."));
 const Albania = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { classNames } = $$props;
   if ($$props.classNames === void 0 && $$bindings.classNames && classNames !== void 0)
@@ -98,11 +182,11 @@ ${validate_component(Popover, "Popover").$$render(
     {},
     {
       default: () => {
-        return `${each(languages, (l) => {
-          return `${l.code === "en" ? `<button class="${"flex items-center space-x-2 "}">${validate_component(UnitedStates, "UnitedStates").$$render($$result, { classNames: "h-3" }, {}, {})}
+        return `${each(languages, (l2) => {
+          return `${l2.code === "en" ? `<button class="${"flex items-center space-x-2 "}">${validate_component(UnitedStates, "UnitedStates").$$render($$result, { classNames: "h-3" }, {}, {})}
 				<p>${escape(languages[0].name)}</p>
 			</button>` : ``}
-		${l.code === "sq" ? `<button class="${"flex items-center space-x-2 "}">${validate_component(Albania, "Albania").$$render($$result, { classNames: "h-3" }, {}, {})}
+		${l2.code === "sq" ? `<button class="${"flex items-center space-x-2 "}">${validate_component(Albania, "Albania").$$render($$result, { classNames: "h-3" }, {}, {})}
 				<p>${escape(languages[1].name)}</p>
 			</button>` : ``}`;
         })}`;

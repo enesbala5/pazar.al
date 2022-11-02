@@ -59,8 +59,15 @@
       "_index.js",
       "_stores.js",
       "_Heart.js",
-      "_nav.js",
-      "_index4.js"
+      "_nav.js"
+    ],
+    "dynamicImports": [
+      "src/lib/lang/en/register.json",
+      "src/lib/lang/sq/register.json",
+      "src/lib/lang/en/login.json",
+      "src/lib/lang/sq/login.json",
+      "src/lib/lang/en/generic.json",
+      "src/lib/lang/sq/generic.json"
     ],
     "css": [
       "_app/immutable/assets/_layout-5fd3be89.css"
@@ -264,20 +271,6 @@
       "_index.js"
     ]
   },
-  "_index4.js": {
-    "file": "chunks/index4.js",
-    "imports": [
-      "_nav.js"
-    ],
-    "dynamicImports": [
-      "src/lib/lang/en/register.json",
-      "src/lib/lang/sq/register.json",
-      "src/lib/lang/en/login.json",
-      "src/lib/lang/sq/login.json",
-      "src/lib/lang/en/generic.json",
-      "src/lib/lang/sq/generic.json"
-    ]
-  },
   "_Heart.js": {
     "file": "chunks/Heart.js",
     "imports": [
@@ -298,11 +291,7 @@
   "src/hooks.server.ts": {
     "file": "chunks/hooks.server.js",
     "src": "src/hooks.server.ts",
-    "isDynamicEntry": true,
-    "imports": [
-      "_index4.js",
-      "_db.js"
-    ]
+    "isDynamicEntry": true
   },
   "src/lib/lang/en/register.json": {
     "file": "chunks/register.js",
