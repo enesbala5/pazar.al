@@ -1,6 +1,7 @@
 import { invalid, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 import type { Action, Actions, PageServerLoad } from './$types';
+import type { User } from '@prisma/client';
 
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userPreferences/nav';
@@ -71,7 +72,7 @@ export const actions: Actions = {
 		console.log({ email, password });
 		console.log(db);
 
-		const user = await db.user.findUnique({
+		const user: User | null = await db.user.findUnique({
 			where: {
 				email,
 			},
@@ -85,7 +86,7 @@ export const actions: Actions = {
 			return invalid(400, { credentials: true });
 		}
 
-		// const userPassword = await bcrypt.compare(password, user.passwordHash);
+		const userPassword = await bcrypt.compare(password, user.passwordHash);
 
 		// if (!userPassword) {
 		// 	return invalid(400, { credentials: true });
