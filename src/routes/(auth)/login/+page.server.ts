@@ -68,40 +68,43 @@ export const actions: Actions = {
 			return invalid(400, { invalid: true });
 		}
 
-		const user = await db.user.findUnique({
-			where: {
-				email,
-			},
-		});
+		console.log({ email, password });
+		console.log(db);
 
-		if (!user) {
-			return invalid(400, { credentials: true });
-		}
+		// const user = await db.user.findUnique({
+		// 	where: {
+		// 		email,
+		// 	},
+		// });
 
-		const userPassword = await bcrypt.compare(password, user.passwordHash);
+		// if (!user) {
+		// 	return invalid(400, { credentials: true });
+		// }
 
-		if (!userPassword) {
-			return invalid(400, { credentials: true });
-		}
+		// const userPassword = await bcrypt.compare(password, user.passwordHash);
 
-		const authenticatedUser = await db.user.update({
-			where: { email: user.email },
-			data: {
-				userAuthToken: crypto.randomUUID(),
-			},
-		});
+		// if (!userPassword) {
+		// 	return invalid(400, { credentials: true });
+		// }
 
-		cookies.set('session', authenticatedUser.userAuthToken, {
-			path: nav.index,
-			// httpOnly: true,
-			// sameSite: 'strict',
-			maxAge: 60 * 60 * 24 * 30,
+		// const authenticatedUser = await db.user.update({
+		// 	where: { email: user.email },
+		// 	data: {
+		// 		userAuthToken: crypto.randomUUID(),
+		// 	},
+		// });
 
-			// TODO: Enable in FINAL BUILD
-			// secure: process.env.NODE_ENV === 'production',
-		});
+		// cookies.set('session', authenticatedUser.userAuthToken, {
+		// 	path: nav.index,
+		// 	// httpOnly: true,
+		// 	// sameSite: 'strict',
+		// 	maxAge: 60 * 60 * 24 * 30,
 
-		throw redirect(302, nav.index);
+		// 	// TODO: Enable in FINAL BUILD
+		// 	// secure: process.env.NODE_ENV === 'production',
+		// });
+
+		// throw redirect(302, nav.index);
 	},
 	// login,
 };
