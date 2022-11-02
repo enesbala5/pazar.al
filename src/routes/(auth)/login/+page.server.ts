@@ -81,9 +81,9 @@ export const actions: Actions = {
 			throw redirect(302, '/');
 		}
 
-		// if (!user) {
-		// 	return invalid(400, { credentials: true });
-		// }
+		if (!user) {
+			return invalid(400, { credentials: true });
+		}
 
 		// const userPassword = await bcrypt.compare(password, user.passwordHash);
 
