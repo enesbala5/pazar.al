@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { nav } from '$lib/userPreferences/nav';
-	import { invalidateAll } from '$app/navigation';
-	import { applyAction, enhance } from '$app/forms';
+	// import { invalidateAll } from '$app/navigation';
+	// import { applyAction, enhance } from '$app/forms';
 
 	export let form: ActionData;
 </script>
