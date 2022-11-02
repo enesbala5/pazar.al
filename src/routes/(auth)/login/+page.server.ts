@@ -71,11 +71,15 @@ export const actions: Actions = {
 		console.log({ email, password });
 		console.log(db);
 
-		// const user = await db.user.findUnique({
-		// 	where: {
-		// 		email,
-		// 	},
-		// });
+		const user = await db.user.findUnique({
+			where: {
+				email,
+			},
+		});
+
+		if (user) {
+			throw redirect(302, '/');
+		}
 
 		// if (!user) {
 		// 	return invalid(400, { credentials: true });
