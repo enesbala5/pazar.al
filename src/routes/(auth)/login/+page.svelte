@@ -1,22 +1,25 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
+	import { applyAction, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import { nav } from '$lib/userPreferences/nav';
-	// import { invalidateAll } from '$app/navigation';
-	// import { applyAction, enhance } from '$app/forms';
 
 	export let form: ActionData;
 </script>
 
-<!-- use:enhance={() => {
+<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Login</h1>
+
+<form
+	action="?/login"
+	method="POST"
+	class="px-4"
+	use:enhance={() => {
 		return async ({ result }) => {
 			invalidateAll();
 			await applyAction(result);
 		};
-	}} -->
-
-<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Login</h1>
-<!-- action="?/login" -->
-<form method="POST" class="px-4">
+	}}
+>
 	<div>
 		<label for="email">Email</label>
 		<input class="inputPrimary mt-2" type="text" id="email" name="email" required />
