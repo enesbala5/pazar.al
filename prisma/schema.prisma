@@ -13,7 +13,7 @@ datasource db {
 
 /// Post Model - Contains all information on a post made on the page
 model Post {
-  pid        String   @id @default(cuid()) /// Post ID
+  pid        String   @id @default(uuid()) /// Post ID
   created_at DateTime @default(now()) /// Created At
   archived   Boolean  @default(false) /// If post is archived
   post_views Int      @default(0) /// How many times has the post been viewed
@@ -24,11 +24,14 @@ model Post {
   description String
   price       Float
   eur         Boolean
-  old_price   Float
-  // to calculate changes on price ||| 
-  // -> mund te jete null 
-  // -> mund te vendoset njejte me cmimin
-  // -> te funksionoje si buffer && te mos ndryshohet kur ndryshon cmimi
+  old_price   Float   @default(0)
+
+  // * MUND TE FUNKSIONOJ KESHTU:
+  // -> old_price = @default(0)
+  // Kur ndryshon cmimi -> make old_price = price
+  // Pastaj ndrysho price;
+
+  // Mbase mund te behet array (per Price History (Mbase per Dashboard Internal))
 
   city    String
   country String
@@ -43,17 +46,26 @@ model Post {
 }
 
 model User {
-  uid        String   @id @default(cuid())
-  created_at DateTime @default(now())
-  // role       Role     @default(USER)
+  uid           String @id @default(uuid())
+  name          String
+  surname       String
+  email         String @unique
+  passwordHash  String
+  userAuthToken String @unique
 
-  email String @unique
-  name  String
-
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
   // liked_posts Post[]
+  role         Role        @default(USER)
+  account_type AccountType @default(Individ)
 }
 
-// enum Role {
-//   USER
-//   ADMIN
-// }
+enum Role {
+  USER
+  ADMIN
+}
+
+enum AccountType {
+  Individ
+  Biznes
+}
