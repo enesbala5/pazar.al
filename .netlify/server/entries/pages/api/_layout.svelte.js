@@ -1,6 +1,6 @@
 import { c as create_ssr_component } from "../../../chunks/index.js";
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"bg-red-500"}">${slots.default ? slots.default({}) : ``}</div>`;
+  return `${slots.default ? slots.default({}) : ``}`;
 });
 export {
   Layout as default

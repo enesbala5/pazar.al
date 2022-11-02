@@ -1,4 +1,4 @@
-import { c as create_ssr_component, b as add_attribute, v as validate_component, e as escape, f as createEventDispatcher, d as subscribe, i as is_promise, n as noop, h as each } from "../../../chunks/index.js";
+import { c as create_ssr_component, b as add_attribute, v as validate_component, e as escape, h as createEventDispatcher, f as subscribe, i as is_promise, n as noop, d as each } from "../../../chunks/index.js";
 import { p as page } from "../../../chunks/stores.js";
 import { n as nav } from "../../../chunks/nav.js";
 import { H as Heart } from "../../../chunks/Heart.js";
@@ -18,7 +18,6 @@ const NoResults = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 });
 const KerkimError = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { id } = $$props;
-  console.log(id);
   const returnHome = () => {
     goto(nav.index);
   };
@@ -168,7 +167,6 @@ const ProductItemSkeleton = create_ssr_component(($$result, $$props, $$bindings,
 });
 const getLatestPosts = async (params) => {
   let url = nav.api.getLatestPosts;
-  console.log("params getLatest", JSON.stringify(params));
   const response = await fetch(url, {
     method: "POST",
     headers: new Headers({
@@ -186,9 +184,9 @@ const getLatestPosts = async (params) => {
   return await data;
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $$unsubscribe_page;
+  let $page, $$unsubscribe_page;
   let $card, $$unsubscribe_card;
-  $$unsubscribe_page = subscribe(page, (value) => value);
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_card = subscribe(card, (value) => $card = value);
   let params = {};
   let itemsAmount = 0;
@@ -197,7 +195,12 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$rendered;
   do {
     $$settled = true;
-    $$rendered = `<div class="${"relative"}"><div class="${"fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-900"}"></div>
+    {
+      console.log("kerkim", $page.data.user);
+    }
+    $$rendered = `<title>Pazar${escape(params.id ? " - " + params.id : "")}</title>
+
+<div class="${"relative"}"><div class="${"fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-900"}"></div>
 
 	<div class="${"absolute top-0 z-0 h-[40vh] w-full rounded-xl bg-gradient-to-b from-indigo-700 to-neutral-900"}"></div>
 

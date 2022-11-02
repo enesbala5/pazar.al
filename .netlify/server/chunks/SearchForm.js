@@ -1,4 +1,4 @@
-import { c as create_ssr_component, b as add_attribute, e as escape, d as subscribe, v as validate_component } from "./index.js";
+import { c as create_ssr_component, b as add_attribute, e as escape, f as subscribe, v as validate_component } from "./index.js";
 import { w as writable } from "./index3.js";
 import { p as page } from "./stores.js";
 const Search = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -59,11 +59,9 @@ const SearchForm = create_ssr_component(($$result, $$props, $$bindings, slots) =
     if (resetPage) {
       params.faqja = 1;
     }
-    console.log("updating params field", params);
   };
   const searchProduct = (resetPage = true) => {
     if (searchInput !== params.id) {
-      console.log("updating params sForm", searchProduct);
       updateParamsField(resetPage);
     }
   };
@@ -87,7 +85,7 @@ const SearchForm = create_ssr_component(($$result, $$props, $$bindings, slots) =
 		${searchInput !== "" && !searchBarFocused && $page.url.pathname != "/" ? `<button class="${"" + escape(onIndex ? "bg-indigo-700" : "", true) + " absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"}">${validate_component(Clear, "Clear").$$render($$result, { classNames: "fill-white w-5/6 h-5/6" }, {}, {})}</button>` : `<button class="${"" + escape(onIndex ? "bg-indigo-700" : "", true) + " absolute right-2 top-1/2 z-50 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"}">${validate_component(Search, "Search").$$render($$result, { classNames: "fill-white w-2/3 h-2/3" }, {}, {})}</button>`}</section>
 
 	${!onIndex ? `
-		<section class="${"mt-3 flex space-x-3"}"><div class="${"flex w-full overflow-hidden rounded-md bg-indigo-400 bg-opacity-20"}"><button class="${"" + escape($card ? "bg-neutral-50" : "bg-transparent", true) + " flex h-full w-1/2 grow items-center justify-center bg-neutral-50 p-1.5"}"><div class="${"mx-2"}">${validate_component(Grid, "Grid").$$render(
+		<section class="${"mt-3 flex space-x-3"}"><div class="${"flex w-full overflow-hidden rounded-md bg-indigo-400 bg-opacity-20"}"><button class="${"" + escape($card ? "bg-neutral-50" : "bg-transparent", true) + " flex h-full w-1/2 grow items-center justify-center p-1.5"}"><div class="${"mx-2"}">${validate_component(Grid, "Grid").$$render(
     $$result,
     {
       classNames: "\r\n							" + ($card ? "stroke-indigo-700" : "stroke-white") + "\r\n							fill-transparent w-4 h-4 bg-transparent"

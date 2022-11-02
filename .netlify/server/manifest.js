@@ -1,10 +1,10 @@
 export const manifest = {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set(["favicon.png","fonts/Aeonik-Light.woff","fonts/Aeonik-Light.woff2","fonts/Aeonik-Medium.woff","fonts/Aeonik-Medium.woff2","fonts/Aeonik-Regular.woff","fonts/Aeonik-Regular.woff2","icon.png","images/heart.png","manifest.json","maskable_icon.png","sitemap.xml","service-worker.js"]),
-	mimeTypes: {".png":"image/png",".woff":"font/woff",".woff2":"font/woff2",".json":"application/json",".xml":"application/xml"},
+	assets: new Set(["favicon.png","fonts/Aeonik-Light.woff","fonts/Aeonik-Light.woff2","fonts/Aeonik-Medium.woff","fonts/Aeonik-Medium.woff2","fonts/Aeonik-Regular.woff","fonts/Aeonik-Regular.woff2","icon.png","images/auth/main.jpg","images/heart.png","manifest.json","maskable_icon.png","sitemap.xml","service-worker.js"]),
+	mimeTypes: {".png":"image/png",".woff":"font/woff",".woff2":"font/woff2",".jpg":"image/jpeg",".json":"application/json",".xml":"application/xml"},
 	_: {
-		entry: {"file":"_app/immutable/start-f5fcff3f.js","imports":["_app/immutable/start-f5fcff3f.js","_app/immutable/chunks/index-80a18114.js","_app/immutable/chunks/singletons-4bb42092.js","_app/immutable/chunks/control-03134885.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-f355e4c5.js","imports":["_app/immutable/start-f355e4c5.js","_app/immutable/chunks/index-304ec1ce.js","_app/immutable/chunks/singletons-ee03c8b3.js","_app/immutable/chunks/preload-helper-b21cceae.js","_app/immutable/chunks/control-03134885.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
@@ -17,7 +17,9 @@ export const manifest = {
 			() => import('./nodes/8.js'),
 			() => import('./nodes/9.js'),
 			() => import('./nodes/10.js'),
-			() => import('./nodes/11.js')
+			() => import('./nodes/11.js'),
+			() => import('./nodes/12.js'),
+			() => import('./nodes/13.js')
 		],
 		routes: [
 			{
@@ -25,7 +27,7 @@ export const manifest = {
 				pattern: /^\/$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 4 },
+				page: { layouts: [0], errors: [1], leaf: 5 },
 				endpoint: null
 			},
 			{
@@ -33,7 +35,7 @@ export const manifest = {
 				pattern: /^\/admin\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 8 },
+				page: { layouts: [0], errors: [1], leaf: 9 },
 				endpoint: null
 			},
 			{
@@ -81,7 +83,7 @@ export const manifest = {
 				pattern: /^\/kerkim\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 9 },
+				page: { layouts: [0], errors: [1], leaf: 11 },
 				endpoint: null
 			},
 			{
@@ -89,7 +91,7 @@ export const manifest = {
 				pattern: /^\/krijo\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 10 },
+				page: { layouts: [0], errors: [1], leaf: 12 },
 				endpoint: null
 			},
 			{
@@ -97,7 +99,7 @@ export const manifest = {
 				pattern: /^\/login\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 5 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 6 },
 				endpoint: null
 			},
 			{
@@ -105,7 +107,7 @@ export const manifest = {
 				pattern: /^\/logout\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 6 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 7 },
 				endpoint: null
 			},
 			{
@@ -113,7 +115,15 @@ export const manifest = {
 				pattern: /^\/postim\/([^/]+?)\/?$/,
 				names: ["id"],
 				types: [null],
-				page: { layouts: [0,,], errors: [1,3], leaf: 11 },
+				page: { layouts: [0,,], errors: [1,4], leaf: 13 },
+				endpoint: null
+			},
+			{
+				id: "/(user)/profile",
+				pattern: /^\/profile\/?$/,
+				names: [],
+				types: [],
+				page: { layouts: [0], errors: [1], leaf: 10 },
 				endpoint: null
 			},
 			{
@@ -121,7 +131,7 @@ export const manifest = {
 				pattern: /^\/register\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 7 },
+				page: { layouts: [0,2], errors: [1,,], leaf: 8 },
 				endpoint: null
 			}
 		],
