@@ -12,7 +12,7 @@
 	<div class="">
 		<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium lg:text-5xl xl:text-6xl">Register</h1>
 
-		<form action="?/register" method="POST" class="px-4" use:enhance>
+		<form action="?/register" method="POST" class="px-4">
 			<InputField name="name" title="First Name" classNames="mt-4" />
 			<InputField name="surname" title="Last Name" classNames="mt-4" />
 			<InputField name="email" title="Email" />
