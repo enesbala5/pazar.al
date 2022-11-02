@@ -5,7 +5,10 @@
 	"scripts": {
 		"dev": "vite dev --host",
 		"build": "vite build",
-		"preview": "vite preview --host"
+		"preview": "vite preview --host",
+		"vercel-build": "prisma generate && pnpm build && pnpm vercel-postbuild",
+		"vercel-postbuild": "cp node_modules/@prisma/engines/*query* .vercel_build_output/functions/node/render/;cp prisma/schema.prisma .vercel_build_output/functions/node/render/",
+		"prisma:generate": "prisma generate"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
