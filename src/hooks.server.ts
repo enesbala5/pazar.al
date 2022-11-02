@@ -5,21 +5,23 @@ import { db } from '$lib/fetching/db';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session');
-	const language = event.cookies.get('language');
+	// const language = event.cookies.get('language');
 
-	console.log('cookies', session, language);
+	// console.log('cookies', session, language);
 
-	if (language) {
-		locale.set(language);
+	// if (language) {
+	// 	locale.set(language);
 
-		// Attach user setting into local env (this is optional)
-		event.locals.language = language;
-	}
+	// 	// Attach user setting into local env (this is optional)
+	// 	event.locals.language = language;
+	// }
 
 	if (!session) {
 		console.log('no session??');
 		return await resolve(event);
 	}
+
+	console.log('there is session');
 
 	const user = await db.user.findUnique({
 		where: { userAuthToken: session },

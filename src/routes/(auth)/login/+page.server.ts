@@ -45,7 +45,7 @@ const login: Action = async ({ cookies, request }) => {
 
 	cookies.set('session', authenticatedUser.userAuthToken, {
 		path: nav.index,
-		httpOnly: true,
+		// httpOnly: true,
 		// sameSite: 'strict',
 		maxAge: 60 * 60 * 24 * 30,
 
