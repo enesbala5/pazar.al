@@ -33,6 +33,7 @@
 	};
 
 	$: element, initPosition();
+	$: popoverSize, console.log(popoverSize);
 
 	/**
 	 * Toggle Popover Visibility

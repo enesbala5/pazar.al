@@ -93,15 +93,15 @@ export const actions: Actions = {
 			},
 		});
 
-		// cookies.set('session', authenticatedUser.userAuthToken, {
-		// 	path: nav.index,
-		// 	// httpOnly: true,
-		// 	// sameSite: 'strict',
-		// 	maxAge: 60 * 60 * 24 * 30,
+		cookies.set('session', authenticatedUser.userAuthToken, {
+			path: nav.index,
+			// httpOnly: true,
+			// sameSite: 'strict',
+			maxAge: 60 * 60 * 24 * 30,
 
-		// 	// TODO: Enable in FINAL BUILD
-		// 	// secure: process.env.NODE_ENV === 'production',
-		// });
+			// TODO: Enable in FINAL BUILD
+			// secure: process.env.NODE_ENV === 'production',
+		});
 
 		throw redirect(302, nav.index);
 	},
