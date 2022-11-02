@@ -1,6 +1,7 @@
 import { invalid, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
 import type { Action, Actions, PageServerLoad } from './$types';
+import type { User } from '@prisma/client';
 
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userPreferences/nav';
@@ -62,11 +63,13 @@ export const actions: Actions = {
 		const email = data.get('email');
 		const password = data.get('password');
 
+		console.log(email, password);
+
 		if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
 			return invalid(400, { invalid: true });
 		}
 
-		const user = await db.user.findUnique({
+		const user: User | null = await db.user.findUnique({
 			where: {
 				email,
 			},
@@ -77,6 +80,7 @@ export const actions: Actions = {
 		}
 
 		const userPassword = await bcrypt.compare(password, user.passwordHash);
+		console.log(userPassword);
 
 		if (!userPassword) {
 			return invalid(400, { credentials: true });
@@ -89,15 +93,15 @@ export const actions: Actions = {
 			},
 		});
 
-		cookies.set('session', authenticatedUser.userAuthToken, {
-			path: nav.index,
-			// httpOnly: true,
-			// sameSite: 'strict',
-			maxAge: 60 * 60 * 24 * 30,
+		// cookies.set('session', authenticatedUser.userAuthToken, {
+		// 	path: nav.index,
+		// 	// httpOnly: true,
+		// 	// sameSite: 'strict',
+		// 	maxAge: 60 * 60 * 24 * 30,
 
-			// TODO: Enable in FINAL BUILD
-			// secure: process.env.NODE_ENV === 'production',
-		});
+		// 	// TODO: Enable in FINAL BUILD
+		// 	// secure: process.env.NODE_ENV === 'production',
+		// });
 
 		throw redirect(302, nav.index);
 	},
