@@ -15,7 +15,7 @@
 	}} -->
 
 <h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Login</h1>
-
+<!-- action="?/login" -->
 <form method="POST" class="px-4">
 	<div>
 		<label for="email">Email</label>
