@@ -50,26 +50,28 @@
 	});
 </script>
 
-<div
-	class="dark min-h-screen {onIndex
-		? 'bg-transparent'
-		: 'bg-neutral-900'} font-aeonik text-neutral-50"
->
-	{#if onIndex}
-		<div
-			class="absolute top-0 -z-10 h-[40vh] w-full bg-gradient-to-b from-neutral-800 to-neutral-900"
-		/>
-		<div class="absolute -z-20 min-h-screen w-full bg-neutral-900 " />
-	{/if}
+<section class="dark">
+	<div
+		class=" min-h-screen {onIndex
+			? 'bg-transparent'
+			: 'bg-neutral-50 dark:bg-neutral-900'} font-aeonik text-neutral-900 dark:text-white"
+	>
+		{#if onIndex}
+			<div
+				class="absolute top-0 -z-10 h-[40vh] w-full bg-gradient-to-b from-neutral-800 to-neutral-900"
+			/>
+			<div class="absolute -z-20 min-h-screen w-full bg-neutral-900 " />
+		{/if}
 
-	<!-- {#if $page.url.pathname !== nav.register && $page.url.pathname !== nav.login} -->
-	<Nav {onIndex} {returnUrl} />
-	<!-- {/if} -->
-
-	<!-- App Content -->
-	<main>
-		<!-- {#if translationsLoaded} -->
-			<slot />
+		<!-- {#if $page.url.pathname !== nav.register && $page.url.pathname !== nav.login} -->
+		<Nav {onIndex} {returnUrl} />
 		<!-- {/if} -->
-	</main>
-</div>
+
+		<!-- App Content -->
+		<main>
+			<!-- {#if translationsLoaded} -->
+			<slot />
+			<!-- {/if} -->
+		</main>
+	</div>
+</section>

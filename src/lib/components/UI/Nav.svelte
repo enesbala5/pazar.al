@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	// Imports:
+	import { page } from '$app/stores';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 	import Heart from '../logos/user/Heart.svelte';
 	import { nav } from '../../userPreferences/nav';
@@ -9,21 +9,25 @@
 	import Logout from '../auth/Logout.svelte';
 	import { toggleBoolean } from '$lib/functions/generic';
 
-	$: $page.data, console.log('page', $page.data.user);
-
 	export let onIndex: boolean;
 
 	export let returnUrl: string | undefined;
 
 	let element: HTMLElement;
 
-	let userPanelVisible: boolean = false;
+	let visible: boolean = false;
+
+	const toggleVisible = () => {
+		visible = toggleBoolean(visible);
+	};
+
+	const notVisible = () => (visible = false);
 </script>
 
 <nav class="flex items-center justify-between p-4 lg:mx-auto lg:w-10/12">
 	<section class="flex items-center">
 		<a href="/" class="h-8 w-8 ">
-			<Logo classNames="fill-neutral-50 w-full h-full " />
+			<Logo classNames="dark:fill-neutral-50 fill-neutral-900 w-full h-full " />
 		</a>
 		{#if returnUrl !== undefined}
 			<button
@@ -69,12 +73,8 @@
 		{#if $page.data.user}
 			<div
 				bind:this={element}
-				on:click={() => {
-					userPanelVisible = toggleBoolean(userPanelVisible);
-				}}
-				on:keydown={() => {
-					userPanelVisible = toggleBoolean(userPanelVisible);
-				}}
+				on:click={toggleVisible}
+				on:keydown={toggleVisible}
 				class="
 				{onIndex ? ' bg-neutral-900' : ' bg-neutral-800'}
 				flex h-10 w-10 items-center justify-center rounded-full "
@@ -87,7 +87,8 @@
 					direction="rtl"
 					anchor="right"
 					{element}
-					visible={userPanelVisible}
+					{visible}
+					on:notVisible={notVisible}
 					bgColor={onIndex ? 'bg-neutral-900' : 'bg-neutral-800'}
 				>
 					<a href={nav.profile} class="">Profile</a>

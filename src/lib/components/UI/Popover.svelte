@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import { toggleBoolean } from '$lib/functions/generic';
 	import { quartInOut } from 'svelte/easing';
 	import { afterNavigate } from '$app/navigation';
+
+	const dispatch = createEventDispatcher();
 
 	export let bgColor: string = 'bg-neutral-900';
 
@@ -38,8 +41,10 @@
 	/**
 	 * Toggle Popover Visibility
 	 */
-	export const toggleVisible = () => (visible = toggleBoolean(visible));
-	export const notVisible = () => (visible = visible = false);
+
+	export const notVisible = () => {
+		dispatch('notVisible');
+	};
 
 	afterNavigate(() => {
 		notVisible();

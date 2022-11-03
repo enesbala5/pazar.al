@@ -8,11 +8,19 @@
 	}
 
 	.buttonPrimary {
-		@apply rounded-md bg-indigo-700 py-2 px-4;
+		@apply rounded-md bg-indigo-600 py-2 px-4 text-white;
 	}
 
 	.buttonSecondary {
-		@apply rounded-md bg-neutral-700 py-2 px-4;
+		@apply rounded-md bg-neutral-700 py-2 px-4 text-white;
+	}
+
+	.link {
+		@apply text-indigo-500;
+	}
+
+	.underlinedLink {
+		@apply link underline underline-offset-2;
 	}
 }
 
@@ -82,4 +90,13 @@
 * {
 	-webkit-appearance: none;
 	-webkit-tap-highlight-color: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: white !important;
+
+	transition: background-color 5000s ease-in-out 0s;
 }

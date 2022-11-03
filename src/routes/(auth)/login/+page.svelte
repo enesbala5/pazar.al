@@ -3,13 +3,16 @@
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { nav } from '$lib/userPreferences/nav';
+	import { Input } from 'postcss';
+	import InputField from '$lib/components/UI/Input/InputField.svelte';
 
 	export let form: ActionData;
 </script>
 
-<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Login</h1>
-
-<!-- action="?/login" -->
+<div class="mb-12 mt-12 p-4">
+	<h1 class=" text-4xl font-medium">Welcome Back</h1>
+	<p class="mt-2 opacity-80">Perdorni platformen E-Commerce me te re Shqiptare</p>
+</div>
 
 <form
 	method="POST"
@@ -21,14 +24,8 @@
 		};
 	}}
 >
-	<div>
-		<label for="email">Email</label>
-		<input class="inputPrimary mt-2" type="text" id="email" name="email" required />
-	</div>
-	<div class="mt-4">
-		<label for="password">Password</label>
-		<input class="inputPrimary mt-2" type="password" id="password" name="password" required />
-	</div>
+	<InputField classNames="mt-4" name="email" type="email" title="Email" required />
+	<InputField classNames="mt-4" name="password" type="password" title="Password" required />
 
 	{#if form?.invalid}
 		<p class=" mt-2 text-red-500">Email and password is required.</p>
@@ -38,8 +35,20 @@
 		<p class=" mt-2 text-red-500">You have entered the wrong credentials.</p>
 	{/if}
 
+	<div class="mt-4 flex items-center justify-between">
+		<div class="flex items-center space-x-2">
+			<input type="checkbox" value="rememberMe" />
+			<label for="rememberMe">Remember me</label>
+		</div>
+		<a href="forgotPassword" class="link">Forgot Password?</a>
+	</div>
+
 	<div class="mt-4">
-		<button type="submit" class="buttonPrimary">Submit</button>
+		<button type="submit" class="buttonPrimary w-full">Log in</button>
 	</div>
 </form>
-<a href={nav.register}>Register</a>
+<div class="mt-4 flex w-full items-center justify-center">
+	<p>
+		Not registered yet? <a href={nav.register} class="underlinedLink">Create an Account</a>
+	</p>
+</div>

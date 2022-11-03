@@ -30,6 +30,8 @@
 		visible = toggleBoolean(visible);
 	};
 
+	const notVisible = () => (visible = false);
+
 	function selectEnglish() {
 		selected = 'en';
 		handleOnChange();
@@ -56,7 +58,7 @@
 		<Albania classNames="h-3" />
 	{/if}
 </button>
-<Popover {element} {bgColor} position="bottom" anchor="right" {visible}>
+<Popover {element} {bgColor} position="bottom" anchor="right" {visible} on:notVisible={notVisible}>
 	{#each languages as l (l.code)}
 		{#if l.code === 'en'}
 			<button class="flex items-center space-x-2 " on:click={selectEnglish}>

@@ -9,9 +9,11 @@
 </script>
 
 <article class="mt-12 px-4 lg:mx-auto lg:w-10/12">
-	<section class="flex items-center space-x-4 lg:space-x-12 bg-gradient-to-r from-neutral-800 to-neutral-900 rounded-l-full">
+	<section
+		class="flex items-center space-x-4 rounded-l-full bg-gradient-to-r from-neutral-800 to-neutral-900 lg:space-x-12"
+	>
 		<div
-			class="flex h-48 w-48 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-indigo-700 p-8"
+			class="flex h-48 w-48 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600 to-indigo-700 p-8"
 		>
 			<p class="text-8xl">E</p>
 		</div>
@@ -40,7 +42,7 @@
 						</div>
 					</div>
 					<div class="flex w-full grow items-center py-4 px-4">
-						<p class="w-1/2 text-2xl font-medium">Postimet e Pelqyera</p>
+						<p class="w-1/2 text-xl font-medium">Postimet e Pelqyera</p>
 					</div>
 				</div>
 
@@ -53,7 +55,7 @@
 						</div>
 					</div>
 					<div class="flex w-full grow items-center py-4 px-4">
-						<p class="w-1/2 text-2xl font-medium">Postimet e Kontaktuar</p>
+						<p class="w-1/2 text-xl font-medium">Postimet e Kontaktuar</p>
 					</div>
 				</div>
 			</div>
