@@ -7,6 +7,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session');
 	const language = event.cookies.get('language');
 
+	console.log('cookies', session, language);
+
 	if (language) {
 		locale.set(language);
 

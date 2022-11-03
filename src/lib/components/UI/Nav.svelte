@@ -20,7 +20,7 @@
 	let userPanelVisible: boolean = false;
 </script>
 
-<nav class="flex items-center justify-between p-4">
+<nav class="flex items-center justify-between p-4 lg:mx-auto lg:w-10/12">
 	<section class="flex items-center">
 		<a href="/" class="h-8 w-8 ">
 			<Logo classNames="fill-neutral-50 w-full h-full " />
@@ -79,7 +79,7 @@
 				{onIndex ? ' bg-neutral-900' : ' bg-neutral-800'}
 				flex h-10 w-10 items-center justify-center rounded-full "
 			>
-				<p class="mb-0.5 text-xl text-neutral-50 pointer-events-none">E</p>
+				<p class="pointer-events-none mb-0.5 text-xl text-neutral-50">E</p>
 			</div>
 			<div class="z-50">
 				<Popover
