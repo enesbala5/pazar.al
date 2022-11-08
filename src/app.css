@@ -8,7 +8,7 @@
 	}
 
 	.buttonPrimary {
-		@apply rounded-md bg-indigo-600 py-2 px-4 text-white;
+		@apply lg:rounded-md bg-indigo-600 py-2 px-4 text-white rounded-full;
 	}
 
 	.buttonSecondary {
@@ -21,6 +21,18 @@
 
 	.underlinedLink {
 		@apply link underline underline-offset-2;
+	}
+
+	.checkbox {
+		@apply h-4 w-4 rounded border-neutral-300 bg-neutral-100 text-indigo-600 focus:ring-2 focus:ring-indigo-500 dark:border-neutral-600 dark:bg-neutral-900 dark:ring-offset-neutral-800 dark:focus:ring-indigo-600;
+	}
+
+	.labelText {
+		@apply text-sm;
+	}
+
+	.tertiary {
+		@apply text-xs opacity-50;
 	}
 }
 
