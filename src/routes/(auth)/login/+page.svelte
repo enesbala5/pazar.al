@@ -8,7 +8,7 @@
 	export let form: ActionData;
 </script>
 
-<div class="flex h-[80vh] flex-col items-center lg:justify-center pt-12 lg:pt-0">
+<div class="flex h-[80vh] flex-col items-center pt-12 lg:justify-center lg:pt-0">
 	<div class="flex w-full flex-col items-center px-4 lg:px-0">
 		<div class="mb-12 w-full max-w-md text-center">
 			<h1 class=" text-4xl font-medium">Hello</h1>
@@ -38,7 +38,7 @@
 				<p class=" mt-2 text-red-500">You have entered the wrong credentials.</p>
 			{/if}
 
-			<div class="mt-4 flex items-center justify-between">
+			<div class="mt-6 flex items-center justify-between">
 				<div class="flex items-center space-x-2">
 					<input type="checkbox" value="rememberMe" class="checkbox" />
 					<label for="rememberMe" class="labelText">Remember me</label>
@@ -46,11 +46,10 @@
 				<a href="forgotPassword" class="link labelText">Forgot Password?</a>
 			</div>
 
-			<div class="mt-4">
+			<div class="mt-6">
 				<button type="submit" class="buttonPrimary w-full">Log in</button>
 			</div>
 		</form>
-		
 	</div>
 </div>
 <div class="fixed bottom-0 w-full border-t py-2 text-center dark:border-neutral-800">
