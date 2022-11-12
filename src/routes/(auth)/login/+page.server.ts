@@ -63,8 +63,6 @@ export const actions: Actions = {
 		const email = data.get('email');
 		const password = data.get('password');
 
-		console.log(email, password);
-
 		if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
 			return invalid(400, { invalid: true });
 		}
@@ -80,7 +78,6 @@ export const actions: Actions = {
 		}
 
 		const userPassword = await bcrypt.compare(password, user.passwordHash);
-		console.log(userPassword);
 
 		if (!userPassword) {
 			return invalid(400, { credentials: true });

@@ -4,12 +4,54 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 // TODO:
 // -> Add image support
+
+model PriceHistory {
+  pid        String   @id @default(uuid()) /// Price Entry ID
+  created_at DateTime @default(now()) /// Created At
+
+  Post    Post?   @relation(fields: [postPid], references: [pid])
+  postPid String?
+}
+
+model User {
+  uid           String  @id @default(uuid())
+  name          String
+  surname       String?
+  email         String  @unique
+  passwordHash  String
+  userAuthToken String  @unique
+
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
+  role         Role        @default(USER)
+  account_type AccountType @default(Personal)
+
+  sellerInfo SellerInformation?
+
+  posts Post[] @relation("CreatedBy")
+
+  likedPosts Post[] @relation("LikedBy")
+}
+
+model SellerInformation {
+  bid     String @id @default(uuid())
+  user    User   @relation(fields: [userUid], references: [uid])
+  userUid String @unique
+
+  status SellerStatus @default(Normal)
+
+  profilePicture String?
+  coverPicture   String?
+
+  mainColor String?
+}
 
 /// Post Model - Contains all information on a post made on the page
 model Post {
@@ -18,47 +60,36 @@ model Post {
   archived   Boolean  @default(false) /// If post is archived
   post_views Int      @default(0) /// How many times has the post been viewed
   post_likes Int      @default(0) /// How many times the post has been liked
-  // ? per kte sjam i sigurt ||| (per Datatype-in e kam fjalen)
 
-  title       String
-  description String
-  price       Float
-  eur         Boolean
-  old_price   Float   @default(0)
+  // link post to one Author Only
+  author   User   @relation("CreatedBy", fields: [authorId], references: [uid])
+  authorId String
 
-  // * MUND TE FUNKSIONOJ KESHTU:
-  // -> old_price = @default(0)
-  // Kur ndryshon cmimi -> make old_price = price
-  // Pastaj ndrysho price;
+  // Link users who like a post
+  likedBy User   @relation(name: "LikedBy", fields: [likerId], references: [uid])
+  likerId String
 
-  // Mbase mund te behet array (per Price History (Mbase per Dashboard Internal))
-
-  city    String
-  country String
-  // foreign key restraints -> Nqs dua te pranoje vetem X vlera
+  title        String
+  description  String
+  price        Float
+  eur          Boolean
+  priceHistory PriceHistory[] // Array of Price Entries - plot them on Graph later to make it valuable
 
   category String
-  tags     Json?
-
-  // TODO: Not working -> Fix and learn how to create the relational model needed for this to work
-  // liked_by     User?   @relation(fields: [liked_by_uid], references: [uid])
-  // liked_by_uid String?
+  tags     Tag[]
+  city     Cities
+  country  Countries
 }
 
-model User {
-  uid           String @id @default(uuid())
-  name          String
-  surname       String
-  email         String @unique
-  passwordHash  String
-  userAuthToken String @unique
-
-  created_at   DateTime    @default(now())
-  updated_at   DateTime    @updatedAt
-  // liked_posts Post[]
-  role         Role        @default(USER)
-  account_type AccountType @default(Individ)
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value String
+  posts Post[]
 }
+
+// ?ENUM DECLARATION
+// -----------------------------------------
 
 enum Role {
   USER
@@ -66,6 +97,67 @@ enum Role {
 }
 
 enum AccountType {
-  Individ
-  Biznes
+  Personal
+  Seller
+}
+
+enum SellerStatus {
+  Normal
+  Verified
+}
+
+enum Countries {
+  Albania
+  Kosovo
+}
+
+enum Cities {
+  BajramCurri
+  Ballsh
+  Belsh
+  Berat
+  Bilisht
+  Bulqize
+  Burrel
+  Cerrik
+  Corovode
+  Delvine
+  Divjake
+  Durres
+  Erseke
+  Fier
+  FusheKruje
+  Gjirokaster
+  Gramsh
+  Kamez
+  Kavaje
+  Korce
+  Kruje
+  Krume
+  Kucove
+  Kukes
+  Lac
+  Lezhe
+  Libonik
+  Librazhd
+  Lushnje
+  Mamurras
+  Patos
+  Peqin
+  Permet
+  Peshkopi
+  Pogradec
+  Prrenjas
+  Puke
+  Roskovec
+  Rreshen
+  Rrogozhine
+  Sarande
+  Shengjin
+  Shijak
+  Shkoder
+  Sukth
+  Tepelene
+  Tirane
+  Vlore
 }

@@ -13,8 +13,6 @@
 	import type { searchQuery } from '$lib/types/query';
 	import { card } from '$lib/userPreferences/preferences';
 
-	$: $page, console.log('kerkim', $page.data.user);
-
 	let params: searchQuery = {};
 
 	let itemsAmount: number = 0;
@@ -26,9 +24,9 @@
 		itemsAmount = await getCount(params);
 	});
 
-	// const createItem = async () => {
-	// fetch('/api/createPost');
-	// };
+	const createItem = async () => {
+	fetch('/api/createPost');
+	};
 
 	const paginateFN = () => {
 		paginate();
@@ -83,3 +81,4 @@
 		{/await}
 	</div>
 </div>
+<!-- <button on:click={createItem} class="fixed top-0 w-full ">Delete all users</button> -->

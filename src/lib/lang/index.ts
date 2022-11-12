@@ -52,4 +52,4 @@ export const { t, loading, locales, locale, loadTranslations, setLocale } = new 
 	Parser.Params<{ item?: string }>
 >(config);
 
-loading.subscribe(($loading) => $loading && console.log('Loading translations...'));
+loading.subscribe(($loading) => $loading);

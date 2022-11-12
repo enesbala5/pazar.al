@@ -8,6 +8,7 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { nav } from '$lib/userPreferences/nav';
+	import { darkMode } from '$lib/userPreferences/preferences';
 
 	let onIndex: boolean = false;
 
@@ -50,7 +51,7 @@
 	});
 </script>
 
-<section class="dark">
+<section class={$darkMode ? 'dark' : ''}>
 	<div
 		class=" min-h-screen {onIndex
 			? 'bg-transparent'

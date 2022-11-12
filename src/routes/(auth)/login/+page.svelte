@@ -8,7 +8,7 @@
 	export let form: ActionData;
 </script>
 
-<div class="flex h-[80vh] flex-col items-center pt-12 lg:justify-center lg:pt-0">
+<div class="flex pt-12 mt-12 lg:pt-0">
 	<div class="flex w-full flex-col items-center px-4 lg:px-0">
 		<div class="mb-12 w-full max-w-md text-center">
 			<h1 class=" text-4xl font-medium">Hello</h1>

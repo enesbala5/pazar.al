@@ -25,7 +25,7 @@
 			<img
 				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
 				alt={product.title}
-				class=" transition-scale h-full w-full object-cover group-active:scale-110 lg:group-hover:scale-110 lg:group-active:scale-100"
+				class="transition-bezier h-full w-full object-cover group-active:scale-110 lg:group-hover:scale-110 lg:group-active:scale-100"
 			/>
 			<div
 				class="absolute bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent "
@@ -101,7 +101,7 @@
 {/if}
 
 <style>
-	.transition-scale {
+	:global(.transition-bezier) {
 		transition: all 2s;
 		transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
 	}
