@@ -18,7 +18,7 @@
 			<p class="text-8xl">E</p>
 		</div>
 		<div>
-			<h1 class="text-6xl font-medium">{user?.name} {user?.surname}</h1>
+			<h1 class="text-6xl font-medium">{user?.firstName} {user?.lastName}</h1>
 			<p class="mt-2 opacity-70">Anetar i Pazar.al</p>
 			<!-- TODO: Duplicate of NAV button -->
 			<!-- <div class="mt-6 flex items-center space-x-2">

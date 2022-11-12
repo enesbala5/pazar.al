@@ -2,9 +2,6 @@
 	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 </script>
 
-<!-- #################################################################################################### -->
-
-<!-- SvelteKit Dynamic Header -->
 <svelte:head>
 	<title>Home</title>
 	<meta name="description" content="Home Page" />
@@ -17,5 +14,3 @@
 		<SearchForm />
 	</div>
 </section>
-
-<!-- Category Highlights -->

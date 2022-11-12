@@ -1,12 +1,23 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { nav } from '$lib/userPreferences/nav';
-	import { enhance } from '$app/forms';
 	import InputField from '$lib/components/UI/Input/InputField.svelte';
+	import { applyAction, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 
 	export let form: ActionData;
 	let business: boolean | undefined = undefined;
 	let selectedType: boolean = false;
+
+	let loginForm: HTMLFormElement | undefined = undefined;
+
+	const login = () => {
+		if (loginForm !== undefined) {
+			loginForm.submit();
+		}
+	};
+
+	$: loginForm, login();
 </script>
 
 {#if !selectedType}
@@ -149,61 +160,65 @@
 				</p>
 			</div>
 
-			<!-- use:enhance={() => {
+			<form
+				method="POST"
+				action="?/register"
+				class="w-full max-w-md"
+				use:enhance={() => {
 					return async ({ result }) => {
 						invalidateAll();
 						await applyAction(result);
 					};
-				}} -->
-			<form method="POST" class="w-full max-w-md">
-				{#if business}
+				}}
+			>
+				<input type="hidden" value={business} name="business" />
+				<div class="mt-4 flex w-full space-x-4">
 					<InputField
 						classNames="w-full"
-						name="businessName"
+						name="firstName"
 						type="text"
-						title="Business Name"
+						title={business ? 'Business Name' : 'First Name'}
 						required
 					/>
-				{/if}
-				{#if !business}
-					<div class="mt-4  flex w-full space-x-4">
-						<InputField
-							classNames="w-full"
-							name="firstName"
-							type="text"
-							title="First Name"
-							required
-						/>
-						<InputField
-							classNames="w-full"
-							name="lastName"
-							type="text"
-							title="Last Name"
-							required
-						/>
-					</div>
-				{/if}
+					<InputField
+						classNames="w-full {business ? 'hidden' : ''}"
+						name="lastName"
+						type="text"
+						title="Last Name"
+						required
+						value={''}
+					/>
+				</div>
 
 				<InputField classNames="mt-4" name="email" type="email" title="Email" required />
 				<InputField classNames="mt-4" name="password" type="password" title="Password" required />
-				<InputField
-					classNames="mt-4"
-					name="country"
-					type="text"
-					title="Country"
-					disabled
-					hidden
-					value="Albania"
-				/>
 
-				{#if form?.invalid}
-					<p class=" mt-2 text-red-500">Email and password is required.</p>
+				{#if form?.user}
+					<p class=" mt-2 text-red-500">
+						There is already an account registered with email address.
+					</p>
 				{/if}
 
-				{#if form?.credentials}
-					<p class=" mt-2 text-red-500">You have entered the wrong credentials.</p>
+				{#if form?.email && form?.password}
+					<form
+						id="loginForm"
+						bind:this={loginForm}
+						action={nav.login}
+						method="POST"
+						class=" w-full max-w-md"
+						use:enhance={() => {
+							return async ({ result }) => {
+								invalidateAll();
+								await applyAction(result);
+							};
+						}}
+					>
+						<input type="text" name="email" value={form?.email} />
+						<input type="text" name="password" value={form?.password} />
+						<input type="text" name="fromRegister" value="true" />
+					</form>
 				{/if}
-
+				<!-- Additional Actions -->
 				<div class="mt-6 flex items-center justify-between">
 					<div class="flex items-center space-x-2">
 						<input type="checkbox" value="rememberMe" class="checkbox" />

@@ -15,9 +15,9 @@
 </script>
 
 <section
-	class="mx-2 my-4 rounded-md bg-gradient-to-t from-neutral-800 to-transparent p-4 text-left"
+	class="to-transparent0 mx-2 my-4 rounded-md bg-gradient-to-t from-neutral-100 p-4 text-left dark:from-neutral-800"
 >
-	<NoResults classNames="w-24 h-24 fill-white" />
+	<NoResults classNames="w-24 h-24 dark:fill-neutral-50 fill-neutral-800" />
 	<p class="mt-4 w-5/6 text-xl">
 		Nuk u gjeten rezultate per
 		{#if id === undefined}

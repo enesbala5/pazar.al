@@ -13,20 +13,23 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 const register: Action = async ({ request }) => {
 	const data = await request.formData();
-	const name = data.get('name');
-	const surname = data.get('surname');
+	const firstName = data.get('firstName');
+	const lastName = data.get('lastName');
 	const email = data.get('email');
 	const password = data.get('password');
+	const business = data.get('business');
+
+	// convert business (dataForm) -> boolean
+	const isBusiness = business === 'true';
 
 	if (
 		typeof email !== 'string' ||
 		typeof password !== 'string' ||
-		typeof name !== 'string' ||
-		typeof surname !== 'string' ||
+		typeof firstName !== 'string' ||
+		typeof lastName !== 'string' ||
 		!email ||
 		!password ||
-		!name ||
-		!surname
+		!firstName
 	) {
 		return invalid(400, { invalid: true });
 	}
@@ -36,21 +39,26 @@ const register: Action = async ({ request }) => {
 	});
 
 	if (user) {
+		console.log('user exists');
 		return invalid(400, { user: true });
 	}
 
+	console.log('creating');
+
 	await db.user.create({
 		data: {
-			name,
-			surname,
+			firstName,
+			lastName,
 			email,
 			passwordHash: await bcrypt.hash(password, 10),
 			userAuthToken: crypto.randomUUID(),
+			account_type: isBusiness ? 'Seller' : 'Personal',
 			role: 'USER',
 		},
 	});
 
-	throw redirect(303, nav.login);
+	return invalid(400, { email: email, password: password });
+	throw redirect(303, nav.welcomeScreen);
 };
 
 export const actions: Actions = { register };

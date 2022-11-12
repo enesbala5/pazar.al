@@ -1,6 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 
-import type { Prisma, Role } from '@prisma/client';
+import type { AccountType, Prisma, Role, SellerInformation } from '@prisma/client';
 
 // src/app.d.ts
 
@@ -10,12 +10,13 @@ import type { Prisma, Role } from '@prisma/client';
 // for information about these interfaces
 // and what to do when importing types
 declare namespace App {
-
 	interface Locals {
 		user: {
-			name: string;
-			surname: string;
+			firstName: string;
+			lastName: string;
 			email: string;
+			account_type: AccountType;
+			sellerInfo: SellerInformation | null;
 			role: Role;
 		};
 		language: string;

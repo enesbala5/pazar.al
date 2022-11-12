@@ -8,11 +8,11 @@
 	}
 
 	.buttonPrimary {
-		@apply rounded-full bg-indigo-600 py-2.5 px-4 text-white lg:rounded-md;
+		@apply rounded-full bg-indigo-500 py-3 px-4 text-sm font-medium tracking-wide text-white dark:bg-indigo-600 lg:rounded-md;
 	}
 
 	.buttonSecondary {
-		@apply rounded-full bg-neutral-700 py-2.5 px-4 text-white lg:rounded-md;
+		@apply rounded-full bg-neutral-200 py-3 px-4 text-sm font-medium tracking-wide text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50 lg:rounded-md;
 	}
 
 	.link {

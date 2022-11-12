@@ -29,6 +29,7 @@
 		>
 			<InputField classNames="mt-4" name="email" type="email" title="Email" required />
 			<InputField classNames="mt-4" name="password" type="password" title="Password" required />
+						<input type="text" name="fromRegister" value="true" />
 
 			{#if form?.invalid}
 				<p class=" mt-2 text-red-500">Email and password is required.</p>

@@ -54,7 +54,7 @@
 			on:blur={() => (searchBarFocused = false)}
 			bind:value={searchInput}
 			class="
-			{onIndex ? 'bg-neutral-800' : 'bg-indigo-600'}
+			{onIndex ? 'bg-neutral-100 dark:bg-neutral-800' : 'bg-neutral-50 dark:bg-indigo-600'}
 			w-full rounded-md border-0 px-5 py-3.5 outline-none focus:ring-0"
 		/>
 		<!-- -->
@@ -62,27 +62,29 @@
 			<button
 				on:click={clearInput}
 				class="
-			{onIndex ? 'bg-indigo-700' : ''}
+			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
-				<Clear classNames="fill-white w-5/6 h-5/6" />
+				<Clear classNames="dark:fill-white {onIndex? 'fill-white' : 'fill-indigo-500'} w-5/6 h-5/6" />
 			</button>
 		{:else}
 			<button
 				on:click={() => searchProduct()}
 				on:mousedown={() => searchProduct()}
 				class="
-			{onIndex ? 'bg-indigo-700' : ''}
+			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
 			absolute right-2 top-1/2 z-50 flex aspect-square h-9  -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
-				<Search classNames="fill-white w-2/3 h-2/3" />
+				<Search classNames="dark:fill-white {onIndex? 'fill-white' : 'fill-indigo-500'} w-2/3 h-2/3" />
 			</button>{/if}
 	</section>
 
 	{#if !onIndex}
 		<!-- Filters -->
 		<section class="mt-3 flex space-x-3">
-			<div class="flex w-full overflow-hidden rounded-md bg-indigo-400 bg-opacity-20">
+			<div
+				class="flex w-full overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 dark:bg-indigo-600"
+			>
 				<button
 					on:click={() => {
 						card.set(true);
@@ -114,7 +116,7 @@
 			</div>
 
 			<div
-				class="flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-400 bg-opacity-20 px-2"
+				class="flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 px-2 dark:bg-indigo-600"
 			>
 				<div class="mx-auto flex items-center">
 					<div id="Expensive" class="flex items-center">
@@ -130,11 +132,11 @@
 			</div>
 
 			<div
-				class="flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-400 bg-opacity-20 px-2"
+				class=" flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 px-2 dark:bg-indigo-600"
 			>
 				<div class="flex items-center">
 					<Settings classNames="w-3.5 h-3.5 fill-white min-w-[0.875rem]" />
-					<p class="ml-2  text-sm font-medium uppercase">Opsione</p>
+					<p class="ml-2  text-sm font-medium uppercase text-white">Options</p>
 				</div>
 			</div>
 		</section>

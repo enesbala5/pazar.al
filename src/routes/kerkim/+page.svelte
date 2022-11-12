@@ -25,7 +25,7 @@
 	});
 
 	const createItem = async () => {
-	fetch('/api/createPost');
+		fetch('/api/createPost');
 	};
 
 	const paginateFN = () => {
@@ -41,7 +41,7 @@
 	<div class="fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-900" />
 
 	<div
-		class="absolute top-0 z-0 h-[40vh] w-full rounded-xl bg-gradient-to-b from-indigo-700 to-neutral-900"
+		class="absolute top-0 z-0 h-[40vh] w-full rounded-xl bg-gradient-to-b from-indigo-600 dark:from-indigo-700 dark:to-neutral-900 to-neutral-50"
 	/>
 
 	<div class="absolute top-0 w-full">

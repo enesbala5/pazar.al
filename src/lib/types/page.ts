@@ -1,8 +1,10 @@
-import type { Role } from '@prisma/client';
+import type { AccountType, Role, SellerInformation } from '@prisma/client';
 
 export type PageUser = {
-	name: string;
-	surname: string;
+	firstName: string;
+	lastName: string;
 	email: string;
+	account_type: AccountType;
+	sellerInfo: SellerInformation | null;
 	role: Role;
 };

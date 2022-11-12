@@ -62,7 +62,7 @@
 				? ' border-neutral-700'
 				: ' border-neutral-800'} pr-4 "
 		>
-			<Language bgColor={onIndex ? 'bg-neutral-900' : 'bg-neutral-800'} />
+			<Language bgColor={onIndex ? 'dark:bg-neutral-900 bg-neutral-300' : 'bg-neutral-200 dark:bg-neutral-800'} />
 		</div>
 		<div class=" mr-4 flex h-5   w-5 items-center justify-center opacity-70">
 			<Heart classNames="fill-white" />
