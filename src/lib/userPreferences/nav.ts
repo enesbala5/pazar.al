@@ -2,6 +2,9 @@ export const nav = {
 	index: '/',
 	kerkim: '/kerkim',
 	postim: '/postim',
+
+	createListing: '/krijoPostim',
+
 	api: {
 		getLatestPosts: '/api/getLatestPosts',
 		count: '/api/getLatestPosts/count',

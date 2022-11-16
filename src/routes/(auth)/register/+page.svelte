@@ -4,6 +4,7 @@
 	import InputField from '$lib/components/UI/Input/InputField.svelte';
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	export let form: ActionData;
 	let business: boolean | undefined = undefined;
@@ -205,13 +206,7 @@
 						bind:this={loginForm}
 						action={nav.login}
 						method="POST"
-						class=" w-full max-w-md"
-						use:enhance={() => {
-							return async ({ result }) => {
-								invalidateAll();
-								await applyAction(result);
-							};
-						}}
+						class="hidden w-full max-w-md"
 					>
 						<input type="text" name="email" value={form?.email} />
 						<input type="text" name="password" value={form?.password} />

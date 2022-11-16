@@ -59,9 +59,9 @@
 	>
 		{#if onIndex}
 			<div
-				class="absolute top-0 -z-10 h-[40vh] w-full bg-gradient-to-b from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
+				class="absolute top-0 -z-10 h-[40vh] w-full bg-gradient-to-b from-neutral-50 to-neutral-50 dark:from-neutral-900 dark:to-neutral-900"
 			/>
-			<div class="absolute -z-20 min-h-screen w-full bg-neutral-200 dark:bg-neutral-900 " />
+			<div class="absolute -z-20 min-h-screen w-full bg-neutral-50 dark:bg-neutral-900 " />
 		{/if}
 
 		<!-- {#if $page.url.pathname !== nav.register && $page.url.pathname !== nav.login} -->

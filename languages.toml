@@ -1,0 +1,3 @@
+[[language]]
+name = "svelte"
+roots = ["package.json"]

@@ -9,11 +9,8 @@ import { nav } from '$lib/userPreferences/nav';
 let redirectRegister = false;
 
 export const load: PageServerLoad = async ({ locals }) => {
-	if (redirectRegister && locals.user) {
+	if (locals.user) {
 		throw redirect(302, nav.index);
-	}
-	if (!redirectRegister && locals.user) {
-		throw redirect(302, nav.welcomeScreen);
 	}
 };
 
@@ -121,7 +118,7 @@ export const actions: Actions = {
 			// secure: process.env.NODE_ENV === 'production',
 		});
 
-		if (redirectRegister) {
+		if (isFromRegister) {
 			throw redirect(302, nav.welcomeScreen);
 		} else {
 			throw redirect(302, nav.index);

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { toggleBoolean } from '$lib/functions/generic';
 	import { locale } from '$lib/lang';
 	import Albania from '../logos/user/flags/Albania.svelte';
 	import UnitedStates from '../logos/user/flags/UnitedStates.svelte';
@@ -27,7 +26,7 @@
 	let visible: boolean = false;
 
 	const toggleVisible = () => {
-		visible = toggleBoolean(visible);
+		visible = !visible;
 	};
 
 	const notVisible = () => (visible = false);

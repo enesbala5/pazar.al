@@ -6,6 +6,7 @@
 	import Heart from '../logos/user/Heart.svelte';
 
 	export let card: boolean;
+	export let margin: boolean = true;
 
 	export let product: Post;
 	export let skeleton: boolean = false;
@@ -16,9 +17,11 @@
 </script>
 
 {#if card}
-	<section class="group relative mx-2 my-4 mb-12 min-h-[30vh] rounded-md">
+	<section
+		class="group relative  {margin ? 'mx-2 my-4 mb-12' : ''} min-h-[30vh] rounded-md md:min-h-0"
+	>
 		<div
-			class="absolute top-0 left-0 z-10 h-full w-full cursor-pointer overflow-hidden rounded-md"
+			class="absolute top-0 left-0 z-10 h-full w-full cursor-pointer overflow-hidden rounded-md md:static md:z-0 md:h-48"
 			on:click={gotoPost}
 			on:keydown={gotoPost}
 		>
@@ -28,24 +31,33 @@
 				class="transition-bezier h-full w-full object-cover group-active:scale-110 lg:group-hover:scale-110 lg:group-active:scale-100"
 			/>
 			<div
-				class="absolute bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent "
+				class=" bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent md:hidden"
 			/>
+			<div
+				class="hidden md:block right-2 top-0 z-20 bg-red-500 w-4 h-4"
+			>
+				<Heart classNames="h-5 dark:stroke-white w-5 opacity-80 stroke-neutral-800" />
+			</div>
 		</div>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
-			class=" absolute bottom-8 z-30 cursor-pointer px-4"
+			class="absolute bottom-8 z-30 cursor-pointer px-4 md:static md:mt-2 md:px-0"
 			on:click={gotoPost}
 			on:keydown={gotoPost}
 		>
-			<h3 class="text-xl">{product.title}</h3>
-			<p class="opacity-70">{product.description}</p>
+			<h3 class="text-xl text-neutral-50 dark:text-neutral-200 md:text-neutral-900 ">
+				{product.title}
+			</h3>
+			<p class="text-neutral-50 opacity-70 dark:text-neutral-200 md:text-neutral-900 ">
+				{product.description}
+			</p>
 		</div>
 
 		<div
-			class=" absolute bottom-0 left-2.5 z-30 translate-y-1/2 rounded-sm bg-neutral-900 p-1.5 font-medium"
+			class="absolute  bottom-0 left-2.5 z-30 w-fit translate-y-1/2 rounded-sm bg-neutral-50 p-1.5 font-medium dark:bg-neutral-900 md:static md:mt-2 md:translate-y-0 md:p-0"
 		>
-			<section class="flex items-center rounded-sm bg-indigo-600 py-0.5 px-2">
+			<section class="flex w-fit items-center rounded-sm bg-indigo-600 py-0.5 px-2">
 				<div aria-label="Currency Used" class="mr-2 opacity-80">
 					{#if product.eur}
 						<Euro classNames="fill-white h-2.5" />
@@ -53,13 +65,15 @@
 						<Lek classNames="fill-white h-2.5" />
 					{/if}
 				</div>
-				<p>{product.price.toLocaleString()}</p>
+				<p class="text-neutral-50">{product.price.toLocaleString()}</p>
 			</section>
 		</div>
 
 		<!-- Like Button -->
-		<div class="absolute bottom-0 z-30 flex w-full cursor-pointer items-center  justify-end p-4">
-			<Heart classNames="h-5 fill-white w-5 opacity-80 " />
+		<div
+			class="absolute bottom-0 z-30 flex w-full cursor-pointer items-center justify-end  p-4 md:hidden"
+		>
+			<Heart classNames="h-5 dark:stroke-white w-5 opacity-80 stroke-neutral-800" />
 		</div>
 	</section>
 {:else}

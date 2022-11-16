@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { scale } from 'svelte/transition';
-	import { toggleBoolean } from '$lib/functions/generic';
 	import { quartInOut } from 'svelte/easing';
 	import { afterNavigate } from '$app/navigation';
 
@@ -49,6 +48,11 @@
 	afterNavigate(() => {
 		notVisible();
 	});
+
+	export let classNames: string = '';
+	export let title: string,
+		description: string,
+		vertical: boolean = true;
 </script>
 
 <svelte:window on:resize={initPosition} />
@@ -57,21 +61,22 @@
 	<section
 		bind:offsetWidth={popoverSize}
 		role="dialog"
-		aria-labelledby="Title"
-		aria-describedby="Description"
-		aria-orientation="vertical"
+		aria-labelledby={title}
+		aria-describedby={description}
+		aria-orientation={vertical ? 'vertical' : 'horizontal'}
 		transition:scale={{ start: 0, duration: 200, easing: quartInOut }}
 		class=" 
+		{classNames} shadow-xl
 	{anchor === 'right' ? 'origin-top-right' : 'origin-top-left'}
-	wrapper z-50 rounded-md {bgColor} p-4"
+	wrapper z-50 overflow-hidden rounded-xl {bgColor}"
 		style="--popover-top: {`${bottom}px`};
 		--popover-left:
 	{`${anchor === 'right' ? right - popoverSize : left}px`}"
 	>
 		<div
 			class="
-			{direction === 'rtl' ? 'items-end' : 'items-start'}
-			flex flex-col space-y-2"
+			{direction === 'rtl' ? 'items-end text-right' : 'items-start text-left'}
+			flex flex-col"
 		>
 			<slot />
 		</div>
