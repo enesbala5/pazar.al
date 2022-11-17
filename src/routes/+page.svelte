@@ -15,7 +15,7 @@
 </svelte:head>
 
 <!-- Page Content -->
-<article class="mt-4 w-full px-4">
+<article class="mt-4 w-full bg-neutral-50 px-4 dark:bg-neutral-900">
 	<div class="lg:hidden">
 		<SearchForm />
 	</div>
@@ -49,21 +49,29 @@
 	<section class="mx-auto my-24 grid w-10/12 grid-cols-4 grid-rows-2 gap-4">
 		<!-- Left -->
 		<div
-			class="col-span-2 row-span-2 flex flex-col items-center justify-center rounded-xl bg-neutral-200"
+			class="col-span-2 row-span-2 flex flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img src="images/categories/confetti.png" class="h-48 w-48" alt="" />
 		</div>
 		<!-- Right -->
-		<div class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200">
+		<div
+			class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
+		>
 			<img src="images/categories/message.png" class="h-12 w-12 object-cover" alt="" />
 		</div>
-		<div class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200">
+		<div
+			class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
+		>
 			<img src="images/categories/video.png" class="h-12 w-12 object-cover" alt="" />
 		</div>
-		<div class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200">
+		<div
+			class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
+		>
 			<img src="images/categories/ball.png" class="h-12 w-12 object-cover" alt="" />
 		</div>
-		<div class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200">
+		<div
+			class="flex aspect-[4/3] flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
+		>
 			<img src="images/categories/fire.png" class="h-12 w-12 object-cover" alt="" />
 		</div>
 	</section>

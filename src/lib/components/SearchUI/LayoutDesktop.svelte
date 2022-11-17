@@ -1,0 +1,36 @@
+<script>
+	import { card } from '$lib/userPreferences/preferences';
+	import Grid from '../logos/user/filters/Grid.svelte';
+	import List from '../logos/user/filters/List.svelte';
+</script>
+
+<div class="flex w-fit overflow-hidden rounded-full bg-indigo-100 bg-opacity-20 dark:bg-indigo-600">
+	<button
+		on:click={() => {
+			card.set(true);
+		}}
+		class="
+					{$card ? 'bg-neutral-50' : 'bg-transparent'}
+					flex h-full w-1/2 grow items-center justify-center rounded-full px-4 py-1.5"
+	>
+		<div class="mx-2">
+			<Grid
+				classNames="
+							{$card ? 'stroke-indigo-700' : 'stroke-white'}
+							fill-transparent w-4 h-4 bg-transparent"
+			/>
+		</div>
+	</button>
+	<button
+		on:click={() => {
+			card.set(false);
+		}}
+		class="
+					{!$card ? 'bg-neutral-50' : 'bg-transparent'}
+					flex h-full w-1/2 grow items-center justify-center rounded-full  px-4 py-1.5"
+	>
+		<div class="mx-2">
+			<List classNames="{!$card ? 'fill-indigo-700' : 'fill-white'} w-4 h-4" />
+		</div>
+	</button>
+</div>

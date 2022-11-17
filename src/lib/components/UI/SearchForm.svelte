@@ -66,9 +66,7 @@
 			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
-				<Clear
-					classNames="dark:fill-white fill-white stroke-white w-5/6 h-5/6"
-				/>
+				<Clear classNames="dark:fill-white fill-white stroke-white w-5/6 h-5/6" />
 			</button>
 		{:else}
 			<button

@@ -33,9 +33,7 @@
 			<div
 				class=" bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent md:hidden"
 			/>
-			<div
-				class="hidden md:block right-2 top-0 z-20 bg-red-500 w-4 h-4"
-			>
+			<div class="right-2 top-0 z-20 hidden h-4 w-4 bg-red-500 md:block">
 				<Heart classNames="h-5 dark:stroke-white w-5 opacity-80 stroke-neutral-800" />
 			</div>
 		</div>
@@ -106,7 +104,7 @@
 							<Lek classNames="fill-white h-2.5" />
 						{/if}
 					</div>
-					<p class="text-sm">{product.price.toLocaleString()}</p>
+					<p class="text-sm text-white">{product.price.toLocaleString()}</p>
 				</section>
 				<Heart classNames="h-5 fill-white w-5 opacity-80 " />
 			</section>

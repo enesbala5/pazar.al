@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import { loadTranslations, locale } from '$lib/lang';
 
+	import { Svrollbar } from 'svrollbar';
 	import '../app.css';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
@@ -50,6 +51,8 @@
 		);
 	});
 </script>
+
+<Svrollbar />
 
 <section class={$darkMode ? 'dark' : ''}>
 	<div

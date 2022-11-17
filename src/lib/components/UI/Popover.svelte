@@ -25,6 +25,7 @@
 	let left: number;
 	let right: number;
 	let popoverSize: number;
+	let popoverHeight: number;
 
 	const initPosition = () => {
 		({ bottom, left, right } = element?.getBoundingClientRect() ?? {
@@ -34,8 +35,8 @@
 		});
 	};
 
+	$: visible, console.log('bottom', popoverHeight);
 	$: element, initPosition();
-	$: popoverSize, console.log(popoverSize);
 
 	/**
 	 * Toggle Popover Visibility
@@ -53,6 +54,8 @@
 	export let title: string,
 		description: string,
 		vertical: boolean = true;
+
+	export let usePopoverHeight: boolean = false;
 </script>
 
 <svelte:window on:resize={initPosition} />
@@ -60,6 +63,7 @@
 {#if visible}
 	<section
 		bind:offsetWidth={popoverSize}
+		bind:offsetHeight={popoverHeight}
 		role="dialog"
 		aria-labelledby={title}
 		aria-describedby={description}
@@ -69,7 +73,7 @@
 		{classNames} shadow-xl
 	{anchor === 'right' ? 'origin-top-right' : 'origin-top-left'}
 	wrapper z-50 overflow-hidden rounded-xl {bgColor}"
-		style="--popover-top: {`${bottom}px`};
+		style="--popover-top: {`${usePopoverHeight ? popoverHeight : bottom}px`};
 		--popover-left:
 	{`${anchor === 'right' ? right - popoverSize : left}px`}"
 	>

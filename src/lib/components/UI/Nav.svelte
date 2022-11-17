@@ -1,5 +1,6 @@
 <script lang="ts">
 	// Imports:
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 	import Heart from '../logos/user/Heart.svelte';
@@ -9,6 +10,11 @@
 	import Logout from '../auth/Logout.svelte';
 	import { darkMode } from '$lib/userPreferences/preferences';
 	import SearchForm from './SearchForm.svelte';
+	import type { PageUser } from '$lib/types/page';
+	import PopoverItem from './UserPanel/PopoverItem.svelte';
+	import DarkModeToggle from './UserPanel/DarkModeToggle.svelte';
+	import type { searchQuery } from '$lib/types/query';
+	import { getParams } from '$lib/functions/paramHandling';
 
 	export let onIndex: boolean;
 
@@ -22,10 +28,13 @@
 		visible = !visible;
 	};
 
+	let params: searchQuery = {};
+
+	afterNavigate(async () => {
+		params = getParams($page);
+	});
+
 	const notVisible = () => (visible = false);
-	import type { PageUser } from '$lib/types/page';
-	import PopoverItem from './UserPanel/PopoverItem.svelte';
-	import DarkModeToggle from './UserPanel/DarkModeToggle.svelte';
 
 	const user: PageUser | undefined = $page.data.user ?? undefined;
 </script>
@@ -62,7 +71,7 @@
 		{/if} -->
 	</section>
 	<div class="mx-8 hidden w-full lg:block">
-		<SearchForm />
+		<SearchForm searchInput={params.id !== undefined ? params.id : ''} {params} />
 	</div>
 
 	<div class="flex items-center ">
@@ -203,7 +212,7 @@
 						xmlns="http://www.w3.org/2000/svg"
 						class="
 						{visible ? 'rotate-180 ' : ''}
-						h-3 w-3 fill-neutral-900 transition-transform  ease-in-out dark:fill-neutral-100"
+						h-3 w-3 fill-neutral-900 transition-transform ease-in-out dark:fill-neutral-100"
 						viewBox="0 0 320 191.9"
 					>
 						<path
@@ -237,7 +246,9 @@
 					<!-- ! Chevron Down -->
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-3 w-3 fill-neutral-900"
+						class="
+						{visible ? 'rotate-180 ' : ''}
+						h-3 w-3 fill-neutral-900 transition-transform ease-in-out dark:fill-neutral-100"
 						viewBox="0 0 320 191.9"
 					>
 						<path
@@ -262,7 +273,7 @@
 				{visible}
 				on:notVisible={notVisible}
 				bgColor={onIndex
-					? 'bg-neutral-50 dark:bg-neutral-900'
+					? 'bg-neutral-50 dark:bg-neutral-800'
 					: 'bg-neutral-50 dark:bg-neutral-800'}
 				classNames="shadow-xl"
 			>
@@ -278,13 +289,15 @@
 				{/if}
 				{#if !user}
 					<PopoverItem>
-						<a href={nav.register}>Sign Up</a>
-					</PopoverItem>
-					<PopoverItem>
 						<a href={nav.login}>Log In</a>
 					</PopoverItem>
+					<PopoverItem>
+						<a href={nav.register}>Sign Up</a>
+					</PopoverItem>
 				{/if}
-				<DarkModeToggle />
+				<div class="px-4">
+					<DarkModeToggle />
+				</div>
 			</Popover>
 		</div>
 
