@@ -25,7 +25,7 @@
 	};
 
 	const searchProduct = (resetPage: boolean = true) => {
-		if (searchInput !== params.id) {
+		if (searchInput !== params.id && searchInput !== '') {
 			// update params object with local values
 			updateParamsField(resetPage);
 			insertParams($page, params);
@@ -56,7 +56,8 @@
 			on:blur={() => (searchBarFocused = false)}
 			bind:value={searchInput}
 			class="
-			w-full rounded-md border border-neutral-200 bg-neutral-50 px-5 py-3 shadow-sm outline-none focus:ring-0 dark:border-0 dark:bg-neutral-800"
+				{onIndex ? 'bg-neutral-50 dark:bg-neutral-800' : 'dark:bg-indigo-600'}
+				w-full rounded-md border border-neutral-200 px-5 py-3 shadow-sm outline-none focus:ring-0 dark:border-0"
 		/>
 		<!-- -->
 		{#if searchInput !== '' && !searchBarFocused && $page.url.pathname != '/'}
@@ -66,7 +67,10 @@
 			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
-				<Clear classNames="dark:fill-white fill-white stroke-white w-5/6 h-5/6" />
+				<Clear
+					classNames="
+				{onIndex ? '' : 'stroke-indigo-600 dark:stroke-neutral-50'} stroke-white w-5/6 h-5/6 "
+				/>
 			</button>
 		{:else}
 			<button
@@ -74,10 +78,10 @@
 				on:mousedown={() => searchProduct()}
 				class="
 			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
-			absolute right-2 top-1/2 z-50 flex aspect-square h-9  -translate-y-1/2 items-center justify-center rounded-md p-1"
+			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
 				<Search
-					classNames="dark:fill-white {onIndex ? 'fill-white' : 'fill-indigo-500'} w-2/3 h-2/3"
+					classNames="dark:fill-white {onIndex ? 'fill-white' : 'fill-indigo-600'} w-2/3 h-2/3"
 				/>
 			</button>{/if}
 	</section>
@@ -86,7 +90,7 @@
 		<!-- Filters -->
 		<section class="mt-3 flex space-x-3">
 			<div
-				class="flex w-full overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 dark:bg-indigo-600"
+				class="flex w-full overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 dark:bg-indigo-600 dark:bg-opacity-100"
 			>
 				<button
 					on:click={() => {
@@ -119,7 +123,7 @@
 			</div>
 
 			<div
-				class="flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 px-2 dark:bg-indigo-600"
+				class="flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 px-2 dark:bg-indigo-600 dark:bg-opacity-100"
 			>
 				<div class="mx-auto flex items-center">
 					<div id="Expensive" class="flex items-center">
@@ -135,7 +139,7 @@
 			</div>
 
 			<div
-				class=" flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 px-2 dark:bg-indigo-600"
+				class=" flex w-full items-center justify-center overflow-hidden rounded-md bg-indigo-100 bg-opacity-20 px-2 dark:bg-indigo-600 dark:bg-opacity-100"
 			>
 				<div class="flex items-center">
 					<Settings classNames="w-3.5 h-3.5 fill-white min-w-[0.875rem]" />

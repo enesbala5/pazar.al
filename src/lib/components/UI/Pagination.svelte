@@ -34,8 +34,10 @@
 
 {#if itemsAmount > 0}
 	<!-- Pagination -->
-	<section class="mt-6 ">
-		<div class="flex w-full items-center justify-between rounded-md bg-indigo-400 bg-opacity-20">
+	<section class="mt-3 ">
+		<div
+			class="flex w-full items-center justify-between rounded-md  bg-indigo-100 bg-opacity-20 text-white dark:bg-indigo-600 dark:bg-opacity-100"
+		>
 			<div class="flex w-full items-center justify-around px-2">
 				<!-- First Page -->
 				<button class="" on:click={firstPage}>
@@ -92,7 +94,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="mt-4 text-xs uppercase">
+	<section class="mt-4 text-xs uppercase text-white">
 		<p class="text-sm ">
 			<span class="text-xs opacity-80">Showing</span>
 			{`${pageNumber * itemsPerPage - itemsPerPage + 1} - ${

@@ -38,10 +38,10 @@
 <title>Pazar{params.id ? ' - ' + params.id : ''}</title>
 
 <div class="relative">
-	<div class="fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-900" />
+	<div class="fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-50 dark:bg-neutral-900" />
 
 	<div
-		class="absolute top-0 z-0 h-[40vh] w-full rounded-xl bg-gradient-to-b from-indigo-600 to-neutral-50 dark:from-indigo-700 dark:to-neutral-900"
+		class="absolute top-0 z-0 h-[500px] w-full rounded-xl bg-gradient-to-b from-indigo-600 to-neutral-50 dark:from-indigo-700 dark:to-neutral-900 lg:h-[250px]"
 	/>
 
 	<div class="absolute top-0 w-full">
@@ -81,17 +81,17 @@
 			</section>
 		</article>
 		<article
-			class="flex w-full flex-col justify-between space-x-4 lg:mx-auto lg:w-11/12 lg:flex-row"
+			class="flex w-full flex-col justify-between lg:mx-auto lg:w-11/12 lg:flex-row lg:space-x-4"
 		>
 			<!-- ! FILTER -->
 			<section
-				class="flex w-2/12 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800"
+				class=" hidden items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800 lg:flex lg:w-2/12"
 			>
 				<p>FILTERING</p>
 			</section>
 			<!-- * end -->
 			<!-- ? MAIN -->
-			<section class=" grid w-8/12  {$card ? 'grid-cols-3' : 'grid-cols-1'}">
+			<section class="grid lg:w-8/12  {$card ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-1'}">
 				<!-- * end -->
 				{#await getLatestPosts(params)}
 					{#each Array(5) as _, i}
@@ -112,7 +112,7 @@
 			<!-- ? END -->
 			<!-- ! ADS -->
 			<section
-				class="flex w-2/12 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800"
+				class="flex items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800 lg:w-2/12"
 			>
 				<script
 					async

@@ -46,7 +46,7 @@
 			<Logo classNames="dark:fill-neutral-50 fill-neutral-900 w-full h-full" />
 		</a>
 		<!-- ! Search Form -->
-		<!-- {#if returnUrl !== undefined}
+		{#if returnUrl !== undefined}
 			<button
 				on:click={() => {
 					history.back();
@@ -68,7 +68,7 @@
 					/>
 				</svg>
 			</button>
-		{/if} -->
+		{/if}
 	</section>
 	<div class="mx-8 hidden w-full lg:block">
 		<SearchForm searchInput={params.id !== undefined ? params.id : ''} {params} />
