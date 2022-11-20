@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type { Post } from '@prisma/client';
+	import type { ProductItem } from '$lib/types/product';
 	import Euro from '../logos/user/currencies/Euro.svelte';
 	import Lek from '../logos/user/currencies/Lek.svelte';
 	import Heart from '../logos/user/Heart.svelte';
@@ -8,17 +8,19 @@
 	export let card: boolean;
 	export let margin: boolean = true;
 
-	export let product: Post;
+	export let product: ProductItem;
 	export let skeleton: boolean = false;
 
 	const gotoPost = () => {
-		goto(`/postim/${product.pid}`);
+		if (!product.disabled) {
+			goto(`/postim/${product.pid}`);
+		}
 	};
 </script>
 
 {#if card}
 	<section
-		class="group relative  {margin ? 'mx-2 my-4 mb-12' : ''} min-h-[30vh] rounded-md md:min-h-0"
+		class="group relative {margin ? 'mx-2 my-4 mb-12' : ''} min-h-[30vh] rounded-md md:min-h-0"
 	>
 		<div
 			class="absolute top-0 left-0 z-10 h-full w-full cursor-pointer overflow-hidden rounded-md md:static md:z-0 md:h-48"

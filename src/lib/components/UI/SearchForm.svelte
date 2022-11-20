@@ -50,6 +50,7 @@
 <form on:submit|preventDefault={() => searchProduct()} class="">
 	<section class="relative">
 		<input
+			tabindex="32767"
 			bind:this={searchBar}
 			type="text"
 			on:focus={() => (searchBarFocused = true)}

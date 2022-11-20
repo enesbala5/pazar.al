@@ -36,7 +36,8 @@
 
 	const notVisible = () => (visible = false);
 
-	const user: PageUser | undefined = $page.data.user ?? undefined;
+	let user: PageUser | undefined = $page.data.user ?? undefined;
+	$: user = $page.data.user;
 </script>
 
 <nav class="flex w-full items-center justify-between py-4 px-6 lg:mx-auto lg:w-11/12 lg:px-0">
@@ -275,7 +276,7 @@
 				bgColor={onIndex
 					? 'bg-neutral-50 dark:bg-neutral-800'
 					: 'bg-neutral-50 dark:bg-neutral-800'}
-				classNames="shadow-xl"
+				classNames="shadow-2xl"
 			>
 				{#if user}
 					<PopoverItem>

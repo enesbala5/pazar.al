@@ -3,13 +3,14 @@ export const nav = {
 	kerkim: '/kerkim',
 	postim: '/postim',
 
-	createListing: '/krijoPostim',
+	createListing: '/createPost',
+	promotion: '/promotion',
 
 	api: {
 		getLatestPosts: '/api/getLatestPosts',
 		count: '/api/getLatestPosts/count',
 		getPost: '/api/getPost',
-		createPost: '/api/cretePost',
+		createPost: '/api/createPost',
 	},
 	suport: '/suport',
 

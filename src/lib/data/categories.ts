@@ -1,0 +1,17 @@
+export default [
+	'Makina',
+	'Pjese Kembimi',
+	'Rroba',
+	'Shtepi',
+	'Paisje Elektronike',
+	'Biciklete',
+	'Motocikleta',
+	'Bicikleta',
+	'Servis per Makina',
+	'Mobilje',
+	'Materiale Ndertimi',
+	'Mjete per Ndertim',
+	'Ambient Biznesi',
+	'Telefona Celular',
+	'Servis per Telefona',
+];

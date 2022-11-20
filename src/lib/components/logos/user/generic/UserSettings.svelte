@@ -13,7 +13,7 @@
 			stroke="#fff"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			stroke-width="1.5"
+			stroke-width="2"
 		/>
 		<path
 			id="Path_10"
@@ -24,7 +24,7 @@
 			stroke="#fff"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			stroke-width="1.5"
+			stroke-width="2"
 		/>
 	</g>
 </svg>

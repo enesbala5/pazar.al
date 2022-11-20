@@ -14,21 +14,35 @@
 
 	export let visible: boolean = false;
 
+	function typeAction(node: any) {
+		node.type = type;
+	}
+
 	let passwordValue: string;
+
+	export const focus = () => {
+		el.focus();
+	};
+	export const blur = () => {
+		el.blur();
+	};
+
+	let el: HTMLInputElement;
 </script>
 
 {#if hidden}
-	<input {type} {name} id={name} {value} disabled hidden aria-hidden="true" />
+	<input bind:this={el} {type} {name} id={name} {value} disabled hidden aria-hidden="true" />
 {:else}
 	<div class="relative {classNames}">
 		{#if type === 'password'}
 			{#if visible}
 				<input
+					bind:this={el}
 					type="text"
 					id={name}
 					{name}
 					bind:value={passwordValue}
-					class="border-1 peer block w-full appearance-none rounded-lg border-neutral-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-neutral-900 focus:border-indigo-600 focus:outline-none focus:ring-0 dark:border-neutral-600 dark:text-white dark:focus:border-indigo-500"
+					class="border-1 inputElement dark:inputElementDark peer block w-full appearance-none rounded-lg border-neutral-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-neutral-900 focus:border-indigo-600 focus:outline-none focus:ring-0 dark:border-neutral-600 dark:text-white dark:focus:border-indigo-500"
 					placeholder=" "
 				/>
 				<label
@@ -39,11 +53,12 @@
 			{/if}
 			{#if !visible}
 				<input
+					bind:this={el}
 					type="password"
 					id={name}
 					{name}
 					bind:value={passwordValue}
-					class="border-1 peer block w-full appearance-none rounded-lg border-neutral-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-neutral-900 focus:border-indigo-600 focus:outline-none focus:ring-0 dark:border-neutral-600 dark:text-white dark:focus:border-indigo-500"
+					class="border-1 inputElement dark:inputElementDark peer block w-full appearance-none rounded-lg border-neutral-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-neutral-900 focus:border-indigo-600 focus:outline-none focus:ring-0 dark:border-neutral-600 dark:text-white dark:focus:border-indigo-500"
 					placeholder=" "
 				/>
 				<label
@@ -101,9 +116,11 @@
 		{#if type !== 'password'}
 			{#if !disabled}
 				<input
-					{type}
+					bind:this={el}
+					use:typeAction
 					id={name}
 					{name}
+					bind:value
 					class="border-1 inputElement dark:inputElementDark peer block w-full appearance-none rounded-lg border-neutral-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-neutral-900 focus:border-indigo-600 focus:outline-none focus:ring-0 dark:border-neutral-600 dark:text-white dark:autofill:text-white dark:focus:border-indigo-500"
 					placeholder=" "
 				/>
@@ -115,7 +132,8 @@
 			{/if}
 			{#if disabled}
 				<input
-					{type}
+					bind:this={el}
+					use:typeAction
 					id={name}
 					{name}
 					{value}

@@ -37,7 +37,7 @@
 		<section class="flex w-full max-w-lg flex-col space-y-4 px-4 md:px-0">
 			<div
 				class="
-				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:bg-neutral-800"
+				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900"
 				on:click={() => {
 					business = false;
 					selectedType = true;
@@ -50,7 +50,7 @@
 				<div aria-roledescription="wrapper" class="flex w-full flex-row items-center justify-start">
 					<!-- User Icon -->
 					<div
-						class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-700 dark:to-neutral-700"
+						class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@
 			</div>
 			<div
 				class="
-				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100  bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:bg-neutral-800"
+				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900"
 				on:click={() => {
 					business = true;
 					selectedType = true;
@@ -106,7 +106,7 @@
 				>
 					<!-- Business Icon -->
 					<div
-						class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-700 dark:to-neutral-700"
+						class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
