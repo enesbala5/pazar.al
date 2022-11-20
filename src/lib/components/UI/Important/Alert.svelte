@@ -1,7 +1,7 @@
 <script lang="ts">
 	type AlertType = 'default' | 'info' | 'error' | 'danger' | 'success' | 'warning';
 
-	export let type: AlertType;
+	export let type: AlertType = 'default';
 	export let useSlot: boolean = false;
 
 	export let title: string = '',

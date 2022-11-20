@@ -6,7 +6,7 @@
 
 	export let title: string = '',
 		message: string = '';
-	
+
 	export let margin: boolean = false;
 
 	let defineClassByType = () => {
@@ -32,7 +32,9 @@
 
 <div
 	class="
-	{classNames} flex w-fit items-center space-x-2 rounded-full p-2 px-4 py-2 text-sm mr-2 "
+	{classNames} {margin
+		? 'mb-2 mr-2'
+		: ''} flex w-fit items-center space-x-2 rounded-full p-2 px-4 py-2 text-sm "
 >
 	{#if !useSlot}
 		<p class=" font-medium">

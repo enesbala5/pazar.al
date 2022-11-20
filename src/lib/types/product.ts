@@ -12,6 +12,7 @@ export interface Product {
 }
 
 export interface ProductTag {
+	id: number;
 	name: string;
 	value: string;
 }
