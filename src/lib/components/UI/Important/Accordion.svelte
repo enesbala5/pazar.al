@@ -20,12 +20,12 @@
 </script>
 
 <div
-	class=" my-4 rounded-xl border border-neutral-100 shadow-sm dark:shadow-none dark:border-neutral-800"
-	on:click={toggleVisible}
-	on:keydown={toggleVisible}
+	class=" my-4 rounded-xl border border-neutral-100 shadow-sm dark:border-neutral-800 dark:shadow-none"
 >
 	<!-- H1 and Chevron -->
 	<div
+		on:click={toggleVisible}
+		on:keydown={toggleVisible}
 		class="flex w-full cursor-pointer items-center justify-between rounded-xl p-4 hover:bg-neutral-100  dark:hover:bg-neutral-800"
 	>
 		<h1 class=" text-xl font-medium">
