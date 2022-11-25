@@ -15,4 +15,5 @@ export interface ProductTag {
 	id: number;
 	name: string;
 	value: string;
+	required?: boolean;
 }

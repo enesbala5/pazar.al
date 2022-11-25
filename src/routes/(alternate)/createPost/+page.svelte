@@ -3,6 +3,7 @@
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import Alert from '$lib/components/UI/Important/Alert.svelte';
 	import Badge from '$lib/components/UI/Important/Badge.svelte';
+	import Accordion from '$lib/components/UI/Important/Accordion.svelte';
 	// Icons
 	import Euro from '$lib/components/logos/user/currencies/Euro.svelte';
 	import Lek from '$lib/components/logos/user/currencies/Lek.svelte';
@@ -13,14 +14,14 @@
 	import categories from '$lib/data/categories';
 	import cities from '$lib/data/cities';
 	import countries from '$lib/data/countries';
+	import { nav } from '$lib/userPreferences/nav';
 	// *FUNCTIONS
 	import { getTagsByCategory, type TagInCategory } from '$lib/data/tagsByCategory';
+	import { getCarModelsByBrand } from '$lib/fetching/carsByBrand';
 	import { faqjaParamParse } from '$lib/functions/conversions';
 	// Types
 	import type { Product, ProductTag } from '$lib/types/product';
 	import type { Selection } from '$lib/types/selection';
-
-	import Accordion from '$lib/components/UI/Important/Accordion.svelte';
 
 	let eur: boolean = false;
 
@@ -35,7 +36,7 @@
 	let product: Product = {
 		title: title !== '' ? title : 'Title',
 		description: description !== '' ? description : 'Description',
-		price: faqjaParamParse(price),
+		price: faqjaParamParse(price, 0),
 		eur,
 		city: 'Tirane',
 		country: 'Albania',
@@ -46,7 +47,7 @@
 	$: product = {
 		title: title !== '' ? title : 'Title',
 		description: description !== '' ? description : 'Description',
-		price: faqjaParamParse(price),
+		price: faqjaParamParse(price, 0),
 		eur,
 		city: 'Tirane',
 		country: 'Albania',
@@ -75,12 +76,10 @@
 		return value != null && value !== '';
 	}
 
-	const addRequiredTag = (event: any) => {
-		errors = {};
+	const manageRequiredTag = (event: any) => {
 		const formData = new FormData(event.target);
-		// console.log(formData);
 
-		let error_flag = false;
+		let showError: boolean = false;
 		let requiredTagText, requiredTagValue;
 		let isSelectOption: boolean = false;
 
@@ -88,10 +87,18 @@
 			const [key, value] = field;
 
 			if (key === 'requiredTagText') {
-				requiredTagText = value;
+				if (value === '' || !value) {
+					showError = true;
+				} else {
+					requiredTagText = value;
+				}
 			}
 			if (key === 'requiredTagValue') {
-				requiredTagValue = value;
+				if (value === '' || !value) {
+					showError = true;
+				} else {
+					requiredTagValue = value;
+				}
 			}
 			if (key === 'isSelectOption') {
 				if (value === 'true') {
@@ -100,22 +107,43 @@
 			}
 		}
 
-		if (!error_flag) {
+		if (!showError) {
 			let parsedTagText = String(requiredTagText);
 			let parsedTagValue = String(requiredTagValue);
 
 			if (isSelectOption) {
 				let selectResponse = JSON.parse(parsedTagValue);
 				console.log(selectResponse);
-				tags = [
-					...tags,
-					{ id: currentId, name: parsedTagText, value: selectResponse?.value ?? '' },
-				];
+				submitRequiredForm(parsedTagText, selectResponse.value);
 			} else {
-				tags = [...tags, { id: currentId, name: parsedTagText, value: parsedTagValue }];
+				submitRequiredForm(parsedTagText, parsedTagValue);
 			}
+		}
+	};
+
+	const submitRequiredForm = (text: string, value: string | number) => {
+		if (!text || typeof text !== 'string' || !value) {
+			// ERROR - invalid input
+			console.error('Invalid input');
+			return;
+		}
+		const alreadyExists = (tag: ProductTag) => tag.name === text;
+
+		let tagIndex = tags.findIndex(alreadyExists);
+
+		if (tagIndex !== -1) {
+			// basically if tag has already been inserted
+			tags[tagIndex].value = String(value);
+		} else {
+			tags = [...tags, { id: currentId, name: text, value: String(value), required: true }];
 			currentId++;
 		}
+	};
+
+	const clearRequiredInformationTag = (text: string) => {
+		const alreadyExists = (tag: ProductTag) => tag.name !== text;
+
+		tags = tags.filter(alreadyExists);
 	};
 
 	// Removing Tag
@@ -126,25 +154,48 @@
 	};
 
 	let tags: ProductTag[] | [] = [];
+	let optionalTags: ProductTag[] | [] = [];
 
 	let tagText: string;
 	let tagValue: string;
 
+	// Functions of AddTag input - binded to it
 	let focusInput: any, blurInput: any;
-
-	// let showManageTags: boolean = false;
 
 	let requiredTags: TagInCategory[] = [];
 
 	$: if (category?.value !== undefined) {
 		console.log('updating required');
 		requiredTags = getTagsByCategory(category?.value) ?? [];
-
-		// showManageTags = true;
 		makeVisible();
 	}
 
+	const addRecommendedTagToList = (text: string) => {
+		const alreadyExists = (tag: ProductTag) => tag.name === text;
+
+		let optionalTagIndex = optionalTags.findIndex(alreadyExists);
+
+		if (optionalTagIndex !== -1) {
+			optionalTags = optionalTags.filter(alreadyExists);
+		} else {
+			optionalTags = [{ id: currentId, name: text, value: '' }, ...optionalTags];
+			currentId++;
+		}
+	};
+
 	let makeVisible: any;
+
+	let selectedCarBrand: string = '';
+
+	let carModelsByBrand: string[];
+
+	const getSelectedCarBrand = (tags: ProductTag[]) => {
+		const tagContainingCarBrand = tags.find((tag) => tag.name === 'Lloji / Marka');
+		return tagContainingCarBrand?.value ?? '';
+	};
+
+	$: selectedCarBrand = getSelectedCarBrand(tags);
+	$: carModelsByBrand = getCarModelsByBrand(selectedCarBrand);
 </script>
 
 <title>Krijo nje Postim - Pazar</title>
@@ -153,7 +204,12 @@
 	<article class="mx-auto mt-12 flex w-10/12 justify-between space-x-8">
 		<section class="w-2/3">
 			<h1 class="text-4xl font-medium">Create a Post</h1>
-			<h3 class="mt-2">Every post on Pazar.al is free, with the option of promotion.</h3>
+			<h3 class="mt-2">
+				Every post on Pazar.al is free, with the option of <a
+					href={nav.promotion}
+					class="underlinedLink">promotion.</a
+				>
+			</h3>
 			<!-- <h3 class="mt-2">Cdo postim ne MerrJep eshte falas, me opsionin e promovimit.</h3> -->
 
 			<form action="?/createPost" method="POST" class="mt-12">
@@ -178,10 +234,12 @@
 					<div
 						class="box-border flex w-1/2 items-center justify-between rounded-lg border border-neutral-300 pl-2.5  dark:border-neutral-600"
 					>
-						<p class="pointer-events-none text-sm text-neutral-500">Currency:</p>
+						<p class="pointer-events-none text-sm text-neutral-500 dark:text-neutral-400">
+							Currency:
+						</p>
 
 						<div
-							class="inset-1 box-border flex w-2/3 items-center space-x-2 rounded-l-lg  border-l fill-neutral-800 py-0.5 px-2 shadow-sm dark:fill-neutral-200"
+							class="inset-1 box-border flex w-2/3 items-center space-x-2 rounded-l-lg  border-l border-neutral-300 fill-neutral-800 py-0.5 px-2 shadow-sm dark:border-neutral-600 dark:fill-neutral-200"
 						>
 							<div
 								on:click={() => (eur = false)}
@@ -189,7 +247,7 @@
 								class="
 							{!eur
 									? 'border-indigo-600 bg-indigo-600 fill-indigo-50 hover:border-indigo-500 hover:bg-indigo-500'
-									: 'border-neutral-300 bg-neutral-100 hover:bg-neutral-200  dark:border-neutral-600 dark:hover:bg-neutral-800'}
+									: 'border-neutral-300 bg-neutral-100 hover:bg-neutral-200 dark:border-neutral-600  dark:bg-neutral-900 dark:hover:bg-neutral-800'}
 							my-1 box-border flex h-full w-full items-center justify-center overflow-hidden rounded-lg border py-1.5"
 							>
 								<Lek classNames="w-7 h-5" />
@@ -200,7 +258,7 @@
 								class="
 							{eur
 									? 'border-indigo-600 bg-indigo-600 fill-indigo-50 hover:border-indigo-500 hover:bg-indigo-500'
-									: 'border-neutral-300 bg-neutral-100 hover:bg-neutral-200  dark:border-neutral-600 dark:hover:bg-neutral-800'}
+									: 'border-neutral-300 bg-neutral-100 hover:bg-neutral-200 dark:border-neutral-600  dark:bg-neutral-900 dark:hover:bg-neutral-800'}
 							my-1 box-border flex h-full w-full items-center justify-center rounded-lg border py-1.5"
 							>
 								<!-- surrounding div because it was 1 unit bigger than the Lek - this is to make it equal -->
@@ -231,55 +289,104 @@
 				</div>
 				<hr class="my-4 border-neutral-100 dark:border-neutral-800" />
 
-				<Accordion title="Manage Tags" bind:makeVisible>
+				<!-- Tags Management -->
+				<Accordion title="Post Information" bind:makeVisible>
 					<!-- ? Inserting Tags -->
 					<div class=" ">
-						<p class="mb-2 text-sm font-medium">* Based on Category:</p>
-						<hr class="my-2 border-neutral-200 dark:border-neutral-800" />
-
+						{#if requiredTags.length < 1}
+							<p class="mb-2 text-sm">Please select a category.</p>
+							<hr class="my-2 border-neutral-200 dark:border-neutral-800" />
+						{/if}
 						{#if requiredTags.length > 0}
 							{#each requiredTags as requiredTag}
-								<form on:submit|preventDefault={addRequiredTag} class="my-4 ">
-									<div class="flex items-center justify-center space-x-4">
-										<div class="w-full">
+								{#if requiredTag.name !== 'Other'}
+									<form
+										on:submit|preventDefault={manageRequiredTag}
+										class="mb-4"
+										name={requiredTag.name}
+									>
+										<div class="flex items-center justify-center">
 											<input
 												type="hidden"
 												value={requiredTag.name}
 												name="requiredTagText"
 												class="hidden"
 											/>
-											<InputField
-												name="Placeholder"
-												title="Tag Name"
-												type="text"
-												value={requiredTag.name}
-												disabled
+											<div class="w-full">
+												{#if requiredTag.options}
+													<input type="hidden" value={true} name="isSelectOption" class="hidden" />
+													<Select
+														items={requiredTag.options}
+														justValue
+														on:change={(event) =>
+															submitRequiredForm(requiredTag.name, event.detail.value)}
+														on:clear={() => clearRequiredInformationTag(requiredTag.name)}
+														name="requiredTagValue"
+														placeholder={requiredTag.name}
+													/>
+												{:else}
+													{#if requiredTag.name === 'Modeli'}
+														{#key carModelsByBrand}
+															<Select
+																disabled={selectedCarBrand === ''}
+																items={carModelsByBrand}
+																justValue
+																on:change={(event) =>
+																	submitRequiredForm(requiredTag.name, event.detail.value)}
+																on:clear={() => clearRequiredInformationTag(requiredTag.name)}
+																name="requiredTagValue"
+																placeholder={requiredTag.name}
+															/>
+														{/key}
+													{/if}
+													{#if requiredTag.name !== 'Modeli'}
+														<InputField
+															title={requiredTag.name}
+															type="text"
+															name="requiredTagValue"
+															on:change={(event) =>
+																submitRequiredForm(requiredTag.name, event.detail.value)}
+															on:clear={() => clearRequiredInformationTag(requiredTag.name)}
+														/>
+													{/if}
+												{/if}
+											</div>
+										</div>
+									</form>
+								{/if}
+								{#if requiredTag.name === 'Other'}
+									<p class="mt-2 text-lg font-medium">Other</p>
+									<hr class="my-2 border-neutral-200 dark:border-neutral-800" />
+									<div class="mt-2 flex flex-wrap ">
+										{#each requiredTag.options ?? [] as recommended}
+											<Badge
+												margin
+												type="toggle"
+												sm
+												message={String(recommended)}
+												useAction={true}
+												on:badgeAction={() => addRecommendedTagToList(String(recommended))}
 											/>
-										</div>
-										<div class="w-full">
-											{#if requiredTag.options}
-												<input type="hidden" value={true} name="isSelectOption" class="hidden" />
-												<Select
-													items={requiredTag.options}
-													justValue
-													name="requiredTagValue"
-													placeholder="{requiredTag.name} Options"
-												/>
-											{:else}
-												<InputField
-													title="Tag Value"
-													type="text"
-													name="requiredTagValue"
-													bind:value={tagValue}
-												/>
-											{/if}
-										</div>
+										{/each}
 									</div>
-									<button class=" buttonSmall mt-2 whitespace-nowrap">Add Tag</button>
-								</form>
+								{/if}
 							{/each}
 						{/if}
-						<form on:submit|preventDefault={addTag} class=" my-4">
+						<div>
+							{#each optionalTags as optionalTag}
+								<InputField
+									title={optionalTag.name}
+									type="text"
+									name="optionalTagValue"
+									on:change={(event) => submitRequiredForm(optionalTag.name, event.detail.value)}
+									on:clear={() => clearRequiredInformationTag(optionalTag.name)}
+								/>
+							{/each}
+						</div>
+
+						<!-- ! Add Tag -->
+						<!-- ! ------------------------------------ -->
+						<!-- <form on:submit|preventDefault={addTag} class=" my-4">
 							<div class="flex items-center justify-center space-x-4">
 								<div class="w-full">
 									<InputField
@@ -296,12 +403,14 @@
 								</div>
 							</div>
 							<button class=" buttonSmall mt-2 whitespace-nowrap">Add Tag</button>
-						</form>
+						</form> -->
+						<!-- ! ------------------------------------ -->
 					</div>
 					<!-- ? end -->
 
-					<!-- * Editing Tags -->
-					<div class="">
+					<!-- ! Editing Tags -->
+					<!-- ! ------------------------------------ -->
+					<!-- <div class="">
 						<p class="mb-2 text-sm font-medium">My Tags:</p>
 						<hr class="my-2 mb-4 border-neutral-200 dark:border-neutral-800" />
 
@@ -335,8 +444,8 @@
 							{/each}
 						</div>
 
-						<!-- * end -->
-					</div>
+					</div> -->
+					<!-- ! ------------------------------------ -->
 				</Accordion>
 			</form>
 			<div>

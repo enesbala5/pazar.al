@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
 	export let hidden: boolean = false;
 
 	export let title: string;
@@ -9,6 +12,7 @@
 
 	export let required: boolean = false;
 	export let value: string = '';
+	let valueCache: string = '';
 
 	export let disabled = false;
 
@@ -28,6 +32,20 @@
 	};
 
 	let el: HTMLInputElement;
+
+	const checkIfChanged = () => {
+		if (value !== valueCache)
+			dispatch('change', {
+				value,
+			});
+	};
+
+	const checkIfClear = () => {
+		if (value === '' || value === undefined) dispatch('clear');
+	};
+
+	$: value, checkIfChanged();
+	$: value, checkIfClear();
 </script>
 
 {#if hidden}

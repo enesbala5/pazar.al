@@ -77,7 +77,7 @@ let tags: TagsByCategory = {
 		},
 		// Targa
 		{
-			name: 'Targa/E doganuar në:',
+			name: 'Targa/E doganuar në',
 			required: true,
 			options: ['Kosove', 'Maqedoni', 'Shqiperi', 'Te huaja'],
 		},
@@ -114,6 +114,10 @@ let tags: TagsByCategory = {
 		{
 			name: 'VIN',
 		},
+		{
+			name: 'Other',
+			options: ['Max Speed', 'Color', 'Company Values'],
+		},
 	],
 };
 
@@ -122,8 +126,10 @@ export const getTagsByCategory = (categoryName: string) => {
 		if (categoryName in tags) {
 			return tags[categoryName];
 		} else {
-			return null;
+			return [];
 		}
+	} else {
+		return [];
 	}
 
 	// let models = getCarModelsByBrand('BMW');

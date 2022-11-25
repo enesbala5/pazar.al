@@ -52,7 +52,6 @@
 		{/if}
 	</div>
 
-	<!-- Tags Management -->
 	{#if visible}
 		<div class=" flex flex-col space-y-4 rounded-xl p-4 " transition:slide={{ duration: 150 }}>
 			<slot />
