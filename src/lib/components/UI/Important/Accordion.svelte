@@ -4,6 +4,9 @@
 
 	export let showChevron: boolean = true;
 
+	type AccordionSize = 'normal' | 'compressed';
+	export let size: AccordionSize = 'normal';
+
 	export let title: string;
 
 	export const makeNotVisible = () => {
@@ -20,20 +23,28 @@
 </script>
 
 <div
-	class=" my-4 rounded-xl border border-neutral-100 shadow-sm dark:border-neutral-800 dark:shadow-none"
+	class="
+	{size === 'normal'
+		? 'rounded-xl border border-neutral-100 shadow-sm dark:border-neutral-800 dark:shadow-none'
+		: ''}
+	my-4 "
 >
 	<!-- H1 and Chevron -->
 	<div
 		on:click={toggleVisible}
 		on:keydown={toggleVisible}
-		class="flex w-full cursor-pointer items-center justify-between rounded-xl p-4 hover:bg-neutral-100  dark:hover:bg-neutral-800"
+		class="
+		{size === 'normal'
+			? 'rounded-xl p-4 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+			: ' border-b-2 border-neutral-200 hover:border-neutral-300 dark:border-neutral-600 dark:hover:border-neutral-500'}
+		flex w-full cursor-pointer items-center justify-between   "
 	>
-		<h1 class=" text-xl font-medium">
+		<h6 class=" {size == 'normal' ? 'text-xl' : 'text-base'} font-medium">
 			{title}
-		</h1>
+		</h6>
 
 		{#if showChevron}
-			<div class=" p-2">
+			<div class="p-2">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="
@@ -53,7 +64,12 @@
 	</div>
 
 	{#if visible}
-		<div class=" flex flex-col space-y-4 rounded-xl p-4 " transition:slide={{ duration: 150 }}>
+		<div
+			class=" 
+		{size === 'normal' ? 'p-4' : ''}
+		flex flex-col space-y-4 rounded-xl  "
+			transition:slide={{ duration: 150 }}
+		>
 			<slot />
 		</div>
 	{/if}

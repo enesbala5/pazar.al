@@ -1,7 +1,15 @@
 <script lang="ts">
 	import AddRemove from '$lib/components/logos/user/AddRemove.svelte';
 	import { createEventDispatcher } from 'svelte';
-	type BadgeType = 'default' | 'info' | 'error' | 'danger' | 'success' | 'warning' | 'toggle';
+	type BadgeType =
+		| 'default'
+		| 'info'
+		| 'error'
+		| 'danger'
+		| 'success'
+		| 'warning'
+		| 'toggle'
+		| 'link';
 
 	export let type: BadgeType = 'default';
 	export let useSlot: boolean = false;
@@ -14,6 +22,9 @@
 	let defineClassByType = (inputType: BadgeType) => {
 		if (inputType === 'default') {
 			return 'bg-neutral-100 border border-neutral-200 dark:border-neutral-200 dark:bg-transparent text-neutral-700 dark:text-neutral-200';
+		}
+		if (inputType === 'link') {
+			return 'bg-neutral-100 hover:border-neutral-300 dark:hover-neutral-100 hover:bg-neutral-200 border border-neutral-200 dark:border-neutral-200 dark:bg-transparent text-neutral-700 dark:text-neutral-200';
 		}
 		if (inputType === 'success') {
 			return 'bg-green-100 border border-green-200 dark:border-green-500 dark:bg-transparent text-green-700 dark:text-green-500';
@@ -52,10 +63,10 @@
 	const toggleTypeClassManagement = (toggled: boolean, hovering: boolean) => {
 		if (type === 'toggle') {
 			if (hovering) {
-				classNames = toggled ? defineClassByType('i') : defineClassByType('info');
+				classNames = toggled ? defineClassByType('info') : defineClassByType('link');
 				return;
 			} else {
-				classNames = toggled ? defineClassByType('info') : defineClassByType('default');
+				classNames = toggled ? defineClassByType('info') : defineClassByType('link');
 				return;
 			}
 		} else {
@@ -69,6 +80,8 @@
 <div
 	on:mouseenter={() => (hovering = true)}
 	on:mouseleave={() => (hovering = false)}
+	on:click={dispatchAction}
+	on:keydown={dispatchAction}
 	class="
 	{classNames}
 	{margin ? 'mb-2 mr-2' : ''}
@@ -77,11 +90,7 @@
 		flex w-fit items-center  rounded-full  "
 >
 	{#if !useSlot}
-		<div
-			class="flex items-center justify-center space-x-2"
-			on:click={dispatchAction}
-			on:keydown={dispatchAction}
-		>
+		<div class="flex items-center justify-center space-x-2">
 			<p class=" font-medium">
 				{title} <span class="font-normal">{message}</span>
 			</p>

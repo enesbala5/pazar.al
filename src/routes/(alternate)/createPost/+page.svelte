@@ -172,13 +172,14 @@
 
 	const addRecommendedTagToList = (text: string) => {
 		const alreadyExists = (tag: ProductTag) => tag.name === text;
+		const removeExisting = (tag: ProductTag) => tag.name !== text;
 
 		let optionalTagIndex = optionalTags.findIndex(alreadyExists);
 
 		if (optionalTagIndex !== -1) {
-			optionalTags = optionalTags.filter(alreadyExists);
+			optionalTags = optionalTags.filter(removeExisting);
 		} else {
-			optionalTags = [{ id: currentId, name: text, value: '' }, ...optionalTags];
+			optionalTags = [...optionalTags, { id: currentId, name: text, value: '' }];
 			currentId++;
 		}
 	};
@@ -372,7 +373,7 @@
 								{/if}
 							{/each}
 						{/if}
-						<div>
+						<div class="mt-4">
 							{#each optionalTags as optionalTag}
 								<InputField
 									title={optionalTag.name}
@@ -458,33 +459,38 @@
 			<div class="mt-4">
 				<ProductItem margin={false} card {product} />
 			</div>
+
+			<div class="mt-4">
+				<Accordion title={'Post Tags'} size="compressed" visible={tags.length > 0}>
+					<!-- <p class="font-medium">Post Tags</p> -->
+					{#if tags.length > 0}
+						<div class="mt-2 flex flex-wrap ">
+							{#each tags as tag, i}
+								<Badge margin title={`${tag.name}: `} message={tag.value} />
+							{/each}
+						</div>
+					{/if}
+				</Accordion>
+			</div>
+			<!-- <hr class="my-4 border-neutral-100 dark:border-neutral-800" /> -->
+
+			<div class="mt-4">
+				<Accordion title={'Location Preview'} size="compressed" visible={tags.length > 0} />
+			</div>
+			<!-- <hr class="my-4 border-neutral-100 dark:border-neutral-800" /> -->
+
+			<div class="">
+				<Accordion title={'Account Preview'} size="compressed" visible={tags.length > 0} />
+			</div>
+			<div class="mt-4">
+				<Alert type="success" title="Submit Button" message="will be here" />
+			</div>
 			<div class="mt-4">
 				<Alert
 					type="info"
 					title="Quick Tip:"
 					message="You can edit your post even after uploading&nbsp;it."
 				/>
-			</div>
-
-			<div class="mt-4">
-				<p class="font-medium">Post Tags</p>
-				{#if tags.length > 0}
-					<div class="mt-2 flex flex-wrap ">
-						{#each tags as tag, i}
-							<Badge margin title={`${tag.name}: `} message={tag.value} />
-						{/each}
-					</div>
-				{/if}
-			</div>
-			<hr class="my-4 border-neutral-100 dark:border-neutral-800" />
-
-			<div class="mt-4">
-				<p class="font-medium">Location Preview</p>
-			</div>
-			<hr class="my-4 border-neutral-100 dark:border-neutral-800" />
-
-			<div class="mt-4">
-				<p class="font-medium">Account Preview</p>
 			</div>
 		</section>
 	</article>
