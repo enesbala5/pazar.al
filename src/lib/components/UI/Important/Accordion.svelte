@@ -3,6 +3,7 @@
 	import { slide } from 'svelte/transition';
 
 	export let showChevron: boolean = true;
+	export let disabled: boolean = false;
 
 	type AccordionSize = 'normal' | 'compressed';
 	export let size: AccordionSize = 'normal';
@@ -14,32 +15,43 @@
 	};
 
 	export const makeVisible = () => {
-		visible = true;
+		if (!disabled) visible = true;
 	};
 
 	export const toggleVisible = () => {
-		visible = !visible;
+		if (!disabled) visible = !visible;
 	};
+
+	let hovering: boolean = false;
 </script>
 
 <div
 	class="
-	{size === 'normal'
-		? 'rounded-xl border border-neutral-100 shadow-sm dark:border-neutral-800 dark:shadow-none'
-		: ''}
-	my-4 "
+	{size === 'normal' ? `defaultBg rounded-xl ${hovering ? 'shadowDark' : 'shadowLight'}` : ''}
+	my-4 transition-all ease-in-out"
 >
 	<!-- H1 and Chevron -->
 	<div
 		on:click={toggleVisible}
 		on:keydown={toggleVisible}
+		on:mouseenter={() => (hovering = true)}
+		on:mouseleave={() => (hovering = false)}
+		on:focus={() => (hovering = true)}
+		on:blur={() => (hovering = false)}
 		class="
+		{disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
 		{size === 'normal'
-			? 'rounded-xl p-4 hover:bg-neutral-100 dark:hover:bg-neutral-800'
-			: ' border-b-2 border-neutral-200 hover:border-neutral-300 dark:border-neutral-600 dark:hover:border-neutral-500'}
-		flex w-full cursor-pointer items-center justify-between   "
+			? 'group rounded-xl p-4'
+			: ' border-b-2 border-neutral-200 pb-0.5 hover:border-neutral-300 dark:border-neutral-600 dark:hover:border-neutral-500'}
+		group flex w-full items-center justify-between"
 	>
-		<h6 class=" {size == 'normal' ? 'text-xl' : 'text-base'} font-medium">
+		<h6
+			class="
+		{disabled
+				? 'text-neutral-500 dark:text-neutral-400'
+				: 'text-neutral-800 group-hover:text-neutral-900 dark:text-neutral-100 dark:group-hover:text-neutral-50'}
+		{size == 'normal' ? 'text-lg' : 'text-base'} font-medium"
+		>
 			{title}
 		</h6>
 
@@ -49,7 +61,10 @@
 					xmlns="http://www.w3.org/2000/svg"
 					class="
 							{visible ? 'rotate-180 ' : ''}
-							h-3 w-3 fill-neutral-900 transition-transform ease-in-out dark:fill-neutral-100"
+							{disabled
+						? 'fill-neutral-500  dark:fill-neutral-400'
+						: 'fill-neutral-800  group-hover:fill-neutral-900 dark:fill-neutral-200 dark:group-hover:fill-neutral-50'}
+						 h-3 w-3 transition-transform ease-in-out "
 					viewBox="0 0 320 191.9"
 				>
 					<path

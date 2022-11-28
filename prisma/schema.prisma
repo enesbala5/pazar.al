@@ -16,8 +16,13 @@ model PriceHistory {
   pid        String   @id @default(uuid()) /// Price Entry ID
   created_at DateTime @default(now()) /// Created At
 
-  Post    Post?   @relation(fields: [postPid], references: [pid])
-  postPid String?
+  post    Post    @relation(fields: [postPid], references: [id])
+  postPid String
+  price   Float
+  eur     Boolean
+
+  //   author   User   @relation("CreatedBy", fields: [authorId], references: [uid])
+  // authorId String
 }
 
 model User {
@@ -36,8 +41,7 @@ model User {
   sellerInfo SellerInformation?
 
   posts Post[] @relation("CreatedBy")
-
-  likedPosts Post[] @relation("LikedBy")
+  // likes Post[] @relation(references: [id])
 }
 
 model SellerInformation {
@@ -55,7 +59,7 @@ model SellerInformation {
 
 /// Post Model - Contains all information on a post made on the page
 model Post {
-  pid        String   @id @default(uuid()) /// Post ID
+  id         String   @id @default(uuid()) /// Post ID
   created_at DateTime @default(now()) /// Created At
   archived   Boolean  @default(false) /// If post is archived
   post_views Int      @default(0) /// How many times has the post been viewed
@@ -66,14 +70,20 @@ model Post {
   authorId String
 
   // Link users who like a post
-  likedBy User   @relation(name: "LikedBy", fields: [likerId], references: [uid])
-  likerId String
+  // likedBy User   @relation(name: "LikedBy", fields: [likerId], references: [uid])
 
-  title        String
-  description  String
-  price        Float
-  eur          Boolean
-  priceHistory PriceHistory[] // Array of Price Entries - plot them on Graph later to make it valuable
+  // ->
+  // likedBy User[] @relation(references: [uid])
+
+  // likerId String
+
+  title       String
+  description String
+
+  // Array of Price Entries
+  // -> Can be used to calculate discounts based on last change 24 Hours
+  // -> Could be Premium Feature - View Price History ...
+  priceHistory PriceHistory[]
 
   category String
   tags     Tag[]

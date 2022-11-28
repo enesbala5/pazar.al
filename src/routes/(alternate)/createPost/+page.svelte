@@ -19,6 +19,7 @@
 	import { getTagsByCategory, type TagInCategory } from '$lib/data/tagsByCategory';
 	import { getCarModelsByBrand } from '$lib/fetching/carsByBrand';
 	import { faqjaParamParse } from '$lib/functions/conversions';
+	import { enhance } from '$app/forms';
 	// Types
 	import type { Product, ProductTag } from '$lib/types/product';
 	import type { Selection } from '$lib/types/selection';
@@ -197,6 +198,7 @@
 
 	$: selectedCarBrand = getSelectedCarBrand(tags);
 	$: carModelsByBrand = getCarModelsByBrand(selectedCarBrand);
+
 </script>
 
 <title>Krijo nje Postim - Pazar</title>
@@ -213,7 +215,11 @@
 			</h3>
 			<!-- <h3 class="mt-2">Cdo postim ne MerrJep eshte falas, me opsionin e promovimit.</h3> -->
 
-			<form action="?/createPost" method="POST" class="mt-12">
+			<form action="?/createPost" method="POST" class="mt-12" id="createPost" use:enhance>
+				<!-- Additional Information -->
+				<input type="hidden" name="eur" value={eur} id="eur">
+				<input type="hidden" name="tags" value={JSON.stringify(tags)} id="tags">
+				<!--  -->
 				<InputField name="title" type="text" title="Title" required bind:value={title} />
 				<InputField
 					classNames="mt-4"
@@ -282,8 +288,8 @@
 						<Select
 							items={countries}
 							bind:value={country}
-							name="city"
-							placeholder="City"
+							name="country"
+							placeholder="Country"
 							disabled
 						/>
 					</div>
@@ -454,14 +460,20 @@
 			</div>
 		</section>
 
-		<section class="h-full w-1/3 lg:sticky">
+		<section class="h-full w-1/3 lg:sticky top-8">
 			<h1 class="text-xl font-medium ">Preview</h1>
 			<div class="mt-4">
 				<ProductItem margin={false} card {product} />
 			</div>
 
+			<!-- ! Post Information -->
 			<div class="mt-4">
-				<Accordion title={'Post Tags'} size="compressed" visible={tags.length > 0}>
+				<Accordion
+					title={'Post Tags'}
+					size="compressed"
+					visible={tags.length > 0}
+					disabled={tags.length < 1}
+				>
 					<!-- <p class="font-medium">Post Tags</p> -->
 					{#if tags.length > 0}
 						<div class="mt-2 flex flex-wrap ">
@@ -474,17 +486,22 @@
 			</div>
 			<!-- <hr class="my-4 border-neutral-100 dark:border-neutral-800" /> -->
 
-			<div class="mt-4">
-				<Accordion title={'Location Preview'} size="compressed" visible={tags.length > 0} />
-			</div>
+			<!-- ! Location Preview - Do e heq me shume mundsi -->
+			<!-- <div class="mt-4">
+				<Accordion
+					title={'Location Preview'}
+					size="compressed"
+					visible={tags.length > 0}
+					disabled
+				/>
+			</div> -->
 			<!-- <hr class="my-4 border-neutral-100 dark:border-neutral-800" /> -->
 
-			<div class="">
-				<Accordion title={'Account Preview'} size="compressed" visible={tags.length > 0} />
-			</div>
-			<div class="mt-4">
-				<Alert type="success" title="Submit Button" message="will be here" />
-			</div>
+			<!-- ! Account Preview - Do e heq me shume mundsi -->
+			<!-- <div class="">
+				<Accordion title={'Account Preview'} size="compressed" visible={tags.length > 0} disabled />
+			</div> -->
+
 			<div class="mt-4">
 				<Alert
 					type="info"
@@ -492,14 +509,10 @@
 					message="You can edit your post even after uploading&nbsp;it."
 				/>
 			</div>
+			<div class="defaultBg shadowDark mt-4 w-full rounded-xl p-4">
+				<button class="buttonPrimary w-full" type="submit" form="createPost">Create Post</button>
+				<button class="buttonTertiary mt-2 w-full">Create Post</button>
+			</div>
 		</section>
 	</article>
-	<!-- <button
-		class="buttonPrimary mt-8 mb-8"
-		on:click={() => {
-			getTagsByCategory();
-		}}
-	>
-		Get car brands
-	</button> -->
 </main>

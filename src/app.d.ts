@@ -12,6 +12,7 @@ import type { AccountType, Prisma, Role, SellerInformation } from '@prisma/clien
 declare namespace App {
 	interface Locals {
 		user: {
+			uid: string;
 			firstName: string;
 			lastName: string;
 			email: string;
