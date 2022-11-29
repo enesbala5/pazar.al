@@ -13,6 +13,7 @@ export const nav = {
 		createPost: '/api/createPost',
 		checkIfLiked: '/api/checkIfLiked',
 		likePost: '/api/likePost',
+		dislikePost: '/api/dislikePost',
 	},
 	suport: '/suport',
 

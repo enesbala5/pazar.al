@@ -3,6 +3,20 @@ import { error } from '@sveltejs/kit';
 
 import type { searchQuery } from '$lib/types/query';
 import { nav } from '$lib/userPreferences/nav';
+import type { Product } from '$lib/types/product';
+import type { SellerInformation } from '@prisma/client';
+import type { PageUser } from '$lib/types/page';
+
+interface FullUserInfo extends Product {
+	author: PageUser;
+}
+
+type GetPostQuery = FullUserInfo;
+
+export interface PostimPageRequest {
+	data: GetPostQuery;
+	isLiked: boolean;
+}
 
 export const loadFromApi = async (
 	fetch: {
@@ -40,18 +54,42 @@ export const loadFromApi = async (
 		body: JSON.stringify(query.id),
 	});
 
-	if (!response.ok) {
-		throw error(404, 'Postimi not found.');
-	}
+	// if (!response.ok) {
+	// throw error(202, 'Postimi not found.');
+	// }
 
-	const data = await response.json();
+	const post = await response.json();
 	const isLiked = await isLikedResponse.json();
-	console.log({ data, isLiked });
 
-	return { data, isLiked };
+	const finalResponse: PostimPageRequest = {
+		data: post,
+		isLiked: isLiked,
+	};
+
+	return finalResponse;
 };
 
-export const load: PageLoad = async ({ params, fetch }) => {
-	const data = await loadFromApi(fetch, params);
-	return data;
+export const load: PageLoad<PostimPageRequest> = async ({ params, fetch }) => {
+	const data: any = await loadFromApi(fetch, params);
+
+	// const data: PostimPageRequest = {
+	// 	data: {
+	// 		city: 'BajramCurri',
+	// 		country: 'Albania',
+	// 		description: '',
+	// 		id: '1',
+	// 		priceHistory: [
+	// 			{
+	// 				price: 110,
+	// 				eur: true,
+	// 			},
+	// 		],
+	// 		title: '',
+	// 		category: 'Automjete',
+	// 		disabled: false,
+	// 	},
+	// 	isLiked: true,
+	// };
+
+	return { ...data };
 };

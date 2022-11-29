@@ -7,4 +7,5 @@ export type PageUser = {
 	account_type: AccountType;
 	sellerInfo: SellerInformation | null;
 	role: Role;
+	profilePicture: string | null;
 };

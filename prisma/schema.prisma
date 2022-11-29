@@ -38,6 +38,8 @@ model User {
   role         Role        @default(USER)
   account_type AccountType @default(Personal)
 
+  profilePicture String?
+
   sellerInfo SellerInformation?
 
   posts Post[] @relation("CreatedBy")
@@ -52,8 +54,7 @@ model SellerInformation {
 
   status SellerStatus @default(Normal)
 
-  profilePicture String?
-  coverPicture   String?
+  coverPicture String?
 
   mainColor String?
 }

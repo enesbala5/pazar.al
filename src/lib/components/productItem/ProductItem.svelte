@@ -16,8 +16,6 @@
 			goto(`/postim/${product.id}`);
 		}
 	};
-
-	$: product, console.log(product);
 </script>
 
 {#if card}

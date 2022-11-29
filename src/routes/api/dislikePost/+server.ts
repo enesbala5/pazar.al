@@ -5,34 +5,31 @@ import { db } from '$lib/fetching/db';
 // TODO:
 // -> Maybe add referral query options
 export const POST: RequestHandler = async ({ request, locals }) => {
+	console.log(locals);
+
 	if (!locals?.user) {
 		throw error(202, 'You are not logged in.');
 	}
 
 	const postId = await request.json();
 
-	const response = await db.post.count({
+	const response = await db.post.update({
 		where: {
-			AND: [
-				{
-					id: {
-						equals: postId,
-					},
-				},
-				{
-					postLikes: {
-						some: {
-							uid: locals.user.uid,
-						},
-					},
-				},
-			],
+			id: postId,
+		},
+		data: {
+			postLikes: {
+				disconnect: {
+					uid: locals.user.uid
+				}
+			},
 		},
 	});
 
-	if (response > 0) {
+	if (response) {
+		console.log(response);
 		return new Response(JSON.stringify(true));
 	}
 
-	return new Response(JSON.stringify(false));
+	throw error(404, 'Post not found.');
 };

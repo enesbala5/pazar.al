@@ -18,6 +18,24 @@ export const POST: RequestHandler = async ({ request }) => {
 				},
 			],
 		},
+		include: {
+			author: {
+				select: {
+					firstName: true,
+					lastName: true,
+					account_type: true,
+					profilePicture: true,
+					email: true,
+					sellerInfo: {
+						select: {
+							coverPicture: true,
+							mainColor: true,
+							status: true,
+						},
+					},
+				},
+			},
+		},
 	});
 
 	if (data) {

@@ -7,35 +7,33 @@ import { db } from '$lib/fetching/db';
 export const POST: RequestHandler = async ({ request, locals }) => {
 	console.log(locals);
 
+	if (!request) {
+		throw error(404, 'Invalid parameters.');
+	}
+
 	if (!locals?.user) {
-		throw error(202, 'You are not logged in.');
+		throw error(404, 'You are not logged in.');
 	}
 
 	const postId = await request.json();
-	console.log('request: ', postId);
 
-	const currentPost = await db.post.count({
+	const response = await db.post.update({
 		where: {
-			AND: [
-				{
-					id: {
-						equals: postId,
-					},
+			id: postId,
+		},
+		data: {
+			postLikes: {
+				connect: {
+					uid: locals.user.uid,
 				},
-				{
-					postLikes: {
-						some: {
-							uid: locals.user.uid,
-						},
-					},
-				},
-			],
+			},
 		},
 	});
 
-	if (currentPost) {
-		throw error(202, currentPost);
+	if (response) {
+		console.log(response);
+		return new Response(JSON.stringify(true));
 	}
 
-	throw error(202, { response: 'not found??', currentPost });
+	throw error(404, 'Post not found.');
 };
