@@ -50,6 +50,9 @@ export const POST: RequestHandler = async ({ request }) => {
 				},
 			],
 		},
+		include: {
+			priceHistory: true,
+		},
 	});
 
 	if (data) {

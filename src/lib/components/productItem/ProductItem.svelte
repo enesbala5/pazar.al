@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type { ProductItem } from '$lib/types/product';
+	import type { Product } from '$lib/types/product';
 	import Euro from '../logos/user/currencies/Euro.svelte';
 	import Lek from '../logos/user/currencies/Lek.svelte';
 	import Heart from '../logos/user/Heart.svelte';
@@ -8,14 +8,16 @@
 	export let card: boolean;
 	export let margin: boolean = true;
 
-	export let product: ProductItem;
+	export let product: Product;
 	export let skeleton: boolean = false;
 
 	const gotoPost = () => {
 		if (!product.disabled) {
-			goto(`/postim/${product.pid}`);
+			goto(`/postim/${product.id}`);
 		}
 	};
+
+	$: product, console.log(product);
 </script>
 
 {#if card}
@@ -59,13 +61,13 @@
 		>
 			<section class="flex w-fit items-center rounded-sm bg-indigo-600 py-0.5 px-2">
 				<div aria-label="Currency Used" class="mr-2 opacity-80">
-					{#if product.eur}
+					{#if product.priceHistory[0].eur}
 						<Euro classNames="fill-white h-2.5" />
 					{:else}
 						<Lek classNames="fill-white h-2.5" />
 					{/if}
 				</div>
-				<p class="text-neutral-50">{product.price.toLocaleString()}</p>
+				<p class="text-neutral-50">{product.priceHistory[0].price.toLocaleString()}</p>
 			</section>
 		</div>
 
@@ -100,13 +102,13 @@
 			>
 				<section class="flex items-center rounded-sm bg-indigo-600 py-0.5 px-2">
 					<div aria-label="Currency Used" class="mr-2 opacity-80">
-						{#if product.eur}
+						{#if product.priceHistory[0].eur}
 							<Euro classNames="fill-white h-2.5" />
 						{:else}
 							<Lek classNames="fill-white h-2.5" />
 						{/if}
 					</div>
-					<p class="text-sm text-white">{product.price.toLocaleString()}</p>
+					<p class="text-sm text-white">{product.priceHistory[0].price.toLocaleString()}</p>
 				</section>
 				<Heart classNames="h-5 fill-white w-5 opacity-80 " />
 			</section>

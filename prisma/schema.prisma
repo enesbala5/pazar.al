@@ -41,7 +41,7 @@ model User {
   sellerInfo SellerInformation?
 
   posts Post[] @relation("CreatedBy")
-  // likes Post[] @relation(references: [id])
+  likes Post[]
 }
 
 model SellerInformation {
@@ -86,9 +86,12 @@ model Post {
   priceHistory PriceHistory[]
 
   category String
-  tags     Tag[]
   city     Cities
   country  Countries
+
+  tags Tag[]
+
+  postLikes User[]
 }
 
 model Tag {

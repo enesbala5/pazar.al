@@ -1,78 +1,70 @@
 <script lang="ts">
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
-	import type { Post } from '@prisma/client';
+	import type { Product } from '$lib/types/product';
 
-	let RecommendedItems: Post[] = [
+	let RecommendedItems: Product[] = [
 		{
 			title: 'Range Rover 2022',
 			description: 'Luks',
-			archived: false,
+			id: 'rangerover22',
 			category: 'Automjete',
-			post_likes: 0,
-			post_views: 0,
 			city: 'Tirane',
 			country: 'Albania',
-			pid: 'rangerover22',
-			price: 100,
-			authorId: 'Enes Bala',
-			created_at: new Date(),
-			likerId: 'Bala',
-			eur: false,
+			priceHistory: [
+				{
+					price: 100,
+					eur: false,
+				},
+			],
 		},
 		{
 			title: 'Mercedes S-Class 2022',
 			description: 'Luks 2',
-			archived: false,
 			category: 'Automjete',
-			post_likes: 0,
-			post_views: 0,
 			city: 'Tirane',
 			country: 'Albania',
-			pid: 'benz',
-			price: 100,
-			authorId: 'Enes Bala',
-			created_at: new Date(),
-			likerId: 'Bala',
-			eur: false,
+			id: 'benz',
+			priceHistory: [
+				{
+					price: 100,
+					eur: false,
+				},
+			],
 		},
 		{
 			title: 'Audi Q8 2023',
 			description: 'Luks 3',
-			archived: false,
 			category: 'Automjete',
-			post_likes: 0,
-			post_views: 0,
 			city: 'Tirane',
 			country: 'Albania',
-			pid: 'audi',
-			price: 100,
-			authorId: 'Enes Bala',
-			created_at: new Date(),
-			likerId: 'Bala',
-			eur: false,
+			id: 'audi',
+			priceHistory: [
+				{
+					price: 100,
+					eur: false,
+				},
+			],
 		},
 		{
 			title: 'Bentley 2023',
 			description: 'Luks 4',
-			archived: false,
 			category: 'Automjete',
-			post_likes: 0,
-			post_views: 0,
 			city: 'Tirane',
 			country: 'Albania',
-			pid: 'audi',
-			price: 100,
-			authorId: 'Enes Bala',
-			created_at: new Date(),
-			likerId: 'Bala',
-			eur: false,
+			id: 'audi',
+			priceHistory: [
+				{
+					price: 100,
+					eur: false,
+				},
+			],
 		},
 	];
 </script>
 
 <div class="flex items-end justify-between">
 	<p class="text-2xl font-medium">Recommended</p>
-	<a class="font-medium uppercase opacity-80" href="recommended">View All</a>
+	<a class="font-medium uppercase opacity-80 text-sm md:text-base" href="recommended">View All</a>
 </div>
 <div class="mt-6 grid grid-cols-4 gap-4">
 	{#each RecommendedItems as product}

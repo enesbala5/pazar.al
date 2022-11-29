@@ -7,22 +7,15 @@ import { db } from '$lib/fetching/db';
 export const POST: RequestHandler = async ({ request }) => {
 	const query = await request.json();
 
-	let data = await db.post.findFirst({
-		where: {
-			AND: [
-				{
-					id: query,
-				},
-				{
-					archived: false,
-				},
-			],
-		},
-	});
+	// if (data) {
+	// 	return new Response(JSON.stringify(data));
+	// }
 
-	if (data) {
-		return new Response(JSON.stringify(data));
-	}
+	throw error(404, 'Post Not Found');
+};
+
+export const GET: RequestHandler = async ({ request }) => {
+	await db.priceHistory.deleteMany();
 
 	throw error(404, 'Post Not Found');
 };

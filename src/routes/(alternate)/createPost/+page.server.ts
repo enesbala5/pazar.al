@@ -103,50 +103,9 @@ const createPost: Action = async ({ request, locals }) => {
 	});
 
 	console.log('finished');
-
-	// await db.post.create({
-	// 	data: {
-	// 		title: title,
-	// 		description: description,
-	// 		category: 'Automjete',
-	// 		city: 'Ballsh',
-	// 		country: 'Albania',
-	// 		eur: true,
-	// 		priceHistory: {
-	// 			create: {
-	// 				price: 100,
-	// 			}
-	// 		}
-	// 	}
-	// })
-
-	// -----------
-
-	// const user = await db.user.findUnique({
-	// 	where: { email },
-	// });
-
-	// if (user) {
-	// 	console.log('user exists');
-	// 	return invalid(400, { user: true });
-	// }
-
-	// console.log('creating');
-
-	// await db.user.create({
-	// 	data: {
-	// 		firstName,
-	// 		lastName,
-	// 		email,
-	// 		passwordHash: await bcrypt.hash(password, 10),
-	// 		userAuthToken: crypto.randomUUID(),
-	// 		account_type: isBusiness ? 'Seller' : 'Personal',
-	// 		role: 'USER',
-	// 	},
-	// });
-
-	// return invalid(400, { email: email, password: password });
-	// throw redirect(303, nav.welcomeScreen);
+	console.log(newPost);
+	
+	throw redirect(303, `${nav.postim}/${newPost.id}`);
 };
 
 export const actions: Actions = { createPost };

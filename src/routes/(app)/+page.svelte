@@ -15,11 +15,11 @@
 </svelte:head>
 
 <!-- Page Content -->
-<article class="mt-4 w-full bg-neutral-50 px-4 dark:bg-neutral-900">
-	<div class="lg:hidden">
+<article class="mt-4 w-full bg-neutral-50 md:px-4 dark:bg-neutral-900">
+	<div class="lg:hidden px-4">
 		<SearchForm />
 	</div>
-	<div class="relative mb-8 mt-8 h-[15rem] w-full  lg:mt-4 lg:h-[25rem]">
+	<div class="relative mb-8 mt-8 h-[15rem] w-full  lg:mt-4 lg:h-[25rem] px-4 md:px-0">
 		<picture>
 			<source media="(min-width: 1024px)" srcset="images/promo/coverLg.svg" />
 			<img
@@ -29,14 +29,14 @@
 			/>
 		</picture>
 		<div
-			class="absolute -bottom-4 left-1/2 flex w-full -translate-x-1/2 items-center space-x-2 md:bottom-4 md:w-1/2 lg:w-1/3"
+			class="absolute px-4 md:px-0 -bottom-4 left-1/2 flex w-full -translate-x-1/2 items-center space-x-2 md:bottom-4 md:w-1/2 lg:w-1/3"
 		>
 			{#each Array(3) as _, i}
 				<button
 					on:click={() => (image = i)}
 					class="
 				{image === i ? 'opacity-50' : 'opacity-20'}
-				h-1.5 w-full rounded-full bg-neutral-900 md:bg-neutral-50"
+				h-1.5 w-full rounded-full bg-neutral-900 dark:bg-neutral-500 md:bg-neutral-50"
 				/>
 			{/each}
 		</div>
@@ -46,7 +46,7 @@
 		<RecommendedItems />
 	</section>
 	<!-- Recommended Categories -->
-	<section class="mx-auto my-24 grid w-10/12 grid-cols-4 grid-rows-2 gap-4">
+	<section class="mx-auto my-24 hidden w-10/12 grid-cols-4 grid-rows-2 gap-4 md:grid">
 		<!-- Left -->
 		<div
 			class="col-span-2 row-span-2 flex flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
@@ -79,9 +79,10 @@
 	<section class="mx-auto mt-16 w-10/12 ">
 		<TopDeals />
 	</section>
-	<section class="mx-auto my-24 w-10/12 ">
+	<section class="md:mx-auto mt-16 md:w-10/12">
 		<PopularCategories />
 	</section>
+
 	<section class="mx-auto my-24 w-10/12 ">
 		<div class="flex items-end justify-between">
 			<p class="text-2xl font-medium">Partners</p>

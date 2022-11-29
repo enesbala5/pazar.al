@@ -46,10 +46,15 @@
 	};
 
 	$: product = {
+		id: '',
 		title: title !== '' ? title : 'Title',
 		description: description !== '' ? description : 'Description',
-		price: faqjaParamParse(price, 0),
-		eur,
+		priceHistory: [
+			{
+				price: faqjaParamParse(price, 0),
+				eur,
+			},
+		],
 		city: 'Tirane',
 		country: 'Albania',
 		pid: '',
@@ -166,7 +171,6 @@
 	let requiredTags: TagInCategory[] = [];
 
 	$: if (category?.value !== undefined) {
-		console.log('updating required');
 		requiredTags = getTagsByCategory(category?.value) ?? [];
 		makeVisible();
 	}
@@ -198,7 +202,6 @@
 
 	$: selectedCarBrand = getSelectedCarBrand(tags);
 	$: carModelsByBrand = getCarModelsByBrand(selectedCarBrand);
-
 </script>
 
 <title>Krijo nje Postim - Pazar</title>
@@ -217,8 +220,8 @@
 
 			<form action="?/createPost" method="POST" class="mt-12" id="createPost" use:enhance>
 				<!-- Additional Information -->
-				<input type="hidden" name="eur" value={eur} id="eur">
-				<input type="hidden" name="tags" value={JSON.stringify(tags)} id="tags">
+				<input type="hidden" name="eur" value={eur} id="eur" />
+				<input type="hidden" name="tags" value={JSON.stringify(tags)} id="tags" />
 				<!--  -->
 				<InputField name="title" type="text" title="Title" required bind:value={title} />
 				<InputField
@@ -460,7 +463,7 @@
 			</div>
 		</section>
 
-		<section class="h-full w-1/3 lg:sticky top-8">
+		<section class="top-8 h-full w-1/3 lg:sticky">
 			<h1 class="text-xl font-medium ">Preview</h1>
 			<div class="mt-4">
 				<ProductItem margin={false} card {product} />

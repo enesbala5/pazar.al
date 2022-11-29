@@ -1,14 +1,15 @@
 <script lang="ts">
 </script>
 
-<div class="flex items-end justify-between">
+<div class="flex items-end justify-between px-4 md:px-0">
 	<p class="text-2xl font-medium">Popular Categories</p>
-	<a class="font-medium uppercase opacity-80" href="recommended">View All</a>
+	<a class="font-medium uppercase opacity-80 text-sm md:text-base" href="recommended">View All</a>
 </div>
 
-<div class="mt-8 grid grid-cols-6 grid-rows-1 gap-8">
-	<!-- ! Car -->
-	<div class="flex flex-col items-center space-y-4 text-center">
+<div
+	class="container mt-8 flex space-x-4 overflow-x-scroll noScroll pr-4 pl-4  md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
+>
+	<div class=" flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
 			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
 		>
@@ -20,8 +21,8 @@
 		</div>
 		<a href="#link">Cars</a>
 	</div>
-	<!-- ! iPhone -->
-	<div class="flex flex-col items-center space-y-4 text-center">
+
+	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
 			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
 		>
@@ -34,8 +35,7 @@
 		<a href="#link">Mobile Phones</a>
 	</div>
 
-	<!-- !  -->
-	<div class="flex flex-col items-center space-y-4 text-center">
+	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
 			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
 		>
@@ -48,7 +48,7 @@
 		<a href="#link">Gaming Console</a>
 	</div>
 
-	<div class="flex flex-col items-center space-y-4 text-center">
+	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
 			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
 		>
@@ -61,7 +61,7 @@
 		<a href="#link">Shoes</a>
 	</div>
 
-	<div class="flex flex-col items-center space-y-4 text-center">
+	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
 			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
 		>
@@ -74,7 +74,7 @@
 		<a href="#link">Clothing</a>
 	</div>
 
-	<div class="flex flex-col items-center space-y-4 text-center">
+	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
 			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
 		>

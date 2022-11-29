@@ -24,10 +24,6 @@
 		itemsAmount = await getCount(params);
 	});
 
-	const createItem = async () => {
-		fetch('/api/createPost');
-	};
-
 	const paginateFN = () => {
 		paginate();
 	};
