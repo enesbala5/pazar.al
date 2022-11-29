@@ -11,6 +11,8 @@ export const nav = {
 		count: '/api/getLatestPosts/count',
 		getPost: '/api/getPost',
 		createPost: '/api/createPost',
+		checkIfLiked: '/api/checkIfLiked',
+		likePost: '/api/likePost',
 	},
 	suport: '/suport',
 

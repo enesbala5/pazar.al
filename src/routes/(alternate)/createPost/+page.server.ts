@@ -1,7 +1,7 @@
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userPreferences/nav';
 import { invalid, redirect } from '@sveltejs/kit';
-import type { Cities, Tag } from '@prisma/client';
+import type { Tag } from '@prisma/client';
 import type { Selection } from '$lib/types/selection';
 
 import type { Action, Actions, PageServerLoad } from './$types';
@@ -104,7 +104,7 @@ const createPost: Action = async ({ request, locals }) => {
 
 	console.log('finished');
 	console.log(newPost);
-	
+
 	throw redirect(303, `${nav.postim}/${newPost.id}`);
 };
 

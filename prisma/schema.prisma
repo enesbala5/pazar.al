@@ -41,7 +41,8 @@ model User {
   sellerInfo SellerInformation?
 
   posts Post[] @relation("CreatedBy")
-  likes Post[]
+  likes Post[] @relation("PostLikes")
+  views Post[] @relation("PostViews")
 }
 
 model SellerInformation {
@@ -62,20 +63,10 @@ model Post {
   id         String   @id @default(uuid()) /// Post ID
   created_at DateTime @default(now()) /// Created At
   archived   Boolean  @default(false) /// If post is archived
-  post_views Int      @default(0) /// How many times has the post been viewed
-  post_likes Int      @default(0) /// How many times the post has been liked
 
   // link post to one Author Only
   author   User   @relation("CreatedBy", fields: [authorId], references: [uid])
   authorId String
-
-  // Link users who like a post
-  // likedBy User   @relation(name: "LikedBy", fields: [likerId], references: [uid])
-
-  // ->
-  // likedBy User[] @relation(references: [uid])
-
-  // likerId String
 
   title       String
   description String
@@ -91,7 +82,8 @@ model Post {
 
   tags Tag[]
 
-  postLikes User[]
+  postViews User[] @relation("PostViews") // Array of Users who have viewed the Post
+  postLikes User[] @relation("PostLikes") // Array of Users who have liked the Post 
 }
 
 model Tag {

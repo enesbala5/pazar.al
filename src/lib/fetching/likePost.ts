@@ -1,10 +1,26 @@
 import type { RequestHandler } from './$types';
 import { error } from '@sveltejs/kit';
-import { db } from '$lib/fetching/db';
+import { nav } from '$lib/userPreferences/nav';
 
-export const POST: RequestHandler = async ({ request }) => {
-	const postId = await request.json();
+export default async (request: string) => {
+	if (!request || typeof request !== 'string') {
+		return;
+	}
 
-	db.post
+	let url = nav.api.likePost;
 
+	const response = await fetch(url, {
+		method: 'POST',
+		headers: new Headers({
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: 'Basic ' + Credential,
+		}),
+		cache: 'default',
+		body: JSON.stringify(request),
+	});
+
+	console.log(await response.json());
 };
+
+// export const checkIfLiked

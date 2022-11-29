@@ -1,11 +1,15 @@
 <script lang="ts">
 	import Heart from '$lib/components/logos/user/Heart.svelte';
-	import Save from '$lib/components/logos/user/Save.svelte';
-	import { card } from '$lib/userPreferences/preferences';
-	import type { Post } from '@prisma/client';
-
+	import likePost from '$lib/fetching/likePost';
+	import type { Product } from '$lib/types/product';
 	import type { PageData } from './$types';
-	export let data: PageData;
+
+	interface PostimPageRequest {
+		data: Product;
+		isLiked: boolean;
+	}
+
+	export let { data, isLiked }: PostimPageRequest | any = {};
 </script>
 
 <article class="p-2">
@@ -25,12 +29,12 @@
 			</div>
 
 			<div class="flex items-center space-x-2">
-				<div class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2">
-					<Heart classNames="w-full h-full fill-white " />
-				</div>
-				<div class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2">
-					<Save classNames="w-full h-full fill-white " />
-				</div>
+				<button
+					on:click={() => likePost(data?.id)}
+					class="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-700 p-2"
+				>
+					<Heart classNames="h-full w-full {isLiked? 'stroke-red-500' : 'stroke-white'}" />
+				</button>
 			</div>
 		</section>
 		<section class="mt-4">
