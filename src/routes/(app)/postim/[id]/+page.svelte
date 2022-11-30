@@ -1,6 +1,7 @@
 <script lang="ts">
 	// Icons
 	import Heart from '$lib/components/logos/user/Heart.svelte';
+	import Badge from '$lib/components/UI/Important/Badge.svelte';
 	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
 	// Imported Functions
 	import manageLike from '$lib/fetching/manageLike';
@@ -26,8 +27,6 @@
 			liked = likedCache;
 		}
 	};
-
-	$: data, console.log(data);
 </script>
 
 <article
@@ -37,13 +36,20 @@
 		<!-- Top Content (Image + Title) -->
 		<div class="flex flex-col-reverse md:flex-col">
 			<!-- ! Title and Quick Actions -->
-			<div class="mx-4 border-y border-neutral-200 py-2 dark:border-neutral-800 md:mx-0 md:hidden">
+			<div class="mx-4 flex items-center space-x-2 py-2 md:mx-0 md:hidden">
 				<button
 					class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-100 px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800"
 					on:click={() => updateLikes(data?.data.id)}
 				>
 					<Heart classNames="h-5 w-5 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
 					<p class="text-sm font-medium">Like Post</p>
+				</button>
+				<button
+					class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-100 px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800"
+					on:click={() => updateLikes(data?.data.id)}
+				>
+					<Heart classNames="h-5 w-5 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
+					<p class="text-sm font-medium">Share</p>
 				</button>
 			</div>
 			<section
@@ -74,6 +80,13 @@
 					on:click={() => updateLikes(data?.data.id)}
 				>
 					<Heart classNames="h-5 w-5 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
+					<p class="text-sm font-medium">Share</p>
+				</button>
+				<button
+					class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
+					on:click={() => updateLikes(data?.data.id)}
+				>
+					<Heart classNames="h-5 w-5 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
 					<p class="text-sm font-medium">Like Post</p>
 				</button>
 			</section>
@@ -82,26 +95,42 @@
 			<ImagePreview />
 		</div>
 		<!-- Bottom Content -->
-		<div class="mt-8">
-			<div class="flex items-center justify-between">
+		<div class="mt-8 flex items-start px-4 md:space-x-12 md:px-0">
+			<div class="flex w-4/6 flex-col-reverse justify-between md:flex-row md:items-center">
 				<div class="flex flex-col">
-					<div class="flex items-end">
-						<h2 class="text-lg font-medium">Posted by</h2>
-						<h2 class="ml-1.5 text-2xl font-medium">
+					<div class="flex items-center">
+						<h2 class="hidden text-lg font-medium md:block">Posted by</h2>
+						<h2 class="text-2xl font-medium hover:underline md:ml-1.5">
 							{data.data.author.firstName}
 							{data.data.author.lastName}
 						</h2>
+						<div class="mx-4 hidden h-4 w-px bg-neutral-300 dark:bg-neutral-700 md:block" />
+						<div class="hidden md:block">
+							<Badge
+								type="default"
+								title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
+								sm
+							/>
+						</div>
 					</div>
-					<div>
-
-						<p>ne Pazar.al qe nga 2022</p>
+					<div class="mt-1 md:mt-2 flex items-center text-sm w-full md:w-fit">
+						<div class=" md:hidden">
+							<Badge
+								type="default"
+								title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
+								sm
+							/>
+						</div>
+						<p class="ml-2 md:ml-0 w-full whitespace-nowrap">Ne Pazar.al qe nga 2022</p>
 					</div>
 				</div>
-				<div class="h-16 w-16 overflow-hidden rounded-full">
+				<div
+					class="w-16 h-16 overflow-hidden rounded-full lg:h-14 lg:w-14 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20 mb-2"
+				>
 					<img src={data.data.author.profilePicture} alt="User's Profile" />
 				</div>
 			</div>
-			<p class="mt-12">{data?.data.description}</p>
+			<div class="defaultBg shadowDark hidden h-96 rounded-xl p-4 md:block md:w-2/6" />
 		</div>
 	</article>
 
