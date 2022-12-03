@@ -479,8 +479,8 @@
 				>
 					<!-- <p class="font-medium">Post Tags</p> -->
 					{#if tags.length > 0}
-						<div class="mt-2 flex flex-wrap ">
-							{#each tags as tag, i}
+						<div class="mt-2 flex flex-wrap">
+							{#each tags as tag}
 								<Badge margin title={`${tag.name}: `} message={tag.value} />
 							{/each}
 						</div>

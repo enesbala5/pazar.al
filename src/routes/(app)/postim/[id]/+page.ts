@@ -71,25 +71,6 @@ export const loadFromApi = async (
 
 export const load: PageLoad<PostimPageRequest> = async ({ params, fetch }) => {
 	const data: any = await loadFromApi(fetch, params);
-
-	// const data: PostimPageRequest = {
-	// 	data: {
-	// 		city: 'BajramCurri',
-	// 		country: 'Albania',
-	// 		description: '',
-	// 		id: '1',
-	// 		priceHistory: [
-	// 			{
-	// 				price: 110,
-	// 				eur: true,
-	// 			},
-	// 		],
-	// 		title: '',
-	// 		category: 'Automjete',
-	// 		disabled: false,
-	// 	},
-	// 	isLiked: true,
-	// };
-
+	
 	return { ...data };
 };

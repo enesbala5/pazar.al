@@ -1,5 +1,7 @@
 <script lang="ts">
 	// Icons
+	import Euro from '$lib/components/logos/user/currencies/Euro.svelte';
+	import Lek from '$lib/components/logos/user/currencies/Lek.svelte';
 	import Heart from '$lib/components/logos/user/Heart.svelte';
 	import Badge from '$lib/components/UI/Important/Badge.svelte';
 	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
@@ -27,6 +29,10 @@
 			liked = likedCache;
 		}
 	};
+
+	$: data, console.log(data.data);
+
+	const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
 </script>
 
 <article
@@ -77,7 +83,7 @@
 				</div>
 				<button
 					class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
-					on:click={() => updateLikes(data?.data.id)}
+					on:click={() => console.log('sharing')}
 				>
 					<Heart classNames="h-5 w-5 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
 					<p class="text-sm font-medium">Share</p>
@@ -94,43 +100,104 @@
 			<!-- ! Image Container -->
 			<ImagePreview />
 		</div>
-		<!-- Bottom Content -->
+		<!-- ! Bottom Content -->
 		<div class="mt-8 flex items-start px-4 md:space-x-12 md:px-0">
-			<div class="flex w-4/6 flex-col-reverse justify-between md:flex-row md:items-center">
-				<div class="flex flex-col">
-					<div class="flex items-center">
-						<h2 class="hidden text-lg font-medium md:block">Posted by</h2>
-						<h2 class="text-2xl font-medium hover:underline md:ml-1.5">
-							{data.data.author.firstName}
-							{data.data.author.lastName}
-						</h2>
-						<div class="mx-4 hidden h-4 w-px bg-neutral-300 dark:bg-neutral-700 md:block" />
-						<div class="hidden md:block">
-							<Badge
-								type="default"
-								title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
-								sm
-							/>
+			<div class="flex w-full flex-col md:w-4/6">
+				<div class="flex w-full flex-col-reverse justify-between md:flex-row md:items-center">
+					<!-- ? Bottom Display Information -->
+					<!-- ? Profile Link Info -->
+					<div class="flex flex-col">
+						<div class="flex items-center">
+							<h2 class="hidden text-lg font-medium md:block">Posted by</h2>
+							<h2 class="text-2xl font-medium hover:underline md:ml-1.5">
+								{data.data.author.firstName}
+								{data.data.author.lastName}
+							</h2>
+							<div class="mx-4 hidden h-4 w-px bg-neutral-300 dark:bg-neutral-700 md:block" />
+							<div class="hidden md:block">
+								<Badge
+									type="default"
+									title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
+									sm
+								/>
+							</div>
+						</div>
+						<div class="mt-1 flex w-full items-center text-sm md:mt-2 md:w-fit">
+							<div class=" md:hidden">
+								<Badge
+									type="default"
+									title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
+									sm
+								/>
+							</div>
+							<p class="ml-2 w-full whitespace-nowrap md:ml-0">Ne Pazar.al qe nga 2022</p>
 						</div>
 					</div>
-					<div class="mt-1 md:mt-2 flex items-center text-sm w-full md:w-fit">
-						<div class=" md:hidden">
-							<Badge
-								type="default"
-								title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
-								sm
-							/>
-						</div>
-						<p class="ml-2 md:ml-0 w-full whitespace-nowrap">Ne Pazar.al qe nga 2022</p>
+					<div
+						class="mb-2 h-16 w-16 overflow-hidden rounded-full lg:h-14 lg:w-14 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20"
+					>
+						<img src={data.data.author.profilePicture} alt="User's Profile" />
+						<!-- !  -->
 					</div>
 				</div>
-				<div
-					class="w-16 h-16 overflow-hidden rounded-full lg:h-14 lg:w-14 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20 mb-2"
-				>
-					<img src={data.data.author.profilePicture} alt="User's Profile" />
+				<!-- ? Tags -->
+				<hr class="my-1 mt-8 border-neutral-200 dark:border-neutral-800" />
+				<div class="w-full">
+					<div class=" mb-4 mt-6 flex flex-wrap">
+						{#each data.data.tags ?? [] as tag}
+							<Badge title="{tag.name}:" message={tag.value} margin />
+						{/each}
+					</div>
+				</div>
+				<hr class="my-1 mb-6 border-neutral-200 dark:border-neutral-800" />
+
+				<div class="w-full my-4">
+					<h3 class="text-2xl font-medium ">Description:</h3>
+					<p class="mt-4">{data.data.description}</p>
+				</div>
+				<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
+				<div class="w-full my-4">
+					<h3 class="text-2xl font-medium ">Location:</h3>
 				</div>
 			</div>
-			<div class="defaultBg shadowDark hidden h-96 rounded-xl p-4 md:block md:w-2/6" />
+
+			<div class="hidden flex-col items-center md:sticky md:flex md:w-2/6">
+				<div class="defaultBg shadowDark rounded-xl p-4 dark:border-none dark:bg-neutral-800">
+					<div class="mt-4 flex w-full items-center justify-between">
+						<!-- Currency Symbol -->
+						{#if data.data.priceHistory[0].eur ?? false}
+							<Euro classNames="opacity-75 w-6 h-6 dark:fill-white" />
+						{:else}
+							<Lek classNames="opacity-75 h-5 dark:fill-white" />
+						{/if}
+						<!-- Price -->
+						<p class="text-5xl font-medium">
+							{formatPrice(data.data.priceHistory[0].price)}
+						</p>
+					</div>
+					<p class="mt-2 text-right text-sm opacity-80">Approx. 19031 Lek</p>
+					<hr class="mb-6 mt-8 border-neutral-200 dark:border-neutral-800" />
+					<div>
+						<button class="buttonPrimary w-full">Message Seller</button>
+						<button class="buttonSecondary mt-2 w-full">Contact on WhatsApp</button>
+						<button class="buttonSecondary mt-2 w-full">Contact on Facebook Messenger</button>
+					</div>
+				</div>
+				<div class="group my-4 flex items-center space-x-2 text-sm opacity-50 hover:cursor-pointer">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						class="h-4 w-4"
+					>
+						<path
+							d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.449 6.449 0 014.271.572 7.948 7.948 0 005.965.524l2.078-.64A.75.75 0 0018 12.25v-8.5a.75.75 0 00-.904-.734l-2.38.501a7.25 7.25 0 01-4.186-.363l-.502-.2a8.75 8.75 0 00-5.053-.439l-1.475.31V2.75z"
+						/>
+					</svg>
+
+					<p class="group-hover:underline">Report this listing</p>
+				</div>
+			</div>
 		</div>
 	</article>
 

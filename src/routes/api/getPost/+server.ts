@@ -35,6 +35,18 @@ export const POST: RequestHandler = async ({ request }) => {
 					},
 				},
 			},
+			tags: {
+				select: {
+					name: true,
+					value: true,
+				},
+			},
+			priceHistory: {
+				select: {
+					eur: true,
+					price: true,
+				}
+			}
 		},
 	});
 
