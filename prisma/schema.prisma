@@ -118,52 +118,120 @@ enum Countries {
 }
 
 enum Cities {
-  BajramCurri
-  Ballsh
-  Belsh
-  Berat
-  Bilisht
-  Bulqize
-  Burrel
-  Cerrik
-  Corovode
-  Delvine
-  Divjake
-  Durres
-  Erseke
-  Fier
-  FusheKruje
-  Gjirokaster
-  Gramsh
-  Kamez
-  Kavaje
-  Korce
-  Kruje
-  Krume
-  Kucove
-  Kukes
-  Lac
-  Lezhe
-  Libonik
-  Librazhd
-  Lushnje
-  Mamurras
-  Patos
-  Peqin
-  Permet
-  Peshkopi
-  Pogradec
-  Prrenjas
-  Puke
-  Roskovec
-  Rreshen
-  Rrogozhine
-  Sarande
-  Shengjin
-  Shijak
+  // * 1 DONE
+  // Shkoder
   Shkoder
+  // Puke
+  Puke
+
+  // * 2 DONE
+  // Tropoje
+  BajramCurri
+  // Kukes
+  Kukes
+  // Has
+  Krume
+
+  // * 3 DONE
+  // Lezhe
+  Lezhe
+  Shengjin
+  // Mirdite
+  Rreshen
+  // Kurbin
+  Lac
+  Mamurras
+
+  // * 4
+  // DIBER:
+  // Peshkopi
+  Peshkopi
+  // Mat
+  Burrel
+  // Bulqize
+  Bulqize
+
+  // * 5 DONE
+  // Durres
+  Durres
+  Shijak
   Sukth
-  Tepelene
+  // Kruje
+  FusheKruje
+  Kruje
+
+  // * 6
+  // Tirane
   Tirane
+  // Kavaje
+  Kavaje
+  // Rrogozhine
+  Rrogozhine
+  // Kamez
+  Kamez
+
+  // * 7
+  // Elbasan
+  Elbasan
+  Belsh
+  // Kucove
+  Kucove
+  // Librazhd
+  Librazhd
+  // Peqin
+  Peqin
+  // Gramsh
+  Gramsh
+  // Cerrik
+  Cerrik
+  // Prrenjas
+  Prrenjas
+
+  // * 8 DONE
+  // Fier
+  Fier
+  // Lushnje
+  Lushnje
+  // Mallakaster
+  Ballsh
+  // Divjake
+  Divjake
+  // Patos
+  Patos
+  // Roskovec
+  Roskovec
+
+  // * 9 DONE
+  // Berat
+  Berat
+  // Skrapar
+  Corovode
+
+  // * 10 DONE
+  // Korce
+  Korce
+  // Pogradec
+  Pogradec
+  // Devoll
+  Bilisht
+  // Erseke
+  Erseke
+  // Maliq
+  Libonik
+
+  // * 11 DONE
+  // Vlore
   Vlore
+  // Delvine
+  Delvine
+  // Sarande
+  Sarande
+
+  // * 12
+  // Gjirokaster
+  Gjirokaster
+  // Permet
+  Permet
+  // Tepelene
+  Tepelene
 }

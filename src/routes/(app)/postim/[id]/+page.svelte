@@ -4,6 +4,7 @@
 	import Lek from '$lib/components/logos/user/currencies/Lek.svelte';
 	import Heart from '$lib/components/logos/user/Heart.svelte';
 	import Badge from '$lib/components/UI/Important/Badge.svelte';
+	import Map from '$lib/components/UI/Location/Map.svelte';
 	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
 	// Imported Functions
 	import manageLike from '$lib/fetching/manageLike';
@@ -35,10 +36,20 @@
 	const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
 </script>
 
+<!-- NAVBAR -->
+
 <article
 	class="flex w-full flex-col justify-between lg:mx-auto lg:w-11/12 lg:flex-row lg:space-x-4"
 >
 	<article class="lg:w-9/12">
+	<menu class="sticky top-4 left-4 h-24 w-full bg-neutral-50 z-50 border-b border-neutral-200">
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<a href="#">Link 1</a>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<a href="#">Link 1</a>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<a href="#">Link 1</a>
+	</menu>
 		<!-- Top Content (Image + Title) -->
 		<div class="flex flex-col-reverse md:flex-col">
 			<!-- ! Title and Quick Actions -->
@@ -100,9 +111,11 @@
 			<!-- ! Image Container -->
 			<ImagePreview />
 		</div>
+		
 		<!-- ! Bottom Content -->
 		<div class="mt-8 flex items-start px-4 md:space-x-12 md:px-0">
 			<div class="flex w-full flex-col md:w-4/6">
+				<!-- User Info Short -->
 				<div class="flex w-full flex-col-reverse justify-between md:flex-row md:items-center">
 					<!-- ? Bottom Display Information -->
 					<!-- ? Profile Link Info -->
@@ -151,17 +164,103 @@
 				</div>
 				<hr class="my-1 mb-6 border-neutral-200 dark:border-neutral-800" />
 
-				<div class="w-full my-4">
+				<div class="my-4 w-full">
 					<h3 class="text-2xl font-medium ">Description:</h3>
 					<p class="mt-4">{data.data.description}</p>
 				</div>
 				<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
-				<div class="w-full my-4">
+				<!-- ? Location -->
+				<div class="my-4 w-full">
 					<h3 class="text-2xl font-medium ">Location:</h3>
+					<div class="relative flex items-center justify-between">
+						<div class="z-10 h-[90%] w-full px-6">
+							<p class="text-3xl font-medium">
+								{data.data.city},
+								{data.data.country}
+							</p>
+							<p class="mt-1 text-sm">Blv. Gjergj Fishta, Ish-Ekspozita</p>
+							<button class="buttonSmall mt-4 flex items-center">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+									class="h-5 w-5"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+								<p class="mx-2">Open in Maps</p>
+							</button>
+						</div>
+						<Map
+							country={data.data.country}
+							city={data.data.city}
+							classNames="z-10 px-12"
+							mapClassNames="h-96"
+						/>
+						<div
+							class="absolute top-1/2 h-[75%] w-full -translate-y-1/2 rounded-xl bg-neutral-200 dark:border dark:border-neutral-800 dark:bg-neutral-900"
+						/>
+					</div>
+				</div>
+				<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
+				<!-- ? Listing By: -->
+				<div class="my-4 w-full">
+					<p class="text-lg font-medium">Listing by:</p>
+					<h4 class="mt-1 text-4xl font-medium">
+						{data.data.author.firstName}
+						{data.data.author.lastName}
+					</h4>
+
+					<!-- Cover & Profile Picture -->
+					<div
+						class="relative mt-8 flex h-64 items-center overflow-hidden rounded-xl border-neutral-800 bg-neutral-100 dark:border dark:bg-neutral-900"
+					>
+						{#if data.data.author.sellerInfo?.coverPicture}
+							<div
+								class="absolute top-1/2 left-1/2 h-full w-full -translate-y-1/2 -translate-x-1/2"
+							>
+								<img
+									src={data.data.author.sellerInfo?.coverPicture}
+									alt="{data.data.author.firstName} {data.data.author.lastName} Cover Picture"
+									class="h-[101%] w-[101%] object-cover"
+								/>
+							</div>
+							<div
+								class="absolute top-1/2 left-1/2 z-[5] h-full w-full -translate-y-1/2 -translate-x-1/2 bg-neutral-900 opacity-[85%]"
+							/>
+						{/if}
+						<div class="z-10 mx-6 h-36 w-36 overflow-hidden rounded-full">
+							{#if data.data.author.profilePicture}
+								<img
+									src={data.data.author.profilePicture}
+									alt="{data.data.author.firstName} {data.data.author.lastName} Profile Picture"
+									class="h-full w-full object-cover"
+								/>
+							{:else}
+								<div
+									class="relative flex h-full w-full items-center justify-center bg-neutral-200 text-5xl font-medium dark:bg-neutral-800"
+								>
+									<div
+										class="absolute top-1/2 left-1/2 h-[95%] w-[95%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-neutral-300 dark:border-neutral-700"
+									/>
+									<p>{data.data.author.firstName[0]}.{data.data.author.lastName[0]}</p>
+									<p />
+								</div>
+							{/if}
+						</div>
+					</div>
+					<div class="mt-6 flex items-center space-x-4">
+						<button class="buttonPrimary">Visit Profile</button>
+						<button class="buttonSecondary">Contact Seller</button>
+					</div>
 				</div>
 			</div>
 
-			<div class="hidden flex-col items-center md:sticky md:flex md:w-2/6">
+			<div class="hidden flex-col items-center md:sticky md:top-12 md:left-4 md:flex md:w-2/6">
 				<div class="defaultBg shadowDark rounded-xl p-4 dark:border-none dark:bg-neutral-800">
 					<div class="mt-4 flex w-full items-center justify-between">
 						<!-- Currency Symbol -->
@@ -203,5 +302,13 @@
 
 	<!-- ------------------------------------------- -->
 	<!-- Ad Panel -->
-	<article class="sticky top-0 rounded-md bg-neutral-100 dark:bg-neutral-800 lg:w-3/12" />
+	<article
+		class="h-adPanel sticky top-4 right-0 rounded-md bg-neutral-100 dark:bg-neutral-800 lg:w-3/12"
+	/>
 </article>
+
+<style>
+	.h-adPanel {
+		height: calc(100vh - 2rem);
+	}
+</style>
