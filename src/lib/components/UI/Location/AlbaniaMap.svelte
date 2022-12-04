@@ -4,10 +4,7 @@
 	export let city: Cities;
 	export let mapClassNames: string = 'h-12';
 
-	let highlightedClasses =
-		'fill-indigo-500 stroke-neutral-50 dark:fill-neutral-200 dark:stroke-neutral-800 z-50';
-	let defaultClasses =
-		'fill-neutral-100 stroke-neutral-500 dark:fill-neutral-800 dark:stroke-neutral-500';
+	export let highlightedClasses: string, defaultClasses: string;
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" class={mapClassNames} viewBox="0 0 213.949 482.579">

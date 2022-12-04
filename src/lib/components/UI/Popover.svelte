@@ -35,6 +35,8 @@
 		});
 	};
 
+	let scrollY: number;
+
 	$: visible, console.log('bottom', popoverHeight);
 	$: element, initPosition();
 
@@ -56,9 +58,11 @@
 		vertical: boolean = true;
 
 	export let usePopoverHeight: boolean = false;
+
+	$: if (scrollY == 0) initPosition();
 </script>
 
-<svelte:window on:resize={initPosition} />
+<svelte:window on:resize={initPosition} bind:scrollY />
 
 {#if visible}
 	<section

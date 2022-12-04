@@ -8,7 +8,7 @@
 	}
 
 	.buttonPrimary {
-		@apply rounded-full bg-indigo-500 py-3 px-4 text-sm font-medium tracking-wide text-white dark:bg-indigo-600 lg:rounded-md;
+		@apply rounded-full bg-indigo-600 py-3 px-4 text-sm font-medium tracking-wide text-white dark:bg-indigo-500 lg:rounded-md;
 	}
 
 	.buttonSecondary {
