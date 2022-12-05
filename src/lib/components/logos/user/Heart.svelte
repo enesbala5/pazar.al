@@ -1,12 +1,10 @@
 <script lang="ts">
 	export let classNames: string;
-	export let sm: boolean = false;
-	export let outline: boolean = false;
 
 	import Heart from '~icons/feather/heart';
 </script>
 
-<Heart class={{ classNames }} />
+<Heart class={ classNames } />
 <!-- <svg xmlns="http://www.w3.org/2000/svg" class={classNames} viewBox="0 0 23.903 21.232">
 	<path
 		id="Path_85"

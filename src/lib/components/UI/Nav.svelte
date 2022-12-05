@@ -3,7 +3,6 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
-	import Heart from '../logos/user/Heart.svelte';
 	import { nav } from '../../userPreferences/nav';
 	import Popover from './Popover.svelte';
 	import Language from '$lib/components/UI/Language.svelte';
@@ -15,6 +14,10 @@
 	import DarkModeToggle from './UserPanel/DarkModeToggle.svelte';
 	import type { searchQuery } from '$lib/types/query';
 	import { getParams } from '$lib/functions/paramHandling';
+	// Icons
+	import Heart from '../logos/user/Heart.svelte';
+	import Globe from '~icons/feather/globe';
+	import Message from '~icons/feather/message-square';
 
 	export let onIndex: boolean;
 
@@ -87,45 +90,7 @@
 		<div
 			class="rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 "
 		>
-			<svg
-				class="h-4 w-4 stroke-neutral-900 dark:stroke-neutral-50"
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 22 22"
-			>
-				<g id="Group_274" data-name="Group 274" transform="translate(-1 -1)">
-					<circle
-						id="Ellipse_64"
-						data-name="Ellipse 64"
-						cx="10"
-						cy="10"
-						r="10"
-						transform="translate(2 2)"
-						fill="none"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-					/>
-					<line
-						id="Line_43"
-						data-name="Line 43"
-						x2="20"
-						transform="translate(2 12)"
-						fill="none"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-					/>
-					<path
-						id="Path_84"
-						data-name="Path 84"
-						d="M12,2a15.3,15.3,0,0,1,4,10,15.3,15.3,0,0,1-4,10A15.3,15.3,0,0,1,8,12,15.3,15.3,0,0,1,12,2Z"
-						fill="none"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-					/>
-				</g>
-			</svg>
+			<Globe class={'h-5 w-5'} />
 		</div>
 		<!-- ! Line -->
 		<div class="mx-4 hidden h-5 w-0.5 rounded-full bg-neutral-300 lg:block" />
@@ -133,38 +98,13 @@
 		<div
 			class="hidden rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:block"
 		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="h-4 w-4 stroke-neutral-900 dark:stroke-neutral-50"
-				viewBox="0 0 20 20"
-			>
-				<path
-					id="Path_87"
-					data-name="Path 87"
-					d="M21,15a2,2,0,0,1-2,2H7L3,21V5A2,2,0,0,1,5,3H19a2,2,0,0,1,2,2Z"
-					transform="translate(-2 -2)"
-					fill="none"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-				/>
-				<path
-					id="Path_88"
-					data-name="Path 88"
-					d="M21,15a2,2,0,0,1-2,2H7L3,21V5A2,2,0,0,1,5,3H19a2,2,0,0,1,2,2Z"
-					transform="translate(-2 -2)"
-					fill="none"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-				/>
-			</svg>
+			<Message class={'h-5 w-5'}></Message>
 		</div>
 		<!-- ! Heart -->
 		<div
 			class="hidden rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:block"
 		>
-			<Heart classNames="h-4 w-4 stroke-neutral-900 dark:stroke-neutral-50" />
+			<Heart classNames="h-5 w-5 stroke-neutral-900 dark:stroke-neutral-50" />
 		</div>
 		<!-- {#if $page.data.user}
 			<div

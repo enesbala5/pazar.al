@@ -66,7 +66,7 @@
 				<!-- ! Line -->
 				<div class="mx-4 hidden h-5 w-0.5 rounded-full bg-neutral-300  lg:block" />
 				<!-- ! Messages -->
-				<a href={nav.index} class="buttonSmall">Return Home</a>
+				<a href={nav.index} class="buttonSmRounded buttonSecondary">Return Home</a>
 			</div>
 		</nav>
 	</section>

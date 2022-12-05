@@ -3,28 +3,54 @@
 @tailwind utilities;
 
 @layer components {
-	.inputPrimary {
-		@apply w-full rounded-md border-none bg-neutral-800 py-2.5 ring-0 focus:ring-0;
-	}
-
+	/* * Buttons */
 	.buttonPrimary {
-		@apply rounded-full bg-indigo-600 py-3 px-4 text-sm font-medium tracking-wide text-white dark:bg-indigo-500 lg:rounded-md;
+		@apply bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 text-white hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800;
 	}
 
 	.buttonSecondary {
-		@apply rounded-full bg-neutral-200 py-3 px-4 text-sm font-medium tracking-wide text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50 lg:rounded-md;
+		@apply border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100 hover:text-indigo-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 dark:focus:ring-neutral-700;
 	}
 
 	.buttonTertiary {
 		@apply rounded-full bg-neutral-200 py-3 px-4 text-sm font-medium tracking-wide text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50 lg:rounded-md;
 	}
 
-	.buttonSmall {
+	/* .buttonSmall {
 		@apply whitespace-nowrap rounded-full bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-50 hover:bg-neutral-700 dark:hover:bg-neutral-700;
+	} */
+
+	.buttonSmRounded {
+		@apply buttonSm !rounded-full;
+	}
+
+	.buttonXs {
+		@apply rounded-lg py-2 px-3 text-center text-xs font-medium;
+	}
+
+	.buttonSm {
+		@apply rounded-lg py-2 px-3 text-center text-sm font-medium;
+	}
+
+	.buttonBase {
+		@apply rounded-lg px-5 py-2.5 text-center text-sm font-medium;
+	}
+
+	.buttonLg {
+		@apply rounded-lg py-3 px-5 text-center text-base font-medium;
+	}
+
+	.buttonXl {
+		@apply rounded-lg px-6 py-3.5 text-center text-base font-medium;
+	}
+
+	/* * Alternate */
+	.inputPrimary {
+		@apply w-full rounded-md border-none bg-neutral-800 py-2.5 ring-0 focus:ring-0;
 	}
 
 	.link {
-		@apply text-indigo-500;
+		@apply text-indigo-700;
 	}
 
 	.underlinedLink {

@@ -11,7 +11,7 @@
 	<p>Should be content below:</p>
 	{#if user.role === 'ADMIN'}
 		<form action="/logout" method="POST">
-			<button type="submit" class="buttonPrimary">Log out</button>
+			<button type="submit" class="buttonPrimary buttonBase">Log out</button>
 		</form>
 	{/if}
 </div>

@@ -28,9 +28,9 @@
 	>
 		<div class="flex w-full flex-col items-center px-4 md:px-0">
 			<div class="mb-12 w-full max-w-md text-center">
-				<h1 class=" text-4xl font-medium">Welcome</h1>
+				<h1 class=" text-4xl font-medium">Welcome to Pazar.al</h1>
 				<p class="mt-2 opacity-80">
-					Already a member? <a href={nav.login} class="underlinedLink">Log in</a>
+					Already a member? <a href={nav.login} class="underlinedLink">Log in to your account</a>
 				</p>
 			</div>
 		</div>
@@ -223,8 +223,8 @@
 				</div>
 
 				<div class="mt-6 space-y-2 md:flex md:space-x-4 md:space-y-0">
-					<button type="submit" class="buttonPrimary w-full">Create Account</button>
-					<button on:click={() => (selectedType = false)} class="buttonSecondary w-full"
+					<button type="submit" class="buttonPrimary buttonBase w-full">Create Account</button>
+					<button on:click={() => (selectedType = false)} class="buttonSecondary buttonBase w-full"
 						>Return</button
 					>
 				</div>

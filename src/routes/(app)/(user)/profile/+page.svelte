@@ -77,11 +77,11 @@
 			<p class="mb-4 text-lg font-medium">Menaxho Llogarine</p>
 
 			<div class="flex flex-col items-center space-y-3 lg:flex-row lg:space-y-0 lg:space-x-2">
-				<div class="buttonPrimary flex w-full items-center space-x-4 py-2.5 px-4">
+				<div class="buttonPrimary buttonSm flex w-full items-center space-x-4">
 					<UserSettings classNames="w-6 h-6 " />
 					<p>Cilesimet</p>
 				</div>
-				<div class="buttonSecondary flex w-full items-center space-x-4 py-2.5 px-4">
+				<div class="buttonSecondary buttonSm flex w-full items-center space-x-4">
 					<svg
 						class="h-6 w-6 stroke-neutral-900 dark:stroke-neutral-50"
 						xmlns="http://www.w3.org/2000/svg"

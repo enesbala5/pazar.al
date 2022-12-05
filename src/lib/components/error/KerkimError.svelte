@@ -30,7 +30,7 @@
 		<p>Provoni te kerkoni me terma me te pergjithshem.</p>
 	</div>
 	<div class="mt-8 space-x-2 text-sm">
-		<button class="buttonPrimary" on:click={returnHome}>Return Home</button>
-		<button class="buttonSecondary" on:click={contactSupport}>Kontaktoni Suportin</button>
+		<button class="buttonPrimary buttonBase" on:click={returnHome}>Return Home</button>
+		<button class="buttonSecondary buttonBase" on:click={contactSupport}>Kontaktoni Suportin</button>
 	</div>
 </section>

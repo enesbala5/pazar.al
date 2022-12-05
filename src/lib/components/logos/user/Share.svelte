@@ -1,12 +1,10 @@
 <script lang="ts">
-	export let classNames: string;
-	export let sm: boolean = false;
-	export let outline: boolean = false;
-
 	import Share from '~icons/feather/share2';
+	
+	export let classNames: string;
 </script>
 
-<Share class={{ classNames }} />
+<Share class={classNames} />
 <!-- 
 {#if !sm}
 	{#if !outline}
