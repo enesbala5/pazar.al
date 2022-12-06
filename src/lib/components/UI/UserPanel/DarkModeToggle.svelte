@@ -4,7 +4,7 @@
 
 {#if $darkMode}
 	<div
-		class="rounded-full p-2 dark:bg-neutral-800"
+		class="rounded-full dark:bg-neutral-800"
 		on:click={() => darkMode.set(false)}
 		on:keydown={() => darkMode.set(false)}
 	>
@@ -25,7 +25,7 @@
 	</div>
 {:else}
 	<div
-		class="rounded-full p-2 dark:bg-neutral-800"
+		class="rounded-full  dark:bg-neutral-800"
 		on:click={() => darkMode.set(true)}
 		on:keydown={() => darkMode.set(true)}
 	>

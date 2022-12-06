@@ -76,7 +76,7 @@
 		class=" 
 		{classNames} shadow-xl
 	{anchor === 'right' ? 'origin-top-right' : 'origin-top-left'}
-	wrapper z-50 overflow-hidden rounded-xl {bgColor}"
+	wrapper z-50 overflow-hidden rounded-lg {bgColor}"
 		style="--popover-top: {`${usePopoverHeight ? popoverHeight : bottom}px`};
 		--popover-left:
 	{`${anchor === 'right' ? right - popoverSize : left}px`}"

@@ -6,6 +6,7 @@
 	import { darkMode } from '$lib/userPreferences/preferences';
 
 	import { Svrollbar } from 'svrollbar';
+	import { currencies } from '$lib/userPreferences/currencies';
 
 	let currentLocale = $page.data.language ?? 'sq';
 	let translationsLoaded = false;
@@ -16,6 +17,8 @@
 			(e) => (translationsLoaded = true)
 		);
 	});
+
+	$: $currencies, console.log($currencies);
 </script>
 
 <Svrollbar />

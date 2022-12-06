@@ -7,11 +7,11 @@
 </div>
 
 <div
-	class="container mt-8 flex space-x-4 overflow-x-scroll noScroll pr-4 pl-4  md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
+	class="container mt-8 flex space-x-4 overflow-x-scroll noScroll pr-4 pl-4 md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
 >
 	<div class=" flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
+			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img
 				src="images/categories/popular/cars.png"
@@ -24,7 +24,7 @@
 
 	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
+			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img
 				src="images/categories/popular/iphone.png"
@@ -37,7 +37,7 @@
 
 	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
+			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img
 				src="images/categories/popular/playstation.png"
@@ -50,7 +50,7 @@
 
 	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
+			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img
 				src="images/categories/popular/shoes.png"
@@ -63,7 +63,7 @@
 
 	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
+			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img
 				src="images/categories/popular/clothing.png"
@@ -76,7 +76,7 @@
 
 	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
 		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200"
+			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
 		>
 			<img
 				src="images/categories/popular/appliances.png"

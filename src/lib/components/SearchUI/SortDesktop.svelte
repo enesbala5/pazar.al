@@ -52,7 +52,7 @@
 	{element}
 	{visible}
 	on:notVisible={notVisible}
-	bgColor="bg-neutral-50 dark:bg-neutral-800"
+	bgColor="bg-neutral-50 p-1 dark:bg-neutral-800"
 	classNames="shadow-xl"
 >
 	<PopoverItem>

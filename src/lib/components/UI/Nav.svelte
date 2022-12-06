@@ -98,7 +98,7 @@
 		<div
 			class="hidden rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:block"
 		>
-			<Message class={'h-5 w-5'}></Message>
+			<Message class={'h-5 w-5'} />
 		</div>
 		<!-- ! Heart -->
 		<div
@@ -216,27 +216,27 @@
 				bgColor={onIndex
 					? 'bg-neutral-50 dark:bg-neutral-800'
 					: 'bg-neutral-50 dark:bg-neutral-800'}
-				classNames="shadowDarkPlusMax"
+				classNames="shadowDarkPlusMax p-1"
 			>
 				{#if user}
-					<PopoverItem>
+					<PopoverItem textAlign="right">
 						<a href={nav.profile} class="">Profile</a>
 					</PopoverItem>
-					<PopoverItem>
+					<PopoverItem textAlign="right">
 						<Logout>
 							<button type="submit">Log Out</button>
 						</Logout>
 					</PopoverItem>
 				{/if}
 				{#if !user}
-					<PopoverItem>
+					<PopoverItem textAlign="right">
 						<a href={nav.login}>Log In</a>
 					</PopoverItem>
-					<PopoverItem>
+					<PopoverItem textAlign="right">
 						<a href={nav.register}>Sign Up</a>
 					</PopoverItem>
 				{/if}
-				<div class="px-4">
+				<div class="buttonSm">
 					<DarkModeToggle />
 				</div>
 			</Popover>

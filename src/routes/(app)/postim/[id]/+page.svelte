@@ -1,22 +1,27 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-
 	// Icons
 	import Euro from '$lib/components/logos/user/currencies/Euro.svelte';
 	import Lek from '$lib/components/logos/user/currencies/Lek.svelte';
 	import Heart from '$lib/components/logos/user/Heart.svelte';
 	import Share from '$lib/components/logos/user/Share.svelte';
+	import Flag from '~icons/feather/flag';
+	import Navigate from '~icons/feather/navigation';
+	import Whatsapp from '$lib/components/logos/social/Whatsapp.svelte';
+
+	// UI Components
 	import Badge from '$lib/components/UI/Important/Badge.svelte';
 	import Toast from '$lib/components/UI/Important/Toast.svelte';
 	import Map from '$lib/components/UI/Location/Map.svelte';
 	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
 	import NavLink from '$lib/components/UI/Sections/Post/NavLink.svelte';
 	// Imported Functions
+	import { browser } from '$app/environment';
 	import manageLike from '$lib/fetching/manageLike';
 	import { onMount } from 'svelte';
 	// Types
 	import type { PageData } from './$types';
 	import type { PostimPageRequest } from './+page';
+	import { currencyConversion } from '$lib/functions/conversions';
 	// -----------
 
 	// Variable Declaration
@@ -41,11 +46,12 @@
 
 	// $: data, console.log(data.data);
 
-	const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
+	export const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
 
 	let scrollY: number;
 
 	let bottomContentContainer: HTMLDivElement;
+	let postActions: HTMLDivElement;
 
 	const updateOffsetTop = (div: HTMLDivElement): number => {
 		if (browser) {
@@ -57,23 +63,27 @@
 
 	onMount(() => {
 		bottomContentContainerTop = updateOffsetTop(bottomContentContainer);
+		postActionsTop = updateOffsetTop(postActions);
 	});
+
+	$: if (scrollY === 0) {
+		bottomContentContainerTop = updateOffsetTop(bottomContentContainer);
+		postActionsTop = updateOffsetTop(postActions);
+	}
 
 	let bottomContentContainerTop: number;
 	let bottomContentContainerOffsetHeight: number;
 
-	$: bottomContentContainerTop, console.log('bottomContentContainerTop', bottomContentContainerTop);
-	$: bottomContentContainerOffsetHeight,
-		console.log('bottomContentContainerOffsetHeight', bottomContentContainerOffsetHeight);
-
-	import Flag from '~icons/feather/flag';
-	import Navigate from '~icons/feather/navigation';
-	import Whatsapp from '$lib/components/logos/social/Whatsapp.svelte';
+	let postActionsTop: number;
+	let postActionsOffsetHeight: number;
 </script>
 
 <svelte:window
 	bind:scrollY
-	on:resize={() => (bottomContentContainerTop = updateOffsetTop(bottomContentContainer))}
+	on:resize={() => {
+		bottomContentContainerTop = updateOffsetTop(bottomContentContainer);
+		postActionsTop = updateOffsetTop(postActions);
+	}}
 />
 
 <title>Pazar{data.data.title ? ' - ' + data.data.title : ''}</title>
@@ -91,13 +101,22 @@
 		<menu
 			class="
 			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'fixed' : 'hidden'}
-			w-postNav top-0 z-50 flex h-20 items-end border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900
+			w-postNav top-0 z-50 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
 			"
 		>
-			<NavLink text="Post Information" href="tags" />
-			<NavLink text="Description" href="description" />
-			<NavLink text="Location" href="location" />
-			<NavLink text="Author" href="author" />
+			<section class="flex items-end md:w-4/6">
+				<NavLink text="Post Information" href="tags" />
+				<NavLink text="Description" href="description" />
+				<NavLink text="Location" href="location" />
+				<NavLink text="Author" href="author" />
+			</section>
+			<section
+				class="
+				{scrollY > postActionsTop + postActionsOffsetHeight ? 'block' : 'hidden'}
+				flex h-full w-2/6 items-center justify-end px-4"
+			>
+				<button class="buttonPrimary buttonSm">Message Seller</button>
+			</section>
 		</menu>
 		<article class="relative w-full">
 			<!-- ! Top Content (Image + Title) -->
@@ -319,8 +338,12 @@
 					</div>
 				</div>
 
-				<div class="hidden flex-col items-center md:sticky md:top-28 md:left-4 md:flex md:w-2/6">
+				<div
+					class="hidden flex-col items-center md:sticky md:top-28 md:left-4 md:flex md:w-2/6"
+					bind:this={postActions}
+				>
 					<div
+						bind:offsetHeight={postActionsOffsetHeight}
 						class="defaultBg shadowDark rounded-xl border border-neutral-300 p-4 dark:border-neutral-900 dark:bg-neutral-800"
 					>
 						<div class="mt-4 flex w-full items-center justify-between">
@@ -335,17 +358,22 @@
 								{formatPrice(data.data.priceHistory[0].price)}
 							</p>
 						</div>
-						<p class="mt-2 text-right text-sm opacity-80">Approx. 19031 Lek</p>
+						{#await currencyConversion(data.data.priceHistory[0].eur ? 'EUR' : 'ALL', data.data.priceHistory[0].eur ? 'ALL' : 'EUR', data.data.priceHistory[0].price) then convertedAmount}
+							<p class="mt-2 text-right text-sm opacity-80">
+								Approx. {formatPrice(convertedAmount?.amount)}
+								{convertedAmount?.currency}
+							</p>
+						{/await}
 						<hr class="mb-6 mt-8 border-neutral-200 dark:border-neutral-800" />
 						<div>
-							<button class="buttonPrimary buttonBase w-full">Message Seller</button>
-							<button class="buttonSecondary buttonBase mt-2 w-full">
+							<button class="buttonPrimary buttonLg w-full text-sm">Message Seller</button>
+							<button class="buttonSecondary buttonLg mt-2 w-full text-sm">
 								<div class="flex items-center justify-center space-x-2">
 									<Whatsapp classNames="w-4 dark:fill-neutral-300" />
 									<p>Contact on WhatsApp</p>
 								</div>
 							</button>
-							<button class="buttonSecondary buttonBase mt-2 w-full"
+							<button class="buttonSecondary buttonLg mt-2 w-full text-sm"
 								>Contact on Facebook Messenger</button
 							>
 						</div>
@@ -361,7 +389,7 @@
 			</div>
 		</article>
 		<!-- ! Recommended Post - AFTER CONTENT -->
-		<article class="relative min-h-screen w-full rounded-xl bg-neutral-100 mb-4" />
+		<article class="relative mb-4 min-h-screen w-full rounded-xl bg-neutral-100" />
 	</section>
 
 	<!-- ------------------------------------------- -->
