@@ -53,9 +53,9 @@
 	{visible}
 	on:notVisible={notVisible}
 	bgColor="bg-neutral-50 p-1 dark:bg-neutral-800"
-	classNames="shadow-xl"
+	classNames="shadowDark"
 >
-	<PopoverItem>
+	<PopoverItem textAlign="right">
 		<p class="text-sm">Least expensive</p>
 	</PopoverItem>
 </Popover>

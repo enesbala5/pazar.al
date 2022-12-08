@@ -82,13 +82,13 @@
 		<!-- ! Create a Listing CTA -->
 		<a
 			href={nav.createListing}
-			class="hidden whitespace-nowrap rounded-full bg-transparent px-4 py-2 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:block"
+			class="hidden whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:block"
 		>
 			Create a Listing
 		</a>
 		<!-- ! LANG -->
 		<div
-			class="rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 "
+			class="rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800  "
 		>
 			<Globe class={'h-5 w-5'} />
 		</div>
@@ -106,19 +106,7 @@
 		>
 			<Heart classNames="h-5 w-5 stroke-neutral-900 dark:stroke-neutral-50" />
 		</div>
-		<!-- {#if $page.data.user}
-			<div
-				bind:this={element}
-				on:click={toggleVisible}
-				on:keydown={toggleVisible}
-				class="
-				{onIndex ? ' bg-neutral-300 dark:bg-neutral-900' : 'bg-neutral-200 dark:bg-neutral-800'}
-				flex h-10 w-10 items-center justify-center rounded-full "
-			>
-				<p class="pointer-events-none mb-0.5 text-xl text-neutral-50">E</p>
-			</div>
-			
-		{/if} -->
+
 		<!-- ! User Menu -->
 		<div
 			class="ml-2 flex items-center whitespace-nowrap rounded-full border border-neutral-200 p-0.5 hover:shadow-md dark:border-neutral-700 {visible
@@ -237,35 +225,9 @@
 					</PopoverItem>
 				{/if}
 				<div class="buttonSm">
-					<DarkModeToggle />
+					<DarkModeToggle styled={false} />
 				</div>
 			</Popover>
 		</div>
-
-		<!-- <div
-			class="mr-4 flex items-center border-r-2 {onIndex
-				? ' border-neutral-700'
-				: ' border-neutral-800'} pr-4 "
-		>
-			<Language
-				bgColor={onIndex
-					? 'dark:bg-neutral-900 bg-neutral-300'
-					: 'bg-neutral-200 dark:bg-neutral-800'}
-			/>
-		</div> -->
-		<!-- !HEART -->
-		<!-- <div class=" mr-4 flex h-5   w-5 items-center justify-center opacity-70">
-			<Heart classNames="fill-white" />
-		</div> -->
-		<!-- Break Line -->
-		<!-- <div class=" bg-neutral-50 px-2" /> -->
-
-		<!-- ! Logged in -->
-
-		<!-- ! Not logged in -->
-		<!-- {#if !$page.data.user}
-			<a href={nav.login}>Login</a>
-		{/if} -->
-		<!-- ! Dark Mode Toggle -->
 	</div>
 </nav>

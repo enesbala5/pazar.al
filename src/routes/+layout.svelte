@@ -3,7 +3,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { loadTranslations, locale } from '$lib/lang';
-	import { darkMode } from '$lib/userPreferences/preferences';
+	import { darkMode, modalOpen } from '$lib/userPreferences/preferences';
 
 	import { Svrollbar } from 'svrollbar';
 	import { currencies } from '$lib/userPreferences/currencies';
@@ -12,17 +12,16 @@
 	let translationsLoaded = false;
 
 	afterNavigate(async () => {
+		modalOpen.set(false);
 		if (translationsLoaded) translationsLoaded = false;
 		await loadTranslations(currentLocale, $page.url.pathname)?.then(
 			(e) => (translationsLoaded = true)
 		);
 	});
-
-	$: $currencies, console.log($currencies);
 </script>
 
 <Svrollbar />
 
-<section class={$darkMode ? 'dark' : ''}>
+<section class="{$darkMode ? 'dark' : ''} font-aeonik">
 	<slot />
 </section>

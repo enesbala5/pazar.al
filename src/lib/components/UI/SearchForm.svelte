@@ -69,8 +69,8 @@
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
 				<Clear
-					classNames="
-				{onIndex ? '' : 'stroke-indigo-600 dark:stroke-neutral-50'} stroke-white w-5/6 h-5/6 "
+					classNames="w-2/3 h-2/3"
+					innerClassNames={onIndex ? ' bg-white' : 'bg-indigo-600 dark:bg-neutral-50'}
 				/>
 			</button>
 		{:else}
@@ -82,7 +82,7 @@
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
 				<Search
-					classNames="dark:fill-white {onIndex ? 'fill-white' : 'fill-indigo-600'} w-2/3 h-2/3"
+					classNames="dark:stroke-white {onIndex ? 'fill-white' : 'fill-indigo-600'} w-2/3 h-2/3"
 				/>
 			</button>{/if}
 	</section>

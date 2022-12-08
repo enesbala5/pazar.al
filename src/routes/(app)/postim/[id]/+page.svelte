@@ -51,9 +51,9 @@
 	let scrollY: number;
 
 	let bottomContentContainer: HTMLDivElement;
-	let postActions: HTMLDivElement;
+	let postActions: HTMLElement;
 
-	const updateOffsetTop = (div: HTMLDivElement): number => {
+	const updateOffsetTop = (div: HTMLElement): number => {
 		if (browser) {
 			return div.offsetTop;
 		} else {
@@ -76,6 +76,8 @@
 
 	let postActionsTop: number;
 	let postActionsOffsetHeight: number;
+
+	$: scrollY, console.log('postActionsTop: ', postActionsTop, 'offset:', postActionsOffsetHeight);
 </script>
 
 <svelte:window
@@ -112,13 +114,13 @@
 			</section>
 			<section
 				class="
-				{scrollY > postActionsTop + postActionsOffsetHeight ? 'block' : 'hidden'}
+				{scrollY > postActionsOffsetHeight - postActionsTop / 3 ? 'block' : 'hidden'}
 				flex h-full w-2/6 items-center justify-end px-4"
 			>
 				<button class="buttonPrimary buttonSm">Message Seller</button>
 			</section>
 		</menu>
-		<article class="relative w-full">
+		<article class="relative w-full" bind:offsetHeight={postActionsOffsetHeight}>
 			<!-- ! Top Content (Image + Title) -->
 			<div class="flex flex-col-reverse md:flex-col">
 				<!-- ! Title and Quick Actions -->
@@ -245,10 +247,16 @@
 					<hr class="mb-1 border-neutral-200 dark:border-neutral-800" />
 					<!-- ? Tags -->
 					<div class="w-full  scroll-m-20" bind:this={bottomContentContainer} id="tags">
-						<div class=" mb-4 mt-6 flex flex-wrap">
-							{#each data.data.tags ?? [] as tag}
-								<Badge title="{tag.name}:" message={tag.value} margin />
-							{/each}
+						<div class=" mb-6 mt-6">
+							<div class="mb-4 mt-8 flex w-full items-center justify-between">
+								<h3 class="text-2xl font-medium ">Post Information:</h3>
+								<a href="#" class="buttonXs buttonSecondary rounded-full">View Detailed</a>
+							</div>
+							<div class="mt-6 flex flex-wrap">
+								{#each data.data.tags ?? [] as tag}
+									<Badge title="{tag.name}:" message={tag.value} margin rounded="md" />
+								{/each}
+							</div>
 						</div>
 					</div>
 					<hr class="my-1 mb-6 border-neutral-200 dark:border-neutral-800" />
@@ -343,7 +351,6 @@
 					bind:this={postActions}
 				>
 					<div
-						bind:offsetHeight={postActionsOffsetHeight}
 						class="defaultBg shadowDark rounded-xl border border-neutral-300 p-4 dark:border-neutral-900 dark:bg-neutral-800"
 					>
 						<div class="mt-4 flex w-full items-center justify-between">

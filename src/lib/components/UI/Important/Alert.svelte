@@ -9,19 +9,21 @@
 
 	let defineClassByType = () => {
 		if (type === 'default') {
-			return 'bg-neutral-100 border border-neutral-200 dark:border-neutral-200 dark:bg-transparent text-neutral-700 dark:text-neutral-200';
+			return 'bg-neutral-100 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300';
 		}
 		if (type === 'success') {
-			return 'bg-green-100 border border-green-200 dark:border-green-500 dark:bg-transparent text-green-700 dark:text-green-500';
+			return 'bg-green-100 border border-green-200 dark:border-green-500 dark:bg-green-900 text-green-700 dark:text-green-500';
 		}
 		if (type === 'info') {
-			return 'bg-blue-100 border border-blue-200 dark:border-blue-500 dark:bg-transparent text-blue-700 dark:text-blue-500';
+			return 'bg-blue-100 border border-blue-200 dark:border-blue-500 dark:bg-gray-900 text-blue-700 dark:text-blue-300';
 		}
 		if (type === 'error' || type === 'danger') {
-			return 'bg-red-100 border border-red-200 dark:border-red-500 dark:bg-transparent text-red-700 dark:text-red-500';
+			return 'bg-red-100 border border-red-200 dark:border-red-500 dark:bg-red-900 text-red-700 dark:text-red-200';
 		}
 		if (type === 'warning') {
-			return 'bg-yellow-100 border border-yellow-200 dark:border-yellow-500 dark:bg-transparent text-yellow-700 dark:text-yellow-500';
+			return 'bg-yellow-200 border border-yellow-400 dark:border-yellow-500 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-500';
+		} else {
+			return '';
 		}
 	};
 

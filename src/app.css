@@ -13,7 +13,7 @@
 	}
 
 	.buttonTertiary {
-		@apply rounded-full bg-neutral-200 py-3 px-4 text-sm font-medium tracking-wide text-neutral-900 dark:bg-neutral-700 dark:text-neutral-50 lg:rounded-md;
+		@apply  text-neutral-900 hover:text-indigo-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-neutral-200  dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 dark:focus:ring-neutral-700;
 	}
 
 	/* .buttonSmall {
@@ -50,11 +50,11 @@
 	}
 
 	.link {
-		@apply text-indigo-700;
+		@apply hover:text-indigo-700 dark:hover:text-indigo-500;
 	}
 
-	.underlinedLink {
-		@apply link underline underline-offset-2;
+	.underlined {
+		@apply underline underline-offset-2;
 	}
 
 	.checkbox {

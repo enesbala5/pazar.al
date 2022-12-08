@@ -513,7 +513,9 @@
 				/>
 			</div>
 			<div class="defaultBg shadowDark mt-4 w-full rounded-xl p-4">
-				<button class="buttonPrimary buttonBase w-full" type="submit" form="createPost">Create Post</button>
+				<button class="buttonPrimary buttonBase w-full" type="submit" form="createPost"
+					>Create Post</button
+				>
 				<button class="buttonSecondary buttonBase mt-2 w-full">Create Post</button>
 			</div>
 		</section>

@@ -15,11 +15,11 @@
 </svelte:head>
 
 <!-- Page Content -->
-<article class="mt-4 w-full bg-neutral-50 md:px-4 dark:bg-neutral-900">
-	<div class="lg:hidden px-4">
+<article class="mt-4 w-full bg-neutral-50 dark:bg-neutral-900 md:px-4">
+	<div class="px-4 lg:hidden">
 		<SearchForm />
 	</div>
-	<div class="relative mb-8 mt-8 h-[15rem] w-full  lg:mt-4 lg:h-[25rem] px-4 md:px-0">
+	<div class="relative mb-8 mt-8 h-[15rem] w-full  px-4 md:px-0 lg:mt-4 lg:h-[25rem]">
 		<picture>
 			<source media="(min-width: 1024px)" srcset="images/promo/coverLg.svg" />
 			<img
@@ -29,7 +29,7 @@
 			/>
 		</picture>
 		<div
-			class="absolute px-4 md:px-0 -bottom-4 left-1/2 flex w-full -translate-x-1/2 items-center space-x-2 md:bottom-4 md:w-1/2 lg:w-1/3"
+			class="absolute -bottom-4 left-1/2 flex w-full -translate-x-1/2 items-center space-x-2 px-4 md:bottom-4 md:w-1/2 md:px-0 lg:w-1/3"
 		>
 			{#each Array(3) as _, i}
 				<button
@@ -79,7 +79,7 @@
 	<section class="mx-auto mt-16 w-10/12 ">
 		<TopDeals />
 	</section>
-	<section class="md:mx-auto mt-16 md:w-10/12">
+	<section class="mt-16 md:mx-auto md:w-10/12">
 		<PopularCategories />
 	</section>
 
