@@ -22,6 +22,7 @@
 	import type { PageData } from './$types';
 	import type { PostimPageRequest } from './+page';
 	import { currencyConversion } from '$lib/functions/conversions';
+	import PostInformation from '$lib/components/UI/Sections/Post/PostInformation.svelte';
 	// -----------
 
 	// Variable Declaration
@@ -76,8 +77,6 @@
 
 	let postActionsTop: number;
 	let postActionsOffsetHeight: number;
-
-	$: scrollY, console.log('postActionsTop: ', postActionsTop, 'offset:', postActionsOffsetHeight);
 </script>
 
 <svelte:window
@@ -99,11 +98,10 @@
 >
 	<section class="relative lg:w-9/12">
 		<!-- ! NAVBAR -->
-
 		<menu
 			class="
 			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'fixed' : 'hidden'}
-			w-postNav top-0 z-50 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
+			w-postNav top-0 z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
 			"
 		>
 			<section class="flex items-end md:w-4/6">
@@ -245,19 +243,9 @@
 						</div>
 					</div>
 					<hr class="mb-1 border-neutral-200 dark:border-neutral-800" />
-					<!-- ? Tags -->
-					<div class="w-full  scroll-m-20" bind:this={bottomContentContainer} id="tags">
-						<div class=" mb-6 mt-6">
-							<div class="mb-4 mt-8 flex w-full items-center justify-between">
-								<h3 class="text-2xl font-medium ">Post Information:</h3>
-								<a href="#" class="buttonXs buttonSecondary rounded-full">View Detailed</a>
-							</div>
-							<div class="mt-6 flex flex-wrap">
-								{#each data.data.tags ?? [] as tag}
-									<Badge title="{tag.name}:" message={tag.value} margin rounded="md" />
-								{/each}
-							</div>
-						</div>
+					<!-- ? Post Information -->
+					<div class="w-full scroll-m-20" bind:this={bottomContentContainer} id="tags">
+						<PostInformation tags={data.data?.tags ?? []} />
 					</div>
 					<hr class="my-1 mb-6 border-neutral-200 dark:border-neutral-800" />
 					<!-- ? Description -->

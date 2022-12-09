@@ -33,7 +33,7 @@
 {#if visible}
 	<div
 		class="
-	{classNames} shadowLight fixed right-6 bottom-6 z-50 flex w-80 items-center justify-between space-x-2 rounded-md p-4 text-sm"
+	{classNames} shadowLight fixed right-6 bottom-6 z-30 flex w-80 items-center justify-between space-x-2 rounded-md p-4 text-sm"
 	>
 		<div class="flex items-center space-x-2">
 			{#if !useSlot}

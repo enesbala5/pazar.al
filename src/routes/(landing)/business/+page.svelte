@@ -7,7 +7,7 @@
 <title>Business</title>
 
 <main class="mx-auto w-11/12">
-	<article class="defaultBg flex h-[80vh] items-center justify-between rounded-xl bg-neutral-100">
+	<article class=" flex h-[80vh] items-center justify-between rounded-xl bg-neutral-100">
 		<section class="mb-6 w-1/2 p-8">
 			<h1 class="text-5xl font-medium leading-tight">Dyqani juaj dixhital.</h1>
 			<p class="mt-4 w-2/3 text-sm">
