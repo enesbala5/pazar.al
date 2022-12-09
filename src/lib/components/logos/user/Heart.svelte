@@ -1,10 +1,10 @@
 <script lang="ts">
 	export let classNames: string;
 
+	export let liked: boolean = false;
 	import Heart from '~icons/feather/heart';
 </script>
 
-<Heart class={ classNames } />
 <!-- <svg xmlns="http://www.w3.org/2000/svg" class={classNames} viewBox="0 0 23.903 21.232">
 	<path
 		id="Path_85"
@@ -17,3 +17,21 @@
 		stroke-width="3"
 	/>
 </svg> -->
+<!-- * OLD -->
+<!-- <Heart /> -->
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	class=" border-box 
+	{liked ? 'fill-red-500 stroke-red-500' : 'fill-transparent stroke-neutral-800'} {classNames}"
+	viewBox="0 0 22.903 20.232"
+>
+	<path
+		id="heart"
+		d="M20.84,4.61a5.5,5.5,0,0,0-7.78,0L12,5.67,10.94,4.61a5.5,5.5,0,0,0-7.78,7.78l1.06,1.06L12,21.23l7.78-7.78,1.06-1.06a5.5,5.5,0,0,0,0-7.78Z"
+		transform="translate(-0.549 -1.998)"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		stroke-width="2"
+	/>
+</svg>

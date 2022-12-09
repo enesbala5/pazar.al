@@ -30,9 +30,7 @@
 
 {#if $modalOpen}
 	<div class="fixed top-0 left-0 z-40 flex h-screen w-screen items-center justify-center">
-		<div class="defaultBg z-50">
-			<slot />
-		</div>
+		<slot />
 		<div
 			class="fixed top-0 left-0 h-full w-full bg-black opacity-75"
 			on:click={toggleModal}

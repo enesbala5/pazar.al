@@ -45,8 +45,6 @@
 		}
 	};
 
-	// $: data, console.log(data.data);
-
 	export const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
 
 	let scrollY: number;
@@ -122,14 +120,15 @@
 			<!-- ! Top Content (Image + Title) -->
 			<div class="flex flex-col-reverse md:flex-col">
 				<!-- ! Title and Quick Actions -->
+				<!-- !!!!!!!! MOBILE -->
 				<div class="mx-4 flex items-center space-x-2 py-2 md:mx-0 md:hidden">
-					<button
-						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
-						on:click={() => updateLikes(data?.data.id)}
-					>
-						<Heart classNames="h-4 w-4 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
-						<p class="text-sm font-medium">Like Post</p>
-					</button>
+						<button
+							class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
+							on:click={() => updateLikes(data?.data.id)}
+						>
+							<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
+							<p class="text-sm font-medium">Like Post</p>
+						</button>
 					<button
 						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
 						on:click={() => updateLikes(data?.data.id)}
@@ -163,6 +162,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- !!!!!!!! DESKTOP -->
 					<button
 						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
 						on:click={() => console.log('sharing')}
@@ -174,7 +174,7 @@
 						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
 						on:click={() => updateLikes(data?.data.id)}
 					>
-						<Heart classNames="h-4 w-4 {liked ? 'text-red-500' : 'text-neutral-800'}" />
+						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />liked={typeof liked !== 'boolean' ? false : liked}
 						<p class="text-sm font-medium">Like Post</p>
 					</button>
 				</section>

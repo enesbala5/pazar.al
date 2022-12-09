@@ -55,7 +55,7 @@
 				on:click={() => {
 					history.back();
 				}}
-				class="ml-4 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-700"
+				class="ml-4 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-700 md:hidden"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
