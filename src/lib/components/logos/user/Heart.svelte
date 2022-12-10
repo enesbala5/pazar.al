@@ -23,7 +23,7 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	class=" border-box 
-	{liked ? 'fill-red-500 stroke-red-500' : 'fill-transparent stroke-neutral-800'} {classNames}"
+	{liked ? 'fill-red-500 stroke-red-500' : 'fill-transparent stroke-neutral-700 dark:stroke-neutral-100 '} {classNames}"
 	viewBox="0 0 22.903 20.232"
 >
 	<path

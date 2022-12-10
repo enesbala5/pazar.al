@@ -4,16 +4,17 @@
 	import { invalidateAll } from '$app/navigation';
 	import { nav } from '$lib/userPreferences/nav';
 	import InputField from '$lib/components/UI/Input/InputField.svelte';
+	import Alert from '$lib/components/UI/Important/Alert.svelte';
 
 	export let form: ActionData;
 </script>
 
-<div class="mt-12 flex pt-12 lg:pt-0 relative min-h-[85vh]">
+<div class="relative mt-12 flex min-h-[85vh] pt-12 lg:pt-0">
 	<div class="flex w-full flex-col items-center px-4 lg:px-0">
 		<div class="mb-12 w-full max-w-md text-center">
-			<h1 class=" text-4xl font-medium">Welcome back!</h1>
+			<h1 class="headline text-4xl font-medium">Welcome back!</h1>
 			<p class="mt-2 opacity-80">
-				Sign in to Pazar.al or <a href={nav.register} class="underlinedLink">create an account</a>
+				Sign in to Pazar.al or <a href={nav.register} class="underlined">create an account</a>
 			</p>
 		</div>
 
@@ -22,26 +23,30 @@
 			class="w-full max-w-md"
 			use:enhance={() => {
 				return async ({ result }) => {
-					// rerun the `load` function for the page
-					// https://kit.svelte.dev/docs/modules#$app-navigation-invalidateall
 					invalidateAll();
-
-					// since we're customizing the default behaviour
-					// we don't want to reimplement what `use:enhance` does
-					// so we can use `applyResult` and pass the `result`
 					await applyAction(result);
 				};
 			}}
 		>
-			<InputField classNames="mt-4" name="email" type="email" title="Email" required />
+			<InputField
+				classNames="mt-4"
+				name="emailOrUsername"
+				type="text"
+				title="Email or Username"
+				required
+			/>
 			<InputField classNames="mt-4" name="password" type="password" title="Password" required />
 
 			{#if form?.invalid}
-				<p class=" mt-2 text-red-500">Email and password is required.</p>
+				<div class="mt-4">
+					<Alert type="error" message="Email and password is required." />
+				</div>
 			{/if}
 
 			{#if form?.credentials}
-				<p class=" mt-2 text-red-500">You have entered the wrong credentials.</p>
+				<div class="mt-4">
+					<Alert type="error" message="You have entered the wrong credentials" />
+				</div>
 			{/if}
 
 			<div class="mt-6 flex items-center justify-between">

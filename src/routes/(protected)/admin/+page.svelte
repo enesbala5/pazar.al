@@ -5,7 +5,7 @@
 	const user: PageUser = $page.data.user;
 </script>
 
-<h1 class="mx-4 mb-12 mt-4 text-4xl font-medium">Admin</h1>
+<h1 class="headline mx-4 mb-12 mt-4 text-4xl font-medium">Admin</h1>
 
 <div class="px-4">
 	<p>Should be content below:</p>

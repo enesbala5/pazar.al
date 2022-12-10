@@ -28,8 +28,9 @@ model PriceHistory {
 model User {
   uid           String  @id @default(uuid())
   firstName     String
-  lastName      String?
+  lastName      String
   email         String  @unique
+  username      String  @unique
   passwordHash  String
   userAuthToken String  @unique
 

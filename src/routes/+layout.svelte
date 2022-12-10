@@ -18,11 +18,10 @@
 			(e) => (translationsLoaded = true)
 		);
 	});
-	
 </script>
 
 <Svrollbar />
 
-<section class="{$darkMode ? 'dark' : ''} font-aeonik {modalOpen ? 'overflow-y-hidden' : ''}">
+<section class="{$darkMode ? 'dark' : ''} font-aeonik">
 	<slot />
 </section>

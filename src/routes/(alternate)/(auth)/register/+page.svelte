@@ -28,7 +28,7 @@
 	>
 		<div class="flex w-full flex-col items-center px-4 md:px-0">
 			<div class="mb-12 w-full max-w-md text-center">
-				<h1 class=" text-4xl font-medium">Welcome to Pazar.al</h1>
+				<h1 class="headline text-4xl font-medium">Welcome to Pazar.al</h1>
 				<p class="mt-2 opacity-80">
 					Already a member? <a href={nav.login} class="underlinedLink">Log in to your account</a>
 				</p>
@@ -152,7 +152,7 @@
 	<div class="mt-12 flex flex-col items-center pt-12 lg:justify-center lg:pt-0">
 		<div class="flex w-full flex-col items-center px-4 lg:px-0">
 			<div class="mb-12 w-full max-w-md text-center">
-				<h1 class=" text-4xl font-medium">
+				<h1 class="headline text-4xl font-medium">
 					Create your<br />
 					{`${business ? 'Seller Account' : 'Personal Account'}`}
 				</h1>

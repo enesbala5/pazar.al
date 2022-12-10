@@ -209,7 +209,7 @@
 <main class="mt-12 px-4 lg:mx-auto lg:w-11/12 lg:px-0">
 	<article class="mx-auto mt-12 flex w-10/12 justify-between space-x-8">
 		<section class="w-2/3">
-			<h1 class="text-4xl font-medium">Create a Post</h1>
+			<h1 class="headline text-4xl font-medium">Create a Post</h1>
 			<h3 class="mt-2">
 				Every post on Pazar.al is free, with the option of <a
 					href={nav.promotion}
@@ -464,7 +464,7 @@
 		</section>
 
 		<section class="top-8 h-full w-1/3 lg:sticky">
-			<h1 class="text-xl font-medium ">Preview</h1>
+			<h2 class="headline text-xl font-medium ">Preview</h2>
 			<div class="mt-4">
 				<ProductItem margin={false} card {product} />
 			</div>

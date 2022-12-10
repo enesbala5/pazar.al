@@ -19,7 +19,7 @@
 			<p class="text-4xl text-neutral-50 md:text-7xl lg:text-8xl">E</p>
 		</div>
 		<div>
-			<h1 class="text-4xl font-medium md:text-5xl lg:text-6xl">
+			<h1 class="headline text-4xl font-medium md:text-5xl lg:text-6xl">
 				{user?.firstName}
 				{user?.lastName}
 			</h1>

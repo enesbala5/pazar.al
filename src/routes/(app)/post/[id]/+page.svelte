@@ -88,7 +88,38 @@
 <title>Pazar{data.data.title ? ' - ' + data.data.title : ''}</title>
 
 {#if likeError}
-	<Toast message="You are offline" />
+	<Toast message="You are o<Modal>
+			<section class="z-50 grid w-full max-w-2xl rounded-xl bg-neutral-50 dark:bg-neutral-900">
+				<div class="w-full  p-4 lg:p-6 ">
+					<h3 class="headline text-2xl font-medium">Detailed Information:</h3>
+					<p class="mt-2">Information around the post.</p>
+				</div>
+				<hr class="mx-4 border-neutral-200 dark:border-neutral-800 lg:mx-6" />
+				<!-- Container - For padding -->
+				<div class="noScroll overflow-y-scroll  p-4 lg:p-6">
+					<!-- Headline -->
+					<!-- Tags?  -->
+					<div class=" grid max-h-96 grid-cols-1 gap-4 text-sm lg:grid-cols-2">
+						{#each tags as tag}
+							<!-- border-indigo-600 dark:border-indigo-500 -->
+							<div
+								class="flex w-full items-center justify-between border-b border-neutral-300 pb-2 dark:border-neutral-700"
+							>
+								<p class="font-medium">{tag.name}:</p>
+								<p>{tag.value}</p>
+							</div>
+						{/each}
+					</div>
+				</div>
+				<!-- Actions -->
+				<div
+					class="flex w-full items-center space-x-4 border-t border-neutral-200 p-4 dark:border-neutral-800 lg:p-6"
+				>
+					<button class="buttonBase buttonSecondary w-full" on:click={toggleModal}>Return</button>
+					<button class="buttonBase buttonPrimary w-full">Print as PDF</button>
+				</div>
+			</section>
+		</Modal>ffline" />
 {/if}
 
 <article
@@ -99,8 +130,7 @@
 		<menu
 			class="
 			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'fixed' : 'hidden'}
-			w-postNav top-0 z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
-			"
+			w-postNav top-0 z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12"
 		>
 			<section class="flex items-end md:w-4/6">
 				<NavLink text="Post Information" href="tags" />
@@ -122,13 +152,13 @@
 				<!-- ! Title and Quick Actions -->
 				<!-- !!!!!!!! MOBILE -->
 				<div class="mx-4 flex items-center space-x-2 py-2 md:mx-0 md:hidden">
-						<button
-							class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
-							on:click={() => updateLikes(data?.data.id)}
-						>
-							<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
-							<p class="text-sm font-medium">Like Post</p>
-						</button>
+					<button
+						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
+						on:click={() => updateLikes(data?.data.id)}
+					>
+						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
+						<p class="text-sm font-medium">Like Post</p>
+					</button>
 					<button
 						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
 						on:click={() => updateLikes(data?.data.id)}
@@ -142,7 +172,7 @@
 				>
 					<div class="flex w-full flex-col">
 						<div class="flex w-full flex-shrink-0 justify-between">
-							<h1 class=" whitespace-pre-line text-3xl font-medium md:text-3xl">
+							<h1 class="headline whitespace-pre-line text-3xl font-medium md:text-3xl">
 								{data?.data.title}
 							</h1>
 						</div>
@@ -174,7 +204,7 @@
 						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
 						on:click={() => updateLikes(data?.data.id)}
 					>
-						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />liked={typeof liked !== 'boolean' ? false : liked}
+						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
 						<p class="text-sm font-medium">Like Post</p>
 					</button>
 				</section>

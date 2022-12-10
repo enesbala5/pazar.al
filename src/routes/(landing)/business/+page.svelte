@@ -9,7 +9,7 @@
 <main class="mx-auto w-11/12">
 	<article class=" flex h-[80vh] items-center justify-between rounded-xl bg-neutral-100">
 		<section class="mb-6 w-1/2 p-8">
-			<h1 class="text-5xl font-medium leading-tight">Dyqani juaj dixhital.</h1>
+			<h1 class="headline text-5xl font-medium leading-tight">Dyqani juaj dixhital.</h1>
 			<p class="mt-4 w-2/3 text-sm">
 				Pazar.al ju ofron dyqanin tuaj dixhital pa asnje kosto. Zgjidhja ideale per te ndertuar
 				eksperiencen ideale per klientet tuaj e per te rritur shitjet.

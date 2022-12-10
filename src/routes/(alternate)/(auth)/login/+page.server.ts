@@ -8,6 +8,42 @@ import { nav } from '$lib/userPreferences/nav';
 
 let redirectRegister = false;
 
+const updateUserAuthToken = async (emailProvided: boolean, emailOrUsername: string) => {
+	if (emailProvided) {
+		const authenticatedUser = await db.user.update({
+			where: { email: emailOrUsername },
+			data: {
+				userAuthToken: crypto.randomUUID(),
+			},
+		});
+		return authenticatedUser;
+	}
+	const authenticatedUser = await db.user.update({
+		where: { username: emailOrUsername },
+		data: {
+			userAuthToken: crypto.randomUUID(),
+		},
+	});
+	return authenticatedUser;
+};
+
+const getUser = async (emailProvided: boolean, emailOrUsername: string) => {
+	if (emailProvided) {
+		const user: User | null = await db.user.findUnique({
+			where: {
+				email: emailOrUsername,
+			},
+		});
+		return user;
+	}
+	const user: User | null = await db.user.findUnique({
+		where: {
+			username: emailOrUsername,
+		},
+	});
+	return user;
+};
+
 export const load: PageServerLoad = async ({ locals }) => {
 	if (locals.user) {
 		throw redirect(302, nav.index);
@@ -17,23 +53,26 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	default: async ({ cookies, request }) => {
 		const data = await request.formData();
-		const email = data.get('email');
+		const emailOrUsername = data.get('emailOrUsername');
 		const fromRegister = data.get('fromRegister');
 		const isFromRegister = fromRegister === 'true';
+
+		let emailProvided: boolean = emailOrUsername?.toString().includes('@') ?? false;
 
 		redirectRegister = isFromRegister;
 
 		const password = data.get('password');
 
-		if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
+		if (
+			typeof emailOrUsername !== 'string' ||
+			typeof password !== 'string' ||
+			!emailOrUsername ||
+			!password
+		) {
 			return invalid(400, { invalid: true });
 		}
 
-		const user: User | null = await db.user.findUnique({
-			where: {
-				email,
-			},
-		});
+		const user: User | null = await getUser(emailProvided, emailOrUsername);
 
 		if (!user) {
 			return invalid(400, { credentials: true });
@@ -44,12 +83,7 @@ export const actions: Actions = {
 			return invalid(400, { credentials: true });
 		}
 
-		const authenticatedUser = await db.user.update({
-			where: { email: user.email },
-			data: {
-				userAuthToken: crypto.randomUUID(),
-			},
-		});
+		const authenticatedUser = await updateUserAuthToken(emailProvided, emailOrUsername);
 
 		cookies.set('session', authenticatedUser.userAuthToken, {
 			path: nav.index,

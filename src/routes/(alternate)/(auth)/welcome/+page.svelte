@@ -9,7 +9,7 @@
 <div class="flex h-[80vh] flex-col items-center justify-center lg:pt-0">
 	<div class="flex w-full flex-col items-center px-4 lg:px-0">
 		<div class="mb-12 w-full max-w-md text-center">
-			<h1 class=" text-4xl font-medium">Account created successfully</h1>
+			<h1 class="headline text-4xl font-medium">Account created successfully</h1>
 
 			{#if user?.account_type === 'Personal'}
 				<div class="mt-8 space-x-2">

@@ -3,6 +3,7 @@
 	import Nav from '$lib/components/UI/Nav.svelte';
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/userPreferences/preferences';
+  import { nav } from '$lib/userPreferences/nav';
 
 	let onIndex: boolean = false;
 
@@ -22,7 +23,7 @@
 	let returnUrl: string | undefined = undefined;
 
 	afterNavigate(() => {
-		if ($page.url.pathname.startsWith('/postim')) {
+		if ($page.url.pathname.startsWith(nav.post)) {
 			if (urlBuffer.startsWith('/kerkim')) {
 				returnUrl = urlBuffer;
 			} else {
@@ -36,9 +37,9 @@
 </script>
 
 <div
-	class=" min-h-screen {onIndex
-		? 'bg-transparent'
-		: 'bg-neutral-50 dark:bg-neutral-900'} font-aeonik text-neutral-700 dark:text-neutral-100"
+	class="
+	min-h-screen font-aeonik text-neutral-700 dark:text-neutral-100
+	{onIndex ? 'bg-transparent' : 'bg-neutral-50 dark:bg-neutral-900'}"
 >
 	{#if onIndex}
 		<div

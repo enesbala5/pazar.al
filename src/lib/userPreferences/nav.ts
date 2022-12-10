@@ -1,21 +1,34 @@
 export const nav = {
 	index: '/',
-	kerkim: '/kerkim',
-	postim: '/postim',
+	kerkim: '/search',
+	post: '/post',
+	category: '/category',
 
 	createListing: '/createPost',
 	promotion: '/promotion',
 
 	api: {
+		// User
+		getUser: '/api/getUser',
+
+		// Post
+		getPost: '/api/getPost',
+
+		// Search
 		getLatestPosts: '/api/getLatestPosts',
 		count: '/api/getLatestPosts/count',
-		getPost: '/api/getPost',
+
+		// Create Post
 		createPost: '/api/createPost',
+		//
+
+		// Likes
 		checkIfLiked: '/api/checkIfLiked',
 		likePost: '/api/likePost',
 		dislikePost: '/api/dislikePost',
 	},
-	suport: '/suport',
+
+	support: '/suport',
 
 	register: '/register',
 	login: '/login',

@@ -71,6 +71,6 @@ export const loadFromApi = async (
 
 export const load: PageLoad<PostimPageRequest> = async ({ params, fetch }) => {
 	const data: any = await loadFromApi(fetch, params);
-	
+
 	return { ...data };
 };

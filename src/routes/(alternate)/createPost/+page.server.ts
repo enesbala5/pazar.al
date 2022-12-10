@@ -105,7 +105,7 @@ const createPost: Action = async ({ request, locals }) => {
 	console.log('finished');
 	console.log(newPost);
 
-	throw redirect(303, `${nav.postim}/${newPost.id}`);
+	throw redirect(303, `${nav.post}/${newPost.id}`);
 };
 
 export const actions: Actions = { createPost };

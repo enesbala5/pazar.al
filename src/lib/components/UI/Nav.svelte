@@ -104,7 +104,7 @@
 		<div
 			class="hidden rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:block"
 		>
-			<Heart classNames="h-5 w-5 stroke-neutral-900 dark:stroke-neutral-50" />
+			<Heart classNames="h-5 w-5" />
 		</div>
 
 		<!-- ! User Menu -->

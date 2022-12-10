@@ -9,7 +9,7 @@
 
 	let defineClassByType = () => {
 		if (type === 'default') {
-			return 'bg-neutral-100 border border-neutral-200  dark:border-neutral-200 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200';
+			return 'bg-neutral-100 border border-neutral-200 dark:border-neutral-600 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300';
 		}
 		if (type === 'success') {
 			return 'bg-green-100 border border-green-200 dark:border-green-500 dark:bg-neutral-900 text-green-700 dark:text-green-500';
