@@ -5,6 +5,7 @@
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { goto } from '$app/navigation';
+	import DarkModeToggle from '$lib/components/UI/UserPanel/DarkModeToggle.svelte';
 
 	export let form: ActionData;
 	let business: boolean | undefined = undefined;
@@ -19,222 +20,80 @@
 	};
 
 	$: loginForm, login();
+
+	import Globe from '~icons/feather/globe';
+	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 </script>
 
-{#if !selectedType}
+<article class="flex  h-full w-full grow items-center justify-between space-x-4 p-4">
 	<section
 		aria-roledescription="wrapper"
-		class="mt-12 flex flex-col items-center pt-12 md:justify-center md:pt-0"
+		class="flex h-full w-full flex-col items-center justify-between rounded-xl px-4 pt-4 pb-2 dark:bg-neutral-800 lg:w-1/2 lg:bg-neutral-100 lg:px-6 lg:pt-6"
 	>
-		<div class="flex w-full flex-col items-center px-4 md:px-0">
-			<div class="mb-12 w-full max-w-md text-center">
-				<h1 class="headline text-4xl font-medium">Welcome to Pazar.al</h1>
-				<p class="mt-2 opacity-80">
-					Already a member? <a href={nav.login} class="underlinedLink">Log in to your account</a>
-				</p>
-			</div>
+		<div class="flex w-full items-center">
+			<nav class="flex w-full items-center justify-between">
+				<section class="flex items-center">
+					<!-- ! LOGO -->
+					<a href="/" class="h-8 w-8 ">
+						<Logo classNames="dark:fill-neutral-50 fill-neutral-900 w-full h-full" />
+					</a>
+				</section>
+
+				<div class="flex items-center">
+					<!-- ! LANG -->
+					<div
+						class="rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800  "
+					>
+						<Globe class={'h-5 w-5'} />
+					</div>
+					<DarkModeToggle />
+
+					<!-- ! Line -->
+					<div class="mr-6 ml-4 hidden h-5 w-0.5 rounded-full bg-neutral-300 lg:block" />
+					<!-- ! Messages -->
+					<a href={nav.index} class="buttonSmRounded buttonSecondary">Return Home</a>
+				</div>
+			</nav>
 		</div>
-		<section class="flex w-full max-w-lg flex-col space-y-4 px-4 md:px-0">
-			<div
-				class="
-				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900"
-				on:click={() => {
-					business = false;
-					selectedType = true;
-				}}
-				on:keydown={() => {
-					business = false;
-					selectedType = true;
-				}}
-			>
-				<div aria-roledescription="wrapper" class="flex w-full flex-row items-center justify-start">
-					<!-- User Icon -->
-					<div
-						class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="h-12 w-12 "
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-							/>
-						</svg>
-					</div>
-					<div>
-						<p class="text-lg font-medium">Create a Personal Account</p>
-						<p class="opacity-80">View products you're interested in</p>
-					</div>
-					<!-- Chivron Right -->
-					<div
-						class="transition-bezier absolute right-4 top-1/2 -translate-y-1/2 transition-all group-hover:-translate-x-1 "
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="2"
-							stroke="currentColor"
-							class="h-6 w-6 group-hover:stroke-indigo-500"
-						>
-							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-						</svg>
-					</div>
-				</div>
-			</div>
-			<div
-				class="
-				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900"
-				on:click={() => {
-					business = true;
-					selectedType = true;
-				}}
-				on:keydown={() => {
-					business = true;
-					selectedType = true;
-				}}
-			>
-				<div
-					aria-roledescription="wrapper"
-					class="flex w-full flex-row items-center justify-start "
-				>
-					<!-- Business Icon -->
-					<div
-						class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="h-12 w-12"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
-							/>
-						</svg>
-					</div>
-					<div>
-						<p class="text-lg font-medium ">Create a Seller Account</p>
-						<p class="opacity-80">Sell products with 0% Commission</p>
-					</div>
 
-					<!-- Chivron Right -->
-					<div
-						class="transition-bezier absolute right-4 top-1/2 -translate-y-1/2 transition-all group-hover:-translate-x-1"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="2"
-							stroke="currentColor"
-							class="h-6 w-6 group-hover:stroke-indigo-500"
-						>
-							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-						</svg>
-					</div>
-				</div>
-			</div>
-		</section>
-	</section>
-{/if}
-{#if selectedType}
-	<div class="mt-12 flex flex-col items-center pt-12 lg:justify-center lg:pt-0">
-		<div class="flex w-full flex-col items-center px-4 lg:px-0">
-			<div class="mb-12 w-full max-w-md text-center">
-				<h1 class="headline text-4xl font-medium">
-					Create your<br />
-					{`${business ? 'Seller Account' : 'Personal Account'}`}
-				</h1>
-				<p class="mt-2 opacity-80">
-					Already a member? <a href={nav.login} class="underlinedLink">Log in</a>
-				</p>
-			</div>
-
-			<form
-				method="POST"
-				action="?/register"
-				class="w-full max-w-md"
-				use:enhance={() => {
-					return async ({ result }) => {
-						invalidateAll();
-						await applyAction(result);
-					};
-				}}
-			>
-				<input type="hidden" value={business} name="business" />
-				<div class="mt-4 flex w-full space-x-4">
-					<InputField
-						classNames="w-full"
-						name="firstName"
-						type="text"
-						title={business ? 'Business Name' : 'First Name'}
-						required
-					/>
-					<InputField
-						classNames="w-full {business ? 'hidden' : ''}"
-						name="lastName"
-						type="text"
-						title="Last Name"
-						required
-						value={''}
-					/>
-				</div>
-
-				<InputField classNames="mt-4" name="email" type="email" title="Email" required />
-				<InputField classNames="mt-4" name="password" type="password" title="Password" required />
-
-				{#if form?.user}
-					<p class=" mt-2 text-red-500">
-						There is already an account registered with email address.
+		<!-- Main Actions -->
+		<section class="h-full w-full md:max-w-lg">
+			<div class="mt-20 flex w-full flex-col md:mt-24">
+				<div class="mb-10 w-full max-w-lg">
+					<h1 class="headline text-4xl font-medium">Welcome to Pazar.al</h1>
+					<p class="mt-4 opacity-80">
+						Already a member? <a href={nav.login} class="underlined">Log in to your account</a>
 					</p>
-				{/if}
-
-				{#if form?.email && form?.password}
-					<form
-						id="loginForm"
-						bind:this={loginForm}
-						action={nav.login}
-						method="POST"
-						class="hidden w-full max-w-md"
-					>
-						<input type="text" name="email" value={form?.email} />
-						<input type="text" name="password" value={form?.password} />
-						<input type="text" name="fromRegister" value="true" />
-					</form>
-				{/if}
-				<!-- Additional Actions -->
-				<div class="mt-6 flex items-center justify-between">
-					<div class="flex items-center space-x-2">
-						<input type="checkbox" value="rememberMe" class="checkbox" />
-						<label for="rememberMe" class="labelText">Remember me</label>
-					</div>
-					<a href="forgotPassword" class="link labelText">Forgot Password?</a>
 				</div>
+			</div>
+			<section class="flex w-full flex-col space-y-4 md:max-w-lg ">
+				<form class="">
+					<InputField classNames="mt-4" name="email" type="email" title="Email" required />
+					<InputField classNames="mt-4" name="password" type="password" title="Password" required />
 
-				<div class="mt-6 space-y-2 md:flex md:space-x-4 md:space-y-0">
-					<button type="submit" class="buttonPrimary buttonBase w-full">Create Account</button>
-					<button on:click={() => (selectedType = false)} class="buttonSecondary buttonBase w-full"
-						>Return</button
-					>
-				</div>
-			</form>
+					<button class="buttonLg buttonPrimary mt-4">Complete Sign Up</button>
+				</form>
+			</section>
+			<p class="mt-12 text-sm">
+				<span class="opacity-80">By clicking on Complete Signup, you agree to our</span>
+				<a href={nav.terms}>Terms</a>
+				<span class="opacity-80">and you acknowledge having read our</span>
+				<a href={nav.privacy}>Privacy Notice</a>.
+			</p>
+			<p class="mt-4 text-xs opacity-60">
+				*This includes periodic newsletters, emails about usage tips, and other communications. You
+				can opt out anytime within the page.
+			</p>
+		</section>
+		<div
+			class="w-full border-t py-2 text-center selection:bg-neutral-800  selection:text-neutral-50 dark:border-neutral-800 dark:selection:bg-white dark:selection:text-neutral-900"
+		>
+			<p class="tertiary">Copyright © 2022 Pazar.al Shpk. All Rights Reserved.</p>
 		</div>
-	</div>
-{/if}
+	</section>
 
-<div
-	class="fixed bottom-0 w-full border-t py-2 text-center selection:bg-neutral-800  selection:text-neutral-50 dark:border-neutral-800 dark:selection:bg-white dark:selection:text-neutral-900"
->
-	<p class="tertiary">Copyright © 2022-2022 Pazar.al Shpk. All Rights Reserved.</p>
-</div>
+	<!-- ? IMAGE -->
+	<div class="hidden h-full w-1/2 overflow-hidden rounded-xl lg:block">
+		<img src="images/business/gradient.jpg" class="h-full w-full object-cover" alt="" />
+	</div>
+</article>

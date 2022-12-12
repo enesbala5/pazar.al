@@ -5,4 +5,5 @@
 	export let data: PageData;
 </script>
 
-<pre>{JSON.stringify(data.user)}</pre>
+<pre>Test</pre>
+<pre>{JSON.stringify(data)}</pre>

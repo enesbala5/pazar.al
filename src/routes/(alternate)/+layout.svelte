@@ -6,19 +6,19 @@
 </script>
 
 <main
-	class="min-h-screen bg-neutral-50 font-aeonik text-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
+	class="min-h-screen flex bg-neutral-50 font-aeonik text-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
 >
-	<section>
+	<!-- <section>
 		<nav class="flex w-full items-center justify-between py-5 px-6 lg:mx-auto lg:w-11/12 lg:px-0">
 			<section class="flex items-center">
-				<!-- ! LOGO -->
+				! LOGO
 				<a href="/" class="h-8 w-8 ">
 					<Logo classNames="dark:fill-neutral-50 fill-neutral-900 w-full h-full" />
 				</a>
 			</section>
 
 			<div class="flex items-center">
-				<!-- ! LANG -->
+				! LANG
 				<div
 					class="rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800  "
 				>
@@ -26,12 +26,12 @@
 				</div>
 				<DarkModeToggle />
 
-				<!-- ! Line -->
+				! Line
 				<div class="mr-6 ml-4 hidden h-5 w-0.5 rounded-full bg-neutral-300 lg:block" />
-				<!-- ! Messages -->
+				! Messages
 				<a href={nav.index} class="buttonSmRounded buttonSecondary">Return Home</a>
 			</div>
 		</nav>
-	</section>
+	</section> -->
 	<slot />
 </main>

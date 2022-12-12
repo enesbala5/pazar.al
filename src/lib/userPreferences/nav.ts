@@ -28,11 +28,15 @@ export const nav = {
 		dislikePost: '/api/dislikePost',
 	},
 
-	support: '/suport',
+	support: '/#',
 
 	register: '/register',
 	login: '/login',
+	setupAccount: '/setupAccount',
 	welcomeScreen: '/welcome',
 	admin: '/admin',
 	profile: '/profile',
+
+	terms: '#',
+	privacy: '#',
 };

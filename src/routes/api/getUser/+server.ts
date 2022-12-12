@@ -7,11 +7,43 @@ import { db } from '$lib/fetching/db';
 export const POST: RequestHandler = async ({ request }) => {
 	const query = await request.json();
 
-	let data = await db.post.findFirst({});
+	// let data = await db.post.findFirst({});
+	let data = await db.user.findUnique({
+		where: {
+			username: query,
+		},
+		select: {
+			firstName: true,
+			lastName: true,
+			email: true,
+			profilePicture: true,
+			created_at: true,
+			username: true,
+			account_type: true,
+			posts: {
+				select: {
+					title: true,
+					priceHistory: {
+						select: {
+							eur: true,
+							price: true,
+						},
+					},
+				},
+			},
+			sellerInfo: {
+				select: {
+					coverPicture: true,
+					mainColor: true,
+					status: true,
+				},
+			},
+		},
+	});
 
 	if (data) {
 		return new Response(JSON.stringify(data));
 	}
 
-	throw error(404, 'Post Not Found');
+	throw error(404, 'Account not found.');
 };
