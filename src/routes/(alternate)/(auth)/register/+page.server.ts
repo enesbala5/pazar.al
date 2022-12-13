@@ -13,24 +13,10 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 const register: Action = async ({ request }) => {
 	const data = await request.formData();
-	const firstName = data.get('firstName');
-	const lastName = data.get('lastName');
 	const email = data.get('email');
 	const password = data.get('password');
-	const business = data.get('business');
 
-	// convert business (dataForm) -> boolean
-	const isBusiness = business === 'true';
-
-	if (
-		typeof email !== 'string' ||
-		typeof password !== 'string' ||
-		typeof firstName !== 'string' ||
-		typeof lastName !== 'string' ||
-		!email ||
-		!password ||
-		!firstName
-	) {
+	if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
 		return invalid(400, { invalid: true });
 	}
 
@@ -43,22 +29,18 @@ const register: Action = async ({ request }) => {
 		return invalid(400, { user: true });
 	}
 
-	console.log('creating');
-
 	await db.user.create({
 		data: {
-			firstName,
-			lastName,
 			email,
 			passwordHash: await bcrypt.hash(password, 10),
 			userAuthToken: crypto.randomUUID(),
-			account_type: isBusiness ? 'Seller' : 'Personal',
+			account_type: 'Personal',
 			role: 'USER',
 		},
 	});
 
 	return invalid(400, { email: email, password: password });
-	throw redirect(303, nav.welcomeScreen);
+	// throw redirect(303, nav.welcomeScreen);
 };
 
 export const actions: Actions = { register };

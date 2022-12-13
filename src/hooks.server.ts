@@ -24,6 +24,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			uid: true,
 			firstName: true,
 			lastName: true,
+			username: true,
 			email: true,
 			role: true,
 			account_type: true,
@@ -36,6 +37,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			firstName: user.firstName,
 			lastName: user.lastName,
 			email: user.email,
+			username: user.username,
 			role: user.role,
 			account_type: user.account_type,
 		};

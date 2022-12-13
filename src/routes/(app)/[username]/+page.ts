@@ -27,29 +27,11 @@ export const loadUser = async (fetch: any, query: any) => {
 };
 
 export const load: PageLoad<PageUser> = async ({ params, fetch }) => {
-	console.log(params.username);
-
 	const user: Awaited<Promise<PageUser | null>> = await loadUser(fetch, params.username);
 
 	if (user === null) {
 		throw error(202, 'Account not found.');
 	}
-	return user;
 
-	// return {
-	// 	firstName: '',
-	// 	lastName: '',
-	// 	account_type: 'Personal',
-	// 	email: '',
-	// 	username: '',
-	// 	profilePicture: '',
-	// 	role: 'USER',
-	// 	sellerInfo: {
-	// 		bid: '',
-	// 		coverPicture: '',
-	// 		mainColor: '',
-	// 		status: 'Normal',
-	// 		userUid: '',
-	// 	},
-	// };
+	return user;
 };

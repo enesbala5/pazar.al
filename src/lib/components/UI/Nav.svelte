@@ -135,7 +135,9 @@
 					</svg>
 				</div>
 				<div class="flex items-center justify-between space-x-3 p-0.5 pl-2.5 pr-3">
-					<p class="font-medium">{user.firstName} {user.lastName}</p>
+					<p class="font-medium">
+						{user.firstName === null ? 'Pazar.al User' : `${user.firstName} ${user.lastName ?? ''}`}
+					</p>
 					<!-- ! Chevron Down -->
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

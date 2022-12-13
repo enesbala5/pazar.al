@@ -13,9 +13,10 @@ export const POST: RequestHandler = async ({ request }) => {
 			username: query,
 		},
 		select: {
+			uid: true,
 			firstName: true,
 			lastName: true,
-			email: true,
+			email: false,
 			profilePicture: true,
 			created_at: true,
 			username: true,

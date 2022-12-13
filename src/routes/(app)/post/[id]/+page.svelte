@@ -23,6 +23,7 @@
 	import type { PostimPageRequest } from './+page';
 	import { currencyConversion } from '$lib/functions/conversions';
 	import PostInformation from '$lib/components/UI/Sections/Post/PostInformation.svelte';
+	import { scrollIntoView } from '$lib/functions/UX';
 	// -----------
 
 	// Variable Declaration
@@ -174,10 +175,7 @@
 						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
 						on:click={() => updateLikes(data?.data.id)}
 					>
-						<Heart
-							classNames="h-4 w-4"
-							liked={typeof liked !== 'boolean' ? false : liked}
-						/>liked={typeof liked !== 'boolean' ? false : liked}
+						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
 						<p class="text-sm font-medium">Like Post</p>
 					</button>
 				</section>
@@ -202,15 +200,20 @@
 						<div class="flex flex-col">
 							<div class="flex items-center">
 								<h2 class="hidden text-lg font-medium md:block">Posted by</h2>
-								<h2 class="text-2xl font-medium hover:underline md:ml-1.5">
-									{data.data.author.firstName}
-									{data.data.author.lastName}
-								</h2>
+								<a
+									class="text-2xl font-medium hover:underline md:ml-1.5"
+									href="#author"
+									on:click|preventDefault={scrollIntoView}
+								>
+									{data.data?.author.firstName === null
+										? 'Pazar.al User'
+										: `${data.data?.author.firstName} ${data.data?.author.lastName}`}
+								</a>
 								<div class="mx-4 hidden h-4 w-px bg-neutral-300 dark:bg-neutral-700 md:block" />
 								<div class="hidden md:block">
 									<Badge
 										type="default"
-										title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
+										title={data.data?.author?.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
 										sm
 									/>
 								</div>
@@ -219,7 +222,7 @@
 								<div class=" md:hidden">
 									<Badge
 										type="default"
-										title={data.data.author.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
+										title={data.data?.author?.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
 										sm
 									/>
 								</div>
@@ -229,9 +232,9 @@
 						<div
 							class="mb-2 h-16 w-16 overflow-hidden rounded-full bg-neutral-200 lg:h-14 lg:w-14 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20"
 						>
-							{#if data.data.author.profilePicture}
+							{#if data.data?.author?.profilePicture}
 								<img
-									src={data.data.author.profilePicture}
+									src={data.data?.author?.profilePicture}
 									alt="User's Profile"
 									class="h-full w-full object-cover "
 								/>
@@ -239,8 +242,25 @@
 								<div
 									class="relative flex h-full w-full items-center justify-center bg-neutral-200 text-3xl font-medium dark:bg-neutral-800"
 								>
-									<p>{data.data.author.firstName[0]}.{data.data.author.lastName[0]}</p>
-									<p />
+									{#if data.data?.author.firstName === null}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											fill="currentColor"
+											class="mt-[25%] fill-neutral-50"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+									{/if}
+									{#if data.data?.author.firstName !== null}
+										<p>
+											{data.data?.author.firstName[0]}{data.data?.author.lastName[0]}
+										</p>
+									{/if}
 								</div>
 							{/if}
 						</div>
@@ -288,21 +308,22 @@
 					<div class="my-4 w-full scroll-m-24" id="author">
 						<p class="text-lg font-medium">Listing by:</p>
 						<h4 class="mt-1 text-4xl font-medium">
-							{data.data.author.firstName}
-							{data.data.author.lastName}
+							{data.data?.author.firstName === null
+								? 'Pazar.al User'
+								: `${data.data?.author.firstName} ${data.data?.author.lastName}`}
 						</h4>
 
 						<!-- Cover & Profile Picture -->
 						<div
 							class="relative mt-8 flex h-64 items-center overflow-hidden rounded-xl border-neutral-800 bg-neutral-100 dark:border dark:bg-neutral-900"
 						>
-							{#if data.data.author.sellerInfo?.coverPicture}
+							{#if data.data?.author?.sellerInfo?.coverPicture}
 								<div
 									class="absolute top-1/2 left-1/2 h-full w-full -translate-y-1/2 -translate-x-1/2"
 								>
 									<img
-										src={data.data.author.sellerInfo?.coverPicture}
-										alt="{data.data.author.firstName} {data.data.author.lastName} Cover Picture"
+										src={data.data?.author?.sellerInfo?.coverPicture}
+										alt="{data.data?.author?.firstName} {data.data?.author?.lastName} Cover Picture"
 										class="h-[101%] w-[101%] object-cover"
 									/>
 								</div>
@@ -311,10 +332,11 @@
 								/>
 							{/if}
 							<div class="z-10 mx-6 h-36 w-36 overflow-hidden rounded-full">
-								{#if data.data.author.profilePicture}
+								{#if data.data?.author?.profilePicture}
 									<img
-										src={data.data.author.profilePicture}
-										alt="{data.data.author.firstName} {data.data.author.lastName} Profile Picture"
+										src={data.data?.author?.profilePicture}
+										alt="{data.data?.author?.firstName} {data.data?.author
+											?.lastName} Profile Picture"
 										class="h-full w-full object-cover"
 									/>
 								{:else}
@@ -324,15 +346,21 @@
 										<div
 											class="absolute top-1/2 left-1/2 h-[95%] w-[95%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-neutral-300 dark:border-neutral-700"
 										/>
-										<p>{data.data.author.firstName[0]}.{data.data.author.lastName[0]}</p>
+										<!-- <p>{data.data?.author?.firstName[0]}.{data.data?.author?.lastName[0]}</p> -->
 										<p />
 									</div>
 								{/if}
 							</div>
 						</div>
 						<div class="mt-4 flex items-center space-x-4">
-							<button class="buttonPrimary buttonBase">Visit Profile</button>
-							<button class="buttonSecondary buttonBase">Contact Seller</button>
+							{#if data.data?.author?.username}
+								<button class=" buttonBase">Visit Profile</button>
+							{/if}
+							<button
+								class="{data.data?.author?.username
+									? 'buttonSecondary'
+									: 'buttonPrimary'} buttonBase">Contact Seller</button
+							>
 						</div>
 					</div>
 				</div>

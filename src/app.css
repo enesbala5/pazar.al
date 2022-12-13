@@ -17,6 +17,10 @@
 		@apply border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100 hover:text-indigo-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 dark:focus:ring-neutral-700;
 	}
 
+	.buttonSecondaryWithIcon {
+		@apply border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100 hover:text-neutral-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 dark:focus:ring-neutral-700;
+	}
+
 	.buttonTertiary {
 		@apply text-neutral-900 hover:text-indigo-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-neutral-200  dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 dark:focus:ring-neutral-700;
 	}
@@ -76,6 +80,13 @@
 
 	.defaultBg {
 		@apply border border-neutral-100 dark:border-neutral-800 dark:!shadow-none;
+	}
+
+	.iconColors {
+		@apply fill-neutral-700 text-neutral-700 dark:fill-neutral-200 dark:text-neutral-200;
+	}
+	.iconColorsStroke {
+		@apply stroke-neutral-700 dark:stroke-neutral-200;
 	}
 }
 

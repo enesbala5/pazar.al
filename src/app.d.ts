@@ -13,10 +13,10 @@ declare namespace App {
 	interface Locals {
 		user: {
 			uid: string;
-			firstName: string;
-			lastName: string;
+			firstName?: string;
+			lastName?: string;
 			email: string;
-			username: string;
+			username?: string;
 			account_type: AccountType;
 			sellerInfo: SellerInformation | null;
 			role: Role;

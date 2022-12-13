@@ -2,6 +2,7 @@ import type { AccountType, Role, SellerInformation } from '@prisma/client';
 import type { Product } from '$lib/types/product';
 
 export type PageUser = {
+	uid?: string;
 	firstName: string;
 	lastName: string;
 	email: string;
