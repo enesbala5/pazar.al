@@ -70,7 +70,7 @@
 					</svg>
 				</button>
 				<div class="flex items-center">
-					<p class="text-xs uppercase opacity-70">Faqja</p>
+					<p class="text-xs uppercase opacity-70">Page</p>
 					<p class="mx-2 font-medium">{pageNumber}</p>
 				</div>
 				<!-- Next Page -->

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { Product } from '$lib/types/product';
-  import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userPreferences/nav';
 	import Euro from '../logos/user/currencies/Euro.svelte';
 	import Lek from '../logos/user/currencies/Lek.svelte';
 	import Heart from '../logos/user/Heart.svelte';

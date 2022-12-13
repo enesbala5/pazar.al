@@ -2,7 +2,7 @@ export const nav = {
 	index: '/',
 	kerkim: '/search',
 	post: '/post',
-	category: '/category',
+	category: '/categories',
 
 	createListing: '/createPost',
 	promotion: '/promotion',
@@ -16,6 +16,9 @@ export const nav = {
 
 		// Search
 		getLatestPosts: '/api/getLatestPosts',
+		// GetLatestPost Options:
+		byCategory: '/byCategory',
+
 		count: '/api/getLatestPosts/count',
 
 		// Create Post

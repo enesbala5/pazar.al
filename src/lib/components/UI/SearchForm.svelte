@@ -10,17 +10,24 @@
 	import Clear from '$lib/components/logos/user/Clear.svelte';
 	import { page } from '$app/stores';
 	import { insertParams } from '$lib/functions/paramHandling';
+	import { nav } from '$lib/userPreferences/nav';
 
 	export let onIndex: boolean = true;
 	export let params: searchQuery = {};
 	export let searchInput: string = ''; // Search value
+	export let itemsPerPage: number;
+
+	export let url: string = nav.kerkim;
 
 	const updateParamsField = (resetPage: boolean = true) => {
 		if (searchInput !== '') {
 			params.id = searchInput;
 		}
 		if (resetPage) {
-			params.faqja = 1;
+			params.page = 1;
+		}
+		if (itemsPerPage !== undefined) {
+			params.itemsPerPage = itemsPerPage;
 		}
 	};
 
@@ -28,7 +35,7 @@
 		if (searchInput !== params.id && searchInput !== '') {
 			// update params object with local values
 			updateParamsField(resetPage);
-			insertParams($page, params);
+			insertParams($page, params, url);
 		}
 	};
 

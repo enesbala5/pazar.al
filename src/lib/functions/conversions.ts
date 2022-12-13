@@ -3,7 +3,7 @@ import { currencies, type CurrencyArray } from '$lib/userPreferences/currencies'
 
 export {};
 
-export const faqjaParamParse = (value: string, replacementValue: number = 1) => {
+export const pageParamParse = (value: string, replacementValue: number = 1) => {
 	const num = parseFloat(value);
 	return Number.isNaN(num) ? replacementValue : num;
 };

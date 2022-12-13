@@ -24,6 +24,28 @@ export const getLatestPosts = async (params: searchQuery) => {
 	return await data;
 };
 
+export const getPostsByCategory = async (params: searchQuery) => {
+	let url = nav.api.getLatestPosts + nav.api.byCategory;
+
+	const response = await fetch(url, {
+		method: 'POST',
+		headers: new Headers({
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: 'Basic ' + Credential,
+		}),
+		cache: 'no-cache',
+		body: JSON.stringify(params),
+	});
+
+	if (!response.ok) {
+		throw error(404, 'Posts not found');
+	}
+
+	const data = await response.json();
+	return await data;
+};
+
 export const getCount = async (params: searchQuery) => {
 	let url = nav.api.count;
 

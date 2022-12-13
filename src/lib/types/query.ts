@@ -1,4 +1,13 @@
+import type { CategoryId } from '$lib/data/categories';
+
 export interface searchQuery {
 	id?: string;
-	faqja?: number;
+	page?: number;
+	itemsPerPage?: number;
+}
+
+export interface searchQueryCategories {
+	id?: CategoryId;
+	page?: number;
+	itemsPerPage?: number;
 }

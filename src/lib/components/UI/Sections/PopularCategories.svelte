@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { gotoCategory } from '$lib/functions/navigation';
+	import { nav } from '$lib/userPreferences/nav';
+	import Category from './Category.svelte';
 </script>
 
 <div class="flex items-end justify-between px-4 md:px-0">
@@ -9,81 +12,36 @@
 <div
 	class="noScroll container mt-8 flex space-x-4 overflow-x-scroll pr-4 pl-4 md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
 >
-	<div class=" flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
-		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
-		>
-			<img
-				src="images/categories/popular/cars.png"
-				alt="Car"
-				class=" max-h-[80%] max-w-[90%] object-cover"
-			/>
-		</div>
-		<a href="#link">Cars</a>
-	</div>
+	<!-- categoryDescriptor="Cars" -->
+	<Category category="automjete" imgLink="images/categories/popular/cars.png" />
 
-	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
-		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
-		>
-			<img
-				src="images/categories/popular/iphone.png"
-				alt="iPhone"
-				class=" max-h-[80%] max-w-[90%] object-cover"
-			/>
-		</div>
-		<a href="#link">Mobile Phones</a>
-	</div>
+	<!-- categoryDescriptor="Mobile Phones" -->
+	<Category
+		category="elektronike"
+		imgLink="images/categories/popular/iphone.png"
+		imgAlt="iPhone 14 Pro Max"
+	/>
 
-	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
-		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
-		>
-			<img
-				src="images/categories/popular/playstation.png"
-				alt="Playstation 5"
-				class=" max-h-[80%] max-w-[90%] object-cover"
-			/>
-		</div>
-		<a href="#link">Gaming Console</a>
-	</div>
+	<!-- categoryDescriptor="Gaming Console" -->
+	<Category
+		category="gaming"
+		imgLink="images/categories/popular/playstation.png"
+		imgAlt="Playstation 5"
+	/>
+	<!-- categoryDescriptor="Shoes" -->
+	<Category category="kepuce" imgLink="images/categories/popular/shoes.png" imgAlt="Nike Dunks" />
 
-	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
-		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
-		>
-			<img
-				src="images/categories/popular/shoes.png"
-				alt="Nike Dunks"
-				class=" max-h-[80%] max-w-[90%] object-cover"
-			/>
-		</div>
-		<a href="#link">Shoes</a>
-	</div>
+	<!-- categoryDescriptor="Clothing" -->
+	<Category
+		category="veshje"
+		imgLink="images/categories/popular/clothing.png"
+		imgAlt="Nike Sweatshirt"
+	/>
 
-	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
-		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
-		>
-			<img
-				src="images/categories/popular/clothing.png"
-				alt="Nike Sweatshirt"
-				class=" max-h-[80%] max-w-[90%] object-cover"
-			/>
-		</div>
-		<a href="#link">Clothing</a>
-	</div>
-
-	<div class="flex min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0">
-		<div
-			class="flex aspect-square h-full w-full items-center justify-center overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800"
-		>
-			<img
-				src="images/categories/popular/appliances.png"
-				alt="Home Appliances"
-				class=" max-h-[80%] max-w-[90%] object-cover"
-			/>
-		</div>
-		<a href="#link">Home Appliances</a>
-	</div>
+	<!-- categoryDescriptor="Home Appliances" -->
+	<Category
+		category="shtepiake"
+		imgLink="images/categories/popular/appliances.png"
+		imgAlt="Home Appliances"
+	/>
 </div>

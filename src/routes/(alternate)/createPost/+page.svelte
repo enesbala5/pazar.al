@@ -18,7 +18,7 @@
 	// *FUNCTIONS
 	import { getTagsByCategory, type TagInCategory } from '$lib/data/tagsByCategory';
 	import { getCarModelsByBrand } from '$lib/fetching/carsByBrand';
-	import { faqjaParamParse } from '$lib/functions/conversions';
+	import { pageParamParse } from '$lib/functions/conversions';
 	import { enhance } from '$app/forms';
 	// Types
 	import type { Product, ProductTag } from '$lib/types/product';
@@ -37,7 +37,7 @@
 	let product: Product = {
 		title: title !== '' ? title : 'Title',
 		description: description !== '' ? description : 'Description',
-		price: faqjaParamParse(price, 0),
+		price: pageParamParse(price, 0),
 		eur,
 		city: 'Tirane',
 		country: 'Albania',
@@ -51,7 +51,7 @@
 		description: description !== '' ? description : 'Description',
 		priceHistory: [
 			{
-				price: faqjaParamParse(price, 0),
+				price: pageParamParse(price, 0),
 				eur,
 			},
 		],
