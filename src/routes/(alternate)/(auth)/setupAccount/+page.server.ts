@@ -1,5 +1,5 @@
 import { db } from '$lib/fetching/db';
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import { invalid, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
 

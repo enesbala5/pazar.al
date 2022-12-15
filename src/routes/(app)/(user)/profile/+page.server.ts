@@ -1,6 +1,6 @@
 import { db } from '$lib/fetching/db';
 import type { PageUser } from '$lib/types/page';
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 

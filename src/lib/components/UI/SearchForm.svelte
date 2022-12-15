@@ -5,12 +5,12 @@
 	import List from '$lib/components/logos/user/filters/List.svelte';
 	import Settings from '$lib/components/logos/user/filters/Settings.svelte';
 	import Dollar from '$lib/components/logos/user/filters/sort/Dollar.svelte';
-	import { card } from '$lib/userPreferences/preferences';
+	import { card } from '$lib/userState/preferences';
 	import type { searchQuery } from '$lib/types/query';
 	import Clear from '$lib/components/logos/user/Clear.svelte';
 	import { page } from '$app/stores';
 	import { insertParams } from '$lib/functions/paramHandling';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 
 	export let onIndex: boolean = true;
 	export let params: searchQuery = {};

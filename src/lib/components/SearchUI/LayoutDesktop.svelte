@@ -1,5 +1,5 @@
 <script>
-	import { card } from '$lib/userPreferences/preferences';
+	import { card } from '$lib/userState/preferences';
 	import Grid from '../logos/user/filters/Grid.svelte';
 	import List from '../logos/user/filters/List.svelte';
 </script>

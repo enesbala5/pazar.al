@@ -1,5 +1,5 @@
 import type { searchQuery } from '$lib/types/query';
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import { error } from '@sveltejs/kit';
 
 export const getLatestPosts = async (params: searchQuery) => {

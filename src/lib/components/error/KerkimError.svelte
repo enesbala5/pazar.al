@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 	import NoResults from '../logos/user/NoResults.svelte';
 
 	export let id: string | undefined;

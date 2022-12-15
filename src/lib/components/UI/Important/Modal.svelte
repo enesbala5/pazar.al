@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { toggleModal } from '$lib/functions/modal';
-	import { modalOpen, scrollingAllowed } from '$lib/userPreferences/preferences';
+	import { modalOpen, scrollingAllowed } from '$lib/userState/preferences';
 
 	const wheel = (node: any, options: any) => {
 		let { scrollable } = options;

@@ -1,5 +1,5 @@
 import { subCategoriesIds, type Category, type CategoryId } from '$lib/data/categories';
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import { goto } from '$app/navigation';
 import categories from '$lib/data/categories';
 

@@ -1,4 +1,4 @@
-import { modalOpen, scrollingAllowed } from '$lib/userPreferences/preferences';
+import { modalOpen, scrollingAllowed } from '$lib/userState/preferences';
 
 const getModalState = () => {
 	let modalState: boolean = false;

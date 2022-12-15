@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 	import InputField from '$lib/components/UI/Input/InputField.svelte';
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';

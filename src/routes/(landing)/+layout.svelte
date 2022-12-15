@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 	import DarkModeToggle from '$lib/components/UI/UserPanel/DarkModeToggle.svelte';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 </script>
 
 <main

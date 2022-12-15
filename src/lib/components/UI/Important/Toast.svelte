@@ -1,11 +1,17 @@
 <script lang="ts">
-	type AlertType = 'default' | 'info' | 'error' | 'danger' | 'success' | 'warning';
+	import { alerts, type AlertType } from '$lib/userState/alerts';
+	import { quadOut, quartInOut } from 'svelte/easing';
 
-	export let type: AlertType = 'default';
+	import { fade, fly } from 'svelte/transition';
+
+	// CUSTOM ONLY
 	export let useSlot: boolean = false;
 
+	// EXPORTS
 	export let title: string = '',
 		message: string = '';
+	export let type: AlertType = 'default';
+	export let id: number = 0;
 
 	let defineClassByType = () => {
 		if (type === 'default') {
@@ -28,12 +34,24 @@
 	const classNames = defineClassByType();
 
 	export let visible = true;
+
+	export let index: number = 0;
+
+	const dismissAlert = (alertId: number) => {
+		const alertsWithoutDismissed = $alerts.filter((alert) => {
+			return alert.id !== alertId;
+		});
+		$alerts = alertsWithoutDismissed;
+	};
 </script>
 
+<!-- <input type="checkbox" name="" id="" bind:checked={visible} /> -->
 {#if visible}
+	<!-- bottom-${(index+1)+6} -->
 	<div
-		class="
-	{classNames} shadowLight fixed right-6 bottom-6 z-30 flex w-80 items-center justify-between space-x-2 rounded-md p-4 text-sm"
+		in:fly={{ duration: 100, delay: 25, x: 500, easing: quadOut }}
+		out:fade={{ duration: 100, delay: 25, easing: quadOut }}
+		class={`  ${classNames} shadowLight  flex w-80 items-center justify-between space-x-2 rounded-md p-4 text-sm`}
 	>
 		<div class="flex items-center space-x-2">
 			{#if !useSlot}
@@ -141,7 +159,7 @@
 				<slot />
 			{/if}
 		</div>
-		<button on:click={() => (visible = false)}>
+		<button on:click={() => dismissAlert(id)}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"

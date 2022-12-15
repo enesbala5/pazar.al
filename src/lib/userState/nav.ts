@@ -10,6 +10,9 @@ export const nav = {
 	api: {
 		// User
 		getUser: '/api/getUser',
+		getUserOptions: {
+			likes: 'likes',
+		},
 
 		// Post
 		getPost: '/api/getPost',
@@ -39,6 +42,8 @@ export const nav = {
 	welcomeScreen: '/welcome',
 	admin: '/admin',
 	profile: '/profile',
+
+	likes: '/likes',
 
 	terms: '#',
 	privacy: '#',

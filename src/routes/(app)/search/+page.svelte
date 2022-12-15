@@ -9,7 +9,7 @@
 	import { getCount, getLatestPosts } from '$lib/fetching/main';
 	import { getParams } from '$lib/functions/paramHandling';
 	import type { searchQuery } from '$lib/types/query';
-	import { card } from '$lib/userPreferences/preferences';
+	import { card } from '$lib/userState/preferences';
 	import PageInfoDesktop from '$lib/components/SearchUI/PageInfoDesktop.svelte';
 	import LayoutDesktop from '$lib/components/SearchUI/LayoutDesktop.svelte';
 	import SortDesktop from '$lib/components/SearchUI/SortDesktop.svelte';

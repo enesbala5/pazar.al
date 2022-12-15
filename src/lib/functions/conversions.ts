@@ -1,5 +1,5 @@
 import { fetchCurrencies } from '$lib/fetching/currencies';
-import { currencies, type CurrencyArray } from '$lib/userPreferences/currencies';
+import { currencies, type CurrencyArray } from '$lib/userState/currencies';
 
 export {};
 

@@ -1,4 +1,4 @@
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import i18n, { type Config, type Parser } from 'sveltekit-i18n';
 import lang from './lang.json';
 

@@ -6,9 +6,7 @@ import type { PageUser } from '$lib/types/page';
 type maybePageUser = PageUser | null;
 
 const loadUser = async (fetch: any, query: any) => {
-	console.log(query);
-
-	const response = await fetch(nav.api.getUser, {
+	const response = await fetch(`${nav.api.getUser}/${nav.api.getUserOptions.likes}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

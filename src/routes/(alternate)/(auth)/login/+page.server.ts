@@ -4,7 +4,7 @@ import type { Action, Actions, PageServerLoad } from './$types';
 import type { User } from '@prisma/client';
 
 import { db } from '$lib/fetching/db';
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 
 let redirectRegister = false;
 

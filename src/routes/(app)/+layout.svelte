@@ -2,8 +2,8 @@
 	import { afterNavigate } from '$app/navigation';
 	import Nav from '$lib/components/UI/Nav.svelte';
 	import { page } from '$app/stores';
-	import { darkMode } from '$lib/userPreferences/preferences';
-  import { nav } from '$lib/userPreferences/nav';
+	import { darkMode } from '$lib/userState/preferences';
+  import { nav } from '$lib/userState/nav';
 
 	let onIndex: boolean = false;
 

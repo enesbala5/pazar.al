@@ -8,7 +8,8 @@
 	import { page } from '$app/stores';
 	import type { PageUser } from '$lib/types/page';
 	import type { PageData } from './$types';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -53,39 +54,127 @@
 				<!-- <p class="mb-6 text-lg font-medium">Veprimtaria</p> -->
 				<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
 					<div
-						class="flex justify-between rounded-lg border border-neutral-100 bg-neutral-50 p-2 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700"
+						class="
+				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900"
+						on:click={() => {
+							goto(`${$page.url.pathname}${nav.likes}`);
+						}}
+						on:keydown={() => {
+							goto(`${$page.url.pathname}${nav.likes}`);
+						}}
 					>
 						<div
-							class="flex aspect-square grow items-center justify-center rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-2 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
+							aria-roledescription="wrapper"
+							class="flex w-full flex-row items-center justify-start"
 						>
-							<div class="h-10 w-10">
-								<Heart classNames="w-full h-full dark:stroke-neutral-50 stroke-neutral-800" />
+							<!-- User Icon -->
+							<div
+								class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="h-12 w-12 "
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+									/>
+								</svg>
 							</div>
-						</div>
-						<div class="flex w-full grow items-center py-4 px-4">
-							<p class="text-base font-medium md:w-1/2 md:text-xl ">Postimet e Pelqyera</p>
+							<div>
+								<p class="text-lg font-medium">Liked Posts</p>
+								<p class="opacity-80">View items you saved</p>
+							</div>
+							<!-- Chivron Right -->
+							<div
+								class="transition-bezier absolute right-4 top-1/2 -translate-y-1/2 transition-all group-hover:-translate-x-1 "
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="2"
+									stroke="currentColor"
+									class="h-6 w-6 group-hover:stroke-indigo-500"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M8.25 4.5l7.5 7.5-7.5 7.5"
+									/>
+								</svg>
+							</div>
 						</div>
 					</div>
-
+					<!-- ! 2 -->
 					<div
-						class="flex justify-between rounded-lg border border-neutral-100 bg-neutral-50 p-2 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700"
+						class="
+				group relative flex w-full cursor-pointer items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-4 shadow-sm hover:border-indigo-100 dark:border-neutral-800 dark:bg-neutral-900"
+						on:click={() => {
+							goto(`${$page.url.pathname}${nav.likes}`);
+						}}
+						on:keydown={() => {
+							goto(`${$page.url.pathname}${nav.likes}`);
+						}}
 					>
 						<div
-							class="flex aspect-square grow items-center justify-center rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-2 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
+							aria-roledescription="wrapper"
+							class="flex w-full flex-row items-center justify-start"
 						>
-							<div class="h-10 w-10">
-								<Heart classNames="w-full h-full dark:stroke-neutral-50 stroke-neutral-800" />
+							<!-- User Icon -->
+							<div
+								class="mr-4 rounded-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 dark:bg-neutral-700 dark:from-neutral-800 dark:to-neutral-900"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="h-12 w-12 "
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+									/>
+								</svg>
 							</div>
-						</div>
-						<div class="flex w-full grow items-center py-4 px-4">
-							<p class="text-base font-medium md:w-1/2 md:text-xl ">Postimet e Kontaktuar</p>
+							<div>
+								<p class="text-lg font-medium">Recently Viewed</p>
+								<p class="opacity-80">View products you're interested in</p>
+							</div>
+							<!-- Chivron Right -->
+							<div
+								class="transition-bezier absolute right-4 top-1/2 -translate-y-1/2 transition-all group-hover:-translate-x-1 "
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="2"
+									stroke="currentColor"
+									class="h-6 w-6 group-hover:stroke-indigo-500"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M8.25 4.5l7.5 7.5-7.5 7.5"
+									/>
+								</svg>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- secondary -->
 			<div
-				class="rounded-lg border border-neutral-100 p-4 shadow-sm dark:border-neutral-800 md:w-1/3"
+				class="rounded-xl border border-neutral-100 p-4 shadow-sm dark:border-neutral-800 md:w-1/3"
 			>
 				<p class="mb-4 text-lg font-medium">Menaxho Llogarine</p>
 

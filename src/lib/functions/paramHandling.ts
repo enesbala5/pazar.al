@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import type { searchQuery } from '$lib/types/query';
 import type { Page } from '@sveltejs/kit';
 import { pageParamParse } from './conversions';

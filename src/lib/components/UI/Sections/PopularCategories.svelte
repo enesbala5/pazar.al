@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { gotoCategory } from '$lib/functions/navigation';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 	import Category from './Category.svelte';
 </script>
 

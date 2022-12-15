@@ -14,7 +14,7 @@
 	import categories from '$lib/data/categories';
 	import cities from '$lib/data/cities';
 	import countries from '$lib/data/countries';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 	// *FUNCTIONS
 	import { getTagsByCategory, type TagInCategory } from '$lib/data/tagsByCategory';
 	import { getCarModelsByBrand } from '$lib/fetching/carsByBrand';

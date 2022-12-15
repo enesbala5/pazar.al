@@ -24,6 +24,7 @@
 	import { currencyConversion } from '$lib/functions/conversions';
 	import PostInformation from '$lib/components/UI/Sections/Post/PostInformation.svelte';
 	import { scrollIntoView } from '$lib/functions/UX';
+	import { alerts, type Alert } from '$lib/userState/alerts';
 	// -----------
 
 	// Variable Declaration
@@ -31,6 +32,11 @@
 	let liked: boolean = data?.isLiked;
 	let likedCache: boolean = liked;
 	let likeError: boolean = true;
+
+	type ManageLikeResponse = {
+		updatedLikes: boolean;
+		error?: Alert;
+	};
 
 	// Function
 	const updateLikes = async (postId: string) => {
@@ -40,9 +46,12 @@
 		}
 		likeError = false;
 		liked = !liked;
-		let updatedLikes: any = await manageLike(postId, !liked);
-		if (updatedLikes === true) {
+
+		let { updatedLikes, error }: ManageLikeResponse = await manageLike(postId, !liked);
+
+		if (!updatedLikes && error) {
 			liked = likedCache;
+			$alerts = [error, ...$alerts];
 		}
 	};
 
@@ -88,10 +97,6 @@
 
 <title>Pazar{data.data.title ? ' - ' + data.data.title : ''}</title>
 
-{#if likeError}
-	<Toast message="You are offline" />
-{/if}
-
 <article
 	class="flex w-full flex-col justify-between lg:mx-auto lg:w-11/12 lg:flex-row lg:space-x-4"
 >
@@ -114,6 +119,8 @@
 				{scrollY > postActionsOffsetHeight - postActionsTop / 3 ? 'block' : 'hidden'}
 				flex h-full w-2/6 items-center justify-end px-4"
 			>
+				<p>{formatPrice(data.data.priceHistory[0].price)} {data.data.priceHistory[0].eur ? '€' : 'LEK'}</p>
+
 				<button class="buttonPrimary buttonSm">Message Seller</button>
 			</section>
 		</menu>
@@ -218,6 +225,8 @@
 									/>
 								</div>
 							</div>
+
+							<!--  -->
 							<div class="mt-1 flex w-full items-center text-sm md:mt-2 md:w-fit">
 								<div class=" md:hidden">
 									<Badge
@@ -230,7 +239,7 @@
 							</div>
 						</div>
 						<div
-							class="mb-2 h-16 w-16 overflow-hidden rounded-full bg-neutral-200 lg:h-14 lg:w-14 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20"
+							class="mb-2 h-16 w-16 overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-900 lg:h-14 lg:w-14 xl:h-16 xl:w-16 2xl:h-20 2xl:w-20"
 						>
 							{#if data.data?.author?.profilePicture}
 								<img

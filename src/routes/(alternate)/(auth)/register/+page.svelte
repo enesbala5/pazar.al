@@ -1,11 +1,10 @@
 <script lang="ts">
 	// Data
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 	import type { ActionData } from './$types';
 	// Functions
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import { goto } from '$app/navigation';
 	// UI
 	import Globe from '~icons/feather/globe';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
@@ -119,7 +118,9 @@
 						class="absolute left-1/2 top-1/2 h-px w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-300 dark:bg-neutral-700"
 					/>
 				</div>
-				<div class="mt-2 flex items-center justify-between space-x-2">
+				<div
+					class="mt-2 flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-2 md:space-y-0"
+				>
 					<GoogleButton signUp />
 					<FacebookButton signUp />
 				</div>
@@ -132,7 +133,7 @@
 				<span class="opacity-80">and you acknowledge having read our</span>
 				<a href={nav.privacy}>Privacy Notice</a>.
 			</p>
-			<p class="mt-4 text-xs opacity-60">
+			<p class="mt-4 mb-8 text-xs opacity-60">
 				*This includes periodic newsletters, emails about usage tips, and other communications. You
 				can opt out anytime within the page.
 			</p>

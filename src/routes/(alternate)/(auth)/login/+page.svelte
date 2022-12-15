@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 	import InputField from '$lib/components/UI/Input/InputField.svelte';
 	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
@@ -161,7 +161,7 @@
 						class="absolute left-1/2 top-1/2 h-px w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-300 dark:bg-neutral-700"
 					/>
 				</div>
-				<div class="mt-2 flex items-center justify-between space-x-2">
+				<div class="mt-2 flex items-center flex-col md:flex-row justify-between md:space-x-2 space-y-2 md:space-y-0">
 					<GoogleButton />
 					<FacebookButton />
 				</div>

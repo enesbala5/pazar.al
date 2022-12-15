@@ -3,11 +3,11 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
-	import { nav } from '../../userPreferences/nav';
+	import { nav } from '../../userState/nav';
 	import Popover from './Popover.svelte';
 	import Language from '$lib/components/UI/Language.svelte';
 	import Logout from '../auth/Logout.svelte';
-	import { darkMode } from '$lib/userPreferences/preferences';
+	import { darkMode } from '$lib/userState/preferences';
 	import SearchForm from './SearchForm.svelte';
 	import type { PageUser } from '$lib/types/page';
 	import PopoverItem from './UserPanel/PopoverItem.svelte';

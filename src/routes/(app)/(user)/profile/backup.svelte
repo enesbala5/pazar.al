@@ -8,7 +8,7 @@
 	import { page } from '$app/stores';
 	import type { PageUser } from '$lib/types/page';
 	import type { PageData } from './$types';
-	import { nav } from '$lib/userPreferences/nav';
+	import { nav } from '$lib/userState/nav';
 
 	export let data: PageData;
 

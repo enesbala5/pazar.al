@@ -1,4 +1,4 @@
-import { nav } from '$lib/userPreferences/nav';
+import { nav } from '$lib/userState/nav';
 import { redirect } from '@sveltejs/kit';
 
 import type { Actions, Action, PageServerLoad } from './$types';

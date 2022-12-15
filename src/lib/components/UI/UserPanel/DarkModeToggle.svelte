@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { darkMode } from '$lib/userPreferences/preferences';
+	import { darkMode } from '$lib/userState/preferences';
 
 	import Moon from '~icons/feather/moon';
 	import Sun from '~icons/feather/sun';
