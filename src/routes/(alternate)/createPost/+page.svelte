@@ -23,6 +23,7 @@
 	// Types
 	import type { Product, ProductTag } from '$lib/types/product';
 	import type { Selection } from '$lib/types/selection';
+	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
 
 	let eur: boolean = false;
 
@@ -35,13 +36,18 @@
 		country: Selection = { index: 0, label: 'Albania', value: 'Albania' };
 
 	let product: Product = {
+		id: '',
+
 		title: title !== '' ? title : 'Title',
 		description: description !== '' ? description : 'Description',
-		price: pageParamParse(price, 0),
-		eur,
+		priceHistory: [
+			{
+				eur: eur,
+				price: pageParamParse(price, 0),
+			},
+		],
 		city: 'Tirane',
 		country: 'Albania',
-		pid: '',
 		disabled: true,
 	};
 
@@ -487,6 +493,19 @@
 					{/if}
 				</Accordion>
 			</div>
+			<div class="mt-4">
+				<Accordion title={'Location Preview'} size="compressed" visible={true} disabled={true}>
+					<!-- <p class="font-medium">Post Tags</p> -->
+					{#if true}
+						<MapComponent
+							classNames="mt-4"
+							city={product.city ? product.city : 'Tirane'}
+							country={product.country}
+							size="xs"
+						/>
+					{/if}
+				</Accordion>
+			</div>
 			<!-- <hr class="my-4 border-neutral-100 dark:border-neutral-800" /> -->
 
 			<!-- ! Location Preview - Do e heq me shume mundsi -->
@@ -494,7 +513,7 @@
 				<Accordion
 					title={'Location Preview'}
 					size="compressed"
-					visible={tags.length > 0}
+					visible={product.city !== ''}
 					disabled
 				/>
 			</div> -->

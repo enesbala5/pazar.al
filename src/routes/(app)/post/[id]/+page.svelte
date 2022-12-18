@@ -5,7 +5,6 @@
 	import Heart from '$lib/components/logos/user/Heart.svelte';
 	import Share from '$lib/components/logos/user/Share.svelte';
 	import Flag from '~icons/feather/flag';
-	import Navigate from '~icons/feather/navigation';
 	import Whatsapp from '$lib/components/logos/social/Whatsapp.svelte';
 
 	// UI Components
@@ -25,6 +24,9 @@
 	import PostInformation from '$lib/components/UI/Sections/Post/PostInformation.svelte';
 	import { scrollIntoView } from '$lib/functions/UX';
 	import { alerts, type Alert } from '$lib/userState/alerts';
+	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
+	import ShareContainer from '$lib/components/UI/Important/ShareContainer.svelte';
+	import { nav } from '$lib/userState/nav';
 	// -----------
 
 	// Variable Declaration
@@ -104,8 +106,8 @@
 		<!-- ! NAVBAR -->
 		<menu
 			class="
-			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'fixed' : 'hidden'}
-			w-postNav top-0 z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
+			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'md:fixed' : 'hidden'}
+			w-postNav top-0  z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
 			"
 		>
 			<section class="flex items-end md:w-4/6">
@@ -119,7 +121,10 @@
 				{scrollY > postActionsOffsetHeight - postActionsTop / 3 ? 'block' : 'hidden'}
 				flex h-full w-2/6 items-center justify-end px-4"
 			>
-				<p>{formatPrice(data.data.priceHistory[0].price)} {data.data.priceHistory[0].eur ? '€' : 'LEK'}</p>
+				<p class="mr-4 font-medium">
+					{formatPrice(data.data.priceHistory[0].price)}
+					{data.data.priceHistory[0].eur ? '€' : 'LEK'}
+				</p>
 
 				<button class="buttonPrimary buttonSm">Message Seller</button>
 			</section>
@@ -130,19 +135,25 @@
 				<!-- ! Title and Quick Actions -->
 				<!-- !!!!!!!! MOBILE -->
 				<div class="mx-4 flex items-center space-x-2 py-2 md:mx-0 md:hidden">
+					<ShareContainer
+						classNames="w-full"
+						path="{`${nav.post}/${data.data.id}`}}"
+						text={`Check out ${data.data.title} on Pazar.al`}
+					>
+						<button
+							class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
+							on:click={() => console.log('shared')}
+						>
+							<Share classNames="h-4 w-4 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
+							<p class="text-sm font-medium">Share</p>
+						</button>
+					</ShareContainer>
 					<button
 						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
 						<p class="text-sm font-medium">Like Post</p>
-					</button>
-					<button
-						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
-						on:click={() => updateLikes(data?.data.id)}
-					>
-						<Share classNames="h-4 w-4 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
-						<p class="text-sm font-medium">Share</p>
 					</button>
 				</div>
 				<section
@@ -171,13 +182,18 @@
 						</div>
 					</div>
 					<!-- !!!!!!!! DESKTOP -->
-					<button
-						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
-						on:click={() => console.log('sharing')}
+					<ShareContainer
+						path="{`${nav.post}/${data.data.id}`}}"
+						text={`Check out ${data.data.title} on Pazar.al`}
 					>
-						<Share classNames="h-4 w-4" />
-						<p class="text-sm font-medium">Share</p>
-					</button>
+						<button
+							class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
+							on:click={() => console.log('sharing')}
+						>
+							<Share classNames="h-4 w-4" />
+							<p class="text-sm font-medium">Share</p>
+						</button>
+					</ShareContainer>
 					<button
 						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
 						on:click={() => updateLikes(data?.data.id)}
@@ -289,28 +305,7 @@
 					<!-- ? Location -->
 					<div class="my-4 w-full scroll-m-24" id="location">
 						<h3 class="text-2xl font-medium">Location:</h3>
-						<div class="relative flex items-center justify-between">
-							<div class="z-10 h-[90%] w-full px-6">
-								<p class="text-3xl font-medium">
-									{data.data.city},
-									{data.data.country}
-								</p>
-								<p class="mt-1 text-sm">Blv. Gjergj Fishta, Ish-Ekspozita</p>
-								<button class="buttonSmRounded buttonSecondary mt-4 flex items-center">
-									<Navigate class="h-4 w-4" />
-									<p class="mx-2">Open in Maps</p>
-								</button>
-							</div>
-							<Map
-								country={data.data.country}
-								city={data.data.city}
-								classNames="z-10 px-12"
-								mapClassNames="h-96"
-							/>
-							<div
-								class="absolute top-1/2 h-[75%] w-full -translate-y-1/2 rounded-xl bg-neutral-200 dark:border dark:border-neutral-800 dark:bg-neutral-900"
-							/>
-						</div>
+						<MapComponent city={data.data.city} country={data.data.country} />
 					</div>
 					<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
 					<!-- ? Listing By: -->

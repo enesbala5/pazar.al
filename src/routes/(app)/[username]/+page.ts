@@ -30,7 +30,7 @@ export const load: PageLoad<PageUser> = async ({ params, fetch }) => {
 	const user: Awaited<Promise<PageUser | null>> = await loadUser(fetch, params.username);
 
 	if (user === null) {
-		throw error(202, 'Account not found.');
+		throw error(404, 'Account not found.');
 	}
 
 	return user;

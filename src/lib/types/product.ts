@@ -11,7 +11,7 @@ export interface Product {
 	description: string;
 	priceHistory: ProductPriceHistory[];
 	city: Cities;
-	country: Countries;
+	country?: Countries;
 	category?: string;
 	disabled?: boolean;
 	tags?: ProductTag[];
