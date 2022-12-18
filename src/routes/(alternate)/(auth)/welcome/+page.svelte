@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { nav } from '$lib/userState
+	import { nav } from '$lib/userState/nav';
 	import { page } from '$app/stores';
 	import type { PageUser } from '$lib/types/page';
 
