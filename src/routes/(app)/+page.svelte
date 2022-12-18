@@ -17,7 +17,7 @@
 <!-- Page Content -->
 <article class="mt-4 w-full bg-neutral-50 dark:bg-neutral-900 md:px-4">
 	<div class="px-4 lg:hidden">
-		<SearchForm />
+		<SearchForm itemsPerPage={15} />
 	</div>
 	<div class="relative mb-8 mt-8 h-[15rem] w-full  px-4 md:px-0 lg:mt-4 lg:h-[25rem]">
 		<picture>

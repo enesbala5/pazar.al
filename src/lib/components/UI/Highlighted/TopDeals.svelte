@@ -6,7 +6,7 @@
 		{
 			title: 'Range Rover 2022',
 			description: 'Luks',
-			id: 'rangerover22',
+			id: 'd4fcab2e-f303-4655-b914-69e742039b13',
 			category: 'Automjete',
 			city: 'Tirane',
 			country: 'Albania',
@@ -23,7 +23,7 @@
 			category: 'Automjete',
 			city: 'Tirane',
 			country: 'Albania',
-			id: 'benz',
+			id: 'd4fcab2e-f303-4655-b914-69e742039b13',
 			priceHistory: [
 				{
 					price: 100,
@@ -37,7 +37,7 @@
 			category: 'Automjete',
 			city: 'Tirane',
 			country: 'Albania',
-			id: 'audi',
+			id: 'd4fcab2e-f303-4655-b914-69e742039b13',
 			priceHistory: [
 				{
 					price: 100,
@@ -51,7 +51,7 @@
 			category: 'Automjete',
 			city: 'Tirane',
 			country: 'Albania',
-			id: 'audi',
+			id: 'd4fcab2e-f303-4655-b914-69e742039b13',
 			priceHistory: [
 				{
 					price: 100,
