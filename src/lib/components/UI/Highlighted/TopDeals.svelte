@@ -64,7 +64,7 @@
 
 <div class="flex items-end justify-between">
 	<p class="text-2xl font-medium">Today's Top Deals</p>
-	<a class="font-medium uppercase opacity-80 text-sm md:text-base" href="recommended">View All</a>
+	<a class="text-sm font-medium uppercase opacity-80 md:text-base" href="recommended">View All</a>
 </div>
 <div class="mt-6 grid grid-cols-4 gap-4">
 	{#each RecommendedItems as product}

@@ -20,7 +20,9 @@ export const nav = {
 		// Search
 		getLatestPosts: '/api/getLatestPosts',
 		// GetLatestPost Options:
-		byCategory: '/byCategory',
+		getLatestPostsOptions: {
+			byCategory: '/byCategory',
+		},
 
 		count: '/api/getLatestPosts/count',
 

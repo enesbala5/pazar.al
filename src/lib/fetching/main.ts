@@ -25,7 +25,7 @@ export const getLatestPosts = async (params: searchQuery) => {
 };
 
 export const getPostsByCategory = async (params: searchQuery) => {
-	let url = nav.api.getLatestPosts + nav.api.byCategory;
+	let url = nav.api.getLatestPosts + nav.api.getLatestPostsOptions.byCategory;
 
 	const response = await fetch(url, {
 		method: 'POST',

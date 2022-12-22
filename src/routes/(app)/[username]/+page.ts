@@ -6,8 +6,6 @@ import type { PageUser } from '$lib/types/page';
 type maybePageUser = PageUser | null;
 
 const loadUser = async (fetch: any, query: any) => {
-	console.log(query);
-
 	const response = await fetch(nav.api.getUser, {
 		method: 'POST',
 		headers: {
