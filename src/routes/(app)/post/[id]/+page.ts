@@ -1,10 +1,8 @@
 import type { PageLoad } from './$types';
-import { error } from '@sveltejs/kit';
 
 import type { searchQuery } from '$lib/types/query';
 import { nav } from '$lib/userState/nav';
 import type { Product } from '$lib/types/product';
-import type { SellerInformation } from '@prisma/client';
 import type { PageUser } from '$lib/types/page';
 
 interface FullUserInfo extends Product {

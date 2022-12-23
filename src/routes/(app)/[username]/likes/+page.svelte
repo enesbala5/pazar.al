@@ -23,6 +23,8 @@
 	$: data, console.log(data);
 </script>
 
+<title>Liked Posts - Pazar</title>
+
 <article class="mt-12 px-4 lg:mx-auto lg:w-11/12 lg:px-0">
 	<h1 class="headline mt-12 text-6xl font-medium">Liked Posts</h1>
 	<!-- USER ACTIONS -->
@@ -30,7 +32,7 @@
 	<section
 		class="mt-12 flex flex-col justify-between space-y-4 md:flex-row md:space-x-8 md:space-y-0 lg:mt-24"
 	>
-	<p>{JSON.stringify(data.likedPosts)}</p>
+		<p>{JSON.stringify(data.likedPosts)}</p>
 		<div />
 	</section>
 	<!-- {/if} -->

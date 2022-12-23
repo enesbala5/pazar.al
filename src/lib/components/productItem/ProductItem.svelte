@@ -2,9 +2,9 @@
 	import { goto } from '$app/navigation';
 	import type { Product } from '$lib/types/product';
 	import { nav } from '$lib/userState/nav';
-	import Euro from '../logos/user/currencies/Euro.svelte';
-	import Lek from '../logos/user/currencies/Lek.svelte';
+
 	import Heart from '../logos/user/Heart.svelte';
+	import PriceDisplay from './PriceDisplay.svelte';
 
 	export let card: boolean;
 	export let margin: boolean = true;
@@ -12,106 +12,88 @@
 	export let product: Product;
 	export let skeleton: boolean = false;
 
-	const gotoPost = () => {
+	const getPostURL = () => {
 		if (!product.disabled) {
-			goto(`${nav.post}/${product.id}`);
+			return `${nav.post}/${product.id}`;
 		}
+		return '#';
 	};
+
+	let postURL = getPostURL();
+
+	$: product.id, (postURL = getPostURL());
 </script>
 
 {#if card}
 	<section
-		class="group relative {margin ? 'mx-2 my-4 mb-12' : ''} min-h-[30vh] rounded-md md:min-h-0"
+		class="group relative {margin
+			? 'mx-2 my-4 mb-12'
+			: ''} min-h-[30vh] rounded-md  md:min-h-0"
 	>
 		<div
-			class="absolute top-0 left-0 z-10 h-full w-full cursor-pointer overflow-hidden rounded-md md:static md:z-0 md:h-48"
-			on:click={gotoPost}
-			on:keydown={gotoPost}
+			class="absolute top-0 left-0 z-10 h-full w-full overflow-hidden rounded-md md:static md:z-0 md:h-48"
 		>
-			<img
-				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
-				alt={product.title}
-				class="transition-bezier h-full w-full object-cover group-active:scale-110 lg:group-hover:scale-110 lg:group-active:scale-100"
-			/>
+			<a href={postURL} class="h-full w-full">
+				<img
+					src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
+					alt={product.title}
+					class="transition-bezier h-full w-full object-cover group-active:scale-110 lg:group-hover:scale-110 lg:group-active:scale-100"
+				/>
+			</a>
 			<div
 				class=" bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent md:hidden"
 			/>
-			<div class="right-2 top-0 z-20 hidden h-4 w-4 bg-red-500 md:block">
-				<Heart classNames="h-5 dark:stroke-white w-5 opacity-80 stroke-neutral-800" />
+			<div class="inverted right-2 top-2 z-50 hidden h-6 w-6 cursor-pointer group  md:absolute md:flex items-center justify-center">
+				<Heart classNames="h-5 w-5" inverted  />
 			</div>
 		</div>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			class="absolute bottom-8 z-30 cursor-pointer px-4 md:static md:mt-2 md:px-0"
-			on:click={gotoPost}
-			on:keydown={gotoPost}
-		>
+		<a class="absolute bottom-8 z-30 cursor-pointer px-4 md:static md:mt-2 md:px-0" href={postURL}>
 			<h3 class="text-xl text-neutral-50 dark:text-neutral-200 md:text-neutral-900 ">
 				{product.title}
 			</h3>
 			<p class="text-neutral-50 opacity-70 dark:text-neutral-200 md:text-neutral-900 ">
 				{product.description}
 			</p>
-		</div>
+		</a>
 
 		<div
 			class="absolute  bottom-0 left-2.5 z-30 w-fit translate-y-1/2 rounded-sm bg-neutral-50 p-1.5 font-medium dark:bg-neutral-900 md:static md:mt-2 md:translate-y-0 md:p-0"
 		>
-			<section class="flex w-fit items-center rounded-sm bg-indigo-600 py-0.5 px-2">
-				<div aria-label="Currency Used" class="mr-2 opacity-80">
-					{#if product.priceHistory[0].eur}
-						<Euro classNames="fill-white h-2.5" />
-					{:else}
-						<Lek classNames="fill-white h-2.5" />
-					{/if}
-				</div>
-				<p class="text-neutral-50">{product.priceHistory[0].price.toLocaleString()}</p>
-			</section>
+			<PriceDisplay price={product.priceHistory[0].price} eur={product.priceHistory[0].eur} />
 		</div>
 
 		<!-- Like Button -->
 		<div
 			class="absolute bottom-0 z-30 flex w-full cursor-pointer items-center justify-end  p-4 md:hidden"
 		>
-			<Heart classNames="h-5 dark:stroke-white w-5 opacity-80 stroke-neutral-800" />
+			<Heart classNames="h-5 w-5 " inverted />
 		</div>
 	</section>
 {:else}
-	<section class="relative my-4 mx-4 mb-6 flex h-auto items-center ">
-		<div
-			class="absolute left-0 h-full w-1/3 cursor-pointer "
-			on:click={gotoPost}
-			on:keydown={gotoPost}
-		>
-			<img
-				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
-				alt={product.title}
-				class=" h-full w-full rounded-md object-cover"
-			/>
+	<section class="relative my-4 mx-4 mb-6 flex h-auto items-center">
+		<div class=" minWidthNonCard left-0 h-full cursor-pointer ">
+			<a href={postURL}>
+				<img
+					src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
+					alt={product.title}
+					class="h-full w-full rounded-md object-cover"
+				/>
+			</a>
 		</div>
-		<div class="invisible w-1/3" />
-		<div class="w-2/3 cursor-pointer  py-4 pl-4" on:click={gotoPost} on:keydown={gotoPost}>
-			<h3 class=" ">{product.title}</h3>
-			<p class="text-sm opacity-70">{product.description}</p>
+		<a class="w-2/3 cursor-pointer py-4 pl-4" href={postURL}>
+			<h3 class="md:text-lg lg:text-xl">{product.title}</h3>
+			<p class="text-sm opacity-70 md:text-base">{product.description}</p>
 
 			<section
 				aria-label="Pricing and User Actions"
 				class="mt-3 flex  w-full items-center justify-between"
 			>
-				<section class="flex items-center rounded-sm bg-indigo-600 py-0.5 px-2">
-					<div aria-label="Currency Used" class="mr-2 opacity-80">
-						{#if product.priceHistory[0].eur}
-							<Euro classNames="fill-white h-2.5" />
-						{:else}
-							<Lek classNames="fill-white h-2.5" />
-						{/if}
-					</div>
-					<p class="text-sm text-white">{product.priceHistory[0].price.toLocaleString()}</p>
-				</section>
+				<PriceDisplay price={product.priceHistory[0].price} eur={product.priceHistory[0].eur} />
 				<Heart classNames="h-5 fill-white w-5 opacity-80 " />
 			</section>
-		</div>
+		</a>
 	</section>
 {/if}
 
@@ -119,5 +101,10 @@
 	:global(.transition-bezier) {
 		transition: all 2s;
 		transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+	}
+
+	.minWidthNonCard {
+		min-width: 1/3;
+		width: 33%;
 	}
 </style>

@@ -7,6 +7,14 @@ export const gotoCategory = (category: Category) => {
 	goto(`${nav.category}/?id=${category.id}`);
 };
 
+export const gotoCategoryById = (categoryId: CategoryId | string) => {
+	goto(`${nav.category}/?id=${categoryId}`);
+};
+
+export const gotoUser = (username: string) => {
+	goto(`/${username}`);
+};
+
 /**
  * Filter Category Function
  * -> 2 Levels of Depth

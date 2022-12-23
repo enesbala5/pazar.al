@@ -24,6 +24,7 @@ export const POST: RequestHandler = async ({ request }) => {
 					firstName: true,
 					lastName: true,
 					account_type: true,
+					username: true,
 					profilePicture: true,
 					email: true,
 					sellerInfo: {
@@ -45,8 +46,8 @@ export const POST: RequestHandler = async ({ request }) => {
 				select: {
 					eur: true,
 					price: true,
-				}
-			}
+				},
+			},
 		},
 	});
 

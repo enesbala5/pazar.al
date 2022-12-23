@@ -12,7 +12,8 @@
 	let complete = false;
 
 	async function handleClick() {
-		console.log('AAFHAKHL');
+		console.log(path);
+		console.log(url);
 
 		try {
 			if (window.navigator.canShare) {

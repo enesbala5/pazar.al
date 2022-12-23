@@ -42,7 +42,7 @@ export const currencyConversion = async (
 
 	// * Add Currency Exchange Rates to Store
 	if (currencyRequested) {
-		console.log('currencyRequested', currencyRequested);
+		// console.log('currencyRequested', currencyRequested);
 		response = {
 			currency: to,
 			amount: currencyConversionEquation(

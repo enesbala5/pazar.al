@@ -27,6 +27,8 @@
 	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
 	import ShareContainer from '$lib/components/UI/Important/ShareContainer.svelte';
 	import { nav } from '$lib/userState/nav';
+	import { gotoCategoryById, gotoUser } from '$lib/functions/navigation';
+	import { capitalizeFirstLetter } from '$lib/functions/generic';
 	// -----------
 
 	// Variable Declaration
@@ -87,6 +89,8 @@
 
 	let postActionsTop: number;
 	let postActionsOffsetHeight: number;
+
+	$: data, console.log(data);
 </script>
 
 <svelte:window
@@ -106,11 +110,11 @@
 		<!-- ! NAVBAR -->
 		<menu
 			class="
-			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'md:fixed' : 'hidden'}
-			w-postNav top-0  z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 md:space-x-12
+			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'lg:fixed' : 'hidden'}
+			w-postNav top-0  z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 lg:space-x-12
 			"
 		>
-			<section class="flex items-end md:w-4/6">
+			<section class="flex items-end lg:w-4/6">
 				<NavLink text="Post Information" href="tags" />
 				<NavLink text="Description" href="description" />
 				<NavLink text="Location" href="location" />
@@ -131,13 +135,13 @@
 		</menu>
 		<article class="relative w-full" bind:offsetHeight={postActionsOffsetHeight}>
 			<!-- ! Top Content (Image + Title) -->
-			<div class="flex flex-col-reverse md:flex-col">
+			<div class="flex flex-col-reverse lg:flex-col">
 				<!-- ! Title and Quick Actions -->
 				<!-- !!!!!!!! MOBILE -->
-				<div class="mx-4 flex items-center space-x-2 py-2 md:mx-0 md:hidden">
+				<div class="mx-4 flex items-center space-x-2 py-2 lg:mx-0 lg:hidden">
 					<ShareContainer
 						classNames="w-full"
-						path="{`${nav.post}/${data.data.id}`}}"
+						path={nav.post + '/' + data.data.id}
 						text={`Check out ${data.data.title} on Pazar.al`}
 					>
 						<button
@@ -157,37 +161,44 @@
 					</button>
 				</div>
 				<section
-					class="my-4 flex w-full px-4 sm:my-6 md:my-8 md:items-end md:justify-between md:px-0"
+					class="my-4 flex w-full px-4 sm:my-6 lg:my-8 lg:items-end lg:justify-between lg:px-0"
 				>
 					<div class="flex w-full flex-col">
 						<div class="flex w-full flex-shrink-0 justify-between">
-							<h1 class=" whitespace-pre-line text-3xl font-medium md:text-3xl">
+							<h1 class=" whitespace-pre-line text-3xl font-medium lg:text-3xl headline">
 								{data?.data.title}
 							</h1>
 						</div>
-						<div class="mt-3 flex items-center space-x-3 opacity-75 md:mt-2 md:space-x-4">
+						<div class="mt-3 flex items-center space-x-3 opacity-75 lg:mt-2 lg:space-x-4">
 							<div class="text-sm">
 								<!-- TODO: Add Link that navigates to Posts by Category -->
 								<!-- svelte-ignore a11y-invalid-attribute -->
 								<p class="">
-									Kategoria:<a class="ml-1 underline" href="#">{data.data.category}</a>
+									Kategoria:
+									<span
+										class="link ml-1 underline"
+										on:click={() => gotoCategoryById(data.data.category ?? '')}
+										on:keydown={() => gotoCategoryById(data.data.category ?? '')}
+									>
+										{capitalizeFirstLetter(data.data.category ?? '')}
+									</span>
 								</p>
 							</div>
-							<div class="h-1.5 w-1.5 rounded-full bg-neutral-800 dark:bg-neutral-200" />
+							<div class="h-px w-2 rounded-full bg-neutral-600 dark:bg-neutral-200" />
 							<div class="text-sm">
 								<!-- TODO: Add Link that navigates to Location Filter -->
 								<!-- svelte-ignore a11y-invalid-attribute -->
-								<a class="underline" href="#">{data.data.city}, {data.data.country}</a>
+								<a class="" href="#">{data.data.city}, {data.data.country}</a>
 							</div>
 						</div>
 					</div>
 					<!-- !!!!!!!! DESKTOP -->
 					<ShareContainer
-						path="{`${nav.post}/${data.data.id}`}}"
+						path={nav.post + '/' + data.data.id}
 						text={`Check out ${data.data.title} on Pazar.al`}
 					>
 						<button
-							class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
+							class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:flex"
 							on:click={() => console.log('sharing')}
 						>
 							<Share classNames="h-4 w-4" />
@@ -195,7 +206,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 md:flex"
+						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:flex"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
@@ -209,22 +220,22 @@
 
 			<!-- ! Bottom Content -->
 			<div
-				class="mt-8 flex items-start px-4 md:space-x-12 md:px-0"
+				class="mt-8 flex items-start px-4 lg:space-x-12 lg:px-0"
 				bind:this={bottomContentContainer}
 			>
-				<div class="flex w-full flex-col md:w-4/6">
+				<div class="flex w-full flex-col lg:w-4/6">
 					<!-- ? User Info Short -->
 					<div
-						class="flex w-full flex-col-reverse justify-between pb-8 md:flex-row md:items-center"
+						class="flex w-full flex-col-reverse justify-between pb-8 lg:flex-row lg:items-center"
 						bind:offsetHeight={bottomContentContainerOffsetHeight}
 					>
 						<!-- ? Bottom Display Information -->
 						<!-- ? Profile Link Info -->
 						<div class="flex flex-col">
 							<div class="flex items-center">
-								<h2 class="hidden text-lg font-medium md:block">Posted by</h2>
+								<h2 class="hidden text-lg font-medium lg:block">Posted by</h2>
 								<a
-									class="text-2xl font-medium hover:underline md:ml-1.5"
+									class="text-2xl font-medium hover:underline lg:ml-1.5"
 									href="#author"
 									on:click|preventDefault={scrollIntoView}
 								>
@@ -232,8 +243,8 @@
 										? 'Pazar.al User'
 										: `${data.data?.author.firstName} ${data.data?.author.lastName}`}
 								</a>
-								<div class="mx-4 hidden h-4 w-px bg-neutral-300 dark:bg-neutral-700 md:block" />
-								<div class="hidden md:block">
+								<div class="mx-4 hidden h-4 w-px bg-neutral-300 dark:bg-neutral-700 lg:block" />
+								<div class="hidden lg:block">
 									<Badge
 										type="default"
 										title={data.data?.author?.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
@@ -243,15 +254,15 @@
 							</div>
 
 							<!--  -->
-							<div class="mt-1 flex w-full items-center text-sm md:mt-2 md:w-fit">
-								<div class=" md:hidden">
+							<div class="mt-1 flex w-full items-center text-sm lg:mt-2 lg:w-fit">
+								<div class=" lg:hidden">
 									<Badge
 										type="default"
 										title={data.data?.author?.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
 										sm
 									/>
 								</div>
-								<p class="ml-2 w-full whitespace-nowrap md:ml-0">Ne Pazar.al qe nga 2022</p>
+								<p class="ml-2 w-full whitespace-nowrap lg:ml-0">Ne Pazar.al qe nga 2022</p>
 							</div>
 						</div>
 						<div
@@ -358,7 +369,10 @@
 						</div>
 						<div class="mt-4 flex items-center space-x-4">
 							{#if data.data?.author?.username}
-								<button class=" buttonBase">Visit Profile</button>
+								<button
+									class="buttonBase buttonPrimary"
+									on:click={() => gotoUser(data.data?.author?.username)}>Visit Profile</button
+								>
 							{/if}
 							<button
 								class="{data.data?.author?.username
@@ -370,7 +384,7 @@
 				</div>
 
 				<div
-					class="hidden flex-col items-center md:sticky md:top-28 md:left-4 md:flex md:w-2/6"
+					class="hidden flex-col items-center lg:sticky lg:top-28 lg:left-4 lg:flex lg:w-2/6"
 					bind:this={postActions}
 				>
 					<div
@@ -425,7 +439,7 @@
 	<!-- ------------------------------------------- -->
 	<!-- Ad Panel -->
 	<article
-		class="h-adPanel sticky top-4 right-0 rounded-md bg-neutral-100 dark:bg-neutral-800 lg:w-3/12"
+		class="h-adPanel sticky top-4 right-0 rounded-lg bg-neutral-100 dark:bg-neutral-800 lg:w-3/12"
 	/>
 </article>
 

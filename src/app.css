@@ -59,7 +59,7 @@
 	}
 
 	.link {
-		@apply hover:text-indigo-700 dark:hover:text-indigo-500;
+		@apply cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500;
 	}
 
 	.underlined {
@@ -85,6 +85,7 @@
 	.iconColors {
 		@apply fill-neutral-700 text-neutral-700 dark:fill-neutral-200 dark:text-neutral-200;
 	}
+
 	.iconColorsStroke {
 		@apply stroke-neutral-700 dark:stroke-neutral-200;
 	}

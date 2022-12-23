@@ -3,7 +3,7 @@
 	import Nav from '$lib/components/UI/Nav.svelte';
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/userState/preferences';
-  import { nav } from '$lib/userState/nav';
+	import { nav } from '$lib/userState/nav';
 
 	let onIndex: boolean = false;
 

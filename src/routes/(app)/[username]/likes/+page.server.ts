@@ -37,7 +37,7 @@ const getLikedPostsByUser: any = async (query: searchQuery) => {
 			username: query.id,
 		},
 		select: {
-			posts: true
+			posts: true,
 		},
 	});
 
