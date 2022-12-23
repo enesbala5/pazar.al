@@ -26,9 +26,7 @@
 
 {#if card}
 	<section
-		class="group relative {margin
-			? 'mx-2 my-4 mb-12'
-			: ''} min-h-[30vh] rounded-md  md:min-h-0"
+		class="group relative {margin ? 'mx-2 my-4 mb-12' : ''} min-h-[30vh] rounded-md  md:min-h-0"
 	>
 		<div
 			class="absolute top-0 left-0 z-10 h-full w-full overflow-hidden rounded-md md:static md:z-0 md:h-48"
@@ -43,8 +41,10 @@
 			<div
 				class=" bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent md:hidden"
 			/>
-			<div class="inverted right-2 top-2 z-50 hidden h-6 w-6 cursor-pointer group  md:absolute md:flex items-center justify-center">
-				<Heart classNames="h-5 w-5" inverted  />
+			<div
+				class="inverted group right-2 top-2 z-50 hidden h-6 w-6 cursor-pointer  items-center justify-center md:absolute md:flex"
+			>
+				<Heart classNames="h-5 w-5" inverted />
 			</div>
 		</div>
 

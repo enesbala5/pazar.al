@@ -9,8 +9,6 @@
 
 	// UI Components
 	import Badge from '$lib/components/UI/Important/Badge.svelte';
-	import Toast from '$lib/components/UI/Important/Toast.svelte';
-	import Map from '$lib/components/UI/Location/Map.svelte';
 	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
 	import NavLink from '$lib/components/UI/Sections/Post/NavLink.svelte';
 	// Imported Functions
@@ -153,7 +151,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
+						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800 group"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
@@ -165,7 +163,7 @@
 				>
 					<div class="flex w-full flex-col">
 						<div class="flex w-full flex-shrink-0 justify-between">
-							<h1 class=" whitespace-pre-line text-3xl font-medium lg:text-3xl headline">
+							<h1 class=" headline whitespace-pre-line text-3xl font-medium lg:text-3xl">
 								{data?.data.title}
 							</h1>
 						</div>
@@ -206,7 +204,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:flex"
+						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:flex group"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
@@ -369,9 +367,8 @@
 						</div>
 						<div class="mt-4 flex items-center space-x-4">
 							{#if data.data?.author?.username}
-								<button
-									class="buttonBase buttonPrimary"
-									on:click={() => gotoUser(data.data?.author?.username)}>Visit Profile</button
+								<a class="buttonBase buttonPrimary" href={'/' + data.data?.author?.username}
+									>Visit Profile</a
 								>
 							{/if}
 							<button
@@ -433,7 +430,9 @@
 			</div>
 		</article>
 		<!-- ! Recommended Post - AFTER CONTENT -->
-		<article class="relative mb-4 min-h-screen w-full rounded-xl bg-neutral-100" />
+		<article
+			class="relative mb-4 min-h-screen w-full rounded-xl bg-neutral-100 dark:bg-neutral-800"
+		/>
 	</section>
 
 	<!-- ------------------------------------------- -->

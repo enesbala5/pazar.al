@@ -9,10 +9,10 @@
 <section class="flex items-center rounded-sm bg-indigo-600 py-0.5 px-2">
 	<div aria-label="Currency Used" class="mr-2 opacity-80">
 		{#if eur}
-			<Euro classNames="fill-white h-2.5" />
+			<Euro classNames="fill-white h-2.5 md:h-3" />
 		{:else}
-			<Lek classNames="fill-white h-2.5" />
+			<Lek classNames="fill-white h-2.5 md:h-3 " />
 		{/if}
 	</div>
-	<p class="text-sm text-white">{price.toLocaleString()}</p>
+	<p class="text-sm text-white md:text-base">{price.toLocaleString()}</p>
 </section>

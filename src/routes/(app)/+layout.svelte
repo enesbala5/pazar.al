@@ -24,7 +24,11 @@
 
 	afterNavigate(() => {
 		if ($page.url.pathname.startsWith(nav.post)) {
-			if (urlBuffer.startsWith('/kerkim')) {
+			if (
+				urlBuffer.startsWith(nav.search) ||
+				urlBuffer.startsWith(nav.category) ||
+				urlBuffer.startsWith(nav.index)
+			) {
 				returnUrl = urlBuffer;
 			} else {
 				returnUrl = undefined;

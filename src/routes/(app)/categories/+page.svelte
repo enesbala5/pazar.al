@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
-	import KerkimError from '$lib/components/error/KerkimError.svelte';
-	import Pagination from '$lib/components/UI/Pagination.svelte';
-	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
-	import ProductItemSkeleton from '$lib/components/productItem/ProductItemSkeleton.svelte';
-	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 	import { getCount, getPostsByCategory } from '$lib/fetching/main';
 	import { getParams } from '$lib/functions/paramHandling';
 	import type { searchQuery, searchQueryCategories } from '$lib/types/query';
@@ -23,15 +18,6 @@
 	let itemsAmount: number = 0;
 
 	// let paramsCache: searchQuery = {};
-
-	afterNavigate(async () => {
-		params = getParams($page);
-		itemsAmount = await getCount(params);
-	});
-
-	const paginateFN = () => {
-		paginate();
-	};
 
 	let paginate: any;
 
@@ -59,4 +45,4 @@
 		{category !== undefined ? category.name : 'Categories'}
 	</h1>
 </div>
-<PostGrid {params} />
+<PostGrid />

@@ -4,14 +4,6 @@
 	import NoResults from '../logos/user/NoResults.svelte';
 
 	export let id: string | undefined;
-
-	export const returnHome = () => {
-		goto(nav.index);
-	};
-
-	export const contactSupport = () => {
-		goto(nav.suport);
-	};
 </script>
 
 <section
@@ -30,7 +22,7 @@
 		<p>Provoni te kerkoni me terma me te pergjithshem.</p>
 	</div>
 	<div class="mt-8 space-x-2 text-sm">
-		<button class="buttonPrimary buttonBase" on:click={returnHome}>Return Home</button>
-		<button class="buttonSecondary buttonBase" on:click={contactSupport}>Kontaktoni Suportin</button>
+		<a href={nav.index} class="buttonPrimary buttonBase">Return Home</a>
+		<a href={nav.support} class="buttonSecondary buttonBase">Kontaktoni Suportin</a>
 	</div>
 </section>

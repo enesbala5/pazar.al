@@ -23,7 +23,7 @@ export function getParams(page: Page) {
 	return params;
 }
 
-export function insertParams(page: Page, params: searchQuery, url: string = nav.kerkim) {
+export function insertParams(page: Page, params: searchQuery, url: string = nav.search) {
 	if (browser) {
 		let paramsString: any[] = [];
 		for (const param in params) {

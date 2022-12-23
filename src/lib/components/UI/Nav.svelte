@@ -74,8 +74,8 @@
 			</button>
 		{/if}
 	</section>
-	<div class="mx-8 hidden w-full lg:block">
-		<SearchForm searchInput={params.id !== undefined ? params.id : ''} {params} />
+	<div class="ml-8 mr-4 hidden w-full lg:block">
+		<SearchForm searchInput={params.id !== undefined ? params.id : ''} {params} itemsPerPage={15} />
 	</div>
 
 	<div class="flex items-center ">
@@ -109,7 +109,7 @@
 
 		<!-- ! User Menu -->
 		<div
-			class="ml-2 flex items-center whitespace-nowrap rounded-full border border-neutral-200 p-0.5 hover:shadow-md dark:border-neutral-700 {visible
+			class="ml-2 flex cursor-pointer items-center whitespace-nowrap rounded-full border border-neutral-200 p-0.5 hover:shadow-md dark:border-neutral-700 {visible
 				? 'shadow-md'
 				: ''} transition-shadow ease-in-out"
 			bind:this={element}

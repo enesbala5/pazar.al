@@ -111,7 +111,7 @@
 				</form>
 				<!-- ? SOCIAL LOGIN -->
 				<div class="relative my-4 flex items-center justify-center text-sm">
-					<div class="z-10 bg-neutral-100 px-4 dark:bg-neutral-900">
+					<div class="z-10 bg-neutral-50 lg:bg-neutral-100 px-4 dark:bg-neutral-900">
 						<p class="text-neutral-500">or</p>
 					</div>
 					<div

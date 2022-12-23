@@ -17,7 +17,7 @@
 	export let searchInput: string = ''; // Search value
 	export let itemsPerPage: number;
 
-	export let url: string = nav.kerkim;
+	export let url: string = nav.search;
 
 	const updateParamsField = (resetPage: boolean = true) => {
 		if (searchInput !== '') {

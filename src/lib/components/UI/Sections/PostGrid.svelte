@@ -22,8 +22,6 @@
 	let params: searchQueryCategories = {};
 	let itemsAmount: number = 0;
 
-	// let paramsCache: searchQuery = {};
-
 	afterNavigate(async () => {
 		params = getParams($page);
 		itemsAmount = await getCount(params);
@@ -38,8 +36,8 @@
 	let itemsPerPage: number = 15;
 
 	export let data: Category;
-	let categoryId: CategoryId | undefined = params.id ?? undefined;
 
+	let categoryId: CategoryId | undefined = params.id ?? undefined;
 	let category: Category | undefined;
 
 	$: params.id, (categoryId = params.id ?? undefined);

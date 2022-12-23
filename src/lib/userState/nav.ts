@@ -1,6 +1,6 @@
 export const nav = {
 	index: '/',
-	kerkim: '/search',
+	search: '/search',
 	post: '/post',
 	category: '/categories',
 

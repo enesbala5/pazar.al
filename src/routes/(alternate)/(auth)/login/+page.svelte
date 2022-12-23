@@ -154,14 +154,16 @@
 				</form>
 				<!-- ? SOCIAL LOGIN -->
 				<div class="relative my-4 flex items-center justify-center text-sm">
-					<div class="z-10 bg-neutral-100 px-4 dark:bg-neutral-900">
+					<div class="z-10 bg-neutral-50 px-4 dark:bg-neutral-900 lg:bg-neutral-100">
 						<p class="text-neutral-500">or</p>
 					</div>
 					<div
 						class="absolute left-1/2 top-1/2 h-px w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-neutral-300 dark:bg-neutral-700"
 					/>
 				</div>
-				<div class="mt-2 flex items-center flex-col md:flex-row justify-between md:space-x-2 space-y-2 md:space-y-0">
+				<div
+					class="mt-2 flex flex-col items-center justify-between space-y-2 md:flex-row md:space-x-2 md:space-y-0"
+				>
 					<GoogleButton />
 					<FacebookButton />
 				</div>
