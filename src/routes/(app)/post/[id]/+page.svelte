@@ -143,7 +143,7 @@
 						text={`Check out ${data.data.title} on Pazar.al`}
 					>
 						<button
-							class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800"
+							class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-800"
 							on:click={() => console.log('shared')}
 						>
 							<Share classNames="h-4 w-4 {liked ? 'stroke-red-500' : 'stroke-neutral-800'}" />
@@ -151,7 +151,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:hover:bg-neutral-800 group"
+						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-800 group"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
