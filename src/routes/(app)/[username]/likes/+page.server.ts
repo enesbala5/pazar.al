@@ -19,30 +19,24 @@ const getLikedPostsByUser: any = async (query: searchQuery) => {
 
 	let itemsToSkip = pageNumber * itemsPerPage - itemsPerPage;
 
-	// let data = await db.post.findMany({
-	// 	take: itemsPerPage,
-	// 	skip: itemsToSkip,
-	// 	where: {
-	// 		title: {
-	// 			contains: query.id,
-	// 		},
-	// 	},
-	// 	include: {
-	// 		priceHistory: true,
-	// 	},
-	// });
-
 	let data = await db.user.findFirst({
 		where: {
 			username: query.id,
 		},
 		select: {
-			posts: true,
+			posts: {
+				where: {
+					archived: false,
+				},
+				include: {
+					priceHistory: true,
+				},
+			},
 		},
 	});
 
 	if (data) {
-		return data;
+		return data.posts;
 	}
 
 	return {};
@@ -55,17 +49,15 @@ export const load: ServerLoad = async ({ params, locals }) => {
 
 	const user: PageUser | undefined = locals.user ?? undefined;
 
-	if (user == undefined) {
-		throw error(404, 'Account not found.');
-	}
+	// if (user == undefined) {
+	// 	throw error(404, 'Account not found.');
+	// }
 
-	if (username !== user.username) {
+	if (username !== user?.username) {
 		throw redirect(302, `/${username}`);
 	}
 
-	console.log(user);
-
-	const likedPosts: Awaited<Promise<PageUser | null>> = await getLikedPostsByUser({
+	const likedPosts: Awaited<Promise<Product[] | null>> = await getLikedPostsByUser({
 		id: username,
 		itemsPerPage: 15,
 		page: 1,
@@ -73,7 +65,9 @@ export const load: ServerLoad = async ({ params, locals }) => {
 
 	console.log(likedPosts);
 
-	return { likedPosts };
+	return {
+		likedPosts: likedPosts ?? [],
+	};
 
 	// console.log(username, locals);
 	// if (user === undefined) {

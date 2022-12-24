@@ -20,8 +20,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		data: {
 			postLikes: {
 				disconnect: {
-					uid: locals.user.uid
-				}
+					uid: locals.user.uid,
+				},
 			},
 		},
 	});

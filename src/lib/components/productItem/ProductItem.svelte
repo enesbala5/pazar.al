@@ -21,6 +21,8 @@
 
 	let postURL = getPostURL();
 
+	
+
 	$: product.id, (postURL = getPostURL());
 </script>
 

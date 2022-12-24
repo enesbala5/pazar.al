@@ -9,6 +9,11 @@
 	import type { PageUser } from '$lib/types/page';
 	import type { PageData } from './$types';
 	import { nav } from '$lib/userState/nav';
+	import KerkimError from '$lib/components/error/KerkimError.svelte';
+	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
+	import { card } from '$lib/userState/preferences';
+	import PostGrid from '$lib/components/UI/Sections/PostGrid.svelte';
+	import type { Product } from '$lib/types/product';
 
 	export let data: PageData;
 
@@ -21,6 +26,9 @@
 	// $: (user, loggedInUser), (loggedIn = loggedInUser?.uid === user?.uid);
 
 	$: data, console.log(data);
+
+	let likedPosts: Product[] | undefined = data.likedPosts ?? undefined;
+	console.log(likedPosts);
 </script>
 
 <title>Liked Posts - Pazar</title>
@@ -29,11 +37,17 @@
 	<h1 class="headline mt-12 text-6xl font-medium">Liked Posts</h1>
 	<!-- USER ACTIONS -->
 	<!-- {#if loggedIn} -->
-	<section
-		class="mt-12 flex flex-col justify-between space-y-4 md:flex-row md:space-x-8 md:space-y-0 lg:mt-24"
-	>
-		<p>{JSON.stringify(data.likedPosts)}</p>
-		<div />
-	</section>
-	<!-- {/if} -->
 </article>
+<section
+	class="mt-12 flex flex-col justify-between space-y-4 md:flex-row md:space-x-8 md:space-y-0 lg:mt-24"
+>
+	{#if likedPosts !== undefined}
+		<PostGrid>
+			{#each likedPosts as postim, i}
+				<ProductItem card={$card} product={postim} />
+			{:else}
+				<KerkimError id={'liked'} />
+			{/each}
+		</PostGrid>
+	{/if}
+</section>

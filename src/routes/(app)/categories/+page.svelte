@@ -12,7 +12,7 @@
 	import type { Category, CategoryId } from '$lib/data/categories';
 	import { filterCategory } from '$lib/functions/navigation';
 	import { capitalizeFirstLetter } from '$lib/functions/generic';
-	import PostGrid from '$lib/components/UI/Sections/PostGrid.svelte';
+	import CategoryPostGrid from '$lib/components/UI/Sections/CategoryPostGrid.svelte';
 
 	let params: searchQueryCategories = {};
 	let itemsAmount: number = 0;
@@ -45,4 +45,4 @@
 		{category !== undefined ? category.name : 'Categories'}
 	</h1>
 </div>
-<PostGrid />
+<CategoryPostGrid />
