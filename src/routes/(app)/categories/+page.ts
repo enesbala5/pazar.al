@@ -8,6 +8,6 @@ import { filterCategory } from '$lib/functions/navigation';
 type maybePageUser = PageUser | null;
 
 export const load: PageLoad<Category | undefined> = async ({ params, fetch }) => {
-	// const category = filterCategory('automjete');
-	// return category;
+	const category = filterCategory('automjete');
+	return category;
 };

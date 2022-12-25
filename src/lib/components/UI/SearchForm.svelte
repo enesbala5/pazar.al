@@ -9,7 +9,7 @@
 	import type { searchQuery } from '$lib/types/query';
 	import Clear from '$lib/components/logos/user/Clear.svelte';
 	import { page } from '$app/stores';
-	import { insertParams } from '$lib/functions/paramHandling';
+	import { searchProduct } from '$lib/functions/paramHandling';
 	import { nav } from '$lib/userState/nav';
 
 	export let onIndex: boolean = true;
@@ -19,28 +19,25 @@
 
 	export let url: string = nav.search;
 
-	const updateParamsField = (resetPage: boolean = true) => {
-		if (searchInput !== '') {
-			params.id = searchInput;
-		}
-		if (resetPage) {
-			params.page = 1;
-		}
-		if (itemsPerPage !== undefined) {
-			params.itemsPerPage = itemsPerPage;
-		}
-	};
-
-	const searchProduct = (resetPage: boolean = true) => {
-		if (searchInput !== params.id && searchInput !== '') {
-			// update params object with local values
-			updateParamsField(resetPage);
-			insertParams($page, params, url);
-		}
-	};
-
 	export const paginate = () => {
-		searchProduct(false);
+		searchProductLocalised(searchInput, false);
+	};
+
+	const searchProductLocalised = (
+		searchInputLocalScope: string,
+		resetPage: boolean = true,
+		isCategory: boolean = false,
+		returnUrl: boolean = false
+	) => {
+		searchProduct(
+			params,
+			itemsPerPage,
+			searchInputLocalScope,
+			resetPage,
+			isCategory,
+			returnUrl,
+			url
+		);
 	};
 
 	const clearInput = () => {
@@ -54,7 +51,7 @@
 
 <!-- {onIndex ? 'bg-neutral-100 dark:bg-neutral-800' : 'bg-neutral-50 dark:bg-indigo-600'} -->
 
-<form on:submit|preventDefault={() => searchProduct()} class="">
+<form on:submit|preventDefault={() => searchProductLocalised(searchInput)} class="">
 	<section class="relative">
 		<input
 			tabindex="32767"
@@ -82,8 +79,8 @@
 			</button>
 		{:else}
 			<button
-				on:click={() => searchProduct()}
-				on:mousedown={() => searchProduct()}
+				on:click={() => searchProductLocalised(searchInput)}
+				on:mousedown={() => searchProductLocalised(searchInput)}
 				class="
 			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"

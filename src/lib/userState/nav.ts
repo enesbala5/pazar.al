@@ -22,6 +22,7 @@ export const nav = {
 		// GetLatestPost Options:
 		getLatestPostsOptions: {
 			byCategory: '/byCategory',
+			byCategoryCount: '/byCategory/count',
 		},
 
 		count: '/api/getLatestPosts/count',

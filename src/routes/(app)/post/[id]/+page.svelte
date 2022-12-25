@@ -25,8 +25,9 @@
 	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
 	import ShareContainer from '$lib/components/UI/Important/ShareContainer.svelte';
 	import { nav } from '$lib/userState/nav';
-	import { gotoCategoryById, gotoUser } from '$lib/functions/navigation';
+	import { getSearchUrl, gotoUser } from '$lib/functions/navigation';
 	import { capitalizeFirstLetter } from '$lib/functions/generic';
+	import { page } from '$app/stores';
 	// -----------
 
 	// Variable Declaration
@@ -88,7 +89,26 @@
 	let postActionsTop: number;
 	let postActionsOffsetHeight: number;
 
-	$: data, console.log(data);
+	const getCategoryUrl = () => {
+		const response = getSearchUrl(
+			{
+				id: data.data.category ?? '',
+				isCategory: true,
+				itemsPerPage: 15,
+				page: 1,
+			},
+			15,
+			data.data.category ?? '',
+			true
+		);
+		return response;
+	};
+
+	let categoryLink: any = getCategoryUrl();
+
+	$: data.data.category, (categoryLink = getCategoryUrl());
+
+	$: categoryLink, console.log(categoryLink);
 </script>
 
 <svelte:window
@@ -151,7 +171,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-800 group"
+						class="group flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-800"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
@@ -173,13 +193,9 @@
 								<!-- svelte-ignore a11y-invalid-attribute -->
 								<p class="">
 									Kategoria:
-									<span
-										class="link ml-1 underline"
-										on:click={() => gotoCategoryById(data.data.category ?? '')}
-										on:keydown={() => gotoCategoryById(data.data.category ?? '')}
-									>
+									<a class="link ml-1 underline" href={categoryLink}>
 										{capitalizeFirstLetter(data.data.category ?? '')}
-									</span>
+									</a>
 								</p>
 							</div>
 							<div class="h-px w-2 rounded-full bg-neutral-600 dark:bg-neutral-200" />
@@ -204,7 +220,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:flex group"
+						class="group hidden items-center space-x-2 whitespace-nowrap rounded-full bg-transparent px-4 py-2.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:flex"
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />

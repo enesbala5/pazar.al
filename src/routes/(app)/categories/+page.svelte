@@ -45,4 +45,3 @@
 		{category !== undefined ? category.name : 'Categories'}
 	</h1>
 </div>
-<CategoryPostGrid />

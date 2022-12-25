@@ -6,6 +6,7 @@ export interface Alert {
 	title?: string;
 	message: string;
 	type: AlertType;
+	selfDismissable?: boolean;
 }
 
 export const alerts = writable<Alert[]>([]);

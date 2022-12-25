@@ -27,7 +27,7 @@
 <section class="{$darkMode ? 'dark' : ''} font-aeonik">
 	{#if $alerts.length > 0}
 		<div class="fixed bottom-6 right-6 z-30 space-y-2">
-			{#each $alerts as alert}
+			{#each $alerts as alert, i}
 				<Toast {...alert} />
 			{/each}
 		</div>

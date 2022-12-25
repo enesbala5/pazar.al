@@ -75,7 +75,11 @@
 		{/if}
 	</section>
 	<div class="ml-8 mr-4 hidden w-full lg:block">
-		<SearchForm searchInput={params.id !== undefined ? params.id : ''} {params} itemsPerPage={15} />
+		<SearchForm
+			searchInput={!params.isCategory ? (params.id !== undefined ? params.id : '') : ''}
+			{params}
+			itemsPerPage={15}
+		/>
 	</div>
 
 	<div class="flex items-center ">

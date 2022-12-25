@@ -1,14 +1,7 @@
 <script lang="ts">
-	// Icons
-	import UserSettings from '$lib/components/logos/user/generic/UserSettings.svelte';
-	import Heart from '$lib/components/logos/user/Heart.svelte';
-	import Settings from '$lib/components/logos/user/filters/Settings.svelte';
-	import Globe from '~icons/feather/globe';
-	// Data
-	import { page } from '$app/stores';
-	import type { PageUser } from '$lib/types/page';
+	// Types
 	import type { PageData } from './$types';
-	import { nav } from '$lib/userState/nav';
+	//
 	import KerkimError from '$lib/components/error/KerkimError.svelte';
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import { card } from '$lib/userState/preferences';
@@ -38,16 +31,17 @@
 	<!-- USER ACTIONS -->
 	<!-- {#if loggedIn} -->
 </article>
-<section
-	class="mt-12 flex flex-col justify-between space-y-4 md:flex-row md:space-x-8 md:space-y-0 lg:mt-24"
->
-	{#if likedPosts !== undefined}
-		<PostGrid>
+<section class="mt-12 w-full lg:mt-24">
+	<PostGrid fullWidth>
+		{#if likedPosts !== undefined && likedPosts.length > 0}
 			{#each likedPosts as postim, i}
 				<ProductItem card={$card} product={postim} />
-			{:else}
-				<KerkimError id={'liked'} />
+				<ProductItem card={$card} product={postim} />
+				<ProductItem card={$card} product={postim} />
+				<ProductItem card={$card} product={postim} />
 			{/each}
-		</PostGrid>
-	{/if}
+		{:else}
+			<KerkimError alternate />
+		{/if}
+	</PostGrid>
 </section>

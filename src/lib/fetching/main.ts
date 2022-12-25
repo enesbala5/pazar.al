@@ -1,6 +1,17 @@
+import type { Product } from '$lib/types/product';
 import type { searchQuery } from '$lib/types/query';
 import { nav } from '$lib/userState/nav';
 import { error } from '@sveltejs/kit';
+
+export const getPosts = async (params: searchQuery) => {
+	if (params.isCategory) {
+		const data = await getPostsByCategory(params);
+		return data;
+	} else {
+		const data = getLatestPosts(params);
+		return data;
+	}
+};
 
 export const getLatestPosts = async (params: searchQuery) => {
 	let url = nav.api.getLatestPosts;
@@ -47,7 +58,13 @@ export const getPostsByCategory = async (params: searchQuery) => {
 };
 
 export const getCount = async (params: searchQuery) => {
-	let url = nav.api.count;
+	let url = '';
+
+	if (params.isCategory) {
+		url = nav.api.getLatestPosts + nav.api.getLatestPostsOptions.byCategoryCount;
+	} else {
+		url = nav.api.count;
+	}
 
 	const response = await fetch(url, {
 		method: 'POST',

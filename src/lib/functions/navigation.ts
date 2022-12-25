@@ -2,13 +2,37 @@ import { subCategoriesIds, type Category, type CategoryId } from '$lib/data/cate
 import { nav } from '$lib/userState/nav';
 import { goto } from '$app/navigation';
 import categories from '$lib/data/categories';
+import { searchProduct } from './paramHandling';
+import type { searchQuery } from '$lib/types/query';
 
 export const gotoCategory = (category: Category) => {
 	goto(`${nav.category}/?id=${category.id}`);
 };
 
 export const gotoCategoryById = (categoryId: CategoryId | string) => {
-	goto(`${nav.category}/?id=${categoryId}`);
+	getSearchUrl;
+};
+
+export const getSearchUrl = (
+	params: searchQuery,
+	itemsPerPage: number,
+	searchInputLocalScope: string,
+	isCategory: boolean
+) => {
+	let url = nav.search;
+	const returnUrlResponse = searchProduct(
+		{
+			id: '',
+			isCategory: true,
+		},
+		itemsPerPage,
+		searchInputLocalScope,
+		false,
+		isCategory,
+		true,
+		url
+	);
+	return returnUrlResponse;
 };
 
 export const gotoUser = (username: string) => {

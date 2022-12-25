@@ -25,11 +25,11 @@
 	xmlns="http://www.w3.org/2000/svg"
 	class=" border-box transition-colors duration-150 ease-in-out
 	{liked
-		? ' fill-red-500 stroke-red-500 group-hover:stroke-red-500'
+		? ' fill-red-500 stroke-red-500 group-hover:fill-red-500 group-hover:stroke-red-500 group-active:fill-red-400'
 		: `${
 				inverted
-					? 'hoverFill fill-transparent stroke-neutral-100 group-hover:fill-neutral-800 dark:stroke-neutral-100 dark:group-hover:fill-neutral-800'
-					: 'hoverFill fill-transparent stroke-neutral-700 group-hover:fill-neutral-800  dark:group-hover:fill-neutral-600'
+					? 'hoverFill fill-transparent stroke-neutral-100 group-hover:fill-neutral-800 group-active:fill-neutral-700 dark:stroke-neutral-100 dark:group-hover:fill-neutral-800'
+					: 'hoverFill fill-transparent stroke-neutral-700 group-hover:fill-neutral-800 group-active:fill-neutral-700 dark:group-hover:fill-neutral-600 dark:group-active:fill-neutral-700'
 		  } dark:stroke-neutral-100 `} {classNames}"
 	viewBox="0 0 22.903 20.232"
 >

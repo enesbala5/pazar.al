@@ -3,11 +3,14 @@
 	import { nav } from '$lib/userState/nav';
 	import NoResults from '../logos/user/NoResults.svelte';
 
-	export let id: string | undefined;
+	export let id: string | undefined = undefined;
+	export let alternate: boolean = false;
 </script>
 
 <section
-	class="to-transparent0 col-span-3 mx-2 my-4 rounded-md bg-gradient-to-t from-neutral-100 p-4 text-left dark:from-neutral-800"
+	class="{alternate
+		? 'col-span-3'
+		: 'col-span-3'} mx-2 my-4 rounded-md bg-gradient-to-t from-neutral-100 to-transparent p-4 text-left dark:from-neutral-800"
 >
 	<NoResults classNames="w-24 h-24 dark:fill-neutral-50 fill-neutral-800" />
 	<p class="mt-4 w-5/6 text-xl">

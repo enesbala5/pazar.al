@@ -49,6 +49,7 @@ export default async (postId: string, isLiked: boolean) => {
 				title: 'Something went wrong.',
 				message: 'Please try again later.',
 				type: 'error',
+				selfDismissable: true,
 			};
 			return { updatedLikes: false, error };
 		}
@@ -62,6 +63,7 @@ export default async (postId: string, isLiked: boolean) => {
 				title: 'You are not logged in.',
 				message: 'Please sign in or register to like posts.',
 				type: 'error',
+				selfDismissable: true,
 			};
 			return { updatedLikes: false, error };
 		}
@@ -87,6 +89,7 @@ export default async (postId: string, isLiked: boolean) => {
 				title: 'Something went wrong.',
 				message: 'Please try again later.',
 				type: 'error',
+				selfDismissable: true,
 			};
 			return { updatedLikes: false, error };
 		}
@@ -100,6 +103,7 @@ export default async (postId: string, isLiked: boolean) => {
 				title: 'You are not logged in.',
 				message: 'Please sign in or register to like posts.',
 				type: 'error',
+				selfDismissable: true,
 			};
 			return { updatedLikes: false, error };
 		}
