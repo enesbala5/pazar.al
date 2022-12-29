@@ -2,18 +2,37 @@ import type { Handle } from '@sveltejs/kit';
 import { locale } from '$lib/lang';
 
 import { db } from '$lib/fetching/db';
+import { browser } from '$app/environment';
+import { nav } from '$lib/userState/nav';
 
 export const handle: Handle = async ({ event, resolve }) => {
+	// ! HANDLE THEME CHANGE
+	if (event.url.pathname.startsWith(nav.theme)) {
+	}
+
 	const session = event.cookies.get('session');
+	const darkModeCookie = event.cookies.get('darkMode');
 	const language = event.cookies.get('language');
 
+	// ? DARK MODE
+	if (darkModeCookie) {
+		const darkMode = darkModeCookie === 'true';
+		event.locals.darkMode = darkMode;
+	} else {
+		if (browser) {
+			const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			event.locals.darkMode = prefersDarkMode;
+		}
+	}
+
+	// ? LANGUAGE
 	if (language) {
 		locale.set(language);
-
 		// Attach user setting into local env (this is optional)
 		event.locals.language = language;
 	}
 
+	// ? SESSION
 	if (!session) {
 		return await resolve(event);
 	}

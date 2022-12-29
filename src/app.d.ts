@@ -22,6 +22,7 @@ declare namespace App {
 			role: Role;
 		};
 		language: string;
+		darkMode: boolean;
 	}
 	// interface PageData {}
 	// interface Error {}

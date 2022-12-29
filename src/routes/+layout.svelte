@@ -6,9 +6,10 @@
 	import { darkMode, modalOpen } from '$lib/userState/preferences';
 
 	import { Svrollbar } from 'svrollbar';
-	import { currencies } from '$lib/userState/currencies';
 	import { alerts } from '$lib/userState/alerts';
 	import Toast from '$lib/components/UI/Important/Toast.svelte';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	let currentLocale = $page.data.language ?? 'sq';
 	let translationsLoaded = false;

@@ -46,6 +46,9 @@ export const nav = {
 	admin: '/admin',
 	profile: '/profile',
 
+	// Toggle for Dark Mode Cookie
+	theme: '/theme',
+
 	likes: '/likes',
 
 	terms: '#',

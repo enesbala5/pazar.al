@@ -1,10 +1,19 @@
 <script lang="ts">
+	import { disableDarkMode, enableDarkMode } from '$lib/fetching/themeChange';
 	import { darkMode } from '$lib/userState/preferences';
 
 	import Moon from '~icons/feather/moon';
 	import Sun from '~icons/feather/sun';
 
 	export let styled: boolean = true;
+
+	const enableDarkModeLocal = () => {
+		enableDarkModeLocal;
+		enableDarkMode();
+	};
+	const disableDarkModeLocal = () => {
+		disableDarkMode();
+	};
 </script>
 
 <div
@@ -13,11 +22,11 @@
 		: ''}
 >
 	{#if $darkMode}
-		<div class="" on:click={() => darkMode.set(false)} on:keydown={() => darkMode.set(false)}>
+		<div class="" on:click={disableDarkModeLocal} on:keydown={disableDarkModeLocal}>
 			<Moon class={'h-5 w-5'} />
 		</div>
 	{:else}
-		<div class="" on:click={() => darkMode.set(true)} on:keydown={() => darkMode.set(true)}>
+		<div class="" on:click={enableDarkModeLocal} on:keydown={enableDarkModeLocal}>
 			<Sun class={'h-5 w-5'} />
 		</div>
 	{/if}

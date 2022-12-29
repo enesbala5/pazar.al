@@ -3,19 +3,17 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
-	import { nav } from '../../userState/nav';
-	import Popover from './Popover.svelte';
-	import Language from '$lib/components/UI/Language.svelte';
-	import Logout from '../auth/Logout.svelte';
-	import { darkMode } from '$lib/userState/preferences';
-	import SearchForm from './SearchForm.svelte';
+	import { nav } from '$lib/userState/nav';
+	import Popover from '$lib/components/UI/Popover.svelte';
+	import Logout from '$lib/components/auth/Logout.svelte';
+	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 	import type { PageUser } from '$lib/types/page';
-	import PopoverItem from './UserPanel/PopoverItem.svelte';
-	import DarkModeToggle from './UserPanel/DarkModeToggle.svelte';
+	import PopoverItem from '$lib/components/UI/UserPanel/PopoverItem.svelte';
+	import DarkModeToggle from '$lib/components/UI/UserPanel/DarkModeToggle.svelte';
 	import type { searchQuery } from '$lib/types/query';
 	import { getParams } from '$lib/functions/paramHandling';
 	// Icons
-	import Heart from '../logos/user/Heart.svelte';
+	import Heart from '$lib/components/logos/user/Heart.svelte';
 	import Globe from '~icons/feather/globe';
 	import Message from '~icons/feather/message-square';
 

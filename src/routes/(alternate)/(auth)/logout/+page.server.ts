@@ -1,7 +1,7 @@
 import { nav } from '$lib/userState/nav';
 import { redirect } from '@sveltejs/kit';
 
-import type { Actions, Action, PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
 	throw redirect(302, '/');
