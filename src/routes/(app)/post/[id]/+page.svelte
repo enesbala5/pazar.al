@@ -92,10 +92,8 @@
 	const getCategoryUrl = () => {
 		const response = getSearchUrl(
 			{
-				id: data.data.category ?? '',
+				id: '',
 				isCategory: true,
-				itemsPerPage: 15,
-				page: 1,
 			},
 			15,
 			data.data.category ?? '',

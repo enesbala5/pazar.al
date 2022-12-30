@@ -19,10 +19,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const darkMode = darkModeCookie === 'true';
 		event.locals.darkMode = darkMode;
 	} else {
-		if (browser) {
-			const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-			event.locals.darkMode = prefersDarkMode;
-		}
+		// if (browser) {
+		// 	const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		// 	event.locals.darkMode = prefersDarkMode;
+		// }
+		event.locals.darkMode = false;
 	}
 
 	// ? LANGUAGE

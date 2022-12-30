@@ -22,8 +22,8 @@ export const darkMode = derived([page, darkModeUnsynced], ([$page, $darkModeUnsy
 		set($darkModeUnsynced);
 		return;
 	}
-	if ($page.data.darkMode) {
-		set($page.data.darkMode ?? false);
+	if ($page?.data?.darkMode) {
+		set($page?.data?.darkMode ?? false);
 		return;
 	}
 });

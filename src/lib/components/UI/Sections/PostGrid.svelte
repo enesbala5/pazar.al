@@ -1,7 +1,12 @@
 <script lang="ts">
+	import type { Category } from '$lib/data/categories';
 	import { card } from '$lib/userState/preferences';
+	import Badge from '../Important/Badge.svelte';
+	import CategoryItem from './CategoryItem.svelte';
+	import CategoryTile from './Search/CategoryTile.svelte';
 
 	export let fullWidth: boolean = false;
+	export let category: Category | undefined = undefined;
 </script>
 
 <article
@@ -16,12 +21,22 @@
 		</section>
 	{/if}
 	<!-- ? MAIN -->
-	<section
-		class="grid  {fullWidth ? 'lg:w-full' : 'lg:w-8/12'}
-			{$card ? `grid-cols-1' ${fullWidth ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}` : 'grid-cols-1'}"
+	<article
+		class="
+			{fullWidth ? 'lg:w-full' : 'lg:w-8/12'}
+			flex flex-col
+		"
 	>
-		<slot />
-	</section>
+		{#if category !== undefined}
+			<CategoryTile {category} />
+		{/if}
+		<section
+			class="grid
+			{$card ? `grid-cols-1' ${fullWidth ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}` : 'grid-cols-1'}"
+		>
+			<slot />
+		</section>
+	</article>
 	<!-- ? ADS -->
 	<section
 		class="flex items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800 lg:w-2/12"

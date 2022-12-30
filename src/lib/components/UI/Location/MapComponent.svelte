@@ -3,11 +3,10 @@
 	import type { Cities } from '@prisma/client';
 	import Map from '$lib/components/UI/Location/Map.svelte';
 	import Navigate from '~icons/feather/navigation';
+	import type { Size } from '$lib/types/size';
 
 	export let city: Cities;
 	export let country: Countries = 'Albania';
-
-	type Size = 'xs' | 'sm' | 'base';
 
 	export let size: Size | undefined = undefined;
 	export let calculatedSize: Size = 'base';

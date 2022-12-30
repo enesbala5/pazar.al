@@ -5,10 +5,6 @@ import categories from '$lib/data/categories';
 import { searchProduct } from './paramHandling';
 import type { searchQuery } from '$lib/types/query';
 
-export const gotoCategory = (category: Category) => {
-	goto(`${nav.category}/?id=${category.id}`);
-};
-
 export const gotoCategoryById = (categoryId: CategoryId | string) => {
 	getSearchUrl;
 };
@@ -21,10 +17,7 @@ export const getSearchUrl = (
 ) => {
 	let url = nav.search;
 	const returnUrlResponse = searchProduct(
-		{
-			id: '',
-			isCategory: true,
-		},
+		params,
 		itemsPerPage,
 		searchInputLocalScope,
 		false,
@@ -46,7 +39,10 @@ export const gotoUser = (username: string) => {
  * || Category -> Subcategory -> Subcategory's Subcategory
  * @param id
  */
-export const filterCategory = (id: CategoryId) => {
+export const filterCategory = (id: CategoryId | string | undefined) => {
+	if (undefined) {
+		return undefined;
+	}
 	const filteredCategory: Category | undefined = categories.find((cat) => {
 		if (cat.id == id) return cat;
 	});

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { gotoCategory } from '$lib/functions/navigation';
-	import { nav } from '$lib/userState/nav';
-	import Category from './Category.svelte';
+	import Category from './CategoryItem.svelte';
 </script>
 
 <div class="flex items-end justify-between px-4 md:px-0">
@@ -13,35 +11,19 @@
 	class="noScroll container mt-8 flex space-x-4 overflow-x-scroll pr-4 pl-4 md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
 >
 	<!-- categoryDescriptor="Cars" -->
-	<Category category="automjete" imgLink="images/categories/popular/cars.png" />
+	<Category categoryId="automjete" />
 
 	<!-- categoryDescriptor="Mobile Phones" -->
-	<Category
-		category="elektronike"
-		imgLink="images/categories/popular/iphone.png"
-		imgAlt="iPhone 14 Pro Max"
-	/>
+	<Category categoryId="elektronike" />
 
 	<!-- categoryDescriptor="Gaming Console" -->
-	<Category
-		category="gaming"
-		imgLink="images/categories/popular/playstation.png"
-		imgAlt="Playstation 5"
-	/>
+	<Category categoryId="gaming" />
 	<!-- categoryDescriptor="Shoes" -->
-	<Category category="kepuce" imgLink="images/categories/popular/shoes.png" imgAlt="Nike Dunks" />
+	<Category categoryId="kepuce" />
 
 	<!-- categoryDescriptor="Clothing" -->
-	<Category
-		category="veshje"
-		imgLink="images/categories/popular/clothing.png"
-		imgAlt="Nike Sweatshirt"
-	/>
+	<Category categoryId="veshje" />
 
 	<!-- categoryDescriptor="Home Appliances" -->
-	<Category
-		category="shtepiake"
-		imgLink="images/categories/popular/appliances.png"
-		imgAlt="Home Appliances"
-	/>
+	<Category categoryId="shtepiake" />
 </div>

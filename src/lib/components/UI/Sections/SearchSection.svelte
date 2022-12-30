@@ -4,6 +4,7 @@
 	// Fetching
 	import { getCount, getPosts } from '$lib/fetching/main';
 	// UI
+	import PostGrid from './PostGrid.svelte';
 	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 	import KerkimError from '$lib/components/error/KerkimError.svelte';
 	import Pagination from '$lib/components/UI/Pagination.svelte';
@@ -16,19 +17,25 @@
 	import { getParams } from '$lib/functions/paramHandling';
 	// Sveltekit Functions
 	import { afterNavigate } from '$app/navigation';
+	import { createEventDispatcher } from 'svelte';
 	// SvelteKit Data
 	import { page } from '$app/stores';
+
 	// Types
 	import type { searchQuery } from '$lib/types/query';
+	import type { Category } from '$lib/data/categories';
 
+	// Variable Declaration
 	let itemsAmount: number = 0;
 	let params: searchQuery = {};
 
+	// GET PARAMS AFTER NAVIGATION
 	afterNavigate(async () => {
 		params = getParams($page);
 		itemsAmount = await getCount(params);
 	});
 
+	// Local function to make sure that pagination works
 	const paginateFN = () => {
 		paginate();
 	};
@@ -37,9 +44,7 @@
 
 	let itemsPerPage: number = 15;
 
-	import { createEventDispatcher } from 'svelte';
-	import PostGrid from './PostGrid.svelte';
-
+	// Dispatch searchId to parent if Parent needs it (used on Nav)
 	const dispatch = createEventDispatcher();
 
 	function updateSearchId() {
@@ -47,8 +52,11 @@
 			searchId: params.id,
 		});
 	}
-
+	// Dispatch on:searchId-change
 	$: params.id, updateSearchId();
+
+	// ? CATEGORY TILE
+	export let category: Category | undefined = undefined;
 </script>
 
 <div class="relative">
@@ -99,7 +107,7 @@
 		</article>
 		<!-- ? FILTERING END -->
 
-		<PostGrid fullWidth={false}>
+		<PostGrid fullWidth={false} {category}>
 			<!-- ! Filters -->
 			<section slot="filters">
 				<p>FILTERING</p>

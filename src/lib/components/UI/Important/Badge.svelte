@@ -79,7 +79,8 @@
 	$: toggleTypeClassManagement(toggled, hovering);
 </script>
 
-<div
+<a
+	href={link !== '' ? link : ''}
 	on:mouseenter={() => (hovering = true)}
 	on:mouseleave={() => (hovering = false)}
 	on:click={dispatchAction}
@@ -107,4 +108,4 @@
 	{#if useSlot}
 		<slot />
 	{/if}
-</div>
+</a>
