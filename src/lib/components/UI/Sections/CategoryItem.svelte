@@ -54,7 +54,7 @@
 			{size === 'xs' ? 'rounded-md' : size === 'sm' ? '' : 'rounded-full'}
 			flex aspect-square h-full w-full items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800"
 			>
-				<a href={categoryLink}>
+				<a href={categoryLink} class="flex items-center justify-center">
 					<img
 						src={imgLink !== '' ? imgLink : c.images !== undefined ? c.images[imageIndex].link : ''}
 						alt={imgAlt !== undefined ? imgAlt : c.label}
