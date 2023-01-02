@@ -23,6 +23,12 @@
 	});
 
 	let innerWidth: number = 1024;
+
+	import { inject } from '@vercel/analytics';
+
+	onMount(() => {
+		inject();
+	});
 </script>
 
 <svelte:window bind:innerWidth />
