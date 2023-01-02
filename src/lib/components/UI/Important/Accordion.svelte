@@ -27,7 +27,7 @@
 
 <div
 	class="
-	{size === 'normal' ? `defaultBg rounded-xl ${hovering ? 'shadowDark' : 'shadowLight'}` : ''}
+	{size === 'normal' ? `defaultBg rounded-xl ${hovering ? 'shadow-dark' : 'shadow-light'}` : ''}
 	my-4 transition-all ease-in-out"
 >
 	<!-- H1 and Chevron -->

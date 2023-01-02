@@ -3,7 +3,7 @@
 	import { filterCategory, getSearchUrl } from '$lib/functions/navigation';
 	// Types
 	import type { Size } from '$lib/types/size';
-	import Badge from '../Important/Badge.svelte';
+	import Badge from '$lib/components/UI/Important/Badge.svelte';
 
 	// Props
 	// Image - Will probably get included in category array later so might have to refactor and change this part
@@ -45,25 +45,45 @@
 	{size === 'xs'
 				? 'flex h-16 w-fit items-center'
 				: size === 'sm'
-				? 'w-full'
+				? 'flex h-24 w-full items-center space-x-2 rounded-md bg-neutral-50 p-1.5 transition-shadow hover:shadow-light'
 				: 'flex w-full min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0'}
 	"
 		>
 			<div
 				class="
-			{size === 'xs' ? 'rounded-md' : size === 'sm' ? '' : 'rounded-full'}
-			flex aspect-square h-full w-full items-center justify-center overflow-hidden bg-neutral-200 dark:bg-neutral-800"
+			{size === 'xs'
+					? 'rounded-md'
+					: size === 'sm'
+					? 'w-full max-w-[50%] rounded-md bg-neutral-200'
+					: 'w-full rounded-full bg-neutral-200'}
+			flex aspect-square h-full  items-center justify-center overflow-hidden dark:bg-neutral-800"
 			>
 				<a href={categoryLink} class="flex items-center justify-center">
 					<img
 						src={imgLink !== '' ? imgLink : c.images !== undefined ? c.images[imageIndex].link : ''}
 						alt={imgAlt !== undefined ? imgAlt : c.label}
-						class=" max-h-[80%] max-w-[90%] cursor-pointer object-cover"
+						class="
+			{size === 'xs'
+							? ''
+							: size === 'sm'
+							? 'h-full max-h-[70%] w-full max-w-[70%] object-contain'
+							: 'max-h-[80%] max-w-[90%] object-cover'} "
 					/>
 				</a>
 			</div>
-			<a href={categoryLink}>
-				{c.label}
+			<a
+				href={categoryLink}
+				class="
+			{size === 'xs'
+					? ''
+					: size === 'sm'
+					? 'flex w-full max-w-[50%] items-center justify-center whitespace-nowrap text-sm font-medium'
+					: ''}
+"
+			>
+				<p>
+					{c.label}
+				</p>
 			</a>
 		</div>
 	{/if}

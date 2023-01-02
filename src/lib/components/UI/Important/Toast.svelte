@@ -58,7 +58,7 @@
 <div
 	in:fly={{ duration: 100, delay: 25, x: 500, easing: quadOut }}
 	out:fade={{ duration: 150, delay: 25, easing: quadOut }}
-	class={`${classNames} shadowLight flex w-96 items-center justify-between space-x-2 rounded-md p-4 text-sm`}
+	class={`${classNames} shadow-light flex w-96 items-center justify-between space-x-2 rounded-md p-4 text-sm`}
 >
 	<div class="flex items-center space-x-2">
 		{#if !useSlot}

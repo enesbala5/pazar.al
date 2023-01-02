@@ -399,7 +399,7 @@
 					bind:this={postActions}
 				>
 					<div
-						class="defaultBg shadowDark rounded-xl border border-neutral-300 p-4 dark:border-neutral-900 dark:bg-neutral-800"
+						class="defaultBg shadow-dark rounded-xl border border-neutral-300 p-4 dark:border-neutral-900 dark:bg-neutral-800"
 					>
 						<div class="mt-4 flex w-full items-center justify-between">
 							<!-- Currency Symbol -->

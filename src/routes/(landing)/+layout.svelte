@@ -8,7 +8,7 @@
 	class="min-h-screen bg-neutral-50 pt-5 font-aeonik text-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
 >
 	<section
-		class="shadowDarkPlusMax mb-5 flex w-full items-center justify-center rounded-full bg-neutral-900 py-2 px-6 text-sm font-medium tracking-wide text-white dark:bg-neutral-800 lg:mx-auto lg:w-11/12 lg:px-0"
+		class="shadow-darkProMax mb-5 flex w-full items-center justify-center rounded-full bg-neutral-900 py-2 px-6 text-sm font-medium tracking-wide text-white dark:bg-neutral-800 lg:mx-auto lg:w-11/12 lg:px-0"
 	>
 		<p>Get your free Pazar.al Store</p>
 	</section>

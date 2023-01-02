@@ -208,7 +208,7 @@
 				bgColor={onIndex
 					? 'bg-neutral-50 dark:bg-neutral-800'
 					: 'bg-neutral-50 dark:bg-neutral-800'}
-				classNames="shadowDarkPlusMax p-1"
+				classNames="shadow-darkProMax p-1"
 			>
 				{#if user}
 					<PopoverItem textAlign="right">

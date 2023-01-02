@@ -8,7 +8,7 @@ const categoryIds = [
 	// ----------------------------------------
 	'elektronike',
 	// subcategory:
-	'gaming',
+	'consoles',
 	// ----------------------------------------
 	'shtepiake',
 	// ----------------------------------------
@@ -20,25 +20,14 @@ const categoryIds = [
 	// ----------------------------------------
 ] as const;
 
-interface subCategoriesLocation {
-	id: CategoryId;
-	parentCategory: CategoryId;
-}
-
-export const subCategoriesIds: subCategoriesLocation[] = [
-	{
-		id: 'gaming',
-		parentCategory: 'elektronike',
-	},
-];
-
 export type CategoryId = typeof categoryIds[number];
 
 export interface Category {
 	name: string;
 	label: string;
 	id: CategoryId;
-	subcategories?: Category[];
+	parentCategory?: CategoryId;
+	subcategories?: CategoryId[];
 	images?: Images[];
 }
 
@@ -97,19 +86,7 @@ const categories: Category[] = [
 				alt: 'iPhone 14 Pro Max',
 			},
 		],
-		subcategories: [
-			{
-				id: 'gaming',
-				name: 'Gaming Console',
-				label: 'Gaming Consoles',
-				images: [
-					{
-						link: 'images/categories/popular/playstation.png',
-						alt: 'Playstation 5',
-					},
-				],
-			},
-		],
+		subcategories: ['consoles'],
 	},
 	{
 		name: 'Paisje Shtepiake',
@@ -145,10 +122,20 @@ const categories: Category[] = [
 		],
 	},
 
-	// 'Telefona Celular',
-	// 'Mobilje',
-	// 'Materiale Ndertimi',
-	// 'Ambient Biznesi',
+	// ! SUBCATEGORIES
+
+	{
+		id: 'consoles',
+		name: 'Gaming Console',
+		label: 'Gaming Consoles',
+		parentCategory: 'elektronike',
+		images: [
+			{
+				link: 'images/categories/popular/playstation.png',
+				alt: 'Playstation 5',
+			},
+		],
+	},
 ];
 
 export default categories;

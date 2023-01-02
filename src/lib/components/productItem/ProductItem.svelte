@@ -49,8 +49,8 @@
 		</div>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<a class="absolute bottom-8 z-30 cursor-pointer px-4 md:static md:mt-2 md:px-0" href={postURL}>
-			<h3 class="text-xl text-neutral-50 dark:text-neutral-200 md:text-neutral-900 ">
+		<a class="absolute bottom-8 z-30 cursor-pointer px-4 md:static md:px-0" href={postURL}>
+			<h3 class="text-xl text-neutral-50 dark:text-neutral-200 md:mt-2 md:text-neutral-900">
 				{product.title}
 			</h3>
 			<p class="text-neutral-50 opacity-70 dark:text-neutral-200 md:text-neutral-900 ">

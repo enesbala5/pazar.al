@@ -531,7 +531,7 @@
 					message="You can edit your post even after uploading&nbsp;it."
 				/>
 			</div>
-			<div class="defaultBg shadowDark mt-4 w-full rounded-xl p-4">
+			<div class="defaultBg shadow-dark mt-4 w-full rounded-xl p-4">
 				<button class="buttonPrimary buttonBase w-full" type="submit" form="createPost"
 					>Create Post</button
 				>

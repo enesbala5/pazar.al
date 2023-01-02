@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Category from './CategoryItem.svelte';
+	import CategoryItem from '$lib/components/UI/Sections/CategoryItem.svelte';
 </script>
 
 <div class="flex items-end justify-between px-4 md:px-0">
@@ -11,19 +11,19 @@
 	class="noScroll container mt-8 flex space-x-4 overflow-x-scroll pr-4 pl-4 md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
 >
 	<!-- categoryDescriptor="Cars" -->
-	<Category categoryId="automjete" />
+	<CategoryItem categoryId="automjete" />
 
 	<!-- categoryDescriptor="Mobile Phones" -->
-	<Category categoryId="elektronike" />
+	<CategoryItem categoryId="elektronike" />
 
 	<!-- categoryDescriptor="Gaming Console" -->
-	<Category categoryId="gaming" />
+	<CategoryItem categoryId="consoles" />
 	<!-- categoryDescriptor="Shoes" -->
-	<Category categoryId="kepuce" />
+	<CategoryItem categoryId="kepuce" />
 
 	<!-- categoryDescriptor="Clothing" -->
-	<Category categoryId="veshje" />
+	<CategoryItem categoryId="veshje" />
 
 	<!-- categoryDescriptor="Home Appliances" -->
-	<Category categoryId="shtepiake" />
+	<CategoryItem categoryId="shtepiake" />
 </div>
