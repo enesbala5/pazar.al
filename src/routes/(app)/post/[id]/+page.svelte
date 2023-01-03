@@ -247,7 +247,7 @@
 							<div class="flex items-center">
 								<h2 class="hidden text-lg font-medium lg:block">Posted by</h2>
 								<a
-									class="text-2xl font-medium hover:underline lg:ml-1.5"
+									class="h3 font-medium hover:underline lg:ml-1.5"
 									href="#author"
 									on:click|preventDefault={scrollIntoView}
 								>
@@ -266,8 +266,8 @@
 							</div>
 
 							<!--  -->
-							<div class="mt-1 flex w-full items-center text-sm lg:mt-2 lg:w-fit">
-								<div class=" lg:hidden">
+							<div class="mt-2 flex w-full items-center text-sm lg:mt-2 lg:w-fit">
+								<div class="lg:hidden">
 									<Badge
 										type="default"
 										title={data.data?.author?.account_type == 'Personal' ? 'PERDORUES' : 'BIZNES'}
@@ -321,13 +321,13 @@
 					<hr class="my-1 mb-6 border-neutral-200 dark:border-neutral-800" />
 					<!-- ? Description -->
 					<div class="my-4 w-full scroll-m-24" id="description">
-						<h3 class="text-2xl font-medium ">Description:</h3>
+						<h3 class="h3 font-medium ">Description:</h3>
 						<p class="mt-4">{data.data.description}</p>
 					</div>
 					<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
 					<!-- ? Location -->
 					<div class="my-4 w-full scroll-m-24" id="location">
-						<h3 class="text-2xl font-medium">Location:</h3>
+						<h3 class="h3 font-medium">Location:</h3>
 						<MapComponent city={data.data.city} country={data.data.country} />
 					</div>
 					<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
@@ -399,7 +399,7 @@
 					bind:this={postActions}
 				>
 					<div
-						class="defaultBg shadow-dark rounded-xl border border-neutral-300 p-4 dark:border-neutral-900 dark:bg-neutral-800"
+						class="defaultBg rounded-xl border border-neutral-300 p-4 shadow-dark dark:border-neutral-900 dark:bg-neutral-800"
 					>
 						<div class="mt-4 flex w-full items-center justify-between">
 							<!-- Currency Symbol -->

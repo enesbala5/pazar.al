@@ -36,9 +36,6 @@
 
 <svelte:window bind:innerWidth />
 
-{#if innerWidth >= 1024}
-	<Svrollbar />
-{/if}
 
 <section class="{$darkMode ? 'dark' : ''} font-aeonik">
 	{#if $alerts.length > 0}
@@ -54,3 +51,7 @@
 	{/if}
 	<slot />
 </section>
+
+{#if innerWidth >= 1024}
+	<Svrollbar  />
+{/if}

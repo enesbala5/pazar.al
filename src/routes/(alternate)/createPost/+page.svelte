@@ -472,7 +472,7 @@
 		<section class="top-8 h-full w-1/3 lg:sticky">
 			<h2 class="headline text-xl font-medium ">Preview</h2>
 			<div class="mt-4">
-				<ProductItem margin={false} card {product} />
+				<ProductItem margin={false} card='card' {product} />
 			</div>
 
 			<!-- ! Post Information -->

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import type { Product } from '$lib/types/product';
+	import PostGrid from '../Sections/PostGrid.svelte';
 
-	let RecommendedItems: Product[] = [
+	let TopDeals: Product[] = [
 		{
 			title: 'Range Rover 2022',
 			description: 'Luks',
@@ -63,11 +64,13 @@
 </script>
 
 <div class="flex items-end justify-between">
-	<p class="text-2xl font-medium">Today's Top Deals</p>
+	<p class="h3 font-medium">Today's Top Deals</p>
 	<a class="text-sm font-medium uppercase opacity-80 md:text-base" href="recommended">View All</a>
 </div>
-<div class="mt-6 grid grid-cols-4 gap-4">
-	{#each RecommendedItems as product}
-		<ProductItem {product} card margin={false} />
-	{/each}
-</div>
+<section class="mt-6">
+	<PostGrid fullWidth hideAds inheritWidth gap cardDisplay="minimized">
+		{#each TopDeals as product, i}
+			<ProductItem {product} card="minimized" margin={false} />
+		{/each}
+	</PostGrid>
+</section>

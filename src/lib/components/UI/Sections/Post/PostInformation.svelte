@@ -9,14 +9,14 @@
 
 <div class=" mb-6 mt-6">
 	<div class="mb-4 mt-8 flex w-full items-center justify-between">
-		<h3 class="text-2xl font-medium ">Post Information:</h3>
+		<h3 class="h3 font-medium ">Post Information:</h3>
 		<button on:click={toggleModal} class="buttonXs buttonSecondary rounded-full"
 			>View Detailed</button
 		>
 		<Modal>
 			<section class="z-50 grid w-full max-w-2xl rounded-xl bg-neutral-50 dark:bg-neutral-900">
 				<div class="w-full  p-4 lg:p-6 ">
-					<h3 class="headline text-2xl font-medium">Detailed Information:</h3>
+					<h3 class="headline h3 font-medium">Detailed Information:</h3>
 					<p class="mt-2">Information around the post.</p>
 				</div>
 				<hr class="mx-4 border-neutral-200 dark:border-neutral-800 lg:mx-6" />

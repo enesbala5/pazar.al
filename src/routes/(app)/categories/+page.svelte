@@ -12,7 +12,6 @@
 	import type { Category, CategoryId } from '$lib/data/categories';
 	import { filterCategory } from '$lib/functions/navigation';
 	import { capitalizeFirstLetter } from '$lib/functions/generic';
-	import CategoryPostGrid from '$lib/components/UI/Sections/CategoryPostGrid.svelte';
 
 	let params: searchQueryCategories = {};
 	let itemsAmount: number = 0;

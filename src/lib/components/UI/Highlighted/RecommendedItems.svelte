@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import type { Product } from '$lib/types/product';
+	import PostGrid from '../Sections/PostGrid.svelte';
 
 	let RecommendedItems: Product[] = [
 		{
@@ -63,11 +64,14 @@
 </script>
 
 <div class="flex items-end justify-between">
-	<p class="text-2xl font-medium">Recommended</p>
-	<a class="font-medium uppercase opacity-80 text-sm md:text-base" href="recommended">View All</a>
+	<p class="h3 font-medium">Recommended</p>
+	<a class="text-sm font-medium uppercase opacity-80 md:text-base" href="recommended">View All</a>
 </div>
-<div class="mt-6 grid grid-cols-4 gap-4">
-	{#each RecommendedItems as product}
-		<ProductItem {product} card margin={false} />
-	{/each}
-</div>
+
+<section class="mt-6">
+	<PostGrid fullWidth hideAds inheritWidth cardDisplay="minimized" gap>
+		{#each RecommendedItems as product}
+			<ProductItem {product} card="minimized" margin={false} />
+		{/each}
+	</PostGrid>
+</section>

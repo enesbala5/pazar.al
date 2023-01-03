@@ -10,6 +10,9 @@
 	import type { PageData } from './$types';
 	import { nav } from '$lib/userState/nav';
 	import { goto } from '$app/navigation';
+	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
+	import PostGrid from '$lib/components/UI/Sections/PostGrid.svelte';
+	import { card } from '$lib/userState/preferences';
 
 	export let data: PageData;
 
@@ -21,9 +24,11 @@
 
 	let loggedIn: boolean = loggedInUser?.uid === user?.uid;
 	$: (user, loggedInUser), (loggedIn = loggedInUser?.uid === user?.uid);
+
+	$: user, console.log(user);
 </script>
 
-<article class="mt-12 px-4 lg:mx-auto lg:w-11/12">
+<article class="mt-12 px-4 lg:mx-auto lg:w-11/12 lg:px-0">
 	<section
 		class="flex items-center space-x-4 rounded-l-full bg-gradient-to-r from-neutral-100 to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 lg:space-x-12"
 	>
@@ -48,9 +53,9 @@
 	<!-- USER ACTIONS -->
 	{#if loggedIn}
 		<section
-			class="mt-12 flex flex-col justify-between space-y-4 md:flex-row md:space-x-8 md:space-y-0 lg:mt-24"
+			class="mt-12 flex flex-col justify-between space-y-4 md:flex-row md:space-y-0 lg:mt-12"
 		>
-			<div class="md:w-2/3">
+			<div class="mr-2 md:w-2/3">
 				<!-- <p class="mb-6 text-lg font-medium">Veprimtaria</p> -->
 				<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
 					<div
@@ -174,7 +179,7 @@
 			</div>
 			<!-- secondary -->
 			<div
-				class="rounded-xl border border-neutral-100 p-4 shadow-sm dark:border-neutral-800 md:w-1/3"
+				class="ml-2 rounded-xl border border-neutral-100 p-4 shadow-sm dark:border-neutral-800 md:w-1/3"
 			>
 				<p class="mb-4 text-lg font-medium">Menaxho Llogarine</p>
 
@@ -192,5 +197,17 @@
 
 			<div />
 		</section>
+	{/if}
+	<!-- POSTS -->
+	<div class="{loggedIn ? 'mt-8 ' : 'mt-12 lg:mt-16'} mb-8 flex items-end justify-between ">
+		<p class="h3 font-medium">Posts</p>
+		<!-- <a class="text-sm font-medium uppercase opacity-80 md:text-base" href="recommended">View All</a> -->
+	</div>
+	{#if user !== undefined}
+		<PostGrid gap inheritWidth>
+			{#each user.posts !== undefined ? user.posts : [] as product}
+				<ProductItem {product} card={$card} margin={false} />
+			{/each}
+		</PostGrid>
 	{/if}
 </article>

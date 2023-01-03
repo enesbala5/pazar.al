@@ -2,13 +2,13 @@
 	import CategoryItem from '$lib/components/UI/Sections/CategoryItem.svelte';
 </script>
 
-<div class="flex items-end justify-between px-4 md:px-0">
-	<p class="text-2xl font-medium">Popular Categories</p>
-	<a class="text-sm font-medium uppercase opacity-80 md:text-base" href="recommended">View All</a>
+<div class="flex items-end justify-between px-4 lg:px-0">
+	<p class="h3 font-medium">Popular Categories</p>
+	<a class="text-sm font-medium uppercase opacity-80 lg:text-base" href="recommended">View All</a>
 </div>
 
 <div
-	class="noScroll container mt-8 flex space-x-4 overflow-x-scroll pr-4 pl-4 md:grid md:grid-cols-6 md:grid-rows-1 md:gap-8 md:overflow-hidden"
+	class="noScroll mt-8 flex space-x-4 overflow-x-scroll lg:grid lg:grid-cols-6 lg:grid-rows-1 lg:gap-8 lg:overflow-hidden px-4 lg:px-0"
 >
 	<!-- categoryDescriptor="Cars" -->
 	<CategoryItem categoryId="automjete" />

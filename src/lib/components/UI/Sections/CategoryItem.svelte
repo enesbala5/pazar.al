@@ -8,6 +8,7 @@
 	// Props
 	// Image - Will probably get included in category array later so might have to refactor and change this part
 	export let imgLink: string = '';
+	export let minWidth: string = '';
 	export let categoryTileVersion: boolean = false;
 	export let imgAlt: string | undefined = undefined;
 
@@ -59,7 +60,7 @@
 	{size === 'xs'
 				? 'flex h-16 w-fit items-center'
 				: size === 'sm'
-				? 'flex h-24 w-full items-center space-x-2 rounded-md border-neutral-700 bg-neutral-50 p-1.5 transition-shadow hover:shadow-light dark:border dark:bg-neutral-800 dark:hover:border-neutral-700 dark:hover:shadow-none'
+				? `${minWidth} flex h-24 w-full items-center space-x-2 rounded-md border-neutral-700 bg-neutral-50 p-1.5 transition-shadow hover:shadow-light dark:border dark:bg-neutral-800 dark:hover:border-neutral-700 dark:hover:shadow-none`
 				: 'flex w-full min-w-[8rem] flex-col items-center space-y-4 text-center md:min-w-0'}
 				group
 	"
@@ -69,9 +70,9 @@
 			{size === 'xs'
 					? 'rounded-md'
 					: size === 'sm'
-					? 'w-full max-w-[50%] rounded-md bg-neutral-200'
-					: 'w-full rounded-full bg-neutral-200'}
-			flex aspect-square h-full  items-center justify-center overflow-hidden dark:bg-neutral-900 dark:group-hover:bg-opacity-75"
+					? 'w-full max-w-[50%] rounded-md bg-neutral-200 dark:bg-neutral-900 dark:group-hover:bg-opacity-75'
+					: 'w-full rounded-full bg-neutral-200 dark:bg-neutral-800'}
+			flex aspect-square h-full  items-center justify-center overflow-hidden "
 			>
 				<a href={categoryLink} class="flex items-center justify-center">
 					<img

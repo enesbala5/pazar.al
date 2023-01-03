@@ -24,6 +24,8 @@ export const POST: RequestHandler = async ({ request }) => {
 			posts: {
 				select: {
 					title: true,
+					description: true,
+					id: true,
 					priceHistory: {
 						select: {
 							eur: true,

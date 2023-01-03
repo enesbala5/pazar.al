@@ -8,6 +8,10 @@
 		@apply text-neutral-900 dark:text-neutral-50;
 	}
 
+	.h3 {
+		@apply text-xl lg:text-2xl	
+	}
+
 	/* * Buttons */
 	.buttonPrimary {
 		@apply bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 text-white hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800;
@@ -24,10 +28,6 @@
 	.buttonTertiary {
 		@apply text-neutral-900 hover:text-indigo-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-neutral-200  dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-50 dark:focus:ring-neutral-700;
 	}
-
-	/* .buttonSmall {
-		@apply whitespace-nowrap rounded-full bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-50 hover:bg-neutral-700 dark:hover:bg-neutral-700;
-	} */
 
 	.buttonSmRounded {
 		@apply buttonSm !rounded-full;
@@ -79,7 +79,7 @@
 	}
 
 	.defaultBg {
-		@apply border border-neutral-100 dark:border-neutral-800 dark:!shadow-none;
+		@apply border border-neutral-100 dark:border-neutral-800 dark:!shadow-none dark:border-none;
 	}
 
 	.iconColors {

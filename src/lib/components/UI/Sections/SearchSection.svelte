@@ -67,7 +67,7 @@
 		<div
 			class="
 		
-		{$card || category !== undefined
+		{$card === 'card' || category !== undefined
 				? 'h-[500px] from-indigo-600 dark:from-indigo-700 lg:h-[250px]'
 				: 'h-[400px] -translate-y-[5%] from-indigo-600 dark:from-indigo-700 lg:h-[150px]'}
 		bg-gradient-to-b to-neutral-50 transition-all duration-300 dark:to-neutral-900
@@ -81,7 +81,7 @@
 		<div class="p-4 lg:hidden">
 			<SearchForm
 				onIndex={false}
-				searchInput={params.id !== undefined ? params.id : ''}
+				searchInput={!params.isCategory ? (params.id !== undefined ? params.id : '') : ''}
 				{itemsPerPage}
 				{params}
 				bind:paginate
@@ -130,7 +130,7 @@
 				{/each}
 			{:then data}
 				{#each data as postim, i}
-					<ProductItem card={$card} product={postim} />
+					<ProductItem  card={$card} product={postim} />
 				{:else}
 					<KerkimError id={params.id} />
 					<!-- TODO: Add Recently Viewed Items -->

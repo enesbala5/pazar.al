@@ -74,7 +74,7 @@
 		aria-orientation={vertical ? 'vertical' : 'horizontal'}
 		transition:scale={{ start: 0, duration: 200, easing: quartInOut }}
 		class=" 
-		{classNames} shadow-xl
+		{classNames} shadow-darkProMax
 	{anchor === 'right' ? 'origin-top-right' : 'origin-top-left'}
 	wrapper z-50 overflow-hidden rounded-lg {bgColor}"
 		style="--popover-top: {`${usePopoverHeight ? popoverHeight : bottom}px`};

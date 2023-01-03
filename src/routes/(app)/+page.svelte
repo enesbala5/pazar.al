@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<!-- Recommended -->
-	<section class="mx-auto mt-16 w-10/12 ">
+	<section class="mx-auto mt-16 px-4 lg:w-10/12 lg:px-0">
 		<RecommendedItems />
 	</section>
 	<!-- Recommended Categories -->
@@ -76,16 +76,16 @@
 		</div>
 	</section>
 	<!-- Top Deals -->
-	<section class="mx-auto mt-16 w-10/12 ">
+	<section class="mx-auto mt-16 px-4 lg:w-10/12 lg:px-0">
 		<TopDeals />
 	</section>
-	<section class="mt-16 md:mx-auto md:w-10/12">
+	<section class="mt-16 lg:mx-auto lg:w-10/12">
 		<PopularCategories />
 	</section>
 
-	<section class="mx-auto my-24 w-10/12 ">
+	<section class="mx-auto my-24 px-4 lg:w-10/12 lg:px-0">
 		<div class="flex items-end justify-between">
-			<p class="text-2xl font-medium">Partners</p>
+			<p class="h3 font-medium">Partners</p>
 			<a class="font-medium uppercase opacity-80" href="recommended">View All</a>
 		</div>
 		<div class="mt-8 grid grid-cols-4 grid-rows-2 gap-4">

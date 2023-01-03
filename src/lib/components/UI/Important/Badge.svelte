@@ -80,7 +80,7 @@
 </script>
 
 <a
-	href={link !== '' ? link : ''}
+	href={link !== '' ? link : '#'}
 	on:mouseenter={() => (hovering = true)}
 	on:mouseleave={() => (hovering = false)}
 	on:click={dispatchAction}
@@ -89,7 +89,7 @@
 	{classNames}
 	{margin ? 'mb-2 mr-2' : ''}
 	{sm ? ' px-3 py-1 text-xs md:text-sm' : ' p-2 px-4 py-2 text-sm'}
-	{link || useAction ? 'cursor-pointer' : ''}
+	{link || useAction ? 'cursor-pointer' : 'isDisabled'}
 		flex w-fit items-center  rounded-{rounded}  "
 >
 	{#if !useSlot}
@@ -109,3 +109,11 @@
 		<slot />
 	{/if}
 </a>
+
+<style>
+	.isDisabled {
+		color: currentColor;
+		pointer-events: none;
+		text-decoration: none;
+	}
+</style>
