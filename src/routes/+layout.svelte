@@ -25,10 +25,13 @@
 	let innerWidth: number = 1024;
 
 	import { inject } from '@vercel/analytics';
+	import { crossfade } from 'svelte/transition';
 
-	onMount(() => {
-		inject();
-	});
+	// onMount(() => {
+	inject();
+	// });
+
+	const [insert, remove] = crossfade({});
 </script>
 
 <svelte:window bind:innerWidth />
@@ -39,9 +42,13 @@
 
 <section class="{$darkMode ? 'dark' : ''} font-aeonik">
 	{#if $alerts.length > 0}
-		<div class="fixed bottom-6 right-6 z-30 space-y-2">
-			{#each $alerts as alert, i}
-				<Toast {...alert} />
+		<div
+			class="fixed bottom-6 right-1/2 z-30 w-full translate-x-1/2 space-y-2 px-4 md:right-6 md:w-fit md:translate-x-0"
+		>
+			{#each $alerts as alert (alert)}
+				<div class="" in:insert={{ key: alert.id }} out:remove={{ key: alert.id }}>
+					<Toast {...alert} />
+				</div>
 			{/each}
 		</div>
 	{/if}

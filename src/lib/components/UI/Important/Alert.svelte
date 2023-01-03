@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	type AlertType = 'default' | 'info' | 'error' | 'danger' | 'success' | 'warning';
 
 	export let type: AlertType = 'default';

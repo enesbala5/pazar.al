@@ -135,6 +135,7 @@ const categories: Category[] = [
 				alt: 'Playstation 5',
 			},
 		],
+		subcategories: ['consoles', 'elektronike', 'automjete', 'kepuce'],
 	},
 ];
 

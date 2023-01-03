@@ -63,9 +63,17 @@
 	<div class="fixed top-0 -z-50 h-full min-h-screen w-full bg-neutral-50 dark:bg-neutral-900" />
 
 	<!-- Gradient -->
-	<div
-		class="absolute top-0 z-0 h-[500px] w-full rounded-xl bg-gradient-to-b from-indigo-600 to-neutral-50 dark:from-indigo-700 dark:to-neutral-900 lg:h-[250px]"
-	/>
+	<div class="absolute top-0 z-0 w-full overflow-hidden rounded-xl">
+		<div
+			class="
+		
+		{$card || category !== undefined
+				? 'h-[500px] from-indigo-600 dark:from-indigo-700 lg:h-[250px]'
+				: 'h-[400px] -translate-y-[5%] from-indigo-600 dark:from-indigo-700 lg:h-[150px]'}
+		bg-gradient-to-b to-neutral-50 transition-all duration-300 dark:to-neutral-900
+		"
+		/>
+	</div>
 
 	<div class="absolute top-0 w-full">
 		<!-- ? FILTERING -->

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { alerts, type AlertType } from '$lib/userState/alerts';
 	import { onMount } from 'svelte';
-	import { quadOut, quartInOut } from 'svelte/easing';
+	import { quadOut } from 'svelte/easing';
 
 	import { fade, fly } from 'svelte/transition';
 
@@ -58,7 +58,7 @@
 <div
 	in:fly={{ duration: 100, delay: 25, x: 500, easing: quadOut }}
 	out:fade={{ duration: 150, delay: 25, easing: quadOut }}
-	class={`${classNames} shadow-light flex w-96 items-center justify-between space-x-2 rounded-md p-4 text-sm`}
+	class={`${classNames} flex w-full items-center justify-between rounded-md p-4 text-sm shadow-light md:w-96`}
 >
 	<div class="flex items-center space-x-2">
 		{#if !useSlot}

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import type { Product } from '$lib/types/product';
 	import { nav } from '$lib/userState/nav';
 
@@ -39,14 +38,15 @@
 				/>
 			</a>
 			<div
-				class=" bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent md:hidden"
-			/>
-			<div
 				class="inverted group right-2 top-2 z-50 hidden h-6 w-6 cursor-pointer  items-center justify-center md:absolute md:flex"
 			>
 				<Heart classNames="h-5 w-5" inverted />
 			</div>
 		</div>
+		<!-- Shadow -->
+		<div
+			class="absolute bottom-0 z-20 h-2/3 w-full rounded-md bg-gradient-to-t from-black to-transparent md:hidden"
+		/>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<a class="absolute bottom-8 z-30 cursor-pointer px-4 md:static md:px-0" href={postURL}>
