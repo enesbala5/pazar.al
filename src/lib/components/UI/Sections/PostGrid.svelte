@@ -9,7 +9,7 @@
 	export let gap: boolean = false;
 	export let category: Category | undefined = undefined;
 
-	let innerWidth: number = 1024;
+	let innerWidth: number = 1020;
 
 	export let cardDisplay: ProductItemFormat | undefined = undefined;
 
@@ -56,9 +56,9 @@
 			class="
 			w-full
 			{cardLocal === 'minimized'
-				? 'flex items-start space-x-2 overflow-x-scroll pb-4 lg:grid lg:items-start lg:space-x-0 lg:overflow-x-hidden'
+				? 'flex items-start space-x-4 overflow-x-scroll px-4 pb-4 lg:grid lg:items-start lg:space-x-0 lg:overflow-x-hidden'
 				: 'grid'}
-			{gap && innerWidth >= 1024 ? 'gap-4' : ''}
+			{gap ? 'lg:gap-4' : ''}
 			{cardLocal === 'card'
 				? `grid-cols-1' ${fullWidth ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`
 				: 'grid-cols-1'} "

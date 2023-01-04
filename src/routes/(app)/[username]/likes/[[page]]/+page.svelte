@@ -18,10 +18,7 @@
 
 	// $: (user, loggedInUser), (loggedIn = loggedInUser?.uid === user?.uid);
 
-	$: data, console.log(data);
-
 	let likedPosts: Product[] | undefined = data.likedPosts ?? undefined;
-	console.log(likedPosts);
 </script>
 
 <title>Liked Posts - Pazar</title>

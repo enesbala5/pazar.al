@@ -100,18 +100,18 @@
 {/if}
 {#if card === 'minimized'}
 	<!-- ! MINIMIZED IS FOR MOBILE ONLY -->
-	<section class="flex w-40 min-w-[10rem] flex-col lg:hidden">
-		<a href={postURL} class="aspect-square w-full">
+	<section class="flex flex-col lg:hidden">
+		<a href={postURL} class="flex h-32 min-h-[8rem] w-40 min-w-[10rem] items-center justify-center">
 			<img
 				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
 				alt={product.title}
-				class="aspect-square h-full w-full rounded-md object-cover"
+				class=" h-full w-full  grow rounded-md object-cover"
 			/>
 		</a>
 		<section class="mt-1.5 w-full">
 			<a class="w-full " href={postURL}>
-				<h3 class="md:text-lg lg:text-xl">{product.title}</h3>
-				<p class="text-sm opacity-70 md:text-base">{product.description}</p>
+				<h3 class="leading-5 md:text-lg lg:text-xl lg:leading-7">{product.title}</h3>
+				<!-- <p class="text-sm opacity-70 md:text-base">{product.description}</p> -->
 			</a>
 			<section class="mt-2 w-fit" aria-label="Pricing and User Actions">
 				<PriceDisplay price={product.priceHistory[0].price} eur={product.priceHistory[0].eur} />

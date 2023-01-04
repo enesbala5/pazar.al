@@ -131,7 +131,4 @@ export const getTagsByCategory = (categoryName: string) => {
 	} else {
 		return [];
 	}
-
-	// let models = getCarModelsByBrand('BMW');
-	// console.log(models);
 };

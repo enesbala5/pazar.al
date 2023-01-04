@@ -4,15 +4,55 @@
 
 	export let eur: boolean = false;
 	export let price: number;
+
+	export let transparent: boolean = false;
+	type Size = 'sm' | 'base' | 'lg';
+	export let size: Size = 'sm';
 </script>
 
-<section class="flex items-center rounded-sm bg-indigo-600 py-0.5 px-2">
-	<div aria-label="Currency Used" class="mr-2 opacity-80">
+<section
+	class="
+	{transparent ? 'w-fit' : 'rounded-sm bg-indigo-600'}
+	{size === 'sm' ? 'items-center py-0.5 px-2' : 'items-end font-medium'}
+	flex "
+>
+	<div
+		aria-label="Currency Used"
+		class="
+		{size === 'sm' ? 'mr-2' : size === 'base' ? 'mr-2' : 'mr-2.5'}
+		opacity-80"
+	>
 		{#if eur}
-			<Euro classNames="fill-white h-2.5 md:h-3" />
+			<Euro
+				classNames="
+			{size === 'sm'
+					? 'h-2.5 md:h-3 fill-white'
+					: size === 'base'
+					? 'h-3 md:h-4 iconColors'
+					: 'h-3 md:h-4 iconColors mb-1.5'}
+			"
+			/>
 		{:else}
-			<Lek classNames="fill-white h-2.5 md:h-3 " />
+			<Lek
+				classNames="
+			{size === 'sm'
+					? 'h-2.5 md:h-3 fill-white'
+					: size === 'base'
+					? 'h-3 md:h-4 iconColors'
+					: 'h-3 md:h-4 iconColors mb-1.5'}"
+			/>
 		{/if}
 	</div>
-	<p class="text-sm text-white md:text-base">{price.toLocaleString()}</p>
+	<p
+		class="
+		{size === 'sm'
+			? 'text-sm text-white md:text-base'
+			: size === 'base'
+			? 'text-base md:text-lg'
+			: 'text-2xl md:text-xl'}
+		
+	"
+	>
+		{price.toLocaleString()}
+	</p>
 </section>

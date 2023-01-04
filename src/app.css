@@ -9,7 +9,7 @@
 	}
 
 	.h3 {
-		@apply text-xl lg:text-2xl	
+		@apply text-xl lg:text-2xl;
 	}
 
 	/* * Buttons */
@@ -79,7 +79,7 @@
 	}
 
 	.defaultBg {
-		@apply border border-neutral-100 dark:border-neutral-800 dark:!shadow-none dark:border-none;
+		@apply border border-neutral-100 dark:border-none dark:border-neutral-800 dark:!shadow-none;
 	}
 
 	.iconColors {
@@ -88,6 +88,14 @@
 
 	.iconColorsStroke {
 		@apply stroke-neutral-700 dark:stroke-neutral-200;
+	}
+
+	.swiper-pagination-bullet {
+		@apply h-4 w-full rounded-full bg-neutral-200 md:w-12;
+	}
+
+	.swiper-pagination-bullet-active {
+		@apply bg-red-500;
 	}
 }
 

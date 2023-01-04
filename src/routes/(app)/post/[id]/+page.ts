@@ -4,6 +4,7 @@ import type { searchQuery } from '$lib/types/query';
 import { nav } from '$lib/userState/nav';
 import type { Product } from '$lib/types/product';
 import type { PageUser } from '$lib/types/page';
+import { error } from '@sveltejs/kit';
 
 interface FullUserInfo extends Product {
 	author: PageUser;
@@ -52,9 +53,9 @@ const loadFromApi = async (
 		body: JSON.stringify(query.id),
 	});
 
-	// if (!response.ok) {
-	// throw error(202, 'Postimi not found.');
-	// }
+	if (!response.ok) {
+		throw error(202, 'Postimi not found.');
+	}
 
 	const post = await response.json();
 	const isLiked = await isLikedResponse.json();

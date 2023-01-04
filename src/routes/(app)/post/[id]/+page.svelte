@@ -28,6 +28,7 @@
 	import { getSearchUrl, gotoUser } from '$lib/functions/navigation';
 	import { capitalizeFirstLetter } from '$lib/functions/generic';
 	import { page } from '$app/stores';
+	import PriceDisplay from '$lib/components/productItem/PriceDisplay.svelte';
 	// -----------
 
 	// Variable Declaration
@@ -126,8 +127,10 @@
 		<!-- ! NAVBAR -->
 		<menu
 			class="
-			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight ? 'lg:fixed' : 'hidden'}
-			w-postNav top-0  z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 lg:space-x-12
+			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight
+				? 'hidden lg:fixed'
+				: 'hidden'}
+			w-postNav top-0 z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 lg:space-x-12
 			"
 		>
 			<section class="flex items-end lg:w-4/6">
@@ -154,9 +157,9 @@
 			<div class="flex flex-col-reverse lg:flex-col">
 				<!-- ! Title and Quick Actions -->
 				<!-- !!!!!!!! MOBILE -->
-				<div class="mx-4 flex items-center space-x-2 py-2 lg:mx-0 lg:hidden">
+				<div class="mx-4 flex  items-center space-x-2 py-2 lg:mx-0 lg:hidden">
 					<ShareContainer
-						classNames="w-full"
+						classNames="w-full "
 						path={nav.post + '/' + data.data.id}
 						text={`Check out ${data.data.title} on Pazar.al`}
 					>
@@ -169,7 +172,7 @@
 						</button>
 					</ShareContainer>
 					<button
-						class="group flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-800"
+						class="group flex w-full items-center justify-center space-x-2 rounded-full bg-neutral-200 px-4 py-2.5 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-800 "
 						on:click={() => updateLikes(data?.data.id)}
 					>
 						<Heart classNames="h-4 w-4" liked={typeof liked !== 'boolean' ? false : liked} />
@@ -455,6 +458,19 @@
 		class="h-adPanel sticky top-4 right-0 rounded-lg bg-neutral-100 dark:bg-neutral-800 lg:w-3/12"
 	/>
 </article>
+
+<!-- ! Bottom BAR ? -->
+<div
+	class="fixed bottom-0 left-0 flex w-full items-center justify-between border-t border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900 z-50 lg:hidden"
+>
+	<PriceDisplay
+		size="lg"
+		transparent
+		price={data.data?.priceHistory[0]?.price}
+		eur={data.data?.priceHistory[0]?.eur}
+	/>
+	<button class="buttonPrimary buttonBase rounded-full">Contact Author</button>
+</div>
 
 <style>
 	.h-adPanel {

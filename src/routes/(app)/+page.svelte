@@ -1,12 +1,21 @@
 <script lang="ts">
-	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import RecommendedItems from '$lib/components/UI/Highlighted/RecommendedItems.svelte';
 	import TopDeals from '$lib/components/UI/Highlighted/TopDeals.svelte';
 	import SearchForm from '$lib/components/UI/SearchForm.svelte';
 	import PopularCategories from '$lib/components/UI/Sections/PopularCategories.svelte';
 	import PartnerImage from '$lib/components/UI/Sections/Secondary/PartnerImage.svelte';
 
-	let image: number = 1;
+	import { Swiper, SwiperSlide } from 'swiper/svelte';
+	import { Pagination } from 'swiper';
+	import 'swiper/css';
+	import 'swiper/css/pagination';
+
+	const pagination = {
+		clickable: true,
+		renderBullet: function (index: any, className: any) {
+			return `<span class="${className}"></span>`;
+		},
+	};
 </script>
 
 <svelte:head>
@@ -15,20 +24,38 @@
 </svelte:head>
 
 <!-- Page Content -->
-<article class="mt-4 w-full bg-neutral-50 dark:bg-neutral-900 md:px-4">
+<article class="mt-4 w-full bg-neutral-50 dark:bg-neutral-900 lg:px-4">
+	<!-- ! Mobile Only -->
 	<div class="px-4 lg:hidden">
 		<SearchForm itemsPerPage={15} />
 	</div>
+
+	<!-- ! Carousel -->
 	<div class="relative mb-8 mt-8 h-[15rem] w-full  px-4 md:px-0 lg:mt-4 lg:h-[25rem]">
-		<picture>
-			<source media="(min-width: 1024px)" srcset="images/promo/coverLg.svg" />
-			<img
-				src="images/promo/coverSm.svg"
-				alt=""
-				class="h-full w-full rounded-md object-cover md:rounded-lg lg:rounded-xl"
-			/>
-		</picture>
-		<div
+		<Swiper
+			{pagination}
+			modules={[Pagination]}
+			class="h-full w-full overflow-hidden rounded-md md:rounded-lg lg:rounded-xl"
+		>
+			<SwiperSlide class="">
+				<picture class="h-full w-full">
+					<source media="(min-width: 1024px)" srcset="images/promo/coverLg.svg" />
+					<img
+						src="images/promo/coverSm.svg"
+						alt=""
+						class="h-full w-full rounded-md object-cover "
+					/>
+				</picture>
+			</SwiperSlide>
+			<SwiperSlide class="flex items-center justify-center bg-neutral-200 dark:bg-neutral-800"
+				>Slide 2</SwiperSlide
+			>
+			<SwiperSlide class="flex items-center justify-center bg-neutral-200 dark:bg-neutral-800"
+				>Slide 3</SwiperSlide
+			>
+		</Swiper>
+		<!-- ? OLD CUSTOM PAGINATION  -->
+		<!-- <div
 			class="absolute -bottom-4 left-1/2 flex w-full -translate-x-1/2 items-center space-x-2 px-4 md:bottom-4 md:w-1/2 md:px-0 lg:w-1/3"
 		>
 			{#each Array(3) as _, i}
@@ -39,10 +66,12 @@
 				h-1.5 w-full rounded-full bg-neutral-900 dark:bg-neutral-500 md:bg-neutral-50"
 				/>
 			{/each}
-		</div>
+		</div> -->
+		<!-- ? END -->
 	</div>
-	<!-- Recommended -->
-	<section class="mx-auto mt-16 px-4 lg:w-10/12 lg:px-0">
+
+	<!-- ! Recommended -->
+	<section class="mx-auto mt-16 lg:w-10/12">
 		<RecommendedItems />
 	</section>
 	<!-- Recommended Categories -->
@@ -76,7 +105,7 @@
 		</div>
 	</section>
 	<!-- Top Deals -->
-	<section class="mx-auto mt-16 px-4 lg:w-10/12 lg:px-0">
+	<section class="mx-auto mt-16 lg:w-10/12 ">
 		<TopDeals />
 	</section>
 	<section class="mt-16 lg:mx-auto lg:w-10/12">
@@ -100,3 +129,50 @@
 		</div>
 	</section>
 </article>
+
+<style>
+	:global(.swiper-pagination-bullet) {
+		height: 0.375rem;
+		width: 100%;
+		border-radius: 9999px;
+		opacity: 20%;
+		/* mix-blend-mode: exclusion; */
+
+		--tw-bg-opacity: 1 !important;
+		background-color: rgb(229 229 229 / var(--tw-bg-opacity)) !important;
+	}
+
+	:global(.swiper-pagination-bullet-active) {
+		opacity: 50%;
+	}
+
+	:global(.swiper-pagination) {
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+		display: flex !important;
+		/* background-color: pink !important; */
+		align-items: center !important;
+		justify-content: center !important;
+		padding-left: 0.5rem /* 16px */ !important;
+		padding-right: 0.5rem /* 16px */ !important;
+	}
+
+	@media (min-width: 768px) {
+		:global(.swiper-pagination) {
+			width: 50% !important;
+			padding-left: 0px !important;
+			padding-right: 0px !important;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		:global(.swiper-pagination) {
+			width: 33.333333% !important;
+		}
+	}
+
+	.dark :global(.swiper-pagination-bullet) {
+		--tw-bg-opacity: 1;
+		background-color: rgb(115 115 115 / var(--tw-bg-opacity));
+	}
+</style>

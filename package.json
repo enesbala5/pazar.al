@@ -39,6 +39,7 @@
 		"svelte": "^3.55.0",
 		"sveltekit-i18n": "^2.2.2",
 		"svrollbar": "^0.12.0",
+		"swiper": "^8.4.5",
 		"unplugin-icons": "^0.14.14",
 		"vite": "^4.0.1"
 	}

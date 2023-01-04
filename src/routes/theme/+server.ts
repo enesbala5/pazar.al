@@ -4,7 +4,6 @@ import type { RequestHandler } from './$types';
 
 export const POST = (async ({ request, cookies }) => {
 	const { darkMode } = await request.json();
-	console.log(darkMode, typeof darkMode);
 
 	const darkModeCookieValueString = String(darkMode);
 	cookies.set('darkMode', darkModeCookieValueString, {

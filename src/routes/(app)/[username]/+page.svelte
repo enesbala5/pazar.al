@@ -24,8 +24,6 @@
 
 	let loggedIn: boolean = loggedInUser?.uid === user?.uid;
 	$: (user, loggedInUser), (loggedIn = loggedInUser?.uid === user?.uid);
-
-	$: user, console.log(user);
 </script>
 
 <article class="mt-12 px-4 lg:mx-auto lg:w-11/12 lg:px-0">

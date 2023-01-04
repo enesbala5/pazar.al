@@ -472,7 +472,7 @@
 		<section class="top-8 h-full w-1/3 lg:sticky">
 			<h2 class="headline text-xl font-medium ">Preview</h2>
 			<div class="mt-4">
-				<ProductItem margin={false} card='card' {product} />
+				<ProductItem margin={false} card="card" {product} />
 			</div>
 
 			<!-- ! Post Information -->
@@ -531,7 +531,7 @@
 					message="You can edit your post even after uploading&nbsp;it."
 				/>
 			</div>
-			<div class="defaultBg shadow-dark mt-4 w-full rounded-xl p-4">
+			<div class="defaultBg mt-4 w-full rounded-xl p-4 shadow-dark">
 				<button class="buttonPrimary buttonBase w-full" type="submit" form="createPost"
 					>Create Post</button
 				>

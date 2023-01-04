@@ -8,7 +8,6 @@ import type { RequestHandler } from './$types';
 // -> Add other search options to query
 export const POST: RequestHandler = async ({ request }) => {
 	const query: searchQuery = await request.json();
-	console.log(query ?? '');
 
 	let pageNumber = query.page !== undefined ? Number(query.page) : 1;
 	const itemsPerPage: number = query.itemsPerPage !== undefined ? Number(query.itemsPerPage) : 15;
