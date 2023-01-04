@@ -31,26 +31,25 @@
 	</div>
 
 	<!-- ! Carousel -->
-	<div class="relative mb-8 mt-8 h-[15rem] w-full  px-4 md:px-0 lg:mt-4 lg:h-[25rem]">
+	<div class="relative mb-8 mt-8 h-[15rem] w-full px-4 md:px-0 lg:mt-4 lg:h-[25rem] ">
 		<Swiper
 			{pagination}
 			modules={[Pagination]}
 			class="h-full w-full overflow-hidden rounded-md md:rounded-lg lg:rounded-xl"
 		>
-			<SwiperSlide class="">
+			<SwiperSlide class="overflow-hidden rounded-l-md md:rounded-l-lg lg:rounded-l-xl">
 				<picture class="h-full w-full">
 					<source media="(min-width: 1024px)" srcset="images/promo/coverLg.svg" />
-					<img
-						src="images/promo/coverSm.svg"
-						alt=""
-						class="h-full w-full rounded-md object-cover "
-					/>
+					<img src="images/promo/coverSm.svg" alt="" class="h-full w-full object-cover " />
 				</picture>
 			</SwiperSlide>
 			<SwiperSlide class="flex items-center justify-center bg-neutral-200 dark:bg-neutral-800"
 				>Slide 2</SwiperSlide
 			>
-			<SwiperSlide class="flex items-center justify-center bg-neutral-200 dark:bg-neutral-800"
+			<SwiperSlide
+				class="
+			flex items-center justify-center overflow-hidden
+			rounded-r-md bg-neutral-200 dark:bg-neutral-800 md:rounded-r-lg lg:rounded-r-xl"
 				>Slide 3</SwiperSlide
 			>
 		</Swiper>

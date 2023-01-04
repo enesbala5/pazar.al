@@ -82,6 +82,8 @@ model Post {
   city     Cities
   country  Countries
 
+  
+
   tags Tag[]
 
   postViews User[] @relation("PostViews") // Array of Users who have viewed the Post

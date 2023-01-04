@@ -128,9 +128,9 @@
 		<menu
 			class="
 			{scrollY > bottomContentContainerTop + bottomContentContainerOffsetHeight
-				? 'hidden lg:fixed'
+				? 'fixed hidden lg:flex'
 				: 'hidden'}
-			w-postNav top-0 z-30 flex h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 lg:space-x-12
+			w-postNav top-0 z-30 h-20 justify-between border-b border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 lg:space-x-12
 			"
 		>
 			<section class="flex items-end lg:w-4/6">
@@ -461,7 +461,7 @@
 
 <!-- ! Bottom BAR ? -->
 <div
-	class="fixed bottom-0 left-0 flex w-full items-center justify-between border-t border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900 z-50 lg:hidden"
+	class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900 lg:hidden"
 >
 	<PriceDisplay
 		size="lg"
