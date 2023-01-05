@@ -27,7 +27,7 @@
 </script>
 
 <section
-	class="defaultBg mx-2 flex flex-col justify-start overflow-hidden rounded-xl bg-neutral-100 py-4 dark:bg-neutral-900"
+	class="defaultBg mx-2 flex flex-col justify-start overflow-hidden rounded-xl bg-neutral-100 py-4 dark:bg-neutral-800"
 >
 	<div class="flex flex-col md:flex-row md:items-start md:justify-between">
 		<div class="w-full self-center">

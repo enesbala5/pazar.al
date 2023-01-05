@@ -47,7 +47,20 @@
 
 	let searchBar: HTMLInputElement;
 	let searchBarFocused: boolean = false;
+
+	const checkForSlash = (event: any) => {
+		let char = typeof event !== 'undefined' ? event.keyCode : '';
+
+		// IF CHAR === 27
+		if (char === 191) {
+			searchBar.focus();
+		}
+	};
+
+	$: searchInput = searchInput.replace('/', '');
 </script>
+
+<svelte:window on:keydown={checkForSlash} />
 
 <!-- {onIndex ? 'bg-neutral-100 dark:bg-neutral-800' : 'bg-neutral-50 dark:bg-indigo-600'} -->
 

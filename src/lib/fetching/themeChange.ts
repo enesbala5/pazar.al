@@ -16,7 +16,6 @@ export const disableDarkMode = async () => {
 	// darkMode.set(false);
 	darkModeUnsynced.set(false);
 
-
 	fetch(nav.theme, {
 		method: 'POST',
 		body: JSON.stringify({

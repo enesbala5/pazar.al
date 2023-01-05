@@ -13,18 +13,24 @@
 
 	export let cardDisplay: ProductItemFormat | undefined = undefined;
 
-	const defineCardPreference = (settingOverride: ProductItemFormat | undefined, width: number) => {
+	const defineCardPreference = (
+		settingOverride: ProductItemFormat | undefined,
+		width: number,
+		cardStore: ProductItemFormat
+	) => {
 		if (settingOverride !== undefined) {
 			if (width >= 1024) {
-				return $card;
+				return cardStore;
 			}
 			return settingOverride;
 		}
-		return $card;
+		return cardStore;
 	};
 
-	let cardLocal = defineCardPreference(cardDisplay, innerWidth);
-	$: cardLocal = defineCardPreference(cardDisplay, innerWidth);
+	let cardLocal = defineCardPreference(cardDisplay, innerWidth, $card);
+	$: cardLocal = defineCardPreference(cardDisplay, innerWidth, $card);
+
+	$: cardLocal, console.log('cardLocal: ', cardLocal);
 </script>
 
 <svelte:window bind:innerWidth />
@@ -45,8 +51,8 @@
 	<!-- ? MAIN -->
 	<article
 		class="
+		flex flex-col 
 			{fullWidth ? 'lg:w-full' : 'lg:w-8/12'}
-			flex flex-col
 		"
 	>
 		{#if category !== undefined}
@@ -54,14 +60,14 @@
 		{/if}
 		<section
 			class="
-			w-full
+		
 			{cardLocal === 'minimized'
 				? 'flex items-start space-x-4 overflow-x-scroll px-4 pb-4 lg:grid lg:items-start lg:space-x-0 lg:overflow-x-hidden'
 				: 'grid'}
 			{gap ? 'lg:gap-4' : ''}
 			{cardLocal === 'card'
-				? `grid-cols-1' ${fullWidth ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`
-				: 'grid-cols-1'} "
+				? `w-full grid-cols-1 ${fullWidth ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`
+				: 'w-full grid-cols-1'}"
 		>
 			<slot />
 		</section>

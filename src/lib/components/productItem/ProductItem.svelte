@@ -8,6 +8,7 @@
 
 	export let card: ProductItemFormat;
 	export let margin: boolean = true;
+	export let marginX: boolean = true;
 
 	export let product: Product;
 	export let skeleton: boolean = false;
@@ -26,7 +27,9 @@
 
 {#if card === 'card'}
 	<section
-		class="group relative {margin ? 'mx-2 my-4 mb-12' : ''} min-h-[30vh] rounded-md  md:min-h-0"
+		class="group relative {margin
+			? `${marginX ? 'mx-2' : 'mx-2'} my-4 mb-12`
+			: ''} min-h-[30vh] rounded-md  md:min-h-0"
 	>
 		<div
 			class="absolute top-0 left-0 z-10 h-full w-full overflow-hidden rounded-md md:static md:z-0 md:h-48"
@@ -74,7 +77,7 @@
 	</section>
 {/if}
 {#if card === 'list'}
-	<section class="relative my-4 mx-4 mb-6 flex h-auto items-center">
+	<section class="relative my-4 mb-6 flex h-auto w-full items-center px-2">
 		<div class=" minWidthNonCard left-0 h-full cursor-pointer ">
 			<a href={postURL}>
 				<img

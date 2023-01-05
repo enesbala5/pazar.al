@@ -6,10 +6,6 @@ import { browser } from '$app/environment';
 import { nav } from '$lib/userState/nav';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	// ! HANDLE THEME CHANGE
-	if (event.url.pathname.startsWith(nav.theme)) {
-	}
-
 	const session = event.cookies.get('session');
 	const darkModeCookie = event.cookies.get('darkMode');
 	const language = event.cookies.get('language');
