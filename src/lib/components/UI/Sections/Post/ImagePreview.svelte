@@ -14,7 +14,7 @@
 	};
 
 	// ? Cloudinary
-	import Image from '@cloudinary/svelte';
+	// import Image from '@cloudinary/svelte';
 
 	// Variable Initialisations
 	export let images = [
