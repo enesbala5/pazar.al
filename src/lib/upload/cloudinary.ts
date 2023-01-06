@@ -1,32 +1,92 @@
-import { Cloudinary } from 'cloudinary-core';
+// Cloudinary Types
+type ImageFileExtension =
+	| string
+	| 'jpg'
+	| 'jpe'
+	| 'jpeg'
+	| 'jpc'
+	| 'jp2'
+	| 'j2k'
+	| 'wdp'
+	| 'jxr'
+	| 'hdp'
+	| 'png'
+	| 'gif'
+	| 'webp'
+	| 'bmp'
+	| 'tif'
+	| 'tiff'
+	| 'ico'
+	| 'pdf'
+	| 'ps'
+	| 'ept'
+	| 'eps'
+	| 'eps3'
+	| 'psd'
+	| 'svg'
+	| 'ai'
+	| 'djvu'
+	| 'flif';
+type VideoFileExtension = string | 'webm' | 'mp4' | 'ogv' | 'flv' | 'm3u8';
+interface CloudinaryResponseSuccessful {
+	asset_id: string;
+	public_id: string;
+	version: number;
+	version_id: string;
+	signature: string;
+	width?: string | number;
+	height?: string | number;
+	format: ImageFileExtension;
+	resource_type: string;
+	created_at: Date; //'2023-01-05T22:07:38Z'
+	tags: [];
+	bytes: number;
+	type: string;
+	etag: string;
+	placeholder: boolean;
+	url: string;
+	secure_url: string;
+	folder: string;
+	access_mode: 'public' | 'private';
+	existing?: boolean;
+	original_filename: string;
+}
 
-var cl = new Cloudinary({ cloud_name: 'dfy2ewof6', secure: true });
+interface ImageDatabaseStructure {
+	imageIndex: number;
+	data: CloudinaryResponseSuccessful;
+}
 
-// `----------------------`
-// cloudinary.v2.config({
-// 	cloud_name: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-// });
+export const uploadImages: any = async (files: any) => {
+	const formData = new FormData();
+	formData.append('upload_preset', 'my-uploads');
 
-// cloudinary.config({
-// cloud_name: 'dfy2ewof6',
-// api_key: '456488463241268',
-// api_secret: 'hxFR3zJSUkjRTouifM7vXoCu4nw',
-// });
-// const cloud_name = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+	let uploadedImages: ImageDatabaseStructure[] = [];
 
-export const uploadImages: any = (images: []) => {
-	// console.log(cloud_name);
-	// cloudinary.v2.uploader.upload(
-	// 	'https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg',
-	// 	{ public_id: 'olympic_flag' },
-	// 	function (error, result) {
-	// 		console.log(result);
-	// 	}
-	// );
+	for (const file in files) {
+		const index = Number(file);
+		console.log(index);
 
-	images.map((image) => console.log(image));
+		console.log('file', files[index]);
+
+		formData.append('file', files[index]);
+		const response = await fetch(`https://api.cloudinary.com/v1_1/pazar-al/upload`, {
+			method: 'POST',
+			body: formData,
+		});
+		console.log('body: ', formData);
+
+		if (!response.ok) {
+			return undefined;
+		}
+
+		const data: CloudinaryResponseSuccessful = await response.json();
+
+		uploadedImages.push({ imageIndex: index, data });
+
+		console.log(files[index].name, typeof index, index, data);
+	}
+
+	// console.log(uploadedImages);
+	return uploadedImages;
 };
-
-// cloudinary.v2.uploader
-// .upload("/home/my_image.jpg")
-// .then(result=>console.log(result));

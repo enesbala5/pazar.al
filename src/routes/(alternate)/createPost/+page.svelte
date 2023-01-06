@@ -24,6 +24,7 @@
 	import type { Product, ProductTag } from '$lib/types/product';
 	import type { Selection } from '$lib/types/selection';
 	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
+	import { darkMode } from '$lib/userState/preferences';
 
 	let eur: boolean = false;
 
@@ -31,8 +32,8 @@
 		description: string = '',
 		price: string = '';
 
-	let category: Selection | null = null,
-		city: Selection | null,
+	let category: Selection | undefined,
+		city: Selection | undefined,
 		country: Selection = { index: 0, label: 'Albania', value: 'Albania' };
 
 	let product: Product = {
@@ -46,7 +47,7 @@
 				price: pageParamParse(price, 0),
 			},
 		],
-		city: 'Tirane',
+		city: city !== undefined ? city?.label : 'Tirane',
 		country: 'Albania',
 		disabled: true,
 	};
@@ -61,7 +62,7 @@
 				eur,
 			},
 		],
-		city: 'Tirane',
+		city: city !== undefined ? city?.label : 'Tirane',
 		country: 'Albania',
 		pid: '',
 		disabled: true,
@@ -71,22 +72,24 @@
 	// Initial ID
 	let currentId: number = 0;
 
-	// Creating Tag
-	const addTag = () => {
-		if (tagText === '' || tagValue === '' || !tagText || !tagValue) {
-			focusInput();
-			return;
-		}
-		tags = [...tags, { id: currentId, name: tagText, value: tagValue }];
-		tagText = '';
-		tagValue = '';
-		focusInput();
-		currentId++;
-	};
+	// NOT USING
+	// ! Creating Tag
+	// const addTag = () => {
+	// 	if (tagText === '' || tagValue === '' || !tagText || !tagValue) {
+	// 		focusInput();
+	// 		return;
+	// 	}
+	// 	tags = [...tags, { id: currentId, name: tagText, value: tagValue }];
+	// 	tagText = '';
+	// 	tagValue = '';
+	// 	focusInput();
+	// 	currentId++;
+	// };
 
-	function isRequired(value: any) {
-		return value != null && value !== '';
-	}
+	// NOT USING
+	// function isRequired(value: any) {
+	// 	return value != null && value !== '';
+	// }
 
 	const manageRequiredTag = (event: any) => {
 		const formData = new FormData(event.target);
@@ -158,12 +161,12 @@
 		tags = tags.filter(alreadyExists);
 	};
 
-	// Removing Tag
-	const deleteTag = (id: number) => {
-		tags = tags.filter((tag) => {
-			tag.id !== id;
-		});
-	};
+	// ! Removing Tag - NOT USING
+	// const deleteTag = (id: number) => {
+	// 	tags = tags.filter((tag) => {
+	// 		tag.id !== id;
+	// 	});
+	// };
 
 	let tags: ProductTag[] | [] = [];
 	let optionalTags: ProductTag[] | [] = [];
@@ -208,6 +211,44 @@
 
 	$: selectedCarBrand = getSelectedCarBrand(tags);
 	$: carModelsByBrand = getCarModelsByBrand(selectedCarBrand);
+
+	// ! FIXING SVELTE:SELECT
+	let categoryOptions: string[] = [];
+
+	for (let category of categories) {
+		categoryOptions = [...categoryOptions, category.name];
+	}
+
+	import Dropzone from 'svelte-file-dropzone';
+	import { uploadImages } from '$lib/upload/cloudinary';
+	// Type Declaration
+	interface Files {
+		accepted: any;
+		rejected: any;
+	}
+	// Variable Declaration
+	let files: Files = {
+		accepted: [],
+		rejected: [],
+	};
+	// Functions
+	function handleFilesSelect(e: any) {
+		const { acceptedFiles, fileRejections } = e.detail;
+		files.accepted = [...files.accepted, ...acceptedFiles];
+		files.rejected = [...files.rejected, ...fileRejections];
+	}
+
+	// Icons
+	import ImageIcon from '~icons/feather/image';
+	import XIcon from '~icons/feather/x';
+
+	function handleRemoveFile(e: any, index: any) {
+		files.accepted.splice(index, 1);
+		files.accepted = [...files.accepted];
+	}
+	function handleRemoveAll() {
+		files.accepted = [];
+	}
 </script>
 
 <title>Krijo nje Postim - Pazar</title>
@@ -224,7 +265,16 @@
 			</h3>
 			<!-- <h3 class="mt-2">Cdo postim ne MerrJep eshte falas, me opsionin e promovimit.</h3> -->
 
-			<form action="?/createPost" method="POST" class="mt-12" id="createPost" use:enhance>
+			<form
+				action="?/createPost"
+				method="POST"
+				class="mt-12"
+				id="createPost"
+				use:enhance
+				on:submit|preventDefault={() => {
+					uploadImages(files.accepted);
+				}}
+			>
 				<!-- Additional Information -->
 				<input type="hidden" name="eur" value={eur} id="eur" />
 				<input type="hidden" name="tags" value={JSON.stringify(tags)} id="tags" />
@@ -286,14 +336,23 @@
 					</div>
 				</div>
 				<hr class="my-4 border-neutral-100 dark:border-neutral-800" />
-				<div class="mt-4">
-					<Select items={categories} bind:value={category} name="category" placeholder="Category" />
+				<div class="mt-4 {$darkMode ? 'selectStylingDark' : 'selectStyling'}">
+					<Select
+						items={categoryOptions}
+						bind:value={category}
+						name="category"
+						placeholder="Category"
+					/>
 				</div>
-				<div class="mt-4 flex w-full items-center space-x-4">
+				<div
+					class="
+					{$darkMode ? 'selectStylingDark' : 'selectStyling'}
+					mt-4 flex w-full items-center space-x-4"
+				>
 					<div class="w-full">
 						<Select items={cities} bind:value={city} name="city" placeholder="City" />
 					</div>
-					<div class="w-full">
+					<div class="w-full ">
 						<Select
 							items={countries}
 							bind:value={country}
@@ -308,7 +367,7 @@
 				<!-- Tags Management -->
 				<Accordion title="Post Information" bind:makeVisible>
 					<!-- ? Inserting Tags -->
-					<div class=" ">
+					<div class="w-full {$darkMode ? 'selectStylingDark' : 'selectStyling'}">
 						{#if requiredTags.length < 1}
 							<p class="mb-2 text-sm">Please select a category.</p>
 							<hr class="my-2 border-neutral-200 dark:border-neutral-800" />
@@ -463,10 +522,68 @@
 					</div> -->
 					<!-- ! ------------------------------------ -->
 				</Accordion>
+				<Dropzone on:drop={handleFilesSelect} accept={['image/*']}>
+					<div class="space-y-1 text-center">
+						<ImageIcon class="mx-auto h-12 w-12 text-gray-400" />
+						<div class="flex text-sm text-gray-600">
+							<label
+								for="file-upload"
+								class="relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+							>
+								<span>Upload a file</span>
+							</label>
+							<p class="pl-1">or drag and drop</p>
+						</div>
+						<p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+					</div>
+				</Dropzone>
+				<div class="mt-4 w-full rounded-xl ">
+					{#if files.accepted?.length > 0}
+						<section class="grid grid-cols-5 gap-4">
+							{#each files.accepted as item, index}
+								<div
+									class="group flex  flex-col items-center rounded-md border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-700 dark:bg-neutral-800"
+								>
+									<div
+										class="relative h-8 w-8 rounded-md bg-neutral-700 p-1 duration-150 ease-in-out hover:cursor-pointer hover:bg-red-500 dark:bg-neutral-700"
+										on:click={(e) => handleRemoveFile(e, index)}
+										on:keydown={(e) => handleRemoveFile(e, index)}
+									>
+										<ImageIcon
+											class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-white duration-150 ease-in-out group-hover:opacity-0"
+										/>
+										<XIcon
+											class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 duration-150 ease-in-out group-hover:opacity-100"
+										/>
+									</div>
+									<p class="mt-4 text-sm font-medium">
+										{item.name.substring(0, item.name.indexOf('.'))}<span
+											class="font-normal opacity-75"
+											>.{item.name.substring(item.name.indexOf('.') + 1)}</span
+										>
+									</p>
+								</div>
+								<!-- <Badge message={item.name} margin /> -->
+							{/each}
+						</section>
+					{/if}
+
+					<!-- <form
+						method="POST"
+						class="w-full"
+						on:submit|preventDefault={() => uploadImages(files.accepted)}
+						use:enhance={() => {
+							return async ({ result }) => {
+								invalidateAll();
+								await applyAction(result);
+							};
+						}}
+					>
+						<button type="submit" class="buttonBase buttonPrimary">Upload Images </button>
+					</form> -->
+				</div>
 			</form>
-			<div>
-				<div class="" />
-			</div>
+			<div />
 		</section>
 
 		<section class="top-8 h-full w-1/3 lg:sticky">
@@ -540,3 +657,41 @@
 		</section>
 	</article>
 </main>
+
+<style>
+	.selectStylingDark {
+		--background: #1f1f1f;
+		--border: none;
+		--inputFontSize: 1rem;
+		--borderRadius: 0.375rem;
+		--listBorderRadius: 0.375rem;
+		--listBackground: #1f1f1f;
+		--itemHoverBG: #141414;
+		--placeholderColor: #fff;
+		--placeholderOpacity: 50%;
+		--inputColor: #fff;
+		--inputPadding: 0.75rem 1.25rem;
+		--height: 3rem;
+		--clearSelectColor: #5d6167;
+		--clearSelectFocusColor: #5d6167;
+		--itemIsActiveBG: #141414;
+	}
+	.selectStyling {
+		--background: #e5e5e5;
+		--border: none;
+		--inputFontSize: 1rem;
+		--borderRadius: 0.375rem;
+		--listBorderRadius: 0.375rem;
+		--listBackground: #e5e5e5;
+		--itemHoverBG: #f5f5f5;
+		--placeholderColor: #475569;
+		--placeholderOpacity: 100%;
+		--inputColor: #000;
+		--inputPadding: 0.75rem 1.25rem;
+		--height: 3rem;
+		--clearSelectColor: #5d6167;
+		--clearSelectFocusColor: #5d6167;
+		--itemIsActiveBG: #f5f5f5;
+		--itemIsActiveColor: #000;
+	}
+</style>

@@ -1,33 +1,31 @@
-import { invalid, redirect } from '@sveltejs/kit';
-import bcrypt from 'bcryptjs';
-import type { Actions, PageServerLoad } from './$types';
-import type { User } from '@prisma/client';
-import cloudinary from 'cloudinary';
-
-const cl = cloudinary.v2;
-
-cl.config({
-	cloud_name: 'dfy2ewof6',
-	api_key: '456488463241268',
-	api_secret: 'hxFR3zJSUkjRTouifM7vXoCu4nw',
-});
-
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userState/nav';
+import { invalid, redirect } from '@sveltejs/kit';
+import type { Tag } from '@prisma/client';
+import type { Selection } from '$lib/types/selection';
 
-let redirectRegister = false;
+import type { Action, Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	if (locals.user) {
-		throw redirect(302, nav.index);
+	if (!locals.user) {
+		throw redirect(302, nav.login);
 	}
 };
 
-export const actions: Actions = {
-	default: async ({ cookies, request }) => {
-		const data = await request.formData();
-		const emailOrUsername = data.get('emailOrUsername');
-
-		throw redirect(302, nav.index);
-	},
+const parseSelection = (selectItem: string): string => {
+	let parsedSelectItem: Selection = JSON.parse(selectItem);
+	return parsedSelectItem.value;
 };
+
+const uploadFile: Action = async ({ request, locals }) => {
+	console.log('jam i modh');
+
+	const data = await request.formData();
+	const uploadedImages = data.get('uploadedImages');
+
+	console.log('logging data', uploadedImages);
+
+	// throw redirect(303, `${nav.post}/${newPost.id}`);
+};
+
+export const actions: Actions = { uploadFile };

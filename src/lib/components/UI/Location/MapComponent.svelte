@@ -56,22 +56,19 @@
 		{calculatedSize === 'base'
 		? ' items-center justify-between md:flex-row'
 		: calculatedSize === 'sm'
-		? ' items-center'
-		: 'flex-row'}
-		{classNames} relative flex flex-col
+		? ' items-center justify-between md:flex-row'
+		: 'flex-col'}
+		{classNames} relative flex
 "
 >
 	<div
 		class="z-10 h-[90%] w-full px-6
-	{calculatedSize === 'xs' ? 'my-4' : calculatedSize === 'sm' ? 'mt-0' : 'mt-0'}
+	{calculatedSize === 'base' ? 'mt-0' : calculatedSize === 'sm' ? 'mt-0' : 'my-6'}
 	"
 	>
 		<p
-			class="{calculatedSize === 'xs'
-				? 'text-xl'
-				: calculatedSize === 'sm'
-				? 'text-2xl'
-				: 'text-3xl'} font-medium"
+			class="font-medium
+			{calculatedSize === 'base' ? 'text-3xl' : calculatedSize === 'sm' ? 'text-3xl' : 'text-2xl'}"
 		>
 			{city},
 			{country}
@@ -95,12 +92,13 @@
 	<!-- {#if calculatedSize !== 'xs'} -->
 	<div
 		class="
-		{calculatedSize === 'xs'
-			? 'top-0 h-[60%] rounded-md text-xl'
+		absolute w-full bg-neutral-200 dark:border dark:border-neutral-800 dark:bg-neutral-900
+		{calculatedSize === 'base'
+			? 'top-1/2 h-[75%] -translate-y-1/2 rounded-xl'
 			: calculatedSize === 'sm'
 			? 'top-1/2 h-[75%] -translate-y-1/2 rounded-lg text-2xl'
-			: 'top-1/2 h-[75%] -translate-y-1/2 rounded-xl'}
-		absolute w-full  bg-neutral-200 dark:border dark:border-neutral-800 dark:bg-neutral-900"
+			: 'top-0 h-[60%] rounded-md text-xl'}
+		"
 	/>
 
 	<!-- {/if} -->

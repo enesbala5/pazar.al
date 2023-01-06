@@ -82,9 +82,8 @@ model Post {
   city     Cities
   country  Countries
 
-  
-
-  tags Tag[]
+  tags   Tag[]
+  images Image[]
 
   postViews User[] @relation("PostViews") // Array of Users who have viewed the Post
   postLikes User[] @relation("PostLikes") // Array of Users who have liked the Post 
@@ -95,6 +94,14 @@ model Tag {
   name  String
   value String
   posts Post[]
+}
+
+model Image {
+  id       String @id @default(cuid())
+  publicId String @unique
+  format   String
+  version  String
+  posts    Post[]
 }
 
 // ?ENUM DECLARATION

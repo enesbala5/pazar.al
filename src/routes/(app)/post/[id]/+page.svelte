@@ -333,7 +333,7 @@
 						<!-- ? Location -->
 						<div class="my-4 w-full scroll-m-24" id="location">
 							<h3 class="h3 font-medium">Location:</h3>
-							<MapComponent city={post?.city} country={post?.country} />
+							<MapComponent city={post?.city} country={post?.country} classNames={'mt-4'} />
 						</div>
 						<hr class="my-6 border-neutral-200 dark:border-neutral-800" />
 						<!-- ? Listing By: -->
@@ -412,7 +412,7 @@
 									<Lek classNames="opacity-75 h-5 dark:fill-white" />
 								{/if}
 								<!-- Price -->
-								<p class="text-5xl font-medium">
+								<p class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl font-medium">
 									{formatPrice(post?.priceHistory[0]?.price)}
 								</p>
 							</div>

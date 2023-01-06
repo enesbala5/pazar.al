@@ -5,6 +5,11 @@
 	// Carousel Styling
 	import 'swiper/css';
 	import 'swiper/css/pagination';
+	// SvelteKit Functions
+	import { browser } from '$app/environment';
+	// Images / Cloudinary
+	import { image, initialize } from 'svelte-cloudinary';
+
 	// Pagination Clasess
 	const pagination = {
 		clickable: true,
@@ -12,32 +17,36 @@
 			return `<span class="${className}"></span>`;
 		},
 	};
-
-	// ? Cloudinary
-	// import Image from '@cloudinary/svelte';
-
 	// Variable Initialisations
 	export let images = [
 		{
 			public_id: 'Range Rover 2022',
-			link: 'https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960',
+			link: 'my-uploads/range2_jwgd0g.webp',
 		},
 		{
 			public_id: 'Cover',
-			link: '/images/promo/coverLg.svg',
+			link: 'my-uploads/range_nxct2q.jpg',
 		},
 		{
 			public_id: 'Cover',
-			link: '/images/promo/coverLg.svg',
+			link: 'my-uploads/range3_oy6jr1.jpg',
 		},
 	];
+
+	// Function to link component to Cloudinary API
+	if (browser) {
+		initialize({
+			cloud_name: 'pazar-al',
+			api_key: '456488463241268',
+		});
+	}
 </script>
 
 <div
 	class="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-t-xl bg-neutral-100 dark:bg-neutral-900 sm:aspect-[20/9] md:rounded-xl"
 >
 	<Swiper {pagination} modules={[Pagination]} class="h-full w-full overflow-hidden rounded-md">
-		{#each images as image, i}
+		{#each images as cloudinaryImage, i}
 			<SwiperSlide
 				class="
 			{i === 0
@@ -48,20 +57,29 @@
 					relative flex items-center justify-center
 			"
 			>
-				<!-- ! SHOULD START USING @cloudinary/svelte -> To Fetch Images (CDN) -->
-				<!-- cloud_name - is your Cloudinary account
-				public_id  - is the asset identifier in your Cloudinary account
-				(usually the file name without a file extension)
-				--------------------------------------------------
-				<Image cloud_name="demo" public_id="sample" …{any <img> tag attributes}/> -->
-				<!-- <img src={image.link} alt={image.public_id} class="h-full w-full object-cover" /> -->
-
-				<img src={image.link} alt={image.public_id} class="z-10 h-full object-cover" />
+				<!-- <img
+					src={cloudinaryImage.link}
+					alt={cloudinaryImage.public_id}
+					class="z-10 h-full object-cover"
+				/> -->
 				<img
+					use:image={{ src: cloudinaryImage.link, bind: true, options: {
+						resetTransformations: true
+					} }}
+					class="z-10 h-full w-full object-contain"
+					alt="background"
+				/>
+
+				<img
+					use:image={{ src: cloudinaryImage.link, bind: true }}
+					class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-50 blur-xl"
+					alt="background"
+				/>
+				<!-- <img
 					src={image.link}
 					alt={image.public_id}
 					class="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-50 blur-xl"
-				/>
+				/> -->
 
 				<!-- <picture class="h-full w-full">
 					<source media="(min-width: 1024px)" srcset="/images/promo/coverLg.svg" />
