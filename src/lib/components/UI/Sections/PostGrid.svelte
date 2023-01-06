@@ -29,8 +29,6 @@
 
 	let cardLocal = defineCardPreference(cardDisplay, innerWidth, $card);
 	$: cardLocal = defineCardPreference(cardDisplay, innerWidth, $card);
-
-	$: cardLocal, console.log('cardLocal: ', cardLocal);
 </script>
 
 <svelte:window bind:innerWidth />

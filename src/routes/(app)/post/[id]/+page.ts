@@ -54,7 +54,7 @@ const loadFromApi = async (
 	});
 
 	if (!response.ok) {
-		throw error(202, 'Postimi not found.');
+		throw error(404, 'Postimi not found.');
 	}
 
 	const post = await response.json();

@@ -82,7 +82,7 @@
 			<button
 				on:click={clearInput}
 				class="
-			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
+			{onIndex ? 'buttonPrimary' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
 				<Clear
@@ -95,7 +95,7 @@
 				on:click={() => searchProductLocalised(searchInput)}
 				on:mousedown={() => searchProductLocalised(searchInput)}
 				class="
-			{onIndex ? 'bg-indigo-500 dark:bg-indigo-700' : ''}
+			{onIndex ? 'buttonPrimary' : ''}
 			absolute right-2 top-1/2 flex aspect-square h-9 -translate-y-1/2 items-center justify-center rounded-md p-1"
 			>
 				<Search

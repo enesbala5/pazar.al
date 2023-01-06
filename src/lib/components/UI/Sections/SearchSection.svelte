@@ -131,8 +131,6 @@
 			{:then data}
 				{#each data as postim, i}
 					<ProductItem card={$card} product={postim} />
-					<ProductItem card={$card} product={postim} />
-					<ProductItem card={$card} product={postim} />
 				{:else}
 					<KerkimError id={params.id} />
 					<!-- TODO: Add Recently Viewed Items -->

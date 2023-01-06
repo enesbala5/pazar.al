@@ -7,38 +7,74 @@
 	// Icons
 	import Euro from '$lib/components/logos/user/currencies/Euro.svelte';
 	import Lek from '$lib/components/logos/user/currencies/Lek.svelte';
+	import ImageIcon from '~icons/feather/image';
+	import RemoveIcon from '~icons/feather/x';
 	// * FUNCTIONAL Components
 	import InputField from '$lib/components/UI/Input/InputField.svelte';
 	import Select from 'svelte-select';
+	import Dropzone from 'svelte-file-dropzone';
 	// Data
 	import categories from '$lib/data/categories';
-	import cities from '$lib/data/cities';
+	import { cities } from '$lib/data/cities';
 	import countries from '$lib/data/countries';
 	import { nav } from '$lib/userState/nav';
 	// *FUNCTIONS
+	import { uploadImages } from '$lib/upload/cloudinary';
 	import { getTagsByCategory, type TagInCategory } from '$lib/data/tagsByCategory';
 	import { getCarModelsByBrand } from '$lib/fetching/carsByBrand';
 	import { pageParamParse } from '$lib/functions/conversions';
+	// SvelteKit Functions
+	// -> Form Submission
 	import { enhance } from '$app/forms';
+	import { applyAction, deserialize } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	// Types
 	import type { Product, ProductTag } from '$lib/types/product';
 	import type { Selection } from '$lib/types/selection';
 	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
 	import { darkMode } from '$lib/userState/preferences';
+	// -> Form Submission
+	import type { ActionResult } from '@sveltejs/kit';
+	import type { ActionData } from './$types';
 
-	let eur: boolean = false;
-
+	// --------------------------------
+	// * Input Variables
 	let title: string = '',
 		description: string = '',
 		price: string = '';
+	let eur: boolean = false;
 
+	// * Image Picker - Dropzone (svelte-file-dropzone)
+	// ->Type Declaration
+	interface Files {
+		accepted: any;
+		rejected: any;
+	}
+	// -> Variable Declaration
+	let files: Files = {
+		accepted: [],
+		rejected: [],
+	};
+	// -> Functions
+	function handleFilesSelect(e: any) {
+		const { acceptedFiles, fileRejections } = e.detail;
+		files.accepted = [...files.accepted, ...acceptedFiles];
+		files.rejected = [...files.rejected, ...fileRejections];
+	}
+	function handleRemoveFile(e: any, index: any) {
+		files.accepted.splice(index, 1);
+		files.accepted = [...files.accepted];
+	}
+
+	// Svelte:Select
+	// -> Bindings
 	let category: Selection | undefined,
 		city: Selection | undefined,
 		country: Selection = { index: 0, label: 'Albania', value: 'Albania' };
 
+	// -> Combined Product to Display on Preview
 	let product: Product = {
 		id: '',
-
 		title: title !== '' ? title : 'Title',
 		description: description !== '' ? description : 'Description',
 		priceHistory: [
@@ -51,7 +87,6 @@
 		country: 'Albania',
 		disabled: true,
 	};
-
 	$: product = {
 		id: '',
 		title: title !== '' ? title : 'Title',
@@ -67,30 +102,21 @@
 		pid: '',
 		disabled: true,
 	};
+	// -> CATEGORY OPTIONS:
+	// -> -> Extracting categories from main Array and converting to format which Svelte:Select can use
+	let categoryOptions: string[] = [];
+	for (let category of categories) {
+		categoryOptions = [...categoryOptions, category.name];
+	}
 
-	// * Managing Tags
-	// Initial ID
+	// ! TAGS
+	let tags: ProductTag[] | [] = [];
+	let optionalTags: ProductTag[] | [] = [];
+	let requiredTags: TagInCategory[] = [];
+
+	// Initial Tag ID
 	let currentId: number = 0;
-
-	// NOT USING
-	// ! Creating Tag
-	// const addTag = () => {
-	// 	if (tagText === '' || tagValue === '' || !tagText || !tagValue) {
-	// 		focusInput();
-	// 		return;
-	// 	}
-	// 	tags = [...tags, { id: currentId, name: tagText, value: tagValue }];
-	// 	tagText = '';
-	// 	tagValue = '';
-	// 	focusInput();
-	// 	currentId++;
-	// };
-
-	// NOT USING
-	// function isRequired(value: any) {
-	// 	return value != null && value !== '';
-	// }
-
+	// -> Functions
 	const manageRequiredTag = (event: any) => {
 		const formData = new FormData(event.target);
 
@@ -135,7 +161,6 @@
 			}
 		}
 	};
-
 	const submitRequiredForm = (text: string, value: string | number) => {
 		if (!text || typeof text !== 'string' || !value) {
 			// ERROR - invalid input
@@ -154,36 +179,25 @@
 			currentId++;
 		}
 	};
-
 	const clearRequiredInformationTag = (text: string) => {
 		const alreadyExists = (tag: ProductTag) => tag.name !== text;
 
 		tags = tags.filter(alreadyExists);
 	};
 
-	// ! Removing Tag - NOT USING
-	// const deleteTag = (id: number) => {
-	// 	tags = tags.filter((tag) => {
-	// 		tag.id !== id;
-	// 	});
-	// };
-
-	let tags: ProductTag[] | [] = [];
-	let optionalTags: ProductTag[] | [] = [];
-
-	let tagText: string;
-	let tagValue: string;
-
-	// Functions of AddTag input - binded to it
-	let focusInput: any, blurInput: any;
-
-	let requiredTags: TagInCategory[] = [];
-
+	// ACCORDION Visibility Management
+	// -> Binding:
+	let makeVisible: any;
+	// Function -> Conditionally make visible
 	$: if (category?.value !== undefined) {
 		requiredTags = getTagsByCategory(category?.value) ?? [];
 		makeVisible();
 	}
-
+	// Recommended Tags
+	/**
+	 * Adds Recommended Tag to List
+	 * @param text
+	 */
 	const addRecommendedTagToList = (text: string) => {
 		const alreadyExists = (tag: ProductTag) => tag.name === text;
 		const removeExisting = (tag: ProductTag) => tag.name !== text;
@@ -198,56 +212,39 @@
 		}
 	};
 
-	let makeVisible: any;
-
+	// * IF (category = 'Automjete') -
+	// -> TODO: Maybe move to external file
 	let selectedCarBrand: string = '';
-
 	let carModelsByBrand: string[];
-
 	const getSelectedCarBrand = (tags: ProductTag[]) => {
 		const tagContainingCarBrand = tags.find((tag) => tag.name === 'Lloji / Marka');
 		return tagContainingCarBrand?.value ?? '';
 	};
-
 	$: selectedCarBrand = getSelectedCarBrand(tags);
 	$: carModelsByBrand = getCarModelsByBrand(selectedCarBrand);
 
-	// ! FIXING SVELTE:SELECT
-	let categoryOptions: string[] = [];
+	// FORM SUBMISSION
+	// Binding
+	export let form: ActionData;
+	// Submit Function
+	async function handleSubmit(this: any, event: any) {
+		// Uploading Images
+		let uploadedImages = await uploadImages(files.accepted);
+		// Creating FormData element
+		const data = new FormData(this);
+		// Adding uploadedImages to form
+		data.append('uploadedImages', JSON.stringify(uploadedImages));
+		const response = await fetch(this.action, {
+			method: 'POST',
+			body: data,
+		});
 
-	for (let category of categories) {
-		categoryOptions = [...categoryOptions, category.name];
-	}
-
-	import Dropzone from 'svelte-file-dropzone';
-	import { uploadImages } from '$lib/upload/cloudinary';
-	// Type Declaration
-	interface Files {
-		accepted: any;
-		rejected: any;
-	}
-	// Variable Declaration
-	let files: Files = {
-		accepted: [],
-		rejected: [],
-	};
-	// Functions
-	function handleFilesSelect(e: any) {
-		const { acceptedFiles, fileRejections } = e.detail;
-		files.accepted = [...files.accepted, ...acceptedFiles];
-		files.rejected = [...files.rejected, ...fileRejections];
-	}
-
-	// Icons
-	import ImageIcon from '~icons/feather/image';
-	import XIcon from '~icons/feather/x';
-
-	function handleRemoveFile(e: any, index: any) {
-		files.accepted.splice(index, 1);
-		files.accepted = [...files.accepted];
-	}
-	function handleRemoveAll() {
-		files.accepted = [];
+		const result: ActionResult = deserialize(await response.text());
+		// if (result.type === 'success') {
+		// 	// re-run all `load` functions, following the successful update
+		// 	await invalidateAll();
+		// }
+		applyAction(result);
 	}
 </script>
 
@@ -271,13 +268,12 @@
 				class="mt-12"
 				id="createPost"
 				use:enhance
-				on:submit|preventDefault={() => {
-					uploadImages(files.accepted);
-				}}
+				on:submit|preventDefault={handleSubmit}
 			>
 				<!-- Additional Information -->
 				<input type="hidden" name="eur" value={eur} id="eur" />
 				<input type="hidden" name="tags" value={JSON.stringify(tags)} id="tags" />
+
 				<!--  -->
 				<InputField name="title" type="text" title="Title" required bind:value={title} />
 				<InputField
@@ -552,7 +548,7 @@
 										<ImageIcon
 											class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-white duration-150 ease-in-out group-hover:opacity-0"
 										/>
-										<XIcon
+										<RemoveIcon
 											class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 duration-150 ease-in-out group-hover:opacity-100"
 										/>
 									</div>

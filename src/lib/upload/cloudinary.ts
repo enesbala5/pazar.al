@@ -52,12 +52,12 @@ interface CloudinaryResponseSuccessful {
 	original_filename: string;
 }
 
-interface ImageDatabaseStructure {
+export interface ImageDatabaseStructure {
 	imageIndex: number;
 	data: CloudinaryResponseSuccessful;
 }
 
-export const uploadImages: any = async (files: any) => {
+export const uploadImages = async (files: any): Promise<ImageDatabaseStructure[] | []> => {
 	const formData = new FormData();
 	formData.append('upload_preset', 'my-uploads');
 
@@ -77,16 +77,10 @@ export const uploadImages: any = async (files: any) => {
 		console.log('body: ', formData);
 
 		if (!response.ok) {
-			return undefined;
+			console.error('Failed to Upload Image', 303);
 		}
-
 		const data: CloudinaryResponseSuccessful = await response.json();
-
 		uploadedImages.push({ imageIndex: index, data });
-
-		console.log(files[index].name, typeof index, index, data);
 	}
-
-	// console.log(uploadedImages);
 	return uploadedImages;
 };

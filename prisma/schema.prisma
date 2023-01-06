@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -23,6 +22,8 @@ model PriceHistory {
 
   //   author   User   @relation("CreatedBy", fields: [authorId], references: [uid])
   // authorId String
+
+  @@index([postPid])
 }
 
 model User {
@@ -83,10 +84,13 @@ model Post {
   country  Countries
 
   tags   Tag[]
-  images Image[]
+  images Image[] @relation("PostId")
+  // posts Post[] @relation("CreatedBy")
 
   postViews User[] @relation("PostViews") // Array of Users who have viewed the Post
   postLikes User[] @relation("PostLikes") // Array of Users who have liked the Post 
+
+  @@index([authorId])
 }
 
 model Tag {
@@ -101,7 +105,12 @@ model Image {
   publicId String @unique
   format   String
   version  String
-  posts    Post[]
+  index    Int?
+
+  post   Post   @relation("PostId", fields: [postId], references: [id])
+  postId String
+
+  @@index([postId])
 }
 
 // ?ENUM DECLARATION

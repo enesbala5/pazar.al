@@ -7,7 +7,7 @@ import { db } from '$lib/fetching/db';
 export const POST: RequestHandler = async ({ request, locals }) => {
 	if (!locals?.user) {
 		return new Response(JSON.stringify(false));
-		// throw error(202, 'You are not logged in.');
+		// throw error(303, 'You are not logged in.');
 	}
 
 	const postId = await request.json();

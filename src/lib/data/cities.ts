@@ -1,4 +1,6 @@
-export default [
+import type { Cities } from '@prisma/client';
+
+export const cities = [
 	{ value: 'BajramCurri', label: 'Bajram Curri' },
 	{ value: 'Ballsh', label: 'Ballsh' },
 	{ value: 'Belsh', label: 'Belsh' },
@@ -48,3 +50,14 @@ export default [
 	{ value: 'Tirane', label: 'Tirane' },
 	{ value: 'Vlore', label: 'Vlore' },
 ];
+
+export const parseCity = (city: Cities) => {
+	const response = cities.find((c) => {
+		c.value === city;
+	});
+
+	if (response !== undefined) {
+		return response.label;
+	}
+	return city;
+};

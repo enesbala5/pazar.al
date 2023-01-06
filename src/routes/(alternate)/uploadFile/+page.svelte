@@ -1,10 +1,8 @@
 <script lang="ts">
 	// Icons
 	import ImageIcon from '~icons/feather/image';
-	// UI Elements
-	import Badge from '$lib/components/UI/Important/Badge.svelte';
 	// SvelteKit Functions
-	import { applyAction, enhance } from '$app/forms';
+	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	// External Libraries
 	import Dropzone from 'svelte-file-dropzone';
@@ -19,6 +17,7 @@
 		accepted: [],
 		rejected: [],
 	};
+	
 	// Functions
 	function handleFilesSelect(e: any) {
 		const { acceptedFiles, fileRejections } = e.detail;
@@ -26,24 +25,31 @@
 		files.rejected = [...files.rejected, ...fileRejections];
 	}
 	// SELECT
-	import Select from 'svelte-select';
-	import categories from '$lib/data/categories';
-	import { darkMode } from '$lib/userState/preferences';
-	import { browser } from '$app/environment';
+	import { applyAction, deserialize } from '$app/forms';
 
-	let items = ['One', 'Two', 'Three'];
+	export let form: ActionData;
+	import type { ActionResult } from '@sveltejs/kit';
+	import type { ActionData } from './$types';
 
-	let category: Selection | null = null;
+	async function handleSubmit(this: any, event: any) {
+		let uploadedImages = await uploadImages(files.accepted);
 
-	$: category, console.log(category);
+		const data = new FormData(this);
+		data.append('uploadedImages', JSON.stringify(uploadedImages));
+		const response = await fetch(this.action, {
+			method: 'POST',
+			body: data,
+		});
 
-	let categoryOptions: string[] = [];
+		const result: ActionResult = deserialize(await response.text());
 
-	for (let category of categories) {
-		categoryOptions = [...categoryOptions, category.name];
+		if (result.type === 'success') {
+			// re-run all `load` functions, following the successful update
+			await invalidateAll();
+		}
+
+		applyAction(result);
 	}
-
-	let formElement: HTMLFormElement;
 </script>
 
 <section class="mx-auto px-4 lg:w-11/12 lg:px-0">
@@ -64,86 +70,22 @@
 	</Dropzone>
 
 	<div class="mt-4 w-full rounded-xl bg-neutral-100 p-4">
-		{#if files.accepted?.length > 0}
+		<!-- {#if files.accepted?.length > 0}
 			<ol class="mt-2 flex flex-wrap">
 				{#each files.accepted as item}
 					<Badge message={item.name} margin />
 				{/each}
 			</ol>
-		{/if}
+		{/if} -->
 
 		<form
 			method="POST"
 			action="?/uploadFile"
 			class="w-full"
-			bind:this={formElement}
-			on:submit={async () => {
-				if (browser) {
-					console.log('uploading');
-					let uploadedImages = await uploadImages(files.accepted);
-
-					let input = document.createElement('input');
-					input.name = 'uploadedImages';
-					// input.value = uploadedImages;
-					input.value = 'test';
-					input.type = 'text';
-					input.classList.add('hidden');
-					console.log('uploaded');
-					formElement.append(input);
-				}
-
-				// formElement.FormData.append('uploadedImages', uploadedImages);
-			}}
-			use:enhance={() => {
-				return async ({ result }) => {
-					invalidateAll();
-					await applyAction(result);
-				};
-			}}
+			on:submit|preventDefault={handleSubmit}
+			use:enhance
 		>
 			<button type="submit" class="buttonBase buttonPrimary">Upload Images</button>
 		</form>
 	</div>
-	<div class="mt-4 {$darkMode ? 'selectStylingDark' : 'selectStyling'}">
-		<Select items={categoryOptions} bind:value={category} name="category" placeholder="Category" />
-		<!-- <Select i></Select> -->
-	</div>
 </section>
-
-<style>
-	.selectStylingDark {
-		--background: #1f1f1f;
-		--border: none;
-		--inputFontSize: 1rem;
-		--borderRadius: 0.375rem;
-		--listBorderRadius: 0.375rem;
-		--listBackground: #1f1f1f;
-		--itemHoverBG: #141414;
-		--placeholderColor: #fff;
-		--placeholderOpacity: 50%;
-		--inputColor: #fff;
-		--inputPadding: 0.75rem 1.25rem;
-		--height: 3rem;
-		--clearSelectColor: #5d6167;
-		--clearSelectFocusColor: #5d6167;
-		--itemIsActiveBG: #141414;
-	}
-	.selectStyling {
-		--background: #e5e5e5;
-		--border: none;
-		--inputFontSize: 1rem;
-		--borderRadius: 0.375rem;
-		--listBorderRadius: 0.375rem;
-		--listBackground: #e5e5e5;
-		--itemHoverBG: #f5f5f5;
-		--placeholderColor: #475569;
-		--placeholderOpacity: 100%;
-		--inputColor: #000;
-		--inputPadding: 0.75rem 1.25rem;
-		--height: 3rem;
-		--clearSelectColor: #5d6167;
-		--clearSelectFocusColor: #5d6167;
-		--itemIsActiveBG: #f5f5f5;
-		--itemIsActiveColor: #000;
-	}
-</style>

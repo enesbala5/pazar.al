@@ -48,6 +48,7 @@ export const POST: RequestHandler = async ({ request }) => {
 					price: true,
 				},
 			},
+			images: true,
 		},
 	});
 
@@ -55,5 +56,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(JSON.stringify(data));
 	}
 
-	throw error(202, 'Post Not Found');
+	throw error(404, 'Post Not Found');
 };

@@ -1,25 +1,31 @@
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userState/nav';
 import { invalid, redirect } from '@sveltejs/kit';
-import type { Tag } from '@prisma/client';
+import type { Image, Tag } from '@prisma/client';
 import type { Selection } from '$lib/types/selection';
 
 import type { Action, Actions, PageServerLoad } from './$types';
+import type { ImageDatabaseStructure } from '$lib/upload/cloudinary';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.user) {
 		throw redirect(302, nav.login);
 	}
 };
-
 const parseSelection = (selectItem: string): string => {
 	let parsedSelectItem: Selection = JSON.parse(selectItem);
 	return parsedSelectItem.value;
 };
+const parseTags = (unparsed: Tag[] | any): Tag[] => {
+	const parsedTags = unparsed.map((unparsedTag: any) => {
+		return { name: unparsedTag.name, value: unparsedTag.value };
+	});
+	return parsedTags;
+};
 
 const createPost: Action = async ({ request, locals }) => {
 	const data = await request.formData();
-
+	// Getting input values
 	const title = data.get('title');
 	const description = data.get('description');
 	const eur = data.get('eur');
@@ -28,8 +34,7 @@ const createPost: Action = async ({ request, locals }) => {
 	const country = data.get('country');
 	const price = data.get('price');
 	const tags: any = data.get('tags');
-
-	// console.log(locals.user);
+	const uploadedImages: any = data.get('uploadedImages');
 
 	// Return invalid if required info not filled in
 	if (
@@ -54,30 +59,36 @@ const createPost: Action = async ({ request, locals }) => {
 
 	// * Parse Values
 	const isEur = eur === 'true';
+	// -> Tags
 	const tagsArray: [] = JSON.parse(tags);
-
-	const parseTags = (unparsed: Tag[] | any): Tag[] => {
-		const parsedTags = unparsed.map((unparsedTag: any) => {
-			return { name: unparsedTag.name, value: unparsedTag.value };
-		});
-		return parsedTags;
-	};
-
 	const parsedTags = parseTags(tagsArray);
-
-	// ? Parse Selection
-	// city: '{"value":"BajramCurri","label":"Bajram Curri"}',
-	// CURRENT:
-	// { id: 7, name: 'VIN', value: 'Shum mjet', required: true }
-
+	// Images
+	const uploadedImagesArray: ImageDatabaseStructure[] | [] = JSON.parse(uploadedImages);
+	// Location
 	const cityParsed: any = parseSelection(city);
 	const countryParsed: any = parseSelection(country);
-
+	// Category
 	const categoryParsed = parseSelection(category);
 
-	// console.log({ cityParsed, countryParsed, categoryParsed, isEur, parsedTags });
-	console.log(parsedTags);
+	let dbImages: any = [];
+	// index in uploadedImagesArray
+	for (let i = 0; i < uploadedImagesArray.length; i++) {
+		dbImages.push({
+			index: i,
+			id: uploadedImagesArray[i].data.asset_id,
+			format: uploadedImagesArray[i].data.format,
+			publicId: uploadedImagesArray[i].data.public_id,
+			version: String(uploadedImagesArray[i].data.version),
+		});
+	}
 
+	// const imagesUploadedDB = await db.image.createMany({
+	// 	data: dbImages,
+	// });
+
+	console.log('dbImages', dbImages);
+
+	// Creating Post
 	const newPost = await db.post.create({
 		data: {
 			title,
@@ -99,11 +110,16 @@ const createPost: Action = async ({ request, locals }) => {
 			tags: {
 				create: parsedTags,
 			},
+			images: {
+				createMany: {
+					data: dbImages,
+				},
+			},
 		},
 	});
 
 	console.log('finished');
-	console.log(newPost);
+	console.log('newPost: ', newPost);
 
 	throw redirect(303, `${nav.post}/${newPost.id}`);
 };

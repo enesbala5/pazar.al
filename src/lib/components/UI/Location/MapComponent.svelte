@@ -4,8 +4,11 @@
 	import Map from '$lib/components/UI/Location/Map.svelte';
 	import Navigate from '~icons/feather/navigation';
 	import type { Size } from '$lib/types/size';
+	import { parseCity, cities } from '$lib/data/cities';
 
 	export let city: Cities;
+	let cityParsed = parseCity(city);
+
 	export let country: Countries = 'Albania';
 
 	export let size: Size | undefined = undefined;
@@ -70,7 +73,7 @@
 			class="font-medium
 			{calculatedSize === 'base' ? 'text-3xl' : calculatedSize === 'sm' ? 'text-3xl' : 'text-2xl'}"
 		>
-			{city},
+			{cityParsed},
 			{country}
 		</p>
 		<p class="mt-1 text-sm">Blv. Gjergj Fishta, Ish-Ekspozita</p>

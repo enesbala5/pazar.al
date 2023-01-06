@@ -8,7 +8,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	console.log(locals);
 
 	if (!locals?.user) {
-		throw error(202, 'You are not logged in.');
+		throw error(303, 'You are not logged in.');
 	}
 
 	const postId = await request.json();

@@ -1,4 +1,28 @@
 <script lang="ts">
+	// UI Components
+	import { alerts, type Alert } from '$lib/userState/alerts';
+	import Badge from '$lib/components/UI/Important/Badge.svelte';
+	import NavLink from '$lib/components/UI/Sections/Post/NavLink.svelte';
+	import PriceDisplay from '$lib/components/productItem/PriceDisplay.svelte';
+	import ShareContainer from '$lib/components/UI/Important/ShareContainer.svelte';
+	// Sections
+	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
+	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
+	import PostInformation from '$lib/components/UI/Sections/Post/PostInformation.svelte';
+	// SvelteKit Functions
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+	// Functions
+	import { currencyConversion } from '$lib/functions/conversions';
+	import { parseCity } from '$lib/data/cities';
+	import manageLike from '$lib/fetching/manageLike';
+	import { scrollIntoView } from '$lib/functions/UX';
+	import { getSearchUrl } from '$lib/functions/navigation';
+	import { capitalizeFirstLetter } from '$lib/functions/generic';
+	// Types
+	import type { PostimPageRequest } from './+page';
+	// Data
+	import { nav } from '$lib/userState/nav';
 	// Icons
 	import Euro from '$lib/components/logos/user/currencies/Euro.svelte';
 	import Lek from '$lib/components/logos/user/currencies/Lek.svelte';
@@ -7,35 +31,11 @@
 	import Flag from '~icons/feather/flag';
 	import Whatsapp from '$lib/components/logos/social/Whatsapp.svelte';
 
-	// UI Components
-	import Badge from '$lib/components/UI/Important/Badge.svelte';
-	import ImagePreview from '$lib/components/UI/Sections/Post/ImagePreview.svelte';
-	import NavLink from '$lib/components/UI/Sections/Post/NavLink.svelte';
-	// Imported Functions
-	import { browser } from '$app/environment';
-	import manageLike from '$lib/fetching/manageLike';
-	import { onMount } from 'svelte';
-	// Types
-	import type { PageData } from './$types';
-	import type { PostimPageRequest } from './+page';
-	import { currencyConversion } from '$lib/functions/conversions';
-	import PostInformation from '$lib/components/UI/Sections/Post/PostInformation.svelte';
-	import { scrollIntoView } from '$lib/functions/UX';
-	import { alerts, type Alert } from '$lib/userState/alerts';
-	import MapComponent from '$lib/components/UI/Location/MapComponent.svelte';
-	import ShareContainer from '$lib/components/UI/Important/ShareContainer.svelte';
-	import { nav } from '$lib/userState/nav';
-	import { getSearchUrl, gotoUser } from '$lib/functions/navigation';
-	import { capitalizeFirstLetter } from '$lib/functions/generic';
-	import { page } from '$app/stores';
-	import PriceDisplay from '$lib/components/productItem/PriceDisplay.svelte';
-	// -----------
-
+	// --------------------------------
 	// Variable Declaration
 	export let data: PostimPageRequest;
 	let liked: boolean = data?.isLiked;
 	let likedCache: boolean = liked;
-	let likeError: boolean = true;
 
 	type ManageLikeResponse = {
 		updatedLikes: boolean;
@@ -58,14 +58,16 @@
 			$alerts = [error, ...$alerts];
 		}
 	};
-
+	// TODO: Change return from eg. '2' to '2.00'
 	export const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
 
+	// Bindings
 	let scrollY: number;
-
 	let bottomContentContainer: HTMLDivElement;
 	let postActions: HTMLElement;
 
+	// * Check distance from Top of Screen
+	// Function
 	const updateOffsetTop = (div: HTMLElement): number => {
 		if (browser) {
 			return div.offsetTop;
@@ -73,23 +75,25 @@
 			return 500;
 		}
 	};
-
+	// USAGE
 	onMount(() => {
 		bottomContentContainerTop = updateOffsetTop(bottomContentContainer);
 		postActionsTop = updateOffsetTop(postActions);
 	});
-
 	$: if (scrollY === 0) {
 		bottomContentContainerTop = updateOffsetTop(bottomContentContainer);
 		postActionsTop = updateOffsetTop(postActions);
 	}
 
+	// Bindings - Part 2
 	let bottomContentContainerTop: number;
 	let bottomContentContainerOffsetHeight: number;
 
+	// Bindings - Part 3
 	let postActionsTop: number;
 	let postActionsOffsetHeight: number;
 
+	// * Get link to Category
 	const getCategoryUrl = () => {
 		const response = getSearchUrl(
 			{
@@ -102,13 +106,13 @@
 		);
 		return response;
 	};
-
+	// Usage
 	let categoryLink: any = getCategoryUrl();
+	$: post?.category, (categoryLink = getCategoryUrl());
 
+	// PageLoad Data -> Local Variable
 	let post = data.data ?? undefined;
 	$: post = data.data ?? undefined;
-
-	$: post?.category, (categoryLink = getCategoryUrl());
 </script>
 
 <svelte:window
@@ -205,7 +209,7 @@
 								<div class="text-sm">
 									<!-- TODO: Add Link that navigates to Location Filter -->
 									<!-- svelte-ignore a11y-invalid-attribute -->
-									<a class="" href="#">{post?.city}, {post?.country}</a>
+									<a class="" href="#">{parseCity(post?.city)}, {post?.country}</a>
 								</div>
 							</div>
 						</div>
@@ -412,7 +416,7 @@
 									<Lek classNames="opacity-75 h-5 dark:fill-white" />
 								{/if}
 								<!-- Price -->
-								<p class="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl font-medium">
+								<p class="text-2xl font-medium md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl">
 									{formatPrice(post?.priceHistory[0]?.price)}
 								</p>
 							</div>

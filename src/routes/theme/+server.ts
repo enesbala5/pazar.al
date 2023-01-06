@@ -7,7 +7,7 @@ export const POST = (async ({ request, cookies }) => {
 
 	const darkModeCookieValueString = String(darkMode);
 	cookies.set('darkMode', darkModeCookieValueString, {
-		path: nav.index,
+		path: '/',
 	});
 	return json(`Set theme to: ${darkModeCookieValueString} || ${darkMode}`);
 }) satisfies RequestHandler;

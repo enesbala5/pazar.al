@@ -18,8 +18,6 @@ const parseSelection = (selectItem: string): string => {
 };
 
 const uploadFile: Action = async ({ request, locals }) => {
-	console.log('jam i modh');
-
 	const data = await request.formData();
 	const uploadedImages = data.get('uploadedImages');
 
