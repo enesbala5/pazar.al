@@ -30,6 +30,8 @@
 	import Share from '$lib/components/logos/user/Share.svelte';
 	import Flag from '~icons/feather/flag';
 	import Whatsapp from '$lib/components/logos/social/Whatsapp.svelte';
+	import { bottomBarOpen } from '$lib/userState/preferences';
+	import BottomBar from '$lib/components/UI/Sections/Search/BottomBar.svelte';
 
 	// --------------------------------
 	// Variable Declaration
@@ -463,18 +465,13 @@
 		/>
 	</article>
 
-	<!-- ! Bottom BAR ? -->
-	<div
-		class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900 lg:hidden"
-	>
-		<PriceDisplay
-			size="lg"
-			transparent
+	<!-- ! BottomBAR ? -->
+
+		<BottomBar
 			price={post?.priceHistory[0]?.price}
 			eur={post?.priceHistory[0]?.eur}
+			on:contact={() => console.log('CONTACTED')}
 		/>
-		<button class="buttonPrimary buttonBase rounded-full">Contact Author</button>
-	</div>
 {/if}
 
 <style>

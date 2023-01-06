@@ -22,4 +22,5 @@ export const darkMode = derived([page, darkModeUnsynced], ([$page, $darkModeUnsy
 
 // MODAL
 export const modalOpen = writable<boolean>(false);
+export const bottomBarOpen = writable<boolean>(false);
 export const scrollingAllowed = writable<boolean>(true);

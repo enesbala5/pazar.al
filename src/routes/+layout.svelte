@@ -13,7 +13,7 @@
 	import { crossfade } from 'svelte/transition';
 	// Data
 	import { page } from '$app/stores';
-	import { darkMode, modalOpen } from '$lib/userState/preferences';
+	import { bottomBarOpen, darkMode, modalOpen } from '$lib/userState/preferences';
 
 	// Variable Initialization
 	let currentLocale = $page.data.language ?? 'sq';
@@ -34,6 +34,8 @@
 	inject();
 
 	const [insert, remove] = crossfade({});
+
+	$: ($bottomBarOpen, $page.url.pathname), console.log('$bottomBarOpen: ', $bottomBarOpen);
 </script>
 
 <svelte:window bind:innerWidth />
