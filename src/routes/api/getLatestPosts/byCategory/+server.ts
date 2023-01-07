@@ -27,6 +27,21 @@ export const POST: RequestHandler = async ({ request }) => {
 		},
 		include: {
 			priceHistory: true,
+			images: {
+				orderBy: {
+					index: 'asc',
+				},
+				take: 1,
+				where: {
+					index: {
+						equals: 0,
+					},
+				},
+				select: {
+					index: true,
+					publicId: true,
+				},
+			},
 		},
 	});
 

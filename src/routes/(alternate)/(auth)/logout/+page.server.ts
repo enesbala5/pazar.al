@@ -11,7 +11,7 @@ export const actions: Actions = {
 	default({ cookies }) {
 		// remove the cookie
 		cookies.set('session', '', {
-			path: nav.index,
+			path: '/',
 			expires: new Date(0),
 		});
 

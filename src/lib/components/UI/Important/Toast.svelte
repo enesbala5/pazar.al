@@ -38,23 +38,21 @@
 	export let index: number = 0;
 
 	const dismissAlert = (alertId: number) => {
-		const alertsWithoutDismissed = $alerts.filter((alert) => {
-			return alert.id !== alertId;
-		});
-		$alerts = alertsWithoutDismissed;
+		let alertsStore = $alerts;
+
+		alertsStore[alertId].hidden = true;
+		$alerts = [...alertsStore];
 	};
 
 	onMount(() => {
 		if (selfDismissable) {
 			setTimeout(() => {
-				dismissAlert(id);
-			}, 5000);
+				dismissAlert(index);
+			}, 10000);
 		}
 	});
 </script>
 
-<!-- <input type="checkbox" name="" id="" bind:checked={visible} /> -->
-<!-- bottom-${(index+1)+6} -->
 <div
 	in:fly={{ duration: 100, delay: 25, x: 500, easing: quadOut }}
 	out:fade={{ duration: 150, delay: 25, easing: quadOut }}
@@ -159,14 +157,14 @@
 				</svg>
 			{/if}
 			<p class=" font-medium">
-				{title} <span class="font-normal">{message}</span>
+				{title} <span class="font-normal"><br />{message}</span>
 			</p>
 		{/if}
 		{#if useSlot}
 			<slot />
 		{/if}
 	</div>
-	<button on:click={() => dismissAlert(id)}>
+	<button on:click={() => dismissAlert(index)}>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
 			<path
 				d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"

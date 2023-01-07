@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { formatPrice } from '$lib/functions/generic';
 	import Euro from '../logos/user/currencies/Euro.svelte';
 	import Lek from '../logos/user/currencies/Lek.svelte';
 
@@ -53,6 +54,6 @@
 		
 	"
 	>
-		{price.toLocaleString()}
+		{formatPrice(price)}
 	</p>
 </section>

@@ -17,7 +17,7 @@
 		accepted: [],
 		rejected: [],
 	};
-	
+
 	// Functions
 	function handleFilesSelect(e: any) {
 		const { acceptedFiles, fileRejections } = e.detail;
@@ -50,7 +50,25 @@
 
 		applyAction(result);
 	}
+
+	import { Svrollbar } from 'svrollbar';
+
+	const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`);
+
+	export let viewport: Element;
+	export let contents: Element;
 </script>
+
+<div class="wrapper relative h-64 ">
+	<div bind:this={viewport} class="viewport ">
+		<div bind:this={contents} class="contents">
+			{#each items as item (item)}
+				<div>{item}</div>
+			{/each}
+		</div>
+	</div>
+	<Svrollbar {viewport} {contents} />
+</div>
 
 <section class="mx-auto px-4 lg:w-11/12 lg:px-0">
 	<Dropzone on:drop={handleFilesSelect}>
@@ -89,3 +107,28 @@
 		</form>
 	</div>
 </section>
+
+<style>
+	.wrapper {
+		position: relative;
+		width: 10rem;
+	}
+
+	.viewport {
+		position: relative;
+		width: 10rem;
+		height: 10rem;
+		overflow: scroll;
+		border: 1px solid gray;
+		box-sizing: border-box;
+
+		/* hide scrollbar */
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.viewport::-webkit-scrollbar {
+		/* hide scrollbar */
+		display: none;
+	}
+</style>

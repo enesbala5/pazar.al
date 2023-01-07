@@ -34,7 +34,7 @@
 <svelte:window bind:innerWidth />
 
 <article
-	class="flex w-full flex-col justify-between  lg:flex-row lg:space-x-4
+	class="flex w-full flex-col justify-between lg:flex-row lg:space-x-4
 	{inheritWidth ? '' : 'lg:mx-auto lg:w-11/12'}
 	"
 >
@@ -73,7 +73,7 @@
 	<!-- ? ADS -->
 	{#if !hideAds}
 		<section
-			class="flex items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800 lg:w-2/12"
+			class="flex items-center min-h-max h-44 justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800 lg:w-2/12"
 		>
 			<script
 				async

@@ -104,9 +104,15 @@
 	};
 	// -> CATEGORY OPTIONS:
 	// -> -> Extracting categories from main Array and converting to format which Svelte:Select can use
-	let categoryOptions: string[] = [];
+	let categoryOptions: any = [];
 	for (let category of categories) {
-		categoryOptions = [...categoryOptions, category.name];
+		categoryOptions = [
+			...categoryOptions,
+			{
+				value: category.id,
+				label: category.name,
+			},
+		];
 	}
 
 	// ! TAGS
@@ -190,7 +196,7 @@
 	let makeVisible: any;
 	// Function -> Conditionally make visible
 	$: if (category?.value !== undefined) {
-		requiredTags = getTagsByCategory(category?.value) ?? [];
+		requiredTags = getTagsByCategory(category?.label) ?? [];
 		makeVisible();
 	}
 	// Recommended Tags
@@ -246,6 +252,8 @@
 		// }
 		applyAction(result);
 	}
+
+	$: category, console.log(category);
 </script>
 
 <title>Krijo nje Postim - Pazar</title>

@@ -72,7 +72,7 @@ const createPost: Action = async ({ request, locals }) => {
 
 	let dbImages: any = [];
 	// index in uploadedImagesArray
-	for (let i = 0; i < uploadedImagesArray.length; i++) {
+	for (let i = 0; i < uploadedImagesArray?.length ?? 0; i++) {
 		dbImages.push({
 			index: i,
 			id: uploadedImagesArray[i].data.asset_id,
@@ -81,10 +81,6 @@ const createPost: Action = async ({ request, locals }) => {
 			version: String(uploadedImagesArray[i].data.version),
 		});
 	}
-
-	// const imagesUploadedDB = await db.image.createMany({
-	// 	data: dbImages,
-	// });
 
 	console.log('dbImages', dbImages);
 
@@ -113,6 +109,7 @@ const createPost: Action = async ({ request, locals }) => {
 			images: {
 				createMany: {
 					data: dbImages,
+					skipDuplicates: true,
 				},
 			},
 		},

@@ -13,6 +13,7 @@
 	import ProductItem from '$lib/components/productItem/ProductItem.svelte';
 	import PostGrid from '$lib/components/UI/Sections/PostGrid.svelte';
 	import { card } from '$lib/userState/preferences';
+	import PostDisplay from '$lib/components/UI/Sections/PostDisplay.svelte';
 
 	export let data: PageData;
 
@@ -197,15 +198,11 @@
 		</section>
 	{/if}
 	<!-- POSTS -->
-	<div class="{loggedIn ? 'mt-8 ' : 'mt-12 lg:mt-16'} mb-8 flex items-end justify-between ">
+	<div class="{loggedIn ? 'mt-8 ' : 'mt-12 lg:mt-16'} flex items-end justify-between ">
 		<p class="h3 font-medium">Posts</p>
 		<!-- <a class="text-sm font-medium uppercase opacity-80 md:text-base" href="recommended">View All</a> -->
 	</div>
-	{#if user !== undefined}
-		<PostGrid gap inheritWidth>
-			{#each user.posts !== undefined ? user.posts : [] as product}
-				<ProductItem {product} card={$card} margin={false} />
-			{/each}
-		</PostGrid>
-	{/if}
 </article>
+{#if user !== undefined}
+	<PostDisplay posts={user.posts} classNames="mt-6" />
+{/if}

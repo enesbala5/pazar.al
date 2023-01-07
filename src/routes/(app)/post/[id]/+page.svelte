@@ -18,7 +18,7 @@
 	import manageLike from '$lib/fetching/manageLike';
 	import { scrollIntoView } from '$lib/functions/UX';
 	import { getSearchUrl } from '$lib/functions/navigation';
-	import { capitalizeFirstLetter } from '$lib/functions/generic';
+	import { capitalizeFirstLetter, formatPrice } from '$lib/functions/generic';
 	// Types
 	import type { PostimPageRequest } from './+page';
 	// Data
@@ -32,6 +32,7 @@
 	import Whatsapp from '$lib/components/logos/social/Whatsapp.svelte';
 	import { bottomBarOpen } from '$lib/userState/preferences';
 	import BottomBar from '$lib/components/UI/Sections/Search/BottomBar.svelte';
+	import { page } from '$app/stores';
 
 	// --------------------------------
 	// Variable Declaration
@@ -44,6 +45,7 @@
 		error?: Alert;
 	};
 
+	let likeError: boolean;
 	// Function
 	const updateLikes = async (postId: string) => {
 		if (!postId || typeof postId !== 'string') {
@@ -60,8 +62,6 @@
 			$alerts = [error, ...$alerts];
 		}
 	};
-	// TODO: Change return from eg. '2' to '2.00'
-	export const formatPrice = (num: any) => parseFloat(num).toFixed(2).toLocaleString();
 
 	// Bindings
 	let scrollY: number;
@@ -115,6 +115,18 @@
 	// PageLoad Data -> Local Variable
 	let post = data.data ?? undefined;
 	$: post = data.data ?? undefined;
+
+	const checkIfCurrentUserIsAuthor = (
+		authorUid: string | undefined,
+		currentUserUid: string | undefined
+	) => {
+		if (authorUid !== undefined && currentUserUid !== undefined) {
+			return authorUid === currentUserUid;
+		}
+		return false;
+	};
+	let currentUserIsAuthor = checkIfCurrentUserIsAuthor(post?.author?.uid, $page.data?.user?.uid);
+	$: currentUserIsAuthor = checkIfCurrentUserIsAuthor(post?.author?.uid, $page.data?.user?.uid);
 </script>
 
 <svelte:window
@@ -238,7 +250,7 @@
 					</section>
 
 					<!-- ! Image Container -->
-					<ImagePreview />
+					<ImagePreview images={post.images} showEditButton={currentUserIsAuthor} />
 				</div>
 
 				<!-- ! Bottom Content -->
@@ -408,7 +420,7 @@
 						bind:this={postActions}
 					>
 						<div
-							class="defaultBg rounded-xl border border-neutral-300 p-4 shadow-dark dark:border-neutral-900 dark:bg-neutral-800"
+							class="rounded-xl border  border-neutral-300 p-4  shadow-dark dark:border-none dark:border-neutral-900 dark:bg-neutral-800 dark:shadow-darkProMax"
 						>
 							<div class="mt-4 flex w-full items-center justify-between">
 								<!-- Currency Symbol -->
@@ -466,12 +478,11 @@
 	</article>
 
 	<!-- ! BottomBAR ? -->
-
-		<BottomBar
-			price={post?.priceHistory[0]?.price}
-			eur={post?.priceHistory[0]?.eur}
-			on:contact={() => console.log('CONTACTED')}
-		/>
+	<BottomBar
+		price={post?.priceHistory[0]?.price}
+		eur={post?.priceHistory[0]?.eur}
+		on:contact={() => console.log('CONTACTED')}
+	/>
 {/if}
 
 <style>

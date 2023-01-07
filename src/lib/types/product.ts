@@ -1,4 +1,4 @@
-import type { Cities, Countries, Post, PriceHistory } from '@prisma/client';
+import type { Cities, Countries, Image, Post, PriceHistory } from '@prisma/client';
 
 export interface ProductPriceHistory {
 	price: number;
@@ -15,6 +15,7 @@ export interface Product {
 	category?: string;
 	disabled?: boolean;
 	tags?: ProductTag[];
+	images?: Image[];
 }
 
 export interface ProductTag {

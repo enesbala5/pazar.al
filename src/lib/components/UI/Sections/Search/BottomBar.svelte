@@ -6,6 +6,8 @@
 	export let price: number;
 	export let eur: boolean;
 
+	let innerWidth: number = 1920;
+
 	const dispatch = createEventDispatcher();
 
 	function dispatchEvent() {
@@ -16,15 +18,17 @@
 		if (innerWidth < 1024) bottomBarOpen.set(true);
 	});
 	onDestroy(() => bottomBarOpen.set(false));
-	let innerWidth: number = 1920;
-	
+
 	$: if (innerWidth < 1024) bottomBarOpen.set(true);
+	else {
+		bottomBarOpen.set(false);
+	}
 </script>
 
 <svelte:window bind:innerWidth />
 
 <div
-	class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900 lg:hidden"
+	class="fixed bottom-0 left-0 z-10 flex w-full items-center justify-between border-t border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900 lg:hidden"
 >
 	<PriceDisplay size="lg" transparent {price} {eur} />
 	<button on:click={dispatchEvent} class="buttonPrimary buttonBase rounded-full"

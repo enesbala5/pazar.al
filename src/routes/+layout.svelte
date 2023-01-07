@@ -47,12 +47,16 @@
 <section class="{$darkMode ? 'dark' : ''} font-aeonik">
 	{#if $alerts.length > 0}
 		<div
-			class="fixed bottom-6 right-1/2 z-30 w-full translate-x-1/2 space-y-2 px-4 md:right-6 md:w-fit md:translate-x-0"
+			class="
+			{$bottomBarOpen ? 'bottom-20 pb-2' : 'bottom-6'}
+			fixed right-1/2 z-30 w-full translate-x-1/2 space-y-2 px-4 md:right-6 md:w-fit md:translate-x-0"
 		>
-			{#each $alerts as alert (alert)}
-				<div class="" in:insert={{ key: alert.id }} out:remove={{ key: alert.id }}>
-					<Toast {...alert} />
-				</div>
+			{#each $alerts as alert, i}
+				{#if !alert.hidden}
+					<div class="" in:insert={{ key: i }} out:remove={{ key: i }}>
+						<Toast {...alert} index={i} />
+					</div>
+				{/if}
 			{/each}
 		</div>
 	{/if}

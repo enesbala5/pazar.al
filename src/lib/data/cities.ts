@@ -52,12 +52,14 @@ export const cities = [
 ];
 
 export const parseCity = (city: Cities) => {
-	const response = cities.find((c) => {
-		c.value === city;
+	const response = cities.filter((c) => {
+		if (c.value === city) {
+			return c;
+		}
 	});
 
 	if (response !== undefined) {
-		return response.label;
+		return response[0]?.label ?? '';
 	}
 	return city;
 };

@@ -30,6 +30,21 @@ export const POST: RequestHandler = async ({ request }) => {
 							price: true,
 						},
 					},
+					images: {
+						take: 1,
+						orderBy: {
+							index: 'asc',
+						},
+						where: {
+							index: {
+								equals: 0,
+							},
+						},
+						select: {
+							index: true,
+							publicId: true,
+						},
+					},
 				},
 			},
 			sellerInfo: {

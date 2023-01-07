@@ -86,7 +86,7 @@ export const actions: Actions = {
 		const authenticatedUser = await updateUserAuthToken(emailProvided, emailOrUsername);
 
 		cookies.set('session', authenticatedUser.userAuthToken, {
-			path: nav.index,
+			path: '/',
 			// httpOnly: true,
 			// sameSite: 'strict',
 			maxAge: 60 * 60 * 24 * 30,

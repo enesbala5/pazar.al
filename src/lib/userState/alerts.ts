@@ -7,6 +7,7 @@ export interface Alert {
 	message: string;
 	type: AlertType;
 	selfDismissable?: boolean;
+	hidden?: boolean;
 }
 
 export const alerts = writable<Alert[]>([]);

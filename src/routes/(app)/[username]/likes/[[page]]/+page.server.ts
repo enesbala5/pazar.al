@@ -32,6 +32,18 @@ const getLikedPostsByUser: any = async (query: searchQuery) => {
 				},
 				include: {
 					priceHistory: true,
+					images: {
+						take: 1,
+						where: {
+							index: {
+								equals: 0,
+							},
+						},
+						select: {
+							index: true,
+							publicId: true,
+						},
+					},
 				},
 			},
 		},

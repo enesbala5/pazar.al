@@ -64,7 +64,7 @@
 							{disabled
 						? 'fill-neutral-500  dark:fill-neutral-400'
 						: 'fill-neutral-800  group-hover:fill-neutral-900 dark:fill-neutral-200 dark:group-hover:fill-neutral-50'}
-						 h-3 w-3 transition-transform ease-in-out "
+							h-3 w-3 transition-transform ease-in-out "
 					viewBox="0 0 320 191.9"
 				>
 					<path
@@ -81,8 +81,9 @@
 	{#if visible}
 		<div
 			class=" 
+			{visible ? 'flex' : 'hidden'}
 		{size === 'normal' ? 'p-4' : ''}
-		flex flex-col space-y-4 rounded-xl  "
+		flex-col space-y-4 rounded-xl"
 			transition:slide={{ duration: 150 }}
 		>
 			<slot />

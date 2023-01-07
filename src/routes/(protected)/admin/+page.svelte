@@ -3,6 +3,8 @@
 	import type { PageUser } from '$lib/types/page';
 
 	const user: PageUser = $page.data.user;
+
+
 </script>
 
 <h1 class="headline mx-4 mb-12 mt-4 text-4xl font-medium">Admin</h1>
