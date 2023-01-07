@@ -44,6 +44,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			email: true,
 			role: true,
 			account_type: true,
+			profilePicture: true,
 		},
 	});
 
@@ -56,6 +57,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			username: user.username,
 			role: user.role,
 			account_type: user.account_type,
+			profilePicture: user.profilePicture,
 		};
 	}
 

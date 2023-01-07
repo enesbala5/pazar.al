@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { clickOutside } from '$lib/components/actions/outclick';
 	import { closeModal, toggleModal } from '$lib/functions/modal';
 	import { modalOpen, scrollingAllowed } from '$lib/userState/preferences';
 

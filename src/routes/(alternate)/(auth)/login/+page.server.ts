@@ -1,4 +1,4 @@
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
 import type { Action, Actions, PageServerLoad } from './$types';
 import type { User } from '@prisma/client';
@@ -69,18 +69,18 @@ export const actions: Actions = {
 			!emailOrUsername ||
 			!password
 		) {
-			return invalid(400, { invalid: true });
+			return fail(400, { invalid: true });
 		}
 
 		const user: User | null = await getUser(emailProvided, emailOrUsername);
 
 		if (!user) {
-			return invalid(400, { credentials: true });
+			return fail(400, { credentials: true });
 		}
 
 		const userPassword = await bcrypt.compare(password, user.passwordHash);
 		if (!userPassword) {
-			return invalid(400, { credentials: true });
+			return fail(400, { credentials: true });
 		}
 
 		const authenticatedUser = await updateUserAuthToken(emailProvided, emailOrUsername);

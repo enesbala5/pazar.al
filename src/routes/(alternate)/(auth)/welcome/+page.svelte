@@ -11,17 +11,16 @@
 		<div class="mb-12 w-full max-w-md text-center">
 			<h1 class="headline text-4xl font-medium">Account created successfully</h1>
 
-			{#if user?.account_type === 'Personal'}
-				<div class="mt-8 space-x-2">
-					<a href={nav.index} class="buttonPrimary">Start browsing</a>
-				</div>
-			{/if}
-			{#if user?.account_type === 'Seller'}
-				<div class="mt-8 space-x-2">
-					<a href={nav.profile} class="buttonPrimary">Set up account</a>
-					<a href={nav.index} class="buttonSecondary">Start browsing</a>
-				</div>
-			{/if}
+			<div class="mt-12 space-x-2">
+				{#if user?.account_type === 'Personal'}
+					<a href={nav.profile} class="buttonPrimary buttonBase">Complete setting up Account</a>
+					<a href={nav.index} class="buttonSecondary buttonBase">Start browsing</a>
+				{/if}
+				{#if user?.account_type === 'Seller'}
+					<a href={nav.profile} class="buttonPrimary buttonBase">Set up Seller Account</a>
+					<a href={nav.index} class="buttonSecondary buttonBase">Start browsing</a>
+				{/if}
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { nav } from '$lib/userState/nav';
-	import NoResults from '../logos/user/NoResults.svelte';
+	import NoResults from '$lib/components/logos/user/NoResults.svelte';
 
 	export let id: string | undefined = undefined;
 	export let alternate: boolean = false;

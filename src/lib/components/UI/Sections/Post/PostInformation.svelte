@@ -21,7 +21,6 @@
 		<Modal>
 			<section
 				class=" relative z-50 mx-2 flex h-fit w-full max-w-2xl flex-col rounded-xl bg-neutral-50 dark:bg-neutral-900 lg:mx-0
-				
 				{$bottomBarOpen ? 'mb-[15%]' : ''}"
 			>
 				<div class="w-full p-4 lg:p-6">
@@ -34,7 +33,7 @@
 				<section class="wrapper">
 					<!-- Container - For padding -->
 					<div
-						class=" viewport max-h-[45vh] border-y bg-neutral-100 border-neutral-200 dark:border-none p-4 dark:bg-neutral-800 lg:p-6"
+						class=" viewport max-h-[45vh] border-y border-neutral-200 bg-neutral-100 p-4 dark:border-none dark:bg-neutral-800 lg:p-6"
 						bind:this={viewport}
 					>
 						<!-- Headline -->
@@ -43,7 +42,7 @@
 							{#each tags as tag, i}
 								<div
 									class="
-									{i === tags.length - 1 ? '' : 'border-b pb-2'}
+									{i === tags.length - 1 ? 'lg:border-b lg:pb-2' : 'border-b pb-2'}
 									flex w-full items-center justify-between border-neutral-300  dark:border-neutral-700"
 								>
 									<p class="font-medium">{tag.name}:</p>

@@ -28,52 +28,6 @@
 	import FacebookButton from '$lib/components/UI/Buttons/FacebookButton.svelte';
 </script>
 
-<!-- <div class="relative mt-12 flex min-h-[85vh] pt-12 lg:pt-0">
-	<div class="flex w-full flex-col items-center px-4 lg:px-0">
-		<div class="mb-12 w-full max-w-md text-center">
-			<h1 class="headline text-4xl font-medium">Welcome back!</h1>
-			
-		</div>
-
-		<form
-			method="POST"
-			class="w-full max-w-md"
-			use:enhance={() => {
-				return async ({ result }) => {
-					invalidateAll();
-					await applyAction(result);
-				};
-			}}
-		>
-			<InputField
-				classNames="mt-4"
-				name="emailOrUsername"
-				type="text"
-				title="Email or Username"
-				required
-			/>
-			<InputField classNames="mt-4" name="password" type="password" title="Password" required />
-
-			{#if form?.invalid}
-				<div class="mt-4">
-					<Alert type="error" message="Email and password is required." />
-				</div>
-			{/if}
-
-			{#if form?.credentials}
-				<div class="mt-4">
-					<Alert type="error" message="You have entered the wrong credentials" />
-				</div>
-			{/if}
-
-			
-
-			
-		</form>
-	</div>
-	
-</div> -->
-
 <article class="flex h-full w-full grow items-center space-x-4 lg:p-4">
 	<section
 		aria-roledescription="wrapper"
@@ -147,7 +101,7 @@
 						</div>
 					{/if}
 					<div class="mt-4 flex items-center justify-between space-x-2">
-						<button class="buttonLg buttonPrimary  w-1/2">Log In</button>
+						<button class="buttonLg buttonPrimary w-1/2">Log In</button>
 
 						<a href="forgotPassword" class=" link  labelText w-1/2 text-right">Forgot Password?</a>
 					</div>

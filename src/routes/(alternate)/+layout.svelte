@@ -6,9 +6,14 @@
 	import { page } from '$app/stores';
 
 	let alternateNav: boolean =
-		$page.url.pathname === nav.login || $page.url.pathname === nav.register;
+		$page.url.pathname === nav.login ||
+		$page.url.pathname === nav.register ||
+		$page.url.pathname.startsWith(nav.dashboard);
 
-	$: alternateNav = $page.url.pathname === nav.login || $page.url.pathname === nav.register;
+	$: alternateNav =
+		$page.url.pathname === nav.login ||
+		$page.url.pathname === nav.register ||
+		$page.url.pathname.startsWith(nav.dashboard);
 </script>
 
 <main

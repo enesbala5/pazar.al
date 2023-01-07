@@ -19,6 +19,7 @@ declare namespace App {
 			username?: string;
 			account_type: AccountType;
 			sellerInfo: SellerInformation | null;
+			profilePicture?: string;
 			role: Role;
 		};
 		language: string;

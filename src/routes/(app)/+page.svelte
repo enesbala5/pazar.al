@@ -9,6 +9,7 @@
 	import { Pagination } from 'swiper';
 	import 'swiper/css';
 	import 'swiper/css/pagination';
+	import HighlightedCategories from '$lib/components/UI/Sections/Homepage/HighlightedCategories.svelte';
 
 	const pagination = {
 		clickable: true,
@@ -70,11 +71,11 @@
 	</div>
 
 	<!-- ! Recommended -->
-	<section class="mx-auto mt-16 lg:w-10/12">
+	<section class="mx-auto my-16 sm:my-24 lg:my-28 lg:w-10/12">
 		<RecommendedItems />
 	</section>
 	<!-- Recommended Categories -->
-	<section class="mx-auto my-24 hidden w-10/12 grid-cols-4 grid-rows-2 gap-4 md:grid">
+	<section class="mx-auto my-24 hidden w-10/12 grid-cols-4 grid-rows-2 gap-4 sm:my-28 md:grid">
 		<!-- Left -->
 		<div
 			class="col-span-2 row-span-2 flex flex-col items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-800"
@@ -103,15 +104,20 @@
 			<img src="images/categories/fire.png" class="h-12 w-12 object-cover" alt="" />
 		</div>
 	</section>
+
+	<!-- <section class="mx-auto my-16 sm:my-24 lg:w-10/12 ">
+		<HighlightedCategories />
+	</section> -->
+
 	<!-- Top Deals -->
-	<section class="mx-auto mt-16 lg:w-10/12 ">
+	<section class="mx-auto my-16 sm:my-24 lg:my-28 lg:w-10/12 ">
 		<TopDeals />
 	</section>
-	<section class="mt-16 lg:mx-auto lg:w-10/12">
+	<section class="my-16 sm:my-24 lg:mx-auto lg:my-28 lg:w-10/12">
 		<PopularCategories />
 	</section>
 
-	<section class="mx-auto my-24 px-4 lg:w-10/12 lg:px-0">
+	<section class="mx-auto my-24 px-4 lg:my-28 lg:w-10/12 lg:px-0">
 		<div class="flex items-end justify-between">
 			<p class="h3 font-medium">Partners</p>
 			<a class="font-medium uppercase opacity-80" href="recommended">View All</a>

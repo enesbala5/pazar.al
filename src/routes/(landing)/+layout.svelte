@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Logo from '$lib/components/logos/companyLogos/Logo.svelte';
 	import DarkModeToggle from '$lib/components/UI/UserPanel/DarkModeToggle.svelte';
 	import { nav } from '$lib/userState/nav';
@@ -8,7 +9,7 @@
 	class="min-h-screen bg-neutral-50 pt-5 font-aeonik text-neutral-800 dark:bg-neutral-900 dark:text-neutral-50"
 >
 	<section
-		class="shadow-darkProMax mb-5 flex w-full items-center justify-center rounded-full bg-neutral-900 py-2 px-6 text-sm font-medium tracking-wide text-white dark:bg-neutral-800 lg:mx-auto lg:w-11/12 lg:px-0"
+		class="mb-5 flex w-full items-center justify-center rounded-full bg-neutral-900 py-2 px-6 text-sm font-medium tracking-wide text-white shadow-darkProMax dark:bg-neutral-800 lg:mx-auto lg:w-11/12 lg:px-0"
 	>
 		<p>Get your free Pazar.al Store</p>
 	</section>
@@ -23,8 +24,8 @@
 				<!-- ! LINKS -->
 				<section class="ml-14 flex items-center space-x-8 font-medium">
 					<a href={nav.index} class="link text-sm">Home</a>
-					<a href={nav.promotion} class="link text-sm">Promotions</a>
-					<a href={nav.promotion} class="link text-sm">Promotions</a>
+					<a href={nav.business} class="link text-sm">Business</a>
+					<a href={nav.pricing} class="link text-sm">Pricing</a>
 				</section>
 			</section>
 
@@ -77,11 +78,19 @@
 					</svg>
 				</div>
 				<!-- ! Line -->
-				<div class="mx-4 hidden h-5 w-0.5 rounded-full bg-neutral-300  lg:block" />
+				<div
+					class="
+				{$page.data.user ? 'mr-8' : ''}
+				mx-4 hidden h-5 w-0.5 rounded-full bg-neutral-300  lg:block "
+				/>
 				<!-- ! Messages -->
 				<div class="flex items-center space-x-2">
-					<a href={nav.index} class="buttonSecondary buttonSm">Sign In</a>
-					<a href={nav.index} class="buttonSm buttonPrimary">Get Started</a>
+					{#if $page.data.user}
+						<!-- <a href={nav.index} class="buttonSecondary buttonSm">Return Home</a> -->
+					{:else}
+						<a href={nav.login} class="buttonSecondary buttonSm">Sign In</a>
+					{/if}
+					<a href={`${nav.business}#pricing`} class="buttonSm buttonPrimary">Get Started</a>
 				</div>
 			</div>
 		</nav>

@@ -1,6 +1,6 @@
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userState/nav';
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
 
 import type { Action, Actions, PageServerLoad } from './$types';
@@ -17,7 +17,7 @@ const register: Action = async ({ request }) => {
 	const password = data.get('password');
 
 	if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
-		return invalid(400, { invalid: true });
+		return fail(400, { invalid: true });
 	}
 
 	const user = await db.user.findUnique({
@@ -26,7 +26,7 @@ const register: Action = async ({ request }) => {
 
 	if (user) {
 		console.log('user exists');
-		return invalid(400, { user: true });
+		return fail(400, { user: true });
 	}
 
 	await db.user.create({
@@ -39,7 +39,7 @@ const register: Action = async ({ request }) => {
 		},
 	});
 
-	return invalid(400, { email: email, password: password });
+	return fail(400, { email: email, password: password });
 	// throw redirect(303, nav.welcomeScreen);
 };
 

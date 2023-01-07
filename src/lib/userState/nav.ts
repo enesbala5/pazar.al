@@ -12,6 +12,7 @@ export const nav = {
 		getUser: '/api/getUser',
 		getUserOptions: {
 			likes: 'likes',
+			byId: 'byId',
 		},
 
 		// Post
@@ -37,7 +38,7 @@ export const nav = {
 		dislikePost: '/api/dislikePost',
 	},
 
-	support: '/#',
+	support: '/support',
 
 	register: '/register',
 	login: '/login',
@@ -45,11 +46,18 @@ export const nav = {
 	welcomeScreen: '/welcome',
 	admin: '/admin',
 	profile: '/profile',
+	likes: '/likes',
+
+	dashboard: '/dashboard',
+	dashboardSubpages: {
+		posts: '/dashboard/posts',
+		analytics: '/dashboard/analytics',
+	},
+	business: '/business',
+	pricing: '/business/pricing',
 
 	// Toggle for Dark Mode Cookie
 	theme: '/theme',
-
-	likes: '/likes',
 
 	terms: '#',
 	privacy: '#',

@@ -27,15 +27,25 @@
 		await loadTranslations(currentLocale, $page.url.pathname)?.then(
 			(e) => (translationsLoaded = true)
 		);
+
+		if ($page.url.pathname.startsWith(nav.dashboard)) {
+			disableDarkMode = true;
+		}
 	});
 
 	// Vercel Analytics
 	import { inject } from '@vercel/analytics';
+	import { nav } from '$lib/userState/nav';
 	inject();
 
 	const [insert, remove] = crossfade({});
 
 	$: ($bottomBarOpen, $page.url.pathname), console.log('$bottomBarOpen: ', $bottomBarOpen);
+
+	let disableDarkMode: boolean = false;
+	$: disableDarkMode = $page.url.pathname.startsWith(nav.dashboard) ?? false;
+
+	// $: $page.url.pathname.startsWith();
 </script>
 
 <svelte:window bind:innerWidth />
@@ -44,7 +54,7 @@
 	<meta name="theme-color" content={$darkMode ? '#000' : '#fafafa'} />
 </svelte:head>
 
-<section class="{$darkMode ? 'dark' : ''} font-aeonik">
+<section class="{$darkMode && !disableDarkMode ? 'dark' : ''} font-aeonik">
 	{#if $alerts.length > 0}
 		<div
 			class="

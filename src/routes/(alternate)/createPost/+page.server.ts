@@ -1,6 +1,6 @@
 import { db } from '$lib/fetching/db';
 import { nav } from '$lib/userState/nav';
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Image, Tag } from '@prisma/client';
 import type { Selection } from '$lib/types/selection';
 
@@ -54,7 +54,7 @@ const createPost: Action = async ({ request, locals }) => {
 		!city ||
 		!country
 	) {
-		return invalid(400, { invalid: true });
+		return fail(400, { invalid: true });
 	}
 
 	// * Parse Values
