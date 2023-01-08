@@ -1,10 +1,7 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { nav } from '$lib/userState/nav';
-	import InputField from '$lib/components/UI/Input/InputField.svelte';
-	import { applyAction, enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
-	import { goto } from '$app/navigation';
+
 	import SetupAccount1 from './SetupAccount1.svelte';
 	import SetupAccount2 from './SetupAccount2.svelte';
 

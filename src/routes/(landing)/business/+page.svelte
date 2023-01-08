@@ -81,7 +81,7 @@
 				<h3 class="h3 mb-6">Simple process - Pazar.al</h3>
 			</div>
 			<div
-				class="flex h-1/2 w-fit min-w-[50%] items-center justify-center rounded-md bg-neutral-900 shadow-dark dark:shadow-darkProMax sm:rounded-lg lg:rounded-xl"
+				class="flex h-1/2 w-fit min-w-[50%] items-center justify-center rounded-md bg-neutral-50 dark:bg-neutral-900 shadow-dark dark:shadow-darkProMax sm:rounded-lg lg:rounded-xl"
 			>
 				<Feeds />
 			</div>
