@@ -110,7 +110,9 @@
 {/if}
 {#if card === 'list'}
 	<section class="relative my-4 mb-6 flex h-auto w-full items-center px-2 ">
-		<div class=" minWidthNonCard left-0 h-full cursor-pointer overflow-hidden rounded-md">
+		<div class=" minWidthNonCard left-0 h-full cursor-pointer overflow-hidden rounded-md"
+		id="wrapper"
+		>
 			<a href={postURL}>
 				<!-- <img
 					src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
@@ -154,7 +156,9 @@
 {#if card === 'minimized'}
 	<!-- ! MINIMIZED IS FOR MOBILE ONLY -->
 	<section class="flex flex-col lg:hidden">
-		<a href={postURL} class="flex h-32 min-h-[8rem] w-40 min-w-[10rem] items-center justify-center">
+		<a href={postURL} class="flex h-32 min-h-[8rem] w-40 min-w-[10rem] items-center justify-center"
+		id="wrapper"
+		>
 			<img
 				src="https://imageio.forbes.com/specials-images/imageserve/629a9b78906d4154a84fcbbd/2022-Land-Rover-Range-Rover-7/960x0.jpg?format=jpg&width=960"
 				alt={product.title}
